@@ -7,14 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE0102C622A784B700EDB18A /* Login_Icon_ver_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0102C522A784B700EDB18A /* Login_Icon_ver_2.png */; };
 		CE0A3C8D229E1FC900649E2E /* Login.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0A3C8C229E1FC900649E2E /* Login.png */; };
 		CE0A3C8F229E5B0600649E2E /* functionswift.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A3C8E229E5B0600649E2E /* functionswift.swift */; };
-		CE0D3D51229F5E0E008033D7 /* Login_Icon_ver_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0D3D50229F5E0D008033D7 /* Login_Icon_ver_2.png */; };
 		CE0D3D53229F5ECD008033D7 /* Login_Icon_ver_2_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */; };
 		CE0D3D63229F92B0008033D7 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */; };
-		CE0D3D68229FA0E9008033D7 /* FriendRecord.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE0D3D66229FA0E9008033D7 /* FriendRecord.xcdatamodeld */; };
 		CE100405229B725200660E82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE100404229B725200660E82 /* AppDelegate.swift */; };
-		CE100407229B725200660E82 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE100406229B725200660E82 /* ViewController.swift */; };
 		CE10040A229B725200660E82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE100408229B725200660E82 /* Main.storyboard */; };
 		CE10040C229B725300660E82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE10040B229B725300660E82 /* Assets.xcassets */; };
 		CE10040F229B725300660E82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE10040D229B725300660E82 /* LaunchScreen.storyboard */; };
@@ -26,15 +24,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CE0A3C8C229E1FC900649E2E /* Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Login.png; path = FriendRecord/Login.png; sourceTree = SOURCE_ROOT; };
+		CE0102C522A784B700EDB18A /* Login_Icon_ver_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login_Icon_ver_2.png; sourceTree = "<group>"; };
+		CE0A3C8C229E1FC900649E2E /* Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Login.png; path = FriendRecord/Image/Login.png; sourceTree = SOURCE_ROOT; };
 		CE0A3C8E229E5B0600649E2E /* functionswift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = functionswift.swift; sourceTree = "<group>"; };
-		CE0D3D50229F5E0D008033D7 /* Login_Icon_ver_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Login_Icon_ver_2.png; path = ../../../../Downloads/Login_Icon_ver_2.png; sourceTree = "<group>"; };
 		CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login_Icon_ver_2_2.png; sourceTree = "<group>"; };
 		CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
-		CE0D3D67229FA0E9008033D7 /* FriendRecord.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FriendRecord.xcdatamodel; sourceTree = "<group>"; };
 		CE100401229B725200660E82 /* FriendRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE100404229B725200660E82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CE100406229B725200660E82 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CE100409229B725200660E82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE10040B229B725300660E82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE10040E229B725300660E82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,14 +53,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CE0A3C89229E1F4700649E2E /* image */ = {
+		CE0102BD22A7831800EDB18A /* Function */ = {
+			isa = PBXGroup;
+			children = (
+				CE0A3C8E229E5B0600649E2E /* functionswift.swift */,
+			);
+			path = Function;
+			sourceTree = "<group>";
+		};
+		CE0102C222A783E600EDB18A /* MainApp */ = {
+			isa = PBXGroup;
+			children = (
+				CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */,
+				CEFF4422229E961B006A7449 /* MainAppViewController.swift */,
+			);
+			path = MainApp;
+			sourceTree = "<group>";
+		};
+		CE0102C322A7841700EDB18A /* Image */ = {
 			isa = PBXGroup;
 			children = (
 				CE0A3C8C229E1FC900649E2E /* Login.png */,
+				CE0102C522A784B700EDB18A /* Login_Icon_ver_2.png */,
 				CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */,
-				CE0D3D50229F5E0D008033D7 /* Login_Icon_ver_2.png */,
 			);
-			name = image;
+			path = Image;
+			sourceTree = "<group>";
+		};
+		CE0102C722A784C900EDB18A /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 		CE1003F8229B725200660E82 = {
@@ -87,17 +108,16 @@
 			isa = PBXGroup;
 			children = (
 				CE100408229B725200660E82 /* Main.storyboard */,
-				CE100404229B725200660E82 /* AppDelegate.swift */,
-				CE10040B229B725300660E82 /* Assets.xcassets */,
-				CE0A3C8E229E5B0600649E2E /* functionswift.swift */,
-				CE0D3D66229FA0E9008033D7 /* FriendRecord.xcdatamodeld */,
-				CE100416229B726300660E82 /* Login */,
-				CEFF4421229E95F2006A7449 /* MainApp */,
-				CE0A3C89229E1F4700649E2E /* image */,
 				CE10040D229B725300660E82 /* LaunchScreen.storyboard */,
+				CE100404229B725200660E82 /* AppDelegate.swift */,
 				CE100410229B725300660E82 /* Info.plist */,
-				CE100406229B725200660E82 /* ViewController.swift */,
-				CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */,
+				CE10040B229B725300660E82 /* Assets.xcassets */,
+				CE0102BD22A7831800EDB18A /* Function */,
+				CE100416229B726300660E82 /* Login */,
+				CE0102C222A783E600EDB18A /* MainApp */,
+				CE15D74822A6885700892340 /* PersonalApp */,
+				CE0102C322A7841700EDB18A /* Image */,
+				CE0102C722A784C900EDB18A /* Other */,
 			);
 			path = FriendRecord;
 			sourceTree = "<group>";
@@ -111,14 +131,12 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		CEFF4421229E95F2006A7449 /* MainApp */ = {
+		CE15D74822A6885700892340 /* PersonalApp */ = {
 			isa = PBXGroup;
 			children = (
-				CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */,
-				CEFF4422229E961B006A7449 /* MainAppViewController.swift */,
 				CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */,
 			);
-			name = MainApp;
+			path = PersonalApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,7 +202,7 @@
 				CE0A3C8D229E1FC900649E2E /* Login.png in Resources */,
 				CE10040C229B725300660E82 /* Assets.xcassets in Resources */,
 				CE10040A229B725200660E82 /* Main.storyboard in Resources */,
-				CE0D3D51229F5E0E008033D7 /* Login_Icon_ver_2.png in Resources */,
+				CE0102C622A784B700EDB18A /* Login_Icon_ver_2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,10 +218,8 @@
 				CEFF4423229E961B006A7449 /* MainAppViewController.swift in Sources */,
 				CE0A3C8F229E5B0600649E2E /* functionswift.swift in Sources */,
 				CEC40AD1229FE6DD00674037 /* MyNavigationController.swift in Sources */,
-				CE100407229B725200660E82 /* ViewController.swift in Sources */,
 				CE10041A229B764900660E82 /* RegisteredViewController.swift in Sources */,
 				CE100405229B725200660E82 /* AppDelegate.swift in Sources */,
-				CE0D3D68229FA0E9008033D7 /* FriendRecord.xcdatamodeld in Sources */,
 				CE0D3D63229F92B0008033D7 /* MyTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,19 +420,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		CE0D3D66229FA0E9008033D7 /* FriendRecord.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				CE0D3D67229FA0E9008033D7 /* FriendRecord.xcdatamodel */,
-			);
-			currentVersion = CE0D3D67229FA0E9008033D7 /* FriendRecord.xcdatamodel */;
-			path = FriendRecord.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = CE1003F9229B725200660E82 /* Project object */;
 }

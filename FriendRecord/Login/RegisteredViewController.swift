@@ -53,6 +53,7 @@ class RegisteredViewController: UIViewController {
         let date = self.datapickerformat(datePicker: datePicker)
         bfTF.text = date
     }
+    
     //MARK: func - registered.
     @IBAction func registered(_ sender: Any) {
         //check registered data.
@@ -66,9 +67,16 @@ class RegisteredViewController: UIViewController {
             self.isRegistered = 0
             return
         }
-        
+        //Create accountID.
         let accountID = UUID().uuidString
-
+        
+        //Remeber uer login data by UserDefaults.
+        let loginUserDefault = UserDefaults.standard
+        loginUserDefault.string(forKey: "loginEmail")
+        loginUserDefault.set("\(self.self.emailTF.text!)", forKey: "loginEmail")
+        loginUserDefault.string(forKey: "password")
+        loginUserDefault.set("\(self.self.passwordTF.text!)", forKey: "password")
+        
         //URL Sesion.
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Registered/Registered.php") {
             var request = URLRequest(url: url)
@@ -120,6 +128,7 @@ class RegisteredViewController: UIViewController {
             task.resume()
         }
     }
+    
     //MARK: func - check all textfiels are =  "".
     func checkTextfiel() {
         guard self.emailTF.text != "", self.passwordTF.text! != "", self.userTF.text! != "", self.bfTF.text! != "", self.genderTF.text! != ""  else {
@@ -128,6 +137,7 @@ class RegisteredViewController: UIViewController {
             return
         }
     }
+    
     //MARK: func - check email.
     func checkEmail() {/*林易興*/
         let emailRegex = "^\\w+((\\-\\w+)|(\\.\\w+))*@[A-Za-z0-9]+((\\.|\\-)[A-Za-z0-9]+)*.[A-Za-z0-9]+$"
@@ -138,6 +148,7 @@ class RegisteredViewController: UIViewController {
             return
         }
     }
+    
     //MARK: func - chaek Password.
     func checkPassword() {
         let allRegex = NSPredicate(format: "SELF MATCHES %@", "^[A-Za-z0-9]{8,12}+$")
@@ -147,6 +158,7 @@ class RegisteredViewController: UIViewController {
             return
         }
     }
+    
     //MARK: func - chek Uesr Name.
     func checkUser() {
         let username = "^[\\u4E00-\\u9FA5]{2,4}$"

@@ -33,7 +33,16 @@ class LoginViewController: UIViewController {
             return
         }
         
+        //Remeber uer login data by UserDefaults.
+        let loginUserDefault = UserDefaults.standard
+        loginUserDefault.string(forKey: "loginEmail")
+        loginUserDefault.set("\(self.loginEmailTF.text!)", forKey: "loginEmail")
+        loginUserDefault.string(forKey: "password")
+        loginUserDefault.set("\(self.loginPassWordTF.text!)", forKey: "password")
+        
+        //Post php.
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Login/Login.php") {
+            
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             
@@ -77,6 +86,7 @@ class LoginViewController: UIViewController {
             task.resume()
         }
     }
+    
     //MARK: func - check all textfiels are =  "".
     func checkTextfiel() {
         guard self.loginEmailTF.text != "", self.loginPassWordTF.text! != "" else {
@@ -85,6 +95,7 @@ class LoginViewController: UIViewController {
             return
         }
     }
+    
     //MARK: func - check email.
     func checkEmail() {
         let emailRegex = "^\\w+((\\-\\w+)|(\\.\\w+))*@[A-Za-z0-9]+((\\.|\\-)[A-Za-z0-9]+)*.[A-Za-z0-9]+$"
@@ -95,6 +106,7 @@ class LoginViewController: UIViewController {
             return
         }
     }
+    
     //MARK: func - chaek Password.
     func checkPassword() {
         let allRegex = NSPredicate(format: "SELF MATCHES %@", "^[A-Za-z0-9]{8,12}+$")
