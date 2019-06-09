@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE0102C622A784B700EDB18A /* Login_Icon_ver_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0102C522A784B700EDB18A /* Login_Icon_ver_2.png */; };
+		CE0102C922A7B4D100EDB18A /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0102C822A7B4D100EDB18A /* UserData.swift */; };
 		CE0A3C8D229E1FC900649E2E /* Login.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0A3C8C229E1FC900649E2E /* Login.png */; };
 		CE0A3C8F229E5B0600649E2E /* functionswift.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A3C8E229E5B0600649E2E /* functionswift.swift */; };
 		CE0D3D53229F5ECD008033D7 /* Login_Icon_ver_2_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		CE0102C522A784B700EDB18A /* Login_Icon_ver_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login_Icon_ver_2.png; sourceTree = "<group>"; };
+		CE0102C822A7B4D100EDB18A /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		CE0A3C8C229E1FC900649E2E /* Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Login.png; path = FriendRecord/Image/Login.png; sourceTree = SOURCE_ROOT; };
 		CE0A3C8E229E5B0600649E2E /* functionswift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = functionswift.swift; sourceTree = "<group>"; };
 		CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login_Icon_ver_2_2.png; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			children = (
 				CE100417229B728D00660E82 /* LoginViewController.swift */,
 				CE100419229B764900660E82 /* RegisteredViewController.swift */,
+				CE0102C822A7B4D100EDB18A /* UserData.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				CE100418229B728D00660E82 /* LoginViewController.swift in Sources */,
 				CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */,
 				CEFF4423229E961B006A7449 /* MainAppViewController.swift in Sources */,
+				CE0102C922A7B4D100EDB18A /* UserData.swift in Sources */,
 				CE0A3C8F229E5B0600649E2E /* functionswift.swift in Sources */,
 				CEC40AD1229FE6DD00674037 /* MyNavigationController.swift in Sources */,
 				CE10041A229B764900660E82 /* RegisteredViewController.swift in Sources */,

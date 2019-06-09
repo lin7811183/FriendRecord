@@ -11,7 +11,6 @@ class MyNavigationController: UINavigationController {
     override func viewDidAppear(_ animated: Bool) {
         //check is login and registered.
         let loginUserDefault = UserDefaults.standard
-        
         //read userdefault is login or registered?
         let checkLogin = loginUserDefault.bool(forKey: "isLogin")
         print("********** user login \(checkLogin) **********")

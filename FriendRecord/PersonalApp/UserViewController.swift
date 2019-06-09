@@ -2,10 +2,23 @@ import UIKit
 
 class UserViewController: UIViewController {
 
+    @IBOutlet weak var userNickNameLB: UILabel!
+    @IBOutlet weak var UsergenderLB: UILabel!
+    @IBOutlet weak var userBfLB: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let userData = UserDefaults.standard
+        
+        let uesrDataNickName = userData.string(forKey: "nickname")
+        self.userNickNameLB.text = uesrDataNickName
+        
+        let userDataGender = userData.string(forKey: "gender")
+        self.UsergenderLB.text = userDataGender
+        
+        let userDataBf = userData.string(forKey: "bf")
+        self.userBfLB.text = userDataBf
     }
     
     /*------------------------------------------------------------ function ------------------------------------------------------------*/

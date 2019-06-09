@@ -8,6 +8,7 @@ class LoginViewController: UIViewController {
     
     var isloginOK: Int = 0
     var recodeArry :[String:Int]!
+    var userLoginArry :[UserData] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,14 +34,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        //Remeber uer login data by UserDefaults.
-        let loginUserDefault = UserDefaults.standard
-        loginUserDefault.string(forKey: "loginEmail")
-        loginUserDefault.set("\(self.loginEmailTF.text!)", forKey: "loginEmail")
-        loginUserDefault.string(forKey: "password")
-        loginUserDefault.set("\(self.loginPassWordTF.text!)", forKey: "password")
-        
-        //Post php.
+        //Post PHP(check user login data).
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Login/Login.php") {
             
             var request = URLRequest(url: url)
@@ -54,33 +48,78 @@ class LoginViewController: UIViewController {
                 if let e = error {
                     print("error \(e)")
                     return
-                } else {
-                    //let reCode = String(data: data!, encoding: .utf8)
-                    //print(reCode!)
-                    let jsDocode = JSONDecoder()
-                    do {
-                        self.recodeArry = try jsDocode.decode([String:Int].self, from: data!)
-                        guard self.recodeArry.first!.value == 1 else {
-                            DispatchQueue.main.async {
-                                self.okAlter(title: "請確認信箱與密碼否有錯誤", message: "請重新輸入")
-                                print("********** user is login fail. **********")
-                            }
-                            return
-                        }
+                }
+                guard let jsData = data else {
+                    return
+                }
+                //let reCode = String(data: data!, encoding: .utf8)
+                //print(reCode!)
+                let jsDocode = JSONDecoder()
+                do {
+                    self.recodeArry = try jsDocode.decode([String:Int].self, from: jsData)
+                    guard self.recodeArry.first!.value == 1 else {
                         DispatchQueue.main.async {
-                            //set isLogin key to UserDefaults.
-                            let loginUserDefault = UserDefaults.standard
-                            loginUserDefault.set(true , forKey: "isLogin")
-                            
-                            //let naVC = self.storyboard?.instantiateViewController(withIdentifier: "nVC") as! MyNavigationController
-                            //self.present(naVC, animated: true, completion: nil)
-                            let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: "tabbarVC") as! MyTabBarController
-                            self.present(tabbarVC, animated: true, completion: nil)
-                            print("********** user is login secure. **********")
+                            self.okAlter(title: "請確認信箱與密碼否有錯誤", message: "請重新輸入")
+                            print("********** user is login fail. **********")
                         }
-                    }catch {
-                        print("jsdocoder reeor : \(error)")
+                        return
                     }
+                    DispatchQueue.main.async {
+                        //set isLogin key to UserDefaults.
+                        let loginUserDefault = UserDefaults.standard
+                        loginUserDefault.set(true , forKey: "isLogin")
+                        //present to tabberVC.
+                        let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: "tabbarVC") as! MyTabBarController
+                        self.present(tabbarVC, animated: true, completion: nil)
+                        print("********** user is login secure. **********")
+                    }
+                }catch {
+                    print("jsdocoder reeor : \(error)")
+                }
+            }
+            task.resume()
+        }
+        //Post PHP(get user login data).
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Login/Login_User.php") {
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let param = "email=\(self.loginEmailTF.text!)"
+            request.httpBody = param.data(using: .utf8)
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, respones, error) in
+                if let e = error {
+                    print("error \(e)")
+                    return
+                }
+                guard let jsData = data else {
+                    return
+                }
+                //let reCode = String(data: data!, encoding: .utf8)
+                //print(reCode!)
+                
+                let decoder = JSONDecoder()
+                do {
+                    self.userLoginArry = try decoder.decode([UserData].self, from: jsData)
+                    
+                    //set user data key to UserDefaults.
+                    let userDataDefault = UserDefaults.standard
+                    userDataDefault.string(forKey: "email")
+                    userDataDefault.set("\(self.userLoginArry[0].email!)" , forKey: "email")
+                    userDataDefault.string(forKey: "pswd")
+                    userDataDefault.set("\(self.userLoginArry[0].pswd!)" , forKey: "pswd")
+                    userDataDefault.string(forKey: "nickname")
+                    userDataDefault.set("\(self.userLoginArry[0].nickname!)" , forKey: "nickname")
+                    userDataDefault.string(forKey: "bf")
+                    let bf = self.userLoginArry[0].bf!.replacingOccurrences(of: "", with: "/")
+                    userDataDefault.set("\(bf)" , forKey: "bf")
+                    userDataDefault.string(forKey: "gende")
+                    userDataDefault.set("\(self.userLoginArry[0].gender!)" , forKey: "gender")
+                    print("********** user is data rember secure. **********")
+                }catch {
+                    print("jsdocoder reeor : \(error)")
                 }
             }
             task.resume()

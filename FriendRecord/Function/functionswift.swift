@@ -8,10 +8,10 @@ extension UIViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
     //MARK: func - UIDatePicker dateFormat.
     func datapickerformat(datePicker :UIDatePicker) -> String {
         let dateFormatter = DateFormatter()

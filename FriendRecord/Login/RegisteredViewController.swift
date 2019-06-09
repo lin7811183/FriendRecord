@@ -69,19 +69,17 @@ class RegisteredViewController: UIViewController {
         }
         //Create accountID.
         let accountID = UUID().uuidString
-        
-        //Remeber uer login data by UserDefaults.
-        let loginUserDefault = UserDefaults.standard
-        loginUserDefault.string(forKey: "loginEmail")
-        loginUserDefault.set("\(self.self.emailTF.text!)", forKey: "loginEmail")
-        loginUserDefault.string(forKey: "password")
-        loginUserDefault.set("\(self.self.passwordTF.text!)", forKey: "password")
-        
+                
         //URL Sesion.
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Registered/Registered.php") {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
-            let param = "accountID=\(accountID)&email=\(self.emailTF.text!)&password=\(self.passwordTF.text!)&userName=\(self.userTF.text!)&birthday=\(self.bfTF.text!)&gender=\(self.genderTF.text!)"
+            
+            guard let email = self.emailTF.text,let password = self.self.passwordTF.text,let userName = self.userTF.text,let bf = self.bfTF.text,let gender = self.genderTF.text else {
+                return
+            }
+            
+            let param = "accountID=\(accountID)&email=\(email)&password=\(password)&userName=\(userName)&birthday=\(bf)&gender=\(gender)"
             request.httpBody = param.data(using: .utf8)
             
             let session = URLSession.shared
@@ -108,14 +106,26 @@ class RegisteredViewController: UIViewController {
                             
                             let alter = UIAlertController(title: "註冊完成", message: "歡迎使用錄音交友APP",preferredStyle: .alert)
                             let okAction = UIAlertAction(title: "確定", style: .default) { (action) in
-                                
+                                //set isLogin key to UserDefaults.
                                 let loginUserDefault = UserDefaults.standard
                                 loginUserDefault.set(true , forKey: "isLogin")
-                                
-                                //let naVC = self.storyboard?.instantiateViewController(withIdentifier: "nVC") as! MyNavigationController
-                                //self.present(naVC, animated: true, completion: nil)
+                                //present to tabbarVC.
                                 let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: "tabbarVC") as! MyTabBarController
                                 self.present(tabbarVC, animated: true, completion: nil)
+                                
+                                //set user data key to UserDefaults.
+                                let userDataDefault = UserDefaults.standard
+                                userDataDefault.string(forKey: "email")
+                                userDataDefault.set("\(email)" , forKey: "email")
+                                userDataDefault.string(forKey: "pswd")
+                                userDataDefault.set("\(password)" , forKey: "pswd")
+                                userDataDefault.string(forKey: "nickname")
+                                userDataDefault.set("\(userName)" , forKey: "nickname")
+                                userDataDefault.string(forKey: "bf")
+                                userDataDefault.set("\(bf)" , forKey: "bf")
+                                userDataDefault.string(forKey: "gende")
+                                userDataDefault.set("\(gender)" , forKey: "gender")
+                                print("********** user is data rember secure. **********")
                             }
                             alter.addAction(okAction)
                             self.present(alter, animated: true, completion: nil)
