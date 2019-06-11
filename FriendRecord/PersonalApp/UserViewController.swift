@@ -10,6 +10,8 @@ class UserViewController: UIViewController {
     @IBOutlet weak var UserGenderLB: UILabel!
     @IBOutlet weak var userBfLB: UILabel!
     
+    var uploadArry :[String:Bool]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -81,9 +83,8 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
         let userEmail = UserDefaults.standard
         //read userdefault is login or registered?
         let email = userEmail.string(forKey: "email")
-        
         guard let emailChange = email else {
-            print("user photo emeil change fial.")
+            print("user photo emeil change fail.")
             return
         }
         
@@ -106,6 +107,41 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
         userPhotoName.set("\(fileName)" , forKey: "userPhotoName")
         
         self.dismiss(animated: true, completion: nil)//關閉imagePickController
+        
+        //Upload user Photo to server.
+        //上傳地址
+        let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Accoount_Upload_UserPhoto.php?userphotofileName=\(fileNameFirst[0])")
+        
+        //請求
+        var request = URLRequest(url: url!, cachePolicy: .reloadIgnoringCacheData)
+        request.httpMethod = "POST"
+        
+        let session = URLSession.shared
+        
+        //上傳數據流
+        let documents =  NSHomeDirectory()+"/Documents/"+fileName
+        //print(documents)
+        let recordData = try! Data(contentsOf: URL(fileURLWithPath: documents))
+        
+        let uploadTask = session.uploadTask(with: request, from: recordData) {
+            (data:Data?, response:URLResponse?, error:Error?) -> Void in
+            
+            //上傳完畢後
+            if error != nil{
+                print("Uoload user Photo error : \(error)")
+            }else{
+                //let str = String(data: data!, encoding: .utf8)
+                //print("上傳完畢：\n\(str!)")
+                let jsDecoder = JSONDecoder()
+                do {
+                    self.uploadArry = try jsDecoder.decode([String:Bool].self, from: data!)
+                }catch {
+                    print("Upload uer Photo jsDecoder error :\(error)")
+                }
+            }
+        }
+        //使用resume方法啟動任務
+        uploadTask.resume()
     }
     
 }

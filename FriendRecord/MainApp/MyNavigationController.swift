@@ -4,8 +4,6 @@ class MyNavigationController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -13,7 +11,7 @@ class MyNavigationController: UINavigationController {
         let loginUserDefault = UserDefaults.standard
         //read userdefault is login or registered?
         let checkLogin = loginUserDefault.bool(forKey: "isLogin")
-        print("********** user login \(checkLogin) **********")
+        print("********** user login \(checkLogin). **********")
         
         guard checkLogin == true else {
             let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController

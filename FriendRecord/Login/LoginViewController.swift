@@ -124,6 +124,7 @@ class LoginViewController: UIViewController {
             }
             task.resume()
         }
+        self.downLoadUserPhoto()
     }
     
     //MARK: func - check all textfiels are =  "".
