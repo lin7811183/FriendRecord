@@ -29,6 +29,32 @@ extension UIViewController {
         self.present(alter, animated: true, completion: nil)
     }
     
+    //MARK: func - file dictory URL.
+    func fileDocumentsPath(fileName :String) -> URL {
+        //建立照片路徑，存的位置，string轉URL一定要用fileURLWithPath
+        let homeURL = URL(fileURLWithPath: NSHomeDirectory())
+        let documents = homeURL.appendingPathComponent("Documents")
+        let filePath = documents.appendingPathComponent(fileName)
+        return filePath
+    }
+    
+    //MARK: func - user Photo fiel read.
+    func userPhotoRead() -> UIImage? {
+        //check UserDefaults have forKey: "userPhotoName".
+        let userPhotofile = UserDefaults.standard
+        guard let userPhotofileName = userPhotofile.string(forKey: "userPhotoName") else {
+            print("********** user is not user Photo. **********")
+            return nil
+        }
+        let photoFileURL = self.fileDocumentsPath(fileName: userPhotofileName)
+        //if have photo do file change data
+        if let imageData = try? Data(contentsOf: photoFileURL) {
+            return UIImage(data: imageData)
+        }
+        return nil
+    }
+    
+    
 }
 
 

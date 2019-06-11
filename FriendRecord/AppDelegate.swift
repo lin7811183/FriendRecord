@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  FriendRecord
-//
-//  Created by 林易興 on 2019/5/27.
-//  Copyright © 2019 林易興. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain

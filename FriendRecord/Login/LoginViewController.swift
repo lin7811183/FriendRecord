@@ -46,7 +46,7 @@ class LoginViewController: UIViewController {
             let session = URLSession.shared
             let task = session.dataTask(with: request) { (data, respones, error) in
                 if let e = error {
-                    print("error \(e)")
+                    print("uesr login check data URL Session error: \(e)")
                     return
                 }
                 guard let jsData = data else {
@@ -74,7 +74,7 @@ class LoginViewController: UIViewController {
                         print("********** user is login secure. **********")
                     }
                 }catch {
-                    print("jsdocoder reeor : \(error)")
+                    print("uesr login check jsdocoder reeor : \(error)")
                 }
             }
             task.resume()
@@ -91,14 +91,14 @@ class LoginViewController: UIViewController {
             let session = URLSession.shared
             let task = session.dataTask(with: request) { (data, respones, error) in
                 if let e = error {
-                    print("error \(e)")
+                    print("uesr login load data URL Session error \(e)")
                     return
                 }
                 guard let jsData = data else {
                     return
                 }
-                //let reCode = String(data: data!, encoding: .utf8)
-                //print(reCode!)
+//                let reCode = String(data: jsData, encoding: .utf8)
+//                print(reCode!)
                 
                 let decoder = JSONDecoder()
                 do {
@@ -119,7 +119,7 @@ class LoginViewController: UIViewController {
                     userDataDefault.set("\(self.userLoginArry[0].gender!)" , forKey: "gender")
                     print("********** user is data rember secure. **********")
                 }catch {
-                    print("jsdocoder reeor : \(error)")
+                    print("uesr login load jsdocoder reeor : \(error)")
                 }
             }
             task.resume()

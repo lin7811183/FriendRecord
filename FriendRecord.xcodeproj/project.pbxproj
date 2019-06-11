@@ -11,6 +11,7 @@
 		CE0102C922A7B4D100EDB18A /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0102C822A7B4D100EDB18A /* UserData.swift */; };
 		CE0A3C8D229E1FC900649E2E /* Login.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0A3C8C229E1FC900649E2E /* Login.png */; };
 		CE0A3C8F229E5B0600649E2E /* functionswift.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A3C8E229E5B0600649E2E /* functionswift.swift */; };
+		CE0B064022ADF756007ADB36 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B063F22ADF756007ADB36 /* CameraViewController.swift */; };
 		CE0D3D53229F5ECD008033D7 /* Login_Icon_ver_2_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */; };
 		CE0D3D63229F92B0008033D7 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */; };
 		CE100405229B725200660E82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE100404229B725200660E82 /* AppDelegate.swift */; };
@@ -29,6 +30,7 @@
 		CE0102C822A7B4D100EDB18A /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		CE0A3C8C229E1FC900649E2E /* Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Login.png; path = FriendRecord/Image/Login.png; sourceTree = SOURCE_ROOT; };
 		CE0A3C8E229E5B0600649E2E /* functionswift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = functionswift.swift; sourceTree = "<group>"; };
+		CE0B063F22ADF756007ADB36 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login_Icon_ver_2_2.png; sourceTree = "<group>"; };
 		CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		CE100401229B725200660E82 /* FriendRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */,
+				CE0B063F22ADF756007ADB36 /* CameraViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE100418229B728D00660E82 /* LoginViewController.swift in Sources */,
+				CE0B064022ADF756007ADB36 /* CameraViewController.swift in Sources */,
 				CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */,
 				CEFF4423229E961B006A7449 /* MainAppViewController.swift in Sources */,
 				CE0102C922A7B4D100EDB18A /* UserData.swift in Sources */,
