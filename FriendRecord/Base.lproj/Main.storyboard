@@ -119,7 +119,7 @@
             </objects>
             <point key="canvasLocation" x="840.57971014492762" y="-133.25892857142856"/>
         </scene>
-        <!--User View Controller-->
+        <!--個人資料-->
         <scene sceneID="kWH-fh-NhA">
             <objects>
                 <viewController storyboardIdentifier="userVC" id="5jJ-ju-kVr" customClass="UserViewController" customModule="FriendRecord" customModuleProvider="target" sceneMemberID="viewController">
@@ -127,7 +127,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jb1-gY-i0Q">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="userPhotoDefault.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jb1-gY-i0Q">
                                 <rect key="frame" x="0.0" y="88" width="213" height="189"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -156,7 +156,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="sYf-gg-kll"/>
                     </view>
-                    <navigationItem key="navigationItem" id="FWu-6s-xj0">
+                    <navigationItem key="navigationItem" title="個人資料" id="FWu-6s-xj0">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="GyH-6l-EGK">
                             <connections>
                                 <action selector="userImagePhoto:" destination="5jJ-ju-kVr" id="beU-Rg-MFE"/>
@@ -220,21 +220,56 @@
             </objects>
             <point key="canvasLocation" x="4603" y="-891"/>
         </scene>
-        <!--Main App View Controller-->
+        <!--聆聽錄音帶-->
         <scene sceneID="EDu-xl-Dpz">
             <objects>
                 <viewController storyboardIdentifier="mainVC" id="09T-vU-Bsr" customClass="MainAppViewController" customModule="FriendRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Bf-Mt-T8o">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="HzQ-4X-Q44">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userCell" rowHeight="97" id="FRI-Fe-gNf">
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="97"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FRI-Fe-gNf" id="kID-IT-wch">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="96.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fDp-gv-wzI">
+                                                    <rect key="frame" x="5" y="11" width="81" height="75"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="發個錄音給大家聽聽～" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7d0-80-6Cn">
+                                                    <rect key="frame" x="94" y="11" width="174" height="75"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HzQ-4X-Q44" firstAttribute="top" secondItem="xWk-A0-umj" secondAttribute="top" id="8Vf-ij-ZxK"/>
+                            <constraint firstItem="HzQ-4X-Q44" firstAttribute="leading" secondItem="xWk-A0-umj" secondAttribute="leading" id="I2F-aA-GSy"/>
+                            <constraint firstItem="HzQ-4X-Q44" firstAttribute="trailing" secondItem="xWk-A0-umj" secondAttribute="trailing" id="emi-XV-fg7"/>
+                            <constraint firstItem="HzQ-4X-Q44" firstAttribute="bottom" secondItem="xWk-A0-umj" secondAttribute="bottom" id="jXB-A8-A7A"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="xWk-A0-umj"/>
                     </view>
-                    <navigationItem key="navigationItem" id="4cV-8L-5z8"/>
+                    <navigationItem key="navigationItem" title="聆聽錄音帶" id="4cV-8L-5z8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iB3-p9-rmz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3664" y="-133"/>
+            <point key="canvasLocation" x="3663.7681159420295" y="-133.25892857142856"/>
         </scene>
         <!--Registered View Controller-->
         <scene sceneID="IFu-gi-Kal">
@@ -498,6 +533,7 @@
     </scenes>
     <resources>
         <image name="Login_Icon_ver_2_2.png" width="1024" height="768"/>
+        <image name="userPhotoDefault.png" width="409.60000610351562" height="409.60000610351562"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gQE-Xf-yw0"/>

@@ -125,6 +125,9 @@ class RegisteredViewController: UIViewController {
                                 userDataDefault.set("\(bf)" , forKey: "bf")
                                 userDataDefault.string(forKey: "gende")
                                 userDataDefault.set("\(gender)" , forKey: "gender")
+                                let emailHead = email.split(separator: "@")
+                                userDataDefault.set("\(emailHead[0])" , forKey: "emailHead")
+                                userDataDefault.string(forKey: "pswd")
                                 print("********** user is data rember secure. **********")
                             }
                             alter.addAction(okAction)

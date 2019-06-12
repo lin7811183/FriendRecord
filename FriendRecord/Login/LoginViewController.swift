@@ -108,6 +108,8 @@ class LoginViewController: UIViewController {
                     let userDataDefault = UserDefaults.standard
                     userDataDefault.string(forKey: "email")
                     userDataDefault.set("\(self.userLoginArry[0].email!)" , forKey: "email")
+                    let emailHead = self.userLoginArry[0].email!.split(separator: "@")
+                    userDataDefault.set("\(emailHead[0])" , forKey: "emailHead")
                     userDataDefault.string(forKey: "pswd")
                     userDataDefault.set("\(self.userLoginArry[0].pswd!)" , forKey: "pswd")
                     userDataDefault.string(forKey: "nickname")
@@ -117,6 +119,7 @@ class LoginViewController: UIViewController {
                     userDataDefault.set("\(bf)" , forKey: "bf")
                     userDataDefault.string(forKey: "gende")
                     userDataDefault.set("\(self.userLoginArry[0].gender!)" , forKey: "gender")
+                    self.downLoadUserPhoto()
                     print("********** user is data rember secure. **********")
                 }catch {
                     print("uesr login load jsdocoder reeor : \(error)")
@@ -124,7 +127,7 @@ class LoginViewController: UIViewController {
             }
             task.resume()
         }
-        self.downLoadUserPhoto()
+        
     }
     
     //MARK: func - check all textfiels are =  "".

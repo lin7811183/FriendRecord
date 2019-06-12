@@ -14,7 +14,7 @@ class UserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let userData = UserDefaults.standard
         
         let uesrDataNickName = userData.string(forKey: "nickname")
@@ -30,6 +30,20 @@ class UserViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //check local app have user Photo.
+        let userEmail = UserDefaults.standard
+        let emailHead = userEmail.string(forKey: "emailHead")
+
+        let fileManager = FileManager.default
+        let filePath = NSHomeDirectory()+"/Documents/"+"\(emailHead!).jpg"
+        let exist = fileManager.fileExists(atPath: filePath)
+
+        guard exist == true else {
+            print("********** user photo not in local app(userVC). **********")
+            self.userImageView.image = UIImage(named: "userPhotoDefault.png")
+            return
+        }
         self.userImageView.image = self.userPhotoRead()
     }
     
@@ -39,6 +53,12 @@ class UserViewController: UIViewController {
         //set isLogin key to UserDefaults.
         let loginUserDefault = UserDefaults.standard
         loginUserDefault.set(false , forKey: "isLogin")
+        
+        //clear userDefault.
+        let userDefault = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: userDefault)
+        UserDefaults.standard.synchronize()
+        print("********** clear userDefault. **********")
         
         let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
         self.present(loginVC, animated: true, completion: nil)
@@ -77,40 +97,43 @@ class UserViewController: UIViewController {
 extension UserViewController :UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        
+        let image = info[.originalImage] as! UIImage
+        self.thumbmailImage(image: image)
         
         //check is login and registered.
         let userEmail = UserDefaults.standard
         //read userdefault is login or registered?
-        let email = userEmail.string(forKey: "email")
-        guard let emailChange = email else {
-            print("user photo emeil change fail.")
+        let emailHead = userEmail.string(forKey: "emailHead")
+        guard let emailChange = emailHead else {
+            print("user photo emeil change fail(imagePickerController).")
             return
         }
+
+        let fileName = "\(emailChange).jpg"
+//
+//        let filePath = self.fileDocumentsPath(fileName: fileName)
+//
+//        //write file
+//        if let imageData = image.jpegData(compressionQuality: 1) {//compressionQuality:0~1之間
+//            do{
+//                try imageData.write(to: filePath, options: [.atomicWrite])
+//            }catch {
+//                print("uer photo fiel save is eror : \(error)")
+//            }
+//        }
         
-        let fileNameFirst = emailChange.split(separator: "@")
-        let fileName = "\(fileNameFirst[0]).jpg"
-        
-        let filePath = self.fileDocumentsPath(fileName: fileName)
-        
-        //write file
-        if let imageData = image.jpegData(compressionQuality: 1) {//compressionQuality:0~1之間
-            do{
-                try imageData.write(to: filePath, options: [.atomicWrite])
-            }catch {
-                print("uer photo fiel save is eror : \(error)")
-            }
-        }
-        //save user photo name by UserDefaults.
-        let userPhotoName = UserDefaults.standard
-        userPhotoName.string(forKey: "userPhotoName")
-        userPhotoName.set("\(fileName)" , forKey: "userPhotoName")
+//        //save user photo name by UserDefaults.
+//        let userPhotoName = UserDefaults.standard
+//        userPhotoName.string(forKey: "userPhotoName")
+//        userPhotoName.set("\(fileName)" , forKey: "userPhotoName")
         
         self.dismiss(animated: true, completion: nil)//關閉imagePickController
         
+        
         //Upload user Photo to server.
         //上傳地址
-        let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Accoount_Upload_UserPhoto.php?userphotofileName=\(fileNameFirst[0])")
+        let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Accoount_Upload_UserPhoto.php?userphotofileName=\(emailChange)")
         
         //請求
         var request = URLRequest(url: url!, cachePolicy: .reloadIgnoringCacheData)
@@ -140,7 +163,6 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
                 }
             }
         }
-        //使用resume方法啟動任務
         uploadTask.resume()
     }
     
