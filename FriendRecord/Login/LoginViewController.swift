@@ -14,7 +14,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         //dismissKeyboard.
-        self.hideKeyboardWhenTappedAround()
+        Manager.shared.hideKeyboardWhenTappedAround()
         
         self.loginEmailTF.delegate = self
         self.loginPassWordTF.delegate = self
@@ -31,6 +31,7 @@ class LoginViewController: UIViewController {
         guard self.isloginOK == 0 else {
             print("********** user login data have error. **********")
             self.isloginOK = 0
+            Manager.shared.okAlter(vc: self, title: "請確認帳號密碼是否空白或是正確", message: "")
             return
         }
         
@@ -59,7 +60,7 @@ class LoginViewController: UIViewController {
                     self.recodeArry = try jsDocode.decode([String:Int].self, from: jsData)
                     guard self.recodeArry.first!.value == 1 else {
                         DispatchQueue.main.async {
-                            self.okAlter(title: "請確認信箱與密碼否有錯誤", message: "請重新輸入")
+                            Manager.shared.okAlter(vc: self, title: "請確認信箱與密碼否有錯誤", message: "請重新輸入")
                             print("********** user is login fail. **********")
                         }
                         return
@@ -119,7 +120,7 @@ class LoginViewController: UIViewController {
                     userDataDefault.set("\(bf)" , forKey: "bf")
                     userDataDefault.string(forKey: "gende")
                     userDataDefault.set("\(self.userLoginArry[0].gender!)" , forKey: "gender")
-                    self.downLoadUserPhoto()
+                    Manager.shared.downLoadUserPhoto()
                     print("********** user is data rember secure. **********")
                 }catch {
                     print("uesr login load jsdocoder reeor : \(error)")
@@ -133,7 +134,7 @@ class LoginViewController: UIViewController {
     //MARK: func - check all textfiels are =  "".
     func checkTextfiel() {
         guard self.loginEmailTF.text != "", self.loginPassWordTF.text! != "" else {
-            self.okAlter(title: "請確認登入資訊是否有空白", message: "")
+            Manager.shared.okAlter(vc: self, title: "請確認登入資訊是否有空白", message: "")
             self.isloginOK += 1
             return
         }
@@ -144,7 +145,7 @@ class LoginViewController: UIViewController {
         let emailRegex = "^\\w+((\\-\\w+)|(\\.\\w+))*@[A-Za-z0-9]+((\\.|\\-)[A-Za-z0-9]+)*.[A-Za-z0-9]+$"
         let emailTest = NSPredicate(format: "SELF MATCHES%@", emailRegex)
         guard emailTest.evaluate(with: self.loginEmailTF.text) == true else {
-            self.okAlter(title: "請確認登入email格式是否正確", message: "")
+            Manager.shared.okAlter(vc: self, title: "請確認登入email格式是否正確", message: "")
             self.isloginOK += 1
             return
         }
@@ -154,7 +155,7 @@ class LoginViewController: UIViewController {
     func checkPassword() {
         let allRegex = NSPredicate(format: "SELF MATCHES %@", "^[A-Za-z0-9]{8,12}+$")
         guard allRegex.evaluate(with: self.loginPassWordTF.text) == true else {
-            self.okAlter(title: "請確認登入密碼格式是否正確", message: "")
+            Manager.shared.okAlter(vc: self, title: "請確認登入密碼格式是否正確", message: "")
             self.isloginOK += 1
             return
         }

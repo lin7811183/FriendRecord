@@ -11,10 +11,15 @@
 		CE0102C922A7B4D100EDB18A /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0102C822A7B4D100EDB18A /* UserData.swift */; };
 		CE0A3C8D229E1FC900649E2E /* Login.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0A3C8C229E1FC900649E2E /* Login.png */; };
 		CE0A3C8F229E5B0600649E2E /* functionswift.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A3C8E229E5B0600649E2E /* functionswift.swift */; };
+		CE0A945722B1D35F00F7F031 /* UserPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A945622B1D35F00F7F031 /* UserPhotoViewController.swift */; };
+		CE0A949922B238A300F7F031 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A949822B238A300F7F031 /* Manager.swift */; };
 		CE0B064022ADF756007ADB36 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B063F22ADF756007ADB36 /* CameraViewController.swift */; };
 		CE0D3D53229F5ECD008033D7 /* Login_Icon_ver_2_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */; };
 		CE0D3D63229F92B0008033D7 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */; };
 		CE0DE89C22B08F7E00F49C5B /* userPhotoDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0DE89B22B08F7E00F49C5B /* userPhotoDefault.png */; };
+		CE0DE8A022B0C7CE00F49C5B /* MyUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DE89F22B0C7CE00F49C5B /* MyUserTableViewCell.swift */; };
+		CE0DE8C222B0D96900F49C5B /* MyRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DE8C122B0D96900F49C5B /* MyRecordTableViewCell.swift */; };
+		CE0DE8C622B0DF9B00F49C5B /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DE8C522B0DF9B00F49C5B /* Cell.swift */; };
 		CE100405229B725200660E82 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE100404229B725200660E82 /* AppDelegate.swift */; };
 		CE10040A229B725200660E82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE100408229B725200660E82 /* Main.storyboard */; };
 		CE10040C229B725300660E82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE10040B229B725300660E82 /* Assets.xcassets */; };
@@ -23,6 +28,7 @@
 		CE10041A229B764900660E82 /* RegisteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE100419229B764900660E82 /* RegisteredViewController.swift */; };
 		CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */; };
 		CEC40AD1229FE6DD00674037 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */; };
+		CEF9016022B100CE004F5A4C /* RecordGoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */; };
 		CEFF4423229E961B006A7449 /* MainAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF4422229E961B006A7449 /* MainAppViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,10 +37,15 @@
 		CE0102C822A7B4D100EDB18A /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		CE0A3C8C229E1FC900649E2E /* Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Login.png; path = FriendRecord/Image/Login.png; sourceTree = SOURCE_ROOT; };
 		CE0A3C8E229E5B0600649E2E /* functionswift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = functionswift.swift; sourceTree = "<group>"; };
+		CE0A945622B1D35F00F7F031 /* UserPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotoViewController.swift; sourceTree = "<group>"; };
+		CE0A949822B238A300F7F031 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		CE0B063F22ADF756007ADB36 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login_Icon_ver_2_2.png; sourceTree = "<group>"; };
 		CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		CE0DE89B22B08F7E00F49C5B /* userPhotoDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userPhotoDefault.png; sourceTree = "<group>"; };
+		CE0DE89F22B0C7CE00F49C5B /* MyUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserTableViewCell.swift; sourceTree = "<group>"; };
+		CE0DE8C122B0D96900F49C5B /* MyRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordTableViewCell.swift; sourceTree = "<group>"; };
+		CE0DE8C522B0DF9B00F49C5B /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		CE100401229B725200660E82 /* FriendRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FriendRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE100404229B725200660E82 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE100409229B725200660E82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -45,6 +56,7 @@
 		CE100419229B764900660E82 /* RegisteredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredViewController.swift; sourceTree = "<group>"; };
 		CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
+		CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGoViewController.swift; sourceTree = "<group>"; };
 		CEFF4422229E961B006A7449 /* MainAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				CE0A3C8E229E5B0600649E2E /* functionswift.swift */,
+				CE0A949822B238A300F7F031 /* Manager.swift */,
 			);
 			path = Function;
 			sourceTree = "<group>";
@@ -72,6 +85,8 @@
 			children = (
 				CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */,
 				CEFF4422229E961B006A7449 /* MainAppViewController.swift */,
+				CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */,
+				CE0DE89E22B0C78800F49C5B /* CustomCell */,
 			);
 			path = MainApp;
 			sourceTree = "<group>";
@@ -94,6 +109,16 @@
 				CE0B063F22ADF756007ADB36 /* CameraViewController.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		CE0DE89E22B0C78800F49C5B /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE0DE89F22B0C7CE00F49C5B /* MyUserTableViewCell.swift */,
+				CE0DE8C122B0D96900F49C5B /* MyRecordTableViewCell.swift */,
+				CE0DE8C522B0DF9B00F49C5B /* Cell.swift */,
+			);
+			path = CustomCell;
 			sourceTree = "<group>";
 		};
 		CE1003F8229B725200660E82 = {
@@ -144,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */,
+				CE0A945622B1D35F00F7F031 /* UserPhotoViewController.swift */,
 			);
 			path = PersonalApp;
 			sourceTree = "<group>";
@@ -225,14 +251,20 @@
 			files = (
 				CE100418229B728D00660E82 /* LoginViewController.swift in Sources */,
 				CE0B064022ADF756007ADB36 /* CameraViewController.swift in Sources */,
+				CE0DE8C622B0DF9B00F49C5B /* Cell.swift in Sources */,
+				CE0A949922B238A300F7F031 /* Manager.swift in Sources */,
 				CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */,
 				CEFF4423229E961B006A7449 /* MainAppViewController.swift in Sources */,
 				CE0102C922A7B4D100EDB18A /* UserData.swift in Sources */,
+				CE0DE8A022B0C7CE00F49C5B /* MyUserTableViewCell.swift in Sources */,
 				CE0A3C8F229E5B0600649E2E /* functionswift.swift in Sources */,
 				CEC40AD1229FE6DD00674037 /* MyNavigationController.swift in Sources */,
+				CEF9016022B100CE004F5A4C /* RecordGoViewController.swift in Sources */,
 				CE10041A229B764900660E82 /* RegisteredViewController.swift in Sources */,
 				CE100405229B725200660E82 /* AppDelegate.swift in Sources */,
 				CE0D3D63229F92B0008033D7 /* MyTabBarController.swift in Sources */,
+				CE0A945722B1D35F00F7F031 /* UserPhotoViewController.swift in Sources */,
+				CE0DE8C222B0D96900F49C5B /* MyRecordTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

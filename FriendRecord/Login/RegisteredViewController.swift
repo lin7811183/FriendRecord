@@ -31,7 +31,7 @@ class RegisteredViewController: UIViewController {
         self.userTF.delegate = self
         
         //dismissKeyboard.
-        self.hideKeyboardWhenTappedAround()
+        Manager.shared.hideKeyboardWhenTappedAround()
         
         //UIPickerView.
         self.genderpicker.delegate = self
@@ -50,7 +50,7 @@ class RegisteredViewController: UIViewController {
     /*------------------------------------------------------------ Function ------------------------------------------------------------*/
     //MARK: func - datapicker formatter.
     @objc func changDate(datePicker :UIDatePicker) {
-        let date = self.datapickerformat(datePicker: datePicker)
+        let date = Manager.shared.datapickerformat(datePicker: datePicker)
         bfTF.text = date
     }
     
@@ -96,8 +96,7 @@ class RegisteredViewController: UIViewController {
                         guard self.recodeArry.first!.value == 1 else {
                             DispatchQueue.main.async {
                                 print("********** user registered fail. **********")
-                                
-                                self.okAlter(title: "信箱有人使用過摟", message: "再想想新的信箱")
+                                Manager.shared.okAlter(vc: self, title: "信箱有人使用過摟", message: "再想想新的信箱")
                             }
                             return
                         }
@@ -145,7 +144,7 @@ class RegisteredViewController: UIViewController {
     //MARK: func - check all textfiels are =  "".
     func checkTextfiel() {
         guard self.emailTF.text != "", self.passwordTF.text! != "", self.userTF.text! != "", self.bfTF.text! != "", self.genderTF.text! != ""  else {
-            self.okAlter(title: "請確認註冊資訊是否皆有填寫完成", message: "")
+            Manager.shared.okAlter(vc: self, title: "請確認註冊資訊是否皆有填寫完成", message: "")
             self.isRegistered += 1
             return
         }
@@ -156,7 +155,7 @@ class RegisteredViewController: UIViewController {
         let emailRegex = "^\\w+((\\-\\w+)|(\\.\\w+))*@[A-Za-z0-9]+((\\.|\\-)[A-Za-z0-9]+)*.[A-Za-z0-9]+$"
         let emailTest = NSPredicate(format: "SELF MATCHES%@", emailRegex)
         guard emailTest.evaluate(with: self.emailTF.text) == true else {
-            self.okAlter(title: "請確認這註冊email是否有正確", message: "")
+            Manager.shared.okAlter(vc: self, title: "請確認這註冊email是否有正確", message: "")
             self.isRegistered += 1
             return
         }
@@ -166,7 +165,7 @@ class RegisteredViewController: UIViewController {
     func checkPassword() {
         let allRegex = NSPredicate(format: "SELF MATCHES %@", "^[A-Za-z0-9]{8,12}+$")
         guard allRegex.evaluate(with: self.passwordTF.text) == true else {
-            self.okAlter(title: "請確認註冊密碼是否有符合要求", message: "")
+            Manager.shared.okAlter(vc: self, title: "請確認註冊密碼是否有符合要求", message: "")
             self.isRegistered += 1
             return
         }
@@ -177,7 +176,7 @@ class RegisteredViewController: UIViewController {
         let username = "^[\\u4E00-\\u9FA5]{2,4}$"
         let userRegex = NSPredicate(format: "SELF MATCHES %@", username)
         guard userRegex.evaluate(with: self.userTF.text) == true else {
-            self.okAlter(title: "請輸入正確的中文名字與字數", message: "")
+            Manager.shared.okAlter(vc: self, title: "請輸入正確的中文名字與字數", message: "")
             self.isRegistered += 1
             return
         }

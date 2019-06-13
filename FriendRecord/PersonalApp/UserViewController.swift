@@ -4,11 +4,12 @@ import MobileCoreServices
 
 class UserViewController: UIViewController {
     
-    @IBOutlet weak var userImageView: UIImageView!
+    //@IBOutlet weak var userImageView: UIImageView!
     
     @IBOutlet weak var userNickNameLB: UILabel!
     @IBOutlet weak var UserGenderLB: UILabel!
     @IBOutlet weak var userBfLB: UILabel!
+    @IBOutlet weak var userPhotoBT: UIButton!
     
     var uploadArry :[String:Bool]!
     
@@ -41,13 +42,27 @@ class UserViewController: UIViewController {
 
         guard exist == true else {
             print("********** user photo not in local app(userVC). **********")
-            self.userImageView.image = UIImage(named: "userPhotoDefault.png")
+            //self.userImageView.image = UIImage(named: "userPhotoDefault.png")
+            
+            self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
+            self.userPhotoBT.clipsToBounds = true
+            self.userPhotoBT.setImage(UIImage(named: "userPhotoDefault.png"), for: .normal)
             return
         }
-        self.userImageView.image = self.userPhotoRead()
+        //self.userImageView.image = self.userPhotoRead()
+        
+        self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
+        self.userPhotoBT.clipsToBounds = true
+        self.userPhotoBT.setImage(Manager.shared.userPhotoRead(), for: .normal)
+        
     }
     
     /*------------------------------------------------------------ function ------------------------------------------------------------*/
+    //MARK: func - User Photo Look.
+    @IBAction func userPhotoLook(_ sender: Any) {
+        //let userPhotoVC = self.storyboard?.instantiateViewController(withIdentifier: "userphotoVC") as! UserPhotoViewController
+        //self.present(userPhotoVC, animated: true, completion: nil)
+    }
     //MARK: func - logout button
     @IBAction func logout(_ sender: Any) {
         //set isLogin key to UserDefaults.
@@ -99,7 +114,7 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         let image = info[.originalImage] as! UIImage
-        self.thumbmailImage(image: image)
+        Manager.shared.thumbmailImage(image: image)
         
         //check is login and registered.
         let userEmail = UserDefaults.standard
