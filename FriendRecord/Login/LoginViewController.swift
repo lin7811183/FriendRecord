@@ -69,6 +69,7 @@ class LoginViewController: UIViewController {
                         //set isLogin key to UserDefaults.
                         let loginUserDefault = UserDefaults.standard
                         loginUserDefault.set(true , forKey: "isLogin")
+                        
                         //present to tabberVC.
                         let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: "tabbarVC") as! MyTabBarController
                         self.present(tabbarVC, animated: true, completion: nil)
@@ -100,7 +101,6 @@ class LoginViewController: UIViewController {
                 }
 //                let reCode = String(data: jsData, encoding: .utf8)
 //                print(reCode!)
-                
                 let decoder = JSONDecoder()
                 do {
                     self.userLoginArry = try decoder.decode([UserData].self, from: jsData)
@@ -120,6 +120,7 @@ class LoginViewController: UIViewController {
                     userDataDefault.set("\(bf)" , forKey: "bf")
                     userDataDefault.string(forKey: "gende")
                     userDataDefault.set("\(self.userLoginArry[0].gender!)" , forKey: "gender")
+                    
                     Manager.shared.downLoadUserPhoto()
                     print("********** user is data rember secure. **********")
                 }catch {

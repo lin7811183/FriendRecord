@@ -34,11 +34,11 @@ class UserViewController: UIViewController {
         
         //check local app have user Photo.
         let userEmail = UserDefaults.standard
-        let emailHead = userEmail.string(forKey: "emailHead")
-
-        let fileManager = FileManager.default
-        let filePath = NSHomeDirectory()+"/Documents/"+"\(emailHead!).jpg"
-        let exist = fileManager.fileExists(atPath: filePath)
+        guard let emailHead = userEmail.string(forKey: "emailHead") else {
+            return
+        }
+        
+        let exist = Manager.shared.checkFile(fileName: "\(emailHead).jpg")
 
         guard exist == true else {
             print("********** user photo not in local app(userVC). **********")
@@ -50,7 +50,6 @@ class UserViewController: UIViewController {
             return
         }
         //self.userImageView.image = self.userPhotoRead()
-        
         self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
         self.userPhotoBT.clipsToBounds = true
         self.userPhotoBT.setImage(Manager.shared.userPhotoRead(), for: .normal)
@@ -116,9 +115,13 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
         let image = info[.originalImage] as! UIImage
         Manager.shared.thumbmailImage(image: image)
         
+        //new user Photo.
+        let userDataDefault = UserDefaults.standard
+        userDataDefault.bool(forKey: "isUserPhoto")
+        userDataDefault.set(true , forKey: "isUserPhoto")
+        
         //check is login and registered.
         let userEmail = UserDefaults.standard
-        //read userdefault is login or registered?
         let emailHead = userEmail.string(forKey: "emailHead")
         guard let emailChange = emailHead else {
             print("user photo emeil change fail(imagePickerController).")
@@ -144,7 +147,6 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
 //        userPhotoName.set("\(fileName)" , forKey: "userPhotoName")
         
         self.dismiss(animated: true, completion: nil)//關閉imagePickController
-        
         
         //Upload user Photo to server.
         //上傳地址

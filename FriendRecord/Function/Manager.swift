@@ -6,7 +6,7 @@ class Manager :UIViewController {
     static let shared = Manager()
     
 //    private init() {
-//        
+//
 //    }
     
     //MARK: func - dismissKeyboard.
@@ -44,6 +44,14 @@ class Manager :UIViewController {
         return filePath
     }
     
+    //MARK: func - check file in app.
+    func checkFile(fileName :String) -> Bool {
+        let fileManager = FileManager.default
+        let filePath = NSHomeDirectory()+"/Documents/"+fileName
+        let exist = fileManager.fileExists(atPath: filePath)
+        return exist
+    }
+    
     //MARK: func - user Photo file read.
     func userPhotoRead() -> UIImage? {
         
@@ -57,9 +65,7 @@ class Manager :UIViewController {
             return nil
         }
         
-        let fileManager = FileManager.default
-        let filePath = NSHomeDirectory()+"/Documents/"+"\(emailChange).jpg"
-        let exist = fileManager.fileExists(atPath: filePath)
+        let exist = self.checkFile(fileName: "\(emailChange).jpg")
         
         guard exist == true else {
             print("********** user photo is no local app. **********")
@@ -87,9 +93,7 @@ class Manager :UIViewController {
             return
         }
         
-        let fileManager = FileManager.default
-        let filePath = NSHomeDirectory()+"/Documents/"+"\(emailChange).jpg"
-        let exist = fileManager.fileExists(atPath: filePath)
+        let exist = self.checkFile(fileName: "\(emailChange).jpg")
         
         guard exist == true else {
             print("********** user photo not in local app. **********")
@@ -134,6 +138,19 @@ class Manager :UIViewController {
                                     if let imageData = image?.jpegData(compressionQuality: 1) {//compressionQuality:0~1之間
                                         do{
                                             let filePath = self.fileDocumentsPath(fileName: "\(emailChange).jpg")
+                                            //check is User Photo.
+                                            let userEmail = UserDefaults.standard
+                                            let emailHead = userEmail.string(forKey: "emailHead")
+                                            guard let emailChange = emailHead else {
+                                                print("user photo emeil change fail(NaVC).")
+                                                return
+                                            }
+                                            let exist = Manager.shared.checkFile(fileName: "\(emailChange).jpg")
+                                            if exist == false {
+                                                let userDataDefault = UserDefaults.standard
+                                                userDataDefault.bool(forKey: "isUserPhoto")
+                                                userDataDefault.set(true , forKey: "isUserPhoto")
+                                            }
                                             try imageData.write(to: filePath, options: [.atomicWrite])
                                         }catch {
                                             print("uer photo fiel save is eror : \(error)")

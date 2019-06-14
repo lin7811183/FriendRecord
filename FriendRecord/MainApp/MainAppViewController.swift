@@ -29,6 +29,18 @@ class MainAppViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //check User Photo is new or downLoad to server.
+        let userPhoto = UserDefaults.standard
+        let isUserPhoto = userPhoto.bool(forKey: "isUserPhoto")
+        guard isUserPhoto == false else {
+            let indexpath = IndexPath(row: 0, section: 0)
+            self.tableView.reloadRows(at: [indexpath], with: .automatic)
+            //new user Photo.
+            let userDataDefault = UserDefaults.standard
+            userDataDefault.bool(forKey: "isUserPhoto")
+            userDataDefault.set(false , forKey: "isUserPhoto")
+            return
+        }
     }
     
     /*
@@ -60,7 +72,7 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! MyRecordTableViewCell
             cell.testLB.text = self.tableViewData[indexPath.row].recordCellLB
             //Auto change cell hight.
-            self.tableView.rowHeight = cell.testLB.bounds.height + 20
+            self.tableView.rowHeight = cell.testLB.bounds.height + 10
             return cell
         }
         
