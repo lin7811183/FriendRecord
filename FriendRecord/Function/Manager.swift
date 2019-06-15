@@ -11,9 +11,10 @@ class Manager :UIViewController {
     
     //MARK: func - dismissKeyboard.
     func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(Manager.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
+        
     }
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -186,8 +187,8 @@ class Manager :UIViewController {
         let ratio = max(width,height)
         let imageSize = CGSize(width:image.size.width*ratio,height: image.size.height*ratio)
         //在畫圖行前 切圓形
-        let circle = UIBezierPath(ovalIn: CGRect(x: 0,y: 0,width: thumbnailSize.width,height: thumbnailSize.height))
-        circle.addClip()
+//        let circle = UIBezierPath(ovalIn: CGRect(x: 0,y: 0,width: thumbnailSize.width,height: thumbnailSize.height))
+//        circle.addClip()
         image.draw(in:CGRect(x: -(imageSize.width-thumbnailSize.width)/2.0,y: -(imageSize.height-thumbnailSize.height)/2.0,width: imageSize.width,height: imageSize.height))
         //取得畫布上的圖
         let smallImage = UIGraphicsGetImageFromCurrentImageContext()

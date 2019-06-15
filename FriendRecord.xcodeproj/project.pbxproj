@@ -74,8 +74,8 @@
 		CE0102BD22A7831800EDB18A /* Function */ = {
 			isa = PBXGroup;
 			children = (
-				CE0A3C8E229E5B0600649E2E /* functionswift.swift */,
 				CE0A949822B238A300F7F031 /* Manager.swift */,
+				CE0A3C8E229E5B0600649E2E /* functionswift.swift */,
 			);
 			path = Function;
 			sourceTree = "<group>";

@@ -63,16 +63,16 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! MyUserTableViewCell
+            cell.imageUserPhoto.layer.cornerRadius = cell.imageUserPhoto.bounds.height / 2
             cell.imageUserPhoto.image = Manager.shared.userPhotoRead()
             //Auto change cell hight.
-            self.tableView.rowHeight = cell.showLB.bounds.height + 55
-            
+            self.tableView.rowHeight = cell.showLB.bounds.height + 50
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! MyRecordTableViewCell
             cell.testLB.text = self.tableViewData[indexPath.row].recordCellLB
             //Auto change cell hight.
-            self.tableView.rowHeight = cell.testLB.bounds.height + 10
+            self.tableView.rowHeight = cell.testLB.bounds.height + 20
             return cell
         }
         
