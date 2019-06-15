@@ -308,7 +308,6 @@
                                         <connections>
                                             <outlet property="imageUserPhoto" destination="fDp-gv-wzI" id="Z21-a5-4J7"/>
                                             <outlet property="showLB" destination="7d0-80-6Cn" id="GPp-lR-4MS"/>
-                                            <segue destination="cZc-49-CRW" kind="presentation" id="gwT-Zn-j4U"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recordCell" rowHeight="56" id="S21-3b-Mw9" customClass="MyRecordTableViewCell" customModule="FriendRecord" customModuleProvider="target">
@@ -344,7 +343,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xWk-A0-umj"/>
                     </view>
-                    <navigationItem key="navigationItem" title="聆聽錄音帶" id="4cV-8L-5z8"/>
+                    <navigationItem key="navigationItem" title="聆聽錄音帶" id="4cV-8L-5z8">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="SPF-JA-IdI">
+                            <connections>
+                                <action selector="test:" destination="09T-vU-Bsr" id="XAe-P1-lk7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="HzQ-4X-Q44" id="Fok-h5-val"/>
                     </connections>
@@ -369,6 +374,11 @@
                                         <barButtonItem key="leftBarButtonItem" title="取消" id="ISF-Cu-Y0j">
                                             <connections>
                                                 <action selector="cancel:" destination="cZc-49-CRW" id="4Tb-iX-3CN"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="發布" id="PJk-OU-Nga">
+                                            <connections>
+                                                <action selector="SendRecordPen:" destination="cZc-49-CRW" id="ii7-VM-H6g"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -402,6 +412,7 @@
                         <viewLayoutGuide key="safeArea" id="XgE-BR-X7r"/>
                     </view>
                     <connections>
+                        <outlet property="sendRecordPen" destination="PJk-OU-Nga" id="6bE-Pj-iMu"/>
                         <outlet property="starRecordBT" destination="jT0-rq-f56" id="vNz-nl-RbG"/>
                         <outlet property="textView" destination="Cdl-5R-T7H" id="Z6f-gA-s8z"/>
                         <outlet property="timerLB" destination="dK8-ij-to1" id="LHh-dj-tSj"/>

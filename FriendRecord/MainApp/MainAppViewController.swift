@@ -5,25 +5,25 @@ class MainAppViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        let userCellValue = Cell()
+        let userCellValue = Record()
         userCellValue.userCellLB = "發個錄音帶給大家聽聽~"
-        self.tableViewData.append(userCellValue)
-        let userCellValue2 = Cell()
-        userCellValue2.recordCellLB = "Test"
-        self.tableViewData.append(userCellValue2)
+        Manager.recordData.append(userCellValue)
+        //self.tableViewData.append(userCellValue)
+        //let userCellValue2 = Record()
+        //userCellValue2.userCellLB = "Test"
+        //self.tableViewData.append(userCellValue2)
     }
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userPoRecordBT: UIButton!
     
-    var tableViewData :[Cell] = []
+    //var tableViewData :[Record] = Manager.recordData
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +43,18 @@ class MainAppViewController: UIViewController {
         }
     }
     
+    @IBAction func test(_ sender: Any) {
+        print("\(Manager.recordData.count)")
+        
+        let new = Record()
+        new.recordText = "New"
+        
+        Manager.recordData.append(new)
+        
+        let inserIndexPath = IndexPath(row: Manager.recordData.count - 1, section: 0)
+        self.tableView.insertRows(at: [inserIndexPath], with: .automatic)
+        
+    }
     /*
     // MARK: - Navigation
 
@@ -57,7 +69,8 @@ class MainAppViewController: UIViewController {
 extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
     //MARK:UITableDataSource protocol
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tableViewData.count
+        //return self.tableViewData.count
+        return Manager.recordData.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -70,7 +83,8 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! MyRecordTableViewCell
-            cell.testLB.text = self.tableViewData[indexPath.row].recordCellLB
+            //cell.testLB.text = self.tableViewData[indexPath.row].recordFileName
+            cell.testLB.text = Manager.recordData[indexPath.row].recordText
             //Auto change cell hight.
             self.tableView.rowHeight = cell.testLB.bounds.height + 20
             return cell
@@ -81,9 +95,20 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
     //MARK: Protocol - tableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
-//        if indexPath.row == 0 {
-//            let recordgovc = self.storyboard?.instantiateViewController(withIdentifier: "recordgoVC") as! RecordGoViewController
-//            self.present(recordgovc, animated: true, completion: nil)
-//        }
+        if indexPath.row == 0 {
+            let recordgovc = self.storyboard?.instantiateViewController(withIdentifier: "recordgoVC") as! RecordGoViewController
+            recordgovc.delegate = self
+            self.present(recordgovc, animated: true, completion: nil)
+        }
+    }
+}
+
+extension MainAppViewController :RecordGoViewControllerDelegate {
+    func sendRecordPen() {
+        let inserIndexPath = IndexPath(row: Manager.recordData.count - 1, section: 0)
+        self.tableView.insertRows(at: [inserIndexPath], with: .automatic)
+        
+        let firstIndexPath = IndexPath(row: 0, section: 0)
+        self.tableView.reloadRows(at: [firstIndexPath], with: .automatic)
     }
 }

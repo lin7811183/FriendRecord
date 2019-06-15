@@ -4,6 +4,7 @@ import UIKit
 class Manager :UIViewController {
     
     static let shared = Manager()
+    static var recordData :[Record] = []
     
 //    private init() {
 //
