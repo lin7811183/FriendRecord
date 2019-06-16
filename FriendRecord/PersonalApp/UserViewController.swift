@@ -27,6 +27,7 @@ class UserViewController: UIViewController {
         let userDataBf = userData.string(forKey: "bf")
         self.userBfLB.text = userDataBf
         
+        //self.navigationItem.title = self.userNickNameLB.text
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -182,5 +183,4 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
         }
         uploadTask.resume()
     }
-    
 }

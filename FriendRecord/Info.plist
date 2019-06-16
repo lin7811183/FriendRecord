@@ -24,6 +24,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>請同意開啟相機使用</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>使用錄音留言板需打開麥克風使用權</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>請同意開啟相簿使用</string>
 	<key>NSPhotoLibraryUsageDescription</key>

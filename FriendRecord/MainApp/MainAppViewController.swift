@@ -55,15 +55,7 @@ class MainAppViewController: UIViewController {
         self.tableView.insertRows(at: [inserIndexPath], with: .automatic)
         
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 }
 
 extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
@@ -89,7 +81,6 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             self.tableView.rowHeight = cell.testLB.bounds.height + 20
             return cell
         }
-        
     }
     
     //MARK: Protocol - tableView delegate
@@ -104,6 +95,8 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
 }
 
 extension MainAppViewController :RecordGoViewControllerDelegate {
+    //MARK: Protocol - RecordGoViewControllerDelegate.
+    //if user send new record pen , this delegate tell MainVC tableView insert and reload Row.
     func sendRecordPen() {
         let inserIndexPath = IndexPath(row: Manager.recordData.count - 1, section: 0)
         self.tableView.insertRows(at: [inserIndexPath], with: .automatic)
