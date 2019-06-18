@@ -7,6 +7,8 @@ class MyNavigationController: UINavigationController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+
         //check is login and registered.
         let loginUserDefault = UserDefaults.standard
         //read userdefault is login or registered?
@@ -15,6 +17,7 @@ class MyNavigationController: UINavigationController {
         
         guard checkLogin == true else {
             let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
+            
             self.present(loginVC, animated: true, completion: nil)
             return
         }

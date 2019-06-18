@@ -7,28 +7,26 @@ class MainAppViewController: UIViewController {
         
         let userCellValue = Record()
         userCellValue.userCellLB = "發個錄音帶給大家聽聽~"
-        Manager.recordData.append(userCellValue)
-        //self.tableViewData.append(userCellValue)
-        //let userCellValue2 = Record()
-        //userCellValue2.userCellLB = "Test"
-        //self.tableViewData.append(userCellValue2)
+        Manager.recordDataUser.append(userCellValue)
+        self.tableViewData = [Manager.recordDataUser,[]]
     }
-    
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userPoRecordBT: UIButton!
     
-    //var tableViewData :[Record] = Manager.recordData
+    //var record :[Record] = []
+    var tableViewData = [Manager.recordDataUser,[Record]()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         //check User Photo is new or downLoad to server.
         let userPhoto = UserDefaults.standard
         let isUserPhoto = userPhoto.bool(forKey: "isUserPhoto")
@@ -42,66 +40,90 @@ class MainAppViewController: UIViewController {
             return
         }
     }
-    
     @IBAction func test(_ sender: Any) {
-        print("\(Manager.recordData.count)")
-        
-        let new = Record()
-        new.recordText = "New"
-        
-        Manager.recordData.append(new)
-        
-        let inserIndexPath = IndexPath(row: Manager.recordData.count - 1, section: 0)
-        self.tableView.insertRows(at: [inserIndexPath], with: .automatic)
-        
+//        print("\(Manager.recordData.count)")
     }
-    
 }
 
 extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
     //MARK:UITableDataSource protocol
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return self.tableViewData.count
-        return Manager.recordData.count
+        return self.tableViewData[section].count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! MyUserTableViewCell
             cell.imageUserPhoto.layer.cornerRadius = cell.imageUserPhoto.bounds.height / 2
-            cell.imageUserPhoto.image = Manager.shared.userPhotoRead()
+            //record file path URL.
+            let recordData = UserDefaults.standard
+            if let recordDataEmailHead = recordData.string(forKey: "emailHead") {
+                cell.imageUserPhoto.image = Manager.shared.userPhotoRead(jpg: recordDataEmailHead)
+            }
+            cell.showLB.text = self.tableViewData[indexPath.section][indexPath.row].userCellLB
             //Auto change cell hight.
             self.tableView.rowHeight = cell.showLB.bounds.height + 50
             return cell
         } else {
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! MyRecordTableViewCell
-            //cell.testLB.text = self.tableViewData[indexPath.row].recordFileName
-            cell.testLB.text = Manager.recordData[indexPath.row].recordText
+            //cell.mainLB.text = Manager.recordData[indexPath.row].recordText
+           cell.mainLB.text  = self.tableViewData[indexPath.section][indexPath.row].recordText
+
+            if let imageName = self.tableViewData[indexPath.section][indexPath.row].recordSendUser {
+                let imageNameChange = imageName.split(separator: "@")
+                let name = "\(imageNameChange[0])"
+                cell.sendImage.layer.cornerRadius = cell.sendImage.bounds.height / 2
+                cell.sendImage.image = Manager.shared.userPhotoRead(jpg: name)
+            }
+            cell.sendUserNameLB.text = Manager.recordData[indexPath.row].userNickName
+            if let date = Manager.recordData[indexPath.row].recordDate {
+                let dateFormat :DateFormatter = DateFormatter()
+                dateFormat.dateFormat = "yyyy/MM/dd HH:mm"
+                let dateString = dateFormat.string(from: date)
+                cell.sendRecordDateLB.text = dateString
+            }
             //Auto change cell hight.
-            self.tableView.rowHeight = cell.testLB.bounds.height + 20
-            return cell
+            self.tableView.rowHeight = cell.mainView.bounds.height + 30
+            cell.mainView.layer.cornerRadius = 10
+            cell.mainView.layer.masksToBounds = true
+            cell.backgroundColor = UIColor.lightGray
+           return cell
         }
     }
     
     //MARK: Protocol - tableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             let recordgovc = self.storyboard?.instantiateViewController(withIdentifier: "recordgoVC") as! RecordGoViewController
             recordgovc.delegate = self
             self.present(recordgovc, animated: true, completion: nil)
         }
+    }
+    //MARK: func - tableView Cell separatorInset.
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.tableViewData.count
     }
 }
 
 extension MainAppViewController :RecordGoViewControllerDelegate {
     //MARK: Protocol - RecordGoViewControllerDelegate.
     //if user send new record pen , this delegate tell MainVC tableView insert and reload Row.
-    func sendRecordPen() {
-        let inserIndexPath = IndexPath(row: Manager.recordData.count - 1, section: 0)
-        self.tableView.insertRows(at: [inserIndexPath], with: .automatic)
-        
-        let firstIndexPath = IndexPath(row: 0, section: 0)
-        self.tableView.reloadRows(at: [firstIndexPath], with: .automatic)
+    func sendRecordPen(Record: Record) {
+        if let selectIndex = Manager.recordData.firstIndex(of: Record) {
+            self.tableViewData[1].insert(Record, at: 0)
+            print("tableViewData[0]：\(self.tableViewData[0].count)")
+            print("tableViewData[1]：\(self.tableViewData[1].count)")
+            print("selectIndex:\(selectIndex)")
+            //change indexPath
+            let selectIndexPath = IndexPath(row: selectIndex, section: 1)
+            //tableView Reload.
+            self.tableView.insertRows(at: [selectIndexPath], with: .automatic)
+        }
     }
 }

@@ -4,11 +4,8 @@ import UIKit
 class Manager :UIViewController {
     
     static let shared = Manager()
+    static var recordDataUser :[Record] = []
     static var recordData :[Record] = []
-    
-//    private init() {
-//
-//    }
     
     //MARK: func - dismissKeyboard.
     func hideKeyboardWhenTappedAround() {
@@ -55,26 +52,26 @@ class Manager :UIViewController {
     }
     
     //MARK: func - user Photo file read.
-    func userPhotoRead() -> UIImage? {
+    func userPhotoRead(jpg: String) -> UIImage? {
         
-        //check local app have user Photo.
-        let userEmail = UserDefaults.standard
-        //read userdefault is login or registered?
-        let emailHead = userEmail.string(forKey: "emailHead")
+//        //check local app have user Photo.
+//        let userEmail = UserDefaults.standard
+//        //read userdefault is login or registered?
+//        let emailHead = userEmail.string(forKey: "emailHead")
+//
+//        guard let emailChange = emailHead else {
+//            print("user photo emeil change fail(userPhotoRead).")
+//            return nil
+//        }
+//
+//        let exist = self.checkFile(fileName: "\(emailChange).jpg")
+//
+//        guard exist == true else {
+//            print("********** user photo is no local app. **********")
+//            return nil
+//        }
         
-        guard let emailChange = emailHead else {
-            print("user photo emeil change fail(userPhotoRead).")
-            return nil
-        }
-        
-        let exist = self.checkFile(fileName: "\(emailChange).jpg")
-        
-        guard exist == true else {
-            print("********** user photo is no local app. **********")
-            return nil
-        }
-        
-        let photoFileURL = self.fileDocumentsPath(fileName: "\(emailChange).jpg")
+        let photoFileURL = self.fileDocumentsPath(fileName: "\(jpg).jpg")
         //if have photo do file change data
         if let imageData = try? Data(contentsOf: photoFileURL) {
             return UIImage(data: imageData)

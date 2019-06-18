@@ -3,7 +3,7 @@ import AVFoundation
 import AVKit
 
 protocol RecordGoViewControllerDelegate {
-    func sendRecordPen()
+    func sendRecordPen(Record :Record)
 }
 
 class RecordGoViewController: UIViewController {
@@ -44,7 +44,9 @@ class RecordGoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.userImage.image = Manager.shared.userPhotoRead()
+        let userEmail = UserDefaults.standard
+        let emailHead = userEmail.string(forKey: "emailHead")
+        self.userImage.image = Manager.shared.userPhotoRead(jpg: emailHead!)
         
         self.textView.text = "請給錄音帶一個主題吧~"
         self.textView.textColor = UIColor.gray
@@ -102,6 +104,7 @@ class RecordGoViewController: UIViewController {
                 let recordData = UserDefaults.standard
                 let recordDataEmailHead = recordData.string(forKey: "emailHead")
                 let recordDataEmail = recordData.string(forKey: "email")
+                let userNickName = recordData.string(forKey: "nickname")
                 
                 let now :Date = Date()
                 let dateFormat :DateFormatter = DateFormatter()
@@ -114,11 +117,13 @@ class RecordGoViewController: UIViewController {
                 //save new record.
                 newRecord.recordSendUser = recordDataEmail
                 newRecord.recordFileName = "\(fileName).caf"
+                newRecord.userNickName = userNickName!
                 newRecord.recordText = self.textView.text
                 newRecord.recordDate = now
                 
                 //self.recordData.append(newRecord)
-                Manager.recordData.append(newRecord)
+                Manager.recordData.insert(newRecord, at: 0)
+                //Manager.recordData.append(newRecord)
                 //Manager.recordData.insert(newRecord, at: 0)
                 
                 //將路徑以及設定的Dictionary資料用於產生AVAudioRecorder
@@ -135,7 +140,7 @@ class RecordGoViewController: UIViewController {
                 return
             }
             
-            Manager.recordData.remove(at: Manager.recordData.count - 1)
+            Manager.recordData.remove(at: 0)
             //self.starRecordBT.titleLabel?.text = "再次錄音"
             self.starRecordBT.setTitle("再次錄音", for: .normal)
 //            self.textView.text = ""
@@ -156,6 +161,7 @@ class RecordGoViewController: UIViewController {
             let recordData = UserDefaults.standard
             let recordDataEmailHead = recordData.string(forKey: "emailHead")
             let recordDataEmail = recordData.string(forKey: "email")
+            let userNickName = recordData.string(forKey: "nickname")
             
             let now :Date = Date()
             let dateFormat :DateFormatter = DateFormatter()
@@ -168,11 +174,13 @@ class RecordGoViewController: UIViewController {
             //save new record.
             newRecord.recordSendUser = recordDataEmail
             newRecord.recordFileName = "\(fileName).caf"
+            newRecord.userNickName = userNickName!
             newRecord.recordText = self.textView.text
             newRecord.recordDate = now
             
             //self.recordData.append(newRecord)
-            Manager.recordData.append(newRecord)
+            Manager.recordData.insert(newRecord, at: 0)
+            //Manager.recordData.append(newRecord)
             //Manager.recordData.insert(newRecord, at: 0)
             
             //將路徑以及設定的Dictionary資料用於產生AVAudioRecorder
@@ -192,20 +200,19 @@ class RecordGoViewController: UIViewController {
             print("********** Stop Record. **********")
             self.voiceRecorder?.stop()
             
-            Manager.recordData[Manager.recordData.count - 1].recordTime = self.timerLB.text
+            Manager.recordData[0].recordTime = self.timerLB.text
            
             //cleat timer.
             self.timer.invalidate()
             self.timerLB.text = ""
             count = 0.0
             
-            let row = Manager.recordData.count - 1
-            let recordDataString = "主旨:\(Manager.recordData[row].recordText!)\n時間:\(Manager.recordData[row].recordDate!)\n長度:\(Manager.recordData[row].recordTime!)"
+            let row = 0
+            let recordDataString = "主旨:\(Manager.recordData[0].recordText!)\n時間:\(Manager.recordData[0].recordDate!)\n長度:\(Manager.recordData[0].recordTime!)"
             self.textView.textColor = UIColor.black
             self.textView.text = recordDataString
             
-            print("\(toolRecordPan)")
-            print("\(Manager.recordData.count)")
+            print("Manager.recordData:\(Manager.recordData.count)")
         }
     }
     //MARK: func - cancel RecordGo.
@@ -215,12 +222,12 @@ class RecordGoViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
             return
         }
-        Manager.recordData.remove(at: Manager.recordData.count - 1)
+        Manager.recordData.remove(at: 0)
         self.dismiss(animated: true, completion: nil)
     }
     //MARK: func - Send Record Pen.
     @IBAction func SendRecordPen(_ sender: Any) {
-        self.delegate.sendRecordPen()
+        self.delegate.sendRecordPen(Record: Manager.recordData[0])
         self.dismiss(animated: true, completion: nil)
     }
 }

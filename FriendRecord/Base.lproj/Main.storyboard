@@ -281,9 +281,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HzQ-4X-Q44">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HzQ-4X-Q44">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userCell" rowHeight="126" id="FRI-Fe-gNf" customClass="MyUserTableViewCell" customModule="FriendRecord" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="126"/>
@@ -310,24 +311,53 @@
                                             <outlet property="showLB" destination="7d0-80-6Cn" id="GPp-lR-4MS"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recordCell" rowHeight="56" id="S21-3b-Mw9" customClass="MyRecordTableViewCell" customModule="FriendRecord" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="154" width="414" height="56"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recordCell" rowHeight="167" id="S21-3b-Mw9" customClass="MyRecordTableViewCell" customModule="FriendRecord" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="154" width="414" height="167"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S21-3b-Mw9" id="3xL-fO-BRW" customClass="MyRecordTableViewCell" customModule="FriendRecord" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="166.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="錄音留言板" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztq-qM-qez">
-                                                    <rect key="frame" x="20" y="11" width="340" height="39"/>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lTg-A4-5Ze">
+                                                    <rect key="frame" x="20" y="15" width="374" height="133"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztq-qM-qez">
+                                                            <rect key="frame" x="8" y="74" width="358" height="39"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="75r-B8-r5v">
+                                                            <rect key="frame" x="8" y="8" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHe-hH-fBS">
+                                                            <rect key="frame" x="76" y="8" width="290" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3a-Sz-a6n">
+                                                            <rect key="frame" x="76" y="37" width="290" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </view>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="testLB" destination="ztq-qM-qez" id="Cf1-YF-o7g"/>
+                                            <outlet property="mainLB" destination="ztq-qM-qez" id="6u8-br-RZw"/>
+                                            <outlet property="mainView" destination="lTg-A4-5Ze" id="aF6-Hd-jHX"/>
+                                            <outlet property="sendImage" destination="75r-B8-r5v" id="oMn-ky-n8g"/>
+                                            <outlet property="sendRecordDateLB" destination="X3a-Sz-a6n" id="FFN-Xy-TaO"/>
+                                            <outlet property="sendUserNameLB" destination="qHe-hH-fBS" id="q9P-g0-cSf"/>
                                             <segue destination="Afu-AK-EdX" kind="show" id="BM0-Fw-A0d"/>
                                         </connections>
                                     </tableViewCell>
@@ -344,9 +374,9 @@
                         <viewLayoutGuide key="safeArea" id="xWk-A0-umj"/>
                     </view>
                     <navigationItem key="navigationItem" title="聆聽錄音帶" id="4cV-8L-5z8">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="SPF-JA-IdI">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="L62-BK-58n">
                             <connections>
-                                <action selector="test:" destination="09T-vU-Bsr" id="XAe-P1-lk7"/>
+                                <action selector="test:" destination="09T-vU-Bsr" id="Dsc-w0-2gB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

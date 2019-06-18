@@ -8,7 +8,11 @@ class UserPhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.bigUserPhoto.image = Manager.shared.userPhotoRead()
+        //record file path URL.
+        let recordData = UserDefaults.standard
+        let recordDataEmailHead = recordData.string(forKey: "emailHead")
+        let recordDataEmail = recordData.string(forKey: "email")
+        self.bigUserPhoto.image = Manager.shared.userPhotoRead(jpg: recordDataEmail!)
         
     }
     

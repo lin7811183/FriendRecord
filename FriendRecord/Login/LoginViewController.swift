@@ -70,6 +70,8 @@ class LoginViewController: UIViewController {
                         let loginUserDefault = UserDefaults.standard
                         loginUserDefault.set(true , forKey: "isLogin")
                         
+                        Manager.recordDataUser.removeAll()
+                        
                         //present to tabberVC.
                         let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: "tabbarVC") as! MyTabBarController
                         self.present(tabbarVC, animated: true, completion: nil)

@@ -53,7 +53,8 @@ class UserViewController: UIViewController {
         //self.userImageView.image = self.userPhotoRead()
         self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
         self.userPhotoBT.clipsToBounds = true
-        self.userPhotoBT.setImage(Manager.shared.userPhotoRead(), for: .normal)
+
+        self.userPhotoBT.setImage(Manager.shared.userPhotoRead(jpg: emailHead), for: .normal)
         
     }
     

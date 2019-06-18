@@ -2,7 +2,12 @@ import UIKit
 
 class MyRecordTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var testLB: UILabel!
+    
+    @IBOutlet weak var mainLB: UILabel!
+    @IBOutlet weak var sendImage: UIImageView!
+    @IBOutlet weak var sendRecordDateLB: UILabel!
+    @IBOutlet weak var sendUserNameLB: UILabel!
+    @IBOutlet weak var mainView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
