@@ -6,6 +6,7 @@ class Manager :UIViewController {
     static let shared = Manager()
     static var recordDataUser :[Record] = []
     static var recordData :[Record] = []
+    static var indexPath :Int!
     
     //MARK: func - dismissKeyboard.
     func hideKeyboardWhenTappedAround() {

@@ -358,7 +358,7 @@
                                             <outlet property="sendImage" destination="75r-B8-r5v" id="oMn-ky-n8g"/>
                                             <outlet property="sendRecordDateLB" destination="X3a-Sz-a6n" id="FFN-Xy-TaO"/>
                                             <outlet property="sendUserNameLB" destination="qHe-hH-fBS" id="q9P-g0-cSf"/>
-                                            <segue destination="Afu-AK-EdX" kind="show" id="BM0-Fw-A0d"/>
+                                            <segue destination="Afu-AK-EdX" kind="show" identifier="penSegue" id="BM0-Fw-A0d"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -373,13 +373,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xWk-A0-umj"/>
                     </view>
-                    <navigationItem key="navigationItem" title="聆聽錄音帶" id="4cV-8L-5z8">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="L62-BK-58n">
-                            <connections>
-                                <action selector="test:" destination="09T-vU-Bsr" id="Dsc-w0-2gB"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="聆聽錄音帶" id="4cV-8L-5z8"/>
                     <connections>
                         <outlet property="tableView" destination="HzQ-4X-Q44" id="Fok-h5-val"/>
                     </connections>
@@ -453,20 +447,67 @@
             </objects>
             <point key="canvasLocation" x="4505.7971014492759" y="-133.25892857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Pen View Controller-->
         <scene sceneID="hck-H9-W8o">
             <objects>
-                <viewController id="Afu-AK-EdX" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="penVC" id="Afu-AK-EdX" customClass="PenViewController" customModule="FriendRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o2B-A9-rSu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mcv-u4-Ibi">
+                                <rect key="frame" x="20" y="107" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxh-9D-AyE">
+                                <rect key="frame" x="128" y="120" width="266" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSd-io-Uzt">
+                                <rect key="frame" x="128" y="166" width="266" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dK2-Yr-J4F">
+                                <rect key="frame" x="20" y="223" width="374" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTW-O1-WRP">
+                                <rect key="frame" x="20" y="276" width="374" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="開始播放"/>
+                                <connections>
+                                    <action selector="recordPlayer:" destination="Afu-AK-EdX" eventType="touchUpInside" id="WWN-3k-CCY"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dvl-PA-h7D">
+                                <rect key="frame" x="0.0" y="380" width="414" height="433"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="LqK-Ep-xwj"/>
                     </view>
+                    <connections>
+                        <outlet property="dateLB" destination="kSd-io-Uzt" id="XhG-oB-IWu"/>
+                        <outlet property="mainLB" destination="dK2-Yr-J4F" id="bge-T8-3mo"/>
+                        <outlet property="penableView" destination="dvl-PA-h7D" id="G77-Za-R3O"/>
+                        <outlet property="userImage" destination="Mcv-u4-Ibi" id="d1P-Bk-mp7"/>
+                        <outlet property="userNameLB" destination="Dxh-9D-AyE" id="xb0-EW-NuM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KFZ-DO-Ni4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3645" y="603"/>
+            <point key="canvasLocation" x="3644.9275362318845" y="573.88392857142856"/>
         </scene>
         <!--Registered View Controller-->
         <scene sceneID="IFu-gi-Kal">

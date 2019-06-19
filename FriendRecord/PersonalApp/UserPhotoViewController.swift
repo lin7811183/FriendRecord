@@ -11,8 +11,8 @@ class UserPhotoViewController: UIViewController {
         //record file path URL.
         let recordData = UserDefaults.standard
         let recordDataEmailHead = recordData.string(forKey: "emailHead")
-        let recordDataEmail = recordData.string(forKey: "email")
-        self.bigUserPhoto.image = Manager.shared.userPhotoRead(jpg: recordDataEmail!)
+        print("\(recordDataEmailHead)")
+        self.bigUserPhoto.image = Manager.shared.userPhotoRead(jpg: recordDataEmailHead!)
         
     }
     

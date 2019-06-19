@@ -9,6 +9,14 @@ class MainAppViewController: UIViewController {
         userCellValue.userCellLB = "發個錄音帶給大家聽聽~"
         Manager.recordDataUser.append(userCellValue)
         self.tableViewData = [Manager.recordDataUser,[]]
+        print("tableViewData[0]：\(self.tableViewData[0].count)")
+        print("tableViewData[1]：\(self.tableViewData[1].count)")
+        print("Manager.recordDataUser：\(Manager.recordDataUser.count)")
+        print("Manager.recordData：\(Manager.recordData.count)")
+        
+        if Manager.recordData.count > 0 {
+            self.tableViewData[1] = Manager.recordData
+        }
     }
 
     @IBOutlet weak var tableView: UITableView!
@@ -16,6 +24,8 @@ class MainAppViewController: UIViewController {
     
     //var record :[Record] = []
     var tableViewData = [Manager.recordDataUser,[Record]()]
+    
+    var userSelectRow :Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +43,7 @@ class MainAppViewController: UIViewController {
         guard isUserPhoto == false else {
             let indexpath = IndexPath(row: 0, section: 0)
             self.tableView.reloadRows(at: [indexpath], with: .automatic)
+            self.tableView.reloadData()
             //new user Photo.
             let userDataDefault = UserDefaults.standard
             userDataDefault.bool(forKey: "isUserPhoto")
@@ -40,9 +51,15 @@ class MainAppViewController: UIViewController {
             return
         }
     }
-    @IBAction func test(_ sender: Any) {
-//        print("\(Manager.recordData.count)")
-    }
+//    //MARK: func - Segue
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "penSegue" {
+//            let penVC = segue.destination as! PenViewController
+//             penVC.selectIndexPath = self.userSelectRow
+//            print("segue userSelectRow:\(self.userSelectRow)")
+//            print("penVC.selectIndexPath:\(penVC.selectIndexPath)")
+//        }
+//    }
 }
 
 extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
@@ -74,12 +91,12 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             if let imageName = self.tableViewData[indexPath.section][indexPath.row].recordSendUser {
                 let imageNameChange = imageName.split(separator: "@")
                 let name = "\(imageNameChange[0])"
-                cell.sendImage.layer.cornerRadius = cell.sendImage.bounds.height / 2
                 cell.sendImage.image = Manager.shared.userPhotoRead(jpg: name)
+                cell.sendImage.layer.cornerRadius = cell.sendImage.bounds.height / 2
             }
             cell.sendUserNameLB.text = Manager.recordData[indexPath.row].userNickName
             if let date = Manager.recordData[indexPath.row].recordDate {
-                let dateFormat :DateFormatter = DateFormatter()
+                let dateFormat = DateFormatter()
                 dateFormat.dateFormat = "yyyy/MM/dd HH:mm"
                 let dateString = dateFormat.string(from: date)
                 cell.sendRecordDateLB.text = dateString
@@ -92,6 +109,9 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
            return cell
         }
     }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.tableViewData.count
+    }
     
     //MARK: Protocol - tableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -100,15 +120,22 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             let recordgovc = self.storyboard?.instantiateViewController(withIdentifier: "recordgoVC") as! RecordGoViewController
             recordgovc.delegate = self
             self.present(recordgovc, animated: true, completion: nil)
+        } else {
+//            self.userSelectRow = indexPath.row
+            Manager.indexPath = indexPath.row
+//            self.performSegue(withIdentifier: "penSegue", sender: self)
+            print("mainVC:\(Manager.indexPath)")
+
         }
+        
+        
+        
     }
     //MARK: func - tableView Cell separatorInset.
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return self.tableViewData.count
-    }
+
 }
 
 extension MainAppViewController :RecordGoViewControllerDelegate {
@@ -119,6 +146,8 @@ extension MainAppViewController :RecordGoViewControllerDelegate {
             self.tableViewData[1].insert(Record, at: 0)
             print("tableViewData[0]：\(self.tableViewData[0].count)")
             print("tableViewData[1]：\(self.tableViewData[1].count)")
+            print("Manager.recordDataUser：\(Manager.recordDataUser.count)")
+            print("Manager.recordData：\(Manager.recordData.count)")
             print("selectIndex:\(selectIndex)")
             //change indexPath
             let selectIndexPath = IndexPath(row: selectIndex, section: 1)
