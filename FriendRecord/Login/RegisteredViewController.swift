@@ -80,6 +80,7 @@ class RegisteredViewController: UIViewController {
             }
             
             let param = "accountID=\(accountID)&email=\(email)&password=\(password)&userName=\(userName)&birthday=\(bf)&gender=\(gender)"
+            print("\(param)")
             request.httpBody = param.data(using: .utf8)
             
             let session = URLSession.shared
@@ -108,6 +109,9 @@ class RegisteredViewController: UIViewController {
                                 //set isLogin key to UserDefaults.
                                 let loginUserDefault = UserDefaults.standard
                                 loginUserDefault.set(true , forKey: "isLogin")
+                                
+                                Manager.recordDataUser.removeAll()
+                                
                                 //present to tabbarVC.
                                 let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: "tabbarVC") as! MyTabBarController
                                 self.present(tabbarVC, animated: true, completion: nil)

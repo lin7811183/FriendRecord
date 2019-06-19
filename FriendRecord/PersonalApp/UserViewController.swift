@@ -79,6 +79,8 @@ class UserViewController: UIViewController {
         let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
         self.present(loginVC, animated: true, completion: nil)
         print("********** user is logout secure. **********")
+        Manager.recordDataUser.removeAll()
+        Manager.recordData.removeAll()
     }
     
     //MARK: func - user imaage photo.

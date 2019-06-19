@@ -373,7 +373,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xWk-A0-umj"/>
                     </view>
-                    <navigationItem key="navigationItem" title="聆聽錄音帶" id="4cV-8L-5z8"/>
+                    <navigationItem key="navigationItem" title="聆聽錄音帶" id="4cV-8L-5z8">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="dTg-Rv-ZmO">
+                            <connections>
+                                <segue destination="6CL-OT-bHX" kind="show" id="a9M-7b-BXr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="HzQ-4X-Q44" id="Fok-h5-val"/>
                     </connections>
@@ -508,6 +514,30 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KFZ-DO-Ni4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3644.9275362318845" y="573.88392857142856"/>
+        </scene>
+        <!--Ripple Animation View Controller-->
+        <scene sceneID="J6w-dP-Mvl">
+            <objects>
+                <viewController storyboardIdentifier="raVC" id="6CL-OT-bHX" customClass="RippleAnimationViewController" customModule="FriendRecord" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1FF-4u-fdd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="userPhotoDefault.png" translatesAutoresizingMaskIntoConstraints="NO" id="A3A-Wl-h8i">
+                                <rect key="frame" x="157" y="398" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="AYJ-LY-QT5"/>
+                    </view>
+                    <connections>
+                        <outlet property="image" destination="A3A-Wl-h8i" id="aAL-9o-3lE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HXf-EG-Khs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4504" y="587"/>
         </scene>
         <!--Registered View Controller-->
         <scene sceneID="IFu-gi-Kal">

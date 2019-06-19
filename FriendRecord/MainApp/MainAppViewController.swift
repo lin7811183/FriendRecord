@@ -36,7 +36,7 @@ class MainAppViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         //check User Photo is new or downLoad to server.
         let userPhoto = UserDefaults.standard
         let isUserPhoto = userPhoto.bool(forKey: "isUserPhoto")
@@ -51,15 +51,6 @@ class MainAppViewController: UIViewController {
             return
         }
     }
-//    //MARK: func - Segue
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "penSegue" {
-//            let penVC = segue.destination as! PenViewController
-//             penVC.selectIndexPath = self.userSelectRow
-//            print("segue userSelectRow:\(self.userSelectRow)")
-//            print("penVC.selectIndexPath:\(penVC.selectIndexPath)")
-//        }
-//    }
 }
 
 extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
@@ -95,12 +86,8 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
                 cell.sendImage.layer.cornerRadius = cell.sendImage.bounds.height / 2
             }
             cell.sendUserNameLB.text = Manager.recordData[indexPath.row].userNickName
-            if let date = Manager.recordData[indexPath.row].recordDate {
-                let dateFormat = DateFormatter()
-                dateFormat.dateFormat = "yyyy/MM/dd HH:mm"
-                let dateString = dateFormat.string(from: date)
-                cell.sendRecordDateLB.text = dateString
-            }
+            cell.sendRecordDateLB.text = Manager.recordData[indexPath.row].recordDate
+            
             //Auto change cell hight.
             self.tableView.rowHeight = cell.mainView.bounds.height + 30
             cell.mainView.layer.cornerRadius = 10
@@ -121,15 +108,8 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             recordgovc.delegate = self
             self.present(recordgovc, animated: true, completion: nil)
         } else {
-//            self.userSelectRow = indexPath.row
             Manager.indexPath = indexPath.row
-//            self.performSegue(withIdentifier: "penSegue", sender: self)
-            print("mainVC:\(Manager.indexPath)")
-
         }
-        
-        
-        
     }
     //MARK: func - tableView Cell separatorInset.
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -1,4 +1,5 @@
 import UIKit
+import AVKit
 
 class PenViewController: UIViewController {
     
@@ -11,11 +12,13 @@ class PenViewController: UIViewController {
     
     var selectIndexPath :Int!
     
+    var player = AVPlayer()
+    var playerViewController = AVPlayerViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.selectIndexPath = Manager.indexPath
-        print("penVC:\(self.selectIndexPath)")
         //Show Data to UI.
         guard let index = self.selectIndexPath else {
             print("********** get error index. **********")
@@ -29,20 +32,32 @@ class PenViewController: UIViewController {
         self.userImage.layer.cornerRadius = self.userImage.bounds.height / 2
         
         self.userNameLB.text = data.userNickName
-        
-        let date = data.recordDate!
-        let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "yyyy/MM/dd HH:mm"
-        let dateString = dateFormat.string(from: date)
-        self.dateLB.text = dateString
+
+        self.dateLB.text = data.recordDate!
         
         self.mainLB.text = data.recordText
         
     }
     
     /*------------------------------------------------------------ function ------------------------------------------------------------*/
-    
     @IBAction func recordPlayer(_ sender: Any) {
+        
+        self.selectIndexPath = Manager.indexPath
+        //Show Data to UI.
+        guard let index = self.selectIndexPath else {
+            print("********** get error index. **********")
+            return
+        }
+//        let recordFileName = Manager.recordData[index].recordFileName!
+//        let filePath = Manager.shared.fileDocumentsPath(fileName: recordFileName)
+        let fileURL = NSHomeDirectory()+"/Documents/"+Manager.recordData[index].recordFileName!
+        let videoURL = URL(fileURLWithPath: fileURL)
+        //Play Record.
+        player = AVPlayer(url: videoURL)
+        player.volume = 1
+        playerViewController.player = player
+        player.volume = 1
+        //self.present(playerViewController ,animated: true ,completion: nil)
     }
     
 }

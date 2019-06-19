@@ -17,6 +17,8 @@ class RecordGoViewController: UIViewController {
     
     var delegate :RecordGoViewControllerDelegate!
     
+    var recordIDArry :[String:Double]!
+    
     //建立AudioRecorder元件
     var voiceRecorder: AVAudioRecorder?
     
@@ -108,7 +110,7 @@ class RecordGoViewController: UIViewController {
                 
                 let now :Date = Date()
                 let dateFormat :DateFormatter = DateFormatter()
-                dateFormat.dateFormat = "yyyyMMddHHmm"
+                dateFormat.dateFormat = "yyyyMMddHHmmss"
                 let dateString = dateFormat.string(from: now)
                 
                 let fileName = "\(dateString)_\(recordDataEmailHead!)"
@@ -119,7 +121,11 @@ class RecordGoViewController: UIViewController {
                 newRecord.recordFileName = "\(fileName).caf"
                 newRecord.userNickName = userNickName!
                 newRecord.recordText = self.textView.text
-                newRecord.recordDate = now
+                
+                let dateFormat2 :DateFormatter = DateFormatter()
+                dateFormat2.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                let dateString2 = dateFormat2.string(from: now)
+                newRecord.recordDate = dateString2
                 
                 //self.recordData.append(newRecord)
                 Manager.recordData.insert(newRecord, at: 0)
@@ -165,7 +171,7 @@ class RecordGoViewController: UIViewController {
             
             let now :Date = Date()
             let dateFormat :DateFormatter = DateFormatter()
-            dateFormat.dateFormat = "yyyyMMddHHmm"
+            dateFormat.dateFormat = "yyyyMMddHHmmss"
             let dateString = dateFormat.string(from: now)
             
             let fileName = "\(dateString)_\(recordDataEmailHead!)"
@@ -176,7 +182,11 @@ class RecordGoViewController: UIViewController {
             newRecord.recordFileName = "\(fileName).caf"
             newRecord.userNickName = userNickName!
             newRecord.recordText = self.textView.text
-            newRecord.recordDate = now
+            
+            let dateFormat2 :DateFormatter = DateFormatter()
+            dateFormat2.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let dateString2 = dateFormat2.string(from: now)
+            newRecord.recordDate = dateString2
             
             //self.recordData.append(newRecord)
             Manager.recordData.insert(newRecord, at: 0)
@@ -227,8 +237,60 @@ class RecordGoViewController: UIViewController {
     }
     //MARK: func - Send Record Pen.
     @IBAction func SendRecordPen(_ sender: Any) {
-        self.delegate.sendRecordPen(Record: Manager.recordData[0])
-        self.dismiss(animated: true, completion: nil)
+        
+        //call Mysql get record id.
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Get_Record_Pen_ID.php") {
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let e = error {
+                    print("erroe \(e)")
+                }
+                guard let jsData = data else {
+                    return
+                }
+//                let recordID = String(data: data!, encoding: .utf8)
+//                print(recordID!)
+                let jsDocode = JSONDecoder()
+                self.recordIDArry = try? jsDocode.decode([String:Double].self, from: jsData)
+                //print("\(self.recordIDArry.first?.value)")
+                guard let id = self.recordIDArry.first?.value else {
+                    print("********** get record id error. **********")
+                    return
+                }
+                DispatchQueue.main.async {
+                    Manager.recordData[0].recordID = id
+                    //push to server.
+                    if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Upload_Record_Pen.php") {
+                        var request = URLRequest(url: url)
+                        request.httpMethod = "POST"
+                        
+                        let data = Manager.recordData[0]
+                        let param = ("recordID=\(Int(data.recordID!))&recordDate=\(data.recordDate!)&recordSendUser=\(data.recordSendUser!)&userNickName=\(data.userNickName!)&recordFileName=\(data.recordFileName!)&recordText=\(data.recordText!)&recordTime=\(data.recordTime!)")
+                        print("\(param)")
+                        request.httpBody = param.data(using: .utf8)
+                        
+                        let session = URLSession.shared
+                        let task = session.dataTask(with: request) { (data, response, error) in
+                            print("task")
+                            if let e = error {
+                                print("erroe \(e)")
+                            }else {
+                                let reCode = String(data: data!, encoding: .utf8)
+                                print(reCode)
+                            }
+                        }
+                        task.resume()
+                    }
+                    self.delegate.sendRecordPen(Record: Manager.recordData[0])
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+            task.resume()
+        }
     }
 }
 

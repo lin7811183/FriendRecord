@@ -32,6 +32,8 @@
 		CEC40AD1229FE6DD00674037 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */; };
 		CEF9016022B100CE004F5A4C /* RecordGoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */; };
 		CEFF4423229E961B006A7449 /* MainAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF4422229E961B006A7449 /* MainAppViewController.swift */; };
+		CEFFF87022B9E23A00D7BC8A /* RippleAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF86F22B9E23A00D7BC8A /* RippleAnimationViewController.swift */; };
+		CEFFF87222B9EAB600D7BC8A /* RippleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFF87122B9EAB600D7BC8A /* RippleLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
 		CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGoViewController.swift; sourceTree = "<group>"; };
 		CEFF4422229E961B006A7449 /* MainAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewController.swift; sourceTree = "<group>"; };
+		CEFFF86F22B9E23A00D7BC8A /* RippleAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleAnimationViewController.swift; sourceTree = "<group>"; };
+		CEFFF87122B9EAB600D7BC8A /* RippleLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RippleLayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,8 @@
 				CE0A3C8E229E5B0600649E2E /* functionswift.swift */,
 				CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */,
 				CE0B063F22ADF756007ADB36 /* CameraViewController.swift */,
+				CEFFF86F22B9E23A00D7BC8A /* RippleAnimationViewController.swift */,
+				CEFFF87122B9EAB600D7BC8A /* RippleLayer.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -272,6 +278,7 @@
 				CE0102C922A7B4D100EDB18A /* UserData.swift in Sources */,
 				CE0DE8A022B0C7CE00F49C5B /* MyUserTableViewCell.swift in Sources */,
 				CE21464822B4978100F39747 /* Record.swift in Sources */,
+				CEFFF87222B9EAB600D7BC8A /* RippleLayer.swift in Sources */,
 				CE0A3C8F229E5B0600649E2E /* functionswift.swift in Sources */,
 				CEC40AD1229FE6DD00674037 /* MyNavigationController.swift in Sources */,
 				CEF9016022B100CE004F5A4C /* RecordGoViewController.swift in Sources */,
@@ -279,6 +286,7 @@
 				CE100405229B725200660E82 /* AppDelegate.swift in Sources */,
 				CE140C0A22B8E30300EF1F1C /* PenViewController.swift in Sources */,
 				CE0D3D63229F92B0008033D7 /* MyTabBarController.swift in Sources */,
+				CEFFF87022B9E23A00D7BC8A /* RippleAnimationViewController.swift in Sources */,
 				CE0A945722B1D35F00F7F031 /* UserPhotoViewController.swift in Sources */,
 				CE0DE8C222B0D96900F49C5B /* MyRecordTableViewCell.swift in Sources */,
 			);
