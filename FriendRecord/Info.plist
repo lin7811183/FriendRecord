@@ -30,6 +30,10 @@
 	<string>請同意開啟相簿使用</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>請同意開啟相簿使用</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

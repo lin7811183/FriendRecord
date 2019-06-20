@@ -32,6 +32,9 @@ class MainAppViewController: UIViewController {
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.mydelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +54,12 @@ class MainAppViewController: UIViewController {
             return
         }
     }
+    
+    @IBAction func test(_ sender: Any) {
+        print("Manager.recordData.count:\(Manager.recordData.count)")
+        print("self.tableViewData[1]:\(self.tableViewData[1].count)")
+    }
+    
 }
 
 extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
@@ -122,6 +131,7 @@ extension MainAppViewController :RecordGoViewControllerDelegate {
     //MARK: Protocol - RecordGoViewControllerDelegate.
     //if user send new record pen , this delegate tell MainVC tableView insert and reload Row.
     func sendRecordPen(Record: Record) {
+        print("sendRecordPen")
         if let selectIndex = Manager.recordData.firstIndex(of: Record) {
             self.tableViewData[1].insert(Record, at: 0)
             print("tableViewData[0]：\(self.tableViewData[0].count)")
@@ -133,6 +143,16 @@ extension MainAppViewController :RecordGoViewControllerDelegate {
             let selectIndexPath = IndexPath(row: selectIndex, section: 1)
             //tableView Reload.
             self.tableView.insertRows(at: [selectIndexPath], with: .automatic)
+        }
+    }
+}
+
+extension MainAppViewController: MyAppDelegate {
+    func updateManagerRecordData() {
+        print("updateManagerRecordData")
+        self.tableViewData[1] = Manager.recordData
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-class Record: Equatable {
+class Record: Equatable ,Codable {
     static func == (lhs: Record, rhs: Record) -> Bool {
         return lhs === rhs
     }

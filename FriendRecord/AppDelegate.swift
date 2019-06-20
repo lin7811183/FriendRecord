@@ -1,14 +1,28 @@
 import UIKit
 
+protocol MyAppDelegate {
+    func updateManagerRecordData()
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    var loadDataArray :[Record]!
+    
+    var mydelegate :MyAppDelegate!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         print("Home : \(NSHomeDirectory())")
+        
+        //open Notice.
+        let settings = UIUserNotificationSettings(types: UIUserNotificationType.alert, categories: nil)
+        UIApplication.shared.registerUserNotificationSettings(settings)
+        //虽然定义了后台获取的最短时间，但iOS会自行以它认定的最佳时间来唤醒程序，这个我们无法控制
+        //UIApplicationBackgroundFetchIntervalMinimum 尽可能频繁的调用我们的Fetch方法
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         return true
     }
 
@@ -34,7 +48,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    //Application UIBackgroundFetchResult.
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        
+        print("Complete");
+        completionHandler(UIBackgroundFetchResult.newData)
+        self.loadRecordPen()
+        
+    }
     
-
+    func loadRecordPen() {
+        //Test
+        //Post PHP(check user login data).
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Load_Record_Pen.php") {
+            
+            var request = URLRequest(url: url)
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, respones, error) in
+                if let e = error {
+                    print("uesr login check data URL Session error: \(e)")
+                    return
+                }
+                guard let jsonData = data else {
+                    return
+                }
+                //let reCode = String(data: data!, encoding: .utf8)
+                //print(reCode!)
+                let decoder = JSONDecoder()
+                do {
+                    self.loadDataArray = try decoder.decode([Record].self, from: jsonData)//[Note].self 取得Note陣列的型態
+                    Manager.recordData = self.loadDataArray
+                    print("Manager.recordData.count:\(Manager.recordData.count)")
+                    
+                    self.mydelegate.updateManagerRecordData()
+                    
+                } catch {
+                    print("error while parsing json \(error)")
+                }
+            }
+            task.resume()
+        }
+    }
 }
-

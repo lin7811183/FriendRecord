@@ -131,8 +131,9 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
             print("user photo emeil change fail(imagePickerController).")
             return
         }
-
+        
         let fileName = "\(emailChange).jpg"
+
 //
 //        let filePath = self.fileDocumentsPath(fileName: fileName)
 //
@@ -162,6 +163,9 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
         
         let session = URLSession.shared
         
+        print("\(fileName)")
+        let t = Manager.shared.checkFile(fileName: fileName)
+        print("\(t)")
         //上傳數據流
         let documents =  NSHomeDirectory()+"/Documents/"+fileName
         //print(documents)
@@ -174,8 +178,8 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
             if error != nil{
                 print("Uoload user Photo error : \(error)")
             }else{
-                //let str = String(data: data!, encoding: .utf8)
-                //print("上傳完畢：\n\(str!)")
+                let str = String(data: data!, encoding: .utf8)
+                print("上傳完畢：\n\(str!)")
                 let jsDecoder = JSONDecoder()
                 do {
                     self.uploadArry = try jsDecoder.decode([String:Bool].self, from: data!)
