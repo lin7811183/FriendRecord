@@ -12,7 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var loadDataArray :[Record]!
     
     var mydelegate :MyAppDelegate!
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         print("Home : \(NSHomeDirectory())")
@@ -20,8 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //open Notice.
         let settings = UIUserNotificationSettings(types: UIUserNotificationType.alert, categories: nil)
         UIApplication.shared.registerUserNotificationSettings(settings)
-        //虽然定义了后台获取的最短时间，但iOS会自行以它认定的最佳时间来唤醒程序，这个我们无法控制
-        //UIApplicationBackgroundFetchIntervalMinimum 尽可能频繁的调用我们的Fetch方法
+        //UIApplicationBackgroundFetchIntervalMinimum
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         return true
     }
@@ -34,8 +34,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        var finished = false
+        var bgTask: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0);
+        bgTask = application.beginBackgroundTask(withName:"MyBackgroundTask", expirationHandler: {() -> Void in
+            // Time is up.
+            if bgTask != UIBackgroundTaskIdentifier.invalid {
+                // Do something to stop our background task or the app will be killed
+                finished = true
+            }
+        })
+        
+        // Perform your background task here
+        print("The task has started")
+        while !finished {
+            print("Not finished")
+            // when done, set finished to true
+            // If that doesn't happen in time, the expiration handler will do it for us
+            self.loadRecordPen()
+             print("Finished")
+            finished = true
+            break
+        }
+        
+        // Indicate that it is complete
+        application.endBackgroundTask(bgTask)
+        bgTask = UIBackgroundTaskIdentifier.invalid
     }
-
+    
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }

@@ -175,7 +175,7 @@ class Manager :UIViewController {
     func thumbmailImage(image :UIImage) -> UIImage? {
         
         //設定縮圖大小
-        let thumbnailSize = CGSize(width: 900 ,height: 900)
+        let thumbnailSize = CGSize(width: 400 ,height: 400)
         //找出目前螢幕的scale
         let scale = UIScreen.main.scale
         //產生畫布
@@ -211,4 +211,5 @@ class Manager :UIViewController {
         }
         return smallImage
     }
+    
 }
