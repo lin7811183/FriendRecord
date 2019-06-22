@@ -10,6 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     var loadDataArray :[Record]!
+    var userPhotoArray :[String]!
     
     var mydelegate :MyAppDelegate!
     
@@ -51,8 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Not finished")
             // when done, set finished to true
             // If that doesn't happen in time, the expiration handler will do it for us
-            self.loadRecordPen()
-             print("Finished")
+            self.downLoadRecordPen()
+            print("Finished")
             finished = true
             break
         }
@@ -80,11 +81,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("Complete");
         completionHandler(UIBackgroundFetchResult.newData)
-        self.loadRecordPen()
-        
+        self.downLoadRecordPen()
     }
     
-    func loadRecordPen() {
+    //MARK: func - DownLoad Record Pen.
+    func downLoadRecordPen() {
         //Test
         //Post PHP(check user login data).
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Load_Record_Pen.php") {

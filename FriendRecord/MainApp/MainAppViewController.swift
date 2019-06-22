@@ -35,6 +35,8 @@ class MainAppViewController: UIViewController {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.mydelegate = self
+        
+        Manager.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -132,7 +134,7 @@ extension MainAppViewController :RecordGoViewControllerDelegate {
     //MARK: Protocol - RecordGoViewControllerDelegate.
     //if user send new record pen , this delegate tell MainVC tableView insert and reload Row.
     func sendRecordPen(Record: Record) {
-        print("sendRecordPen")
+        print("RecordGoViewControllerDelegate - sendRecordPen")
         if let selectIndex = Manager.recordData.firstIndex(of: Record) {
             self.tableViewData[1].insert(Record, at: 0)
             print("tableViewData[0]：\(self.tableViewData[0].count)")
@@ -151,8 +153,37 @@ extension MainAppViewController :RecordGoViewControllerDelegate {
 
 extension MainAppViewController: MyAppDelegate {
     func updateManagerRecordData() {
-        print("updateManagerRecordData")
+        print("MyAppDelegate - updateManagerRecordData")
+        
+        //Analysis email to phtot.
+        for photoData in Manager.recordData{
+            let data = photoData.recordSendUser
+            
+            guard let dataChanage = data else {
+                print("********** AppDelegate func downLoadRecordPenUserPhoto error. **********")
+                return
+            }
+            let imageNameChange = dataChanage.split(separator: "@")
+            let fileName = "\(imageNameChange[0])"
+            
+            print("\(fileName)")
+            //Download photo func.
+            Manager.shared.downLoadUserPhoto(fileName: fileName)
+        }
+        
+        
         self.tableViewData[1] = Manager.recordData
+
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+}
+
+extension MainAppViewController :ManagerDelegate {
+    func finishDownLoadUserPhoto() {
+        print("ManagerDelegate - finishDownLoadUserPhoto")
+        
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

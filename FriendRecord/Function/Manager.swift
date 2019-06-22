@@ -1,12 +1,19 @@
 import Foundation
 import UIKit
 
+protocol ManagerDelegate {
+    func finishDownLoadUserPhoto()
+}
+
+
 class Manager :UIViewController {
     
     static let shared = Manager()
     static var recordDataUser :[Record] = []
     static var recordData :[Record] = []
     static var indexPath :Int!
+    
+    static var delegate :ManagerDelegate!
     
     //MARK: func - dismissKeyboard.
     func hideKeyboardWhenTappedAround() {
@@ -54,23 +61,6 @@ class Manager :UIViewController {
     
     //MARK: func - user Photo file read.
     func userPhotoRead(jpg: String) -> UIImage? {
-        
-//        //check local app have user Photo.
-//        let userEmail = UserDefaults.standard
-//        //read userdefault is login or registered?
-//        let emailHead = userEmail.string(forKey: "emailHead")
-//
-//        guard let emailChange = emailHead else {
-//            print("user photo emeil change fail(userPhotoRead).")
-//            return nil
-//        }
-//
-//        let exist = self.checkFile(fileName: "\(emailChange).jpg")
-//
-//        guard exist == true else {
-//            print("********** user photo is no local app. **********")
-//            return nil
-//        }
         
         let photoFileURL = self.fileDocumentsPath(fileName: "\(jpg).jpg")
         //if have photo do file change data
@@ -169,6 +159,42 @@ class Manager :UIViewController {
             return
         }
         print("********** user photo in local app. **********")
+    }
+    
+    func downLoadUserPhoto(fileName :String) {
+        //if Sandbox have Record Pen User Photo , is not DownLoad.
+//        let name = "\(fileName).jpg"
+//        print("\(Manager.shared.checkFile(fileName: name))")
+//        guard Manager.shared.checkFile(fileName: name) == false else {
+//            print("********** Sandbox have Record Pen User Photo. **********")
+//            return
+//        }
+        
+        //DownLoad user Photo.
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Accoount_Upload_UserPhoto/\(fileName).jpg") {
+            let request = URLRequest(url: url)
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let e = error {
+                    print("erroe \(e)")
+                }
+                if let data = data {
+                    let image = UIImage(data: data)
+                    //write file
+                    if let imageData = image?.jpegData(compressionQuality: 1) {//compressionQuality:0~1之間
+                        do{
+                            let filePath = self.fileDocumentsPath(fileName: "\(fileName).jpg")
+                            try imageData.write(to: filePath, options: [.atomicWrite])
+                            
+                            Manager.delegate.finishDownLoadUserPhoto()
+                        } catch {
+                            print("uer photo fiel save is eror : \(error)")
+                        }
+                    }
+                }
+            }
+            task.resume()
+        }
     }
     
     //MARK: func - save thumbmailImage
