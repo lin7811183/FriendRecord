@@ -161,15 +161,14 @@ class Manager :UIViewController {
         print("********** user photo in local app. **********")
     }
     
+    //MARK: func - DownLoad user photo.
     func downLoadUserPhoto(fileName :String) {
         //if Sandbox have Record Pen User Photo , is not DownLoad.
-//        let name = "\(fileName).jpg"
-//        print("\(Manager.shared.checkFile(fileName: name))")
-//        guard Manager.shared.checkFile(fileName: name) == false else {
-//            print("********** Sandbox have Record Pen User Photo. **********")
-//            return
-//        }
-        
+        let name = "\(fileName).jpg"
+        guard Manager.shared.checkFile(fileName: name) == false else {
+            print("********** Sandbox have Record Pen User Photo. **********")
+            return
+        }
         //DownLoad user Photo.
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Accoount_Upload_UserPhoto/\(fileName).jpg") {
             let request = URLRequest(url: url)
@@ -195,6 +194,41 @@ class Manager :UIViewController {
             }
             task.resume()
         }
+    }
+    
+    //MARK: func - Download Record .caf
+    func downLoadRcordFile(fileName :String) {
+        
+        //if Sandbox have Record Pen files , is not DownLoad.
+        guard Manager.shared.checkFile(fileName: fileName) == false else {
+            print("********** Sandbox have Record Pen files. **********")
+            return
+        }
+        
+        guard let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Record/\(fileName)") else {
+            assertionFailure("Invalid URL.")
+            return
+        }
+        //自訂session config.
+        let config = URLSessionConfiguration.default
+        //let config = URLSessionConfiguration.background(withIdentifier: "DownLoadRecordFile")
+        let session = URLSession(configuration: config)
+        let downloadtask = session.downloadTask(with: url) { (url, response, error) in
+            if let e = error {
+                print("erroe \(e)")
+            }
+            //location位置轉換
+            let locationPath = url!.path
+            //copy檔案至app目錄下
+            let filePath = NSHomeDirectory()+"/Documents/"+fileName
+            //創建文件管理器
+            let fileManager = FileManager.default
+            try! fileManager.moveItem(atPath: locationPath, toPath: filePath)
+        }
+        downloadtask.resume()
+        session.finishTasksAndInvalidate()//自訂session 須加這行，會若不加會造成memory link
+        //C400A58877BE124E4BA91BCC7DE56653
+        //D1E6BD4E5865E9EB70B9F13424E3B18Dd
     }
     
     //MARK: func - save thumbmailImage

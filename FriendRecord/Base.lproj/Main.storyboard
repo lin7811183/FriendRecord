@@ -141,11 +141,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eBT-vD-5sW">
-                                <rect key="frame" x="0.0" y="301" width="414" height="512"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4s-qK-ZzW">
                                 <rect key="frame" x="20" y="162" width="115" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -162,6 +157,27 @@
                                     <segue destination="BbY-Cb-Wdf" kind="presentation" id="TYG-f2-oGS"/>
                                 </connections>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NLw-Uy-g58">
+                                <rect key="frame" x="20" y="326" width="374" height="465"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="e0e-gO-nS7">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="AKy-TI-Qf8">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="sYf-gg-kll"/>
@@ -376,7 +392,7 @@
                     <navigationItem key="navigationItem" title="聆聽錄音帶" id="4cV-8L-5z8">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="dTg-Rv-ZmO">
                             <connections>
-                                <action selector="test:" destination="09T-vU-Bsr" id="Q5g-uF-9ej"/>
+                                <segue destination="6CL-OT-bHX" kind="show" id="Wwl-ze-Jun"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -486,19 +502,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTW-O1-WRP">
-                                <rect key="frame" x="20" y="276" width="374" height="96"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="開始播放"/>
-                                <connections>
-                                    <action selector="recordPlayer:" destination="Afu-AK-EdX" eventType="touchUpInside" id="WWN-3k-CCY"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dvl-PA-h7D">
                                 <rect key="frame" x="0.0" y="380" width="414" height="433"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTW-O1-WRP">
+                                <rect key="frame" x="167" y="292" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Stop.png"/>
+                                <connections>
+                                    <action selector="recordPlayer:" destination="Afu-AK-EdX" eventType="touchUpInside" id="WWN-3k-CCY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="LqK-Ep-xwj"/>
@@ -507,13 +523,14 @@
                         <outlet property="dateLB" destination="kSd-io-Uzt" id="XhG-oB-IWu"/>
                         <outlet property="mainLB" destination="dK2-Yr-J4F" id="bge-T8-3mo"/>
                         <outlet property="penableView" destination="dvl-PA-h7D" id="G77-Za-R3O"/>
+                        <outlet property="playerBT" destination="OTW-O1-WRP" id="ft1-uN-AcM"/>
                         <outlet property="userImage" destination="Mcv-u4-Ibi" id="d1P-Bk-mp7"/>
                         <outlet property="userNameLB" destination="Dxh-9D-AyE" id="xb0-EW-NuM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KFZ-DO-Ni4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3645" y="603"/>
+            <point key="canvasLocation" x="3644.9275362318845" y="602.67857142857144"/>
         </scene>
         <!--Ripple Animation View Controller-->
         <scene sceneID="J6w-dP-Mvl">
@@ -523,21 +540,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="userPhotoDefault.png" translatesAutoresizingMaskIntoConstraints="NO" id="A3A-Wl-h8i">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Hm-9F-CtK">
                                 <rect key="frame" x="157" y="398" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <state key="normal" title="Button" image="userPhotoDefault.png"/>
+                                <connections>
+                                    <action selector="test:" destination="6CL-OT-bHX" eventType="touchUpInside" id="g8c-sb-ARF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="AYJ-LY-QT5"/>
                     </view>
                     <connections>
-                        <outlet property="image" destination="A3A-Wl-h8i" id="aAL-9o-3lE"/>
+                        <outlet property="test" destination="9Hm-9F-CtK" id="epT-oI-FFY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXf-EG-Khs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4506" y="603"/>
+            <point key="canvasLocation" x="4505.7971014492759" y="602.67857142857144"/>
         </scene>
         <!--Registered View Controller-->
         <scene sceneID="IFu-gi-Kal">
@@ -802,6 +823,7 @@
     </scenes>
     <resources>
         <image name="Login_Icon_ver_2_2.png" width="1024" height="768"/>
+        <image name="Stop.png" width="192" height="192"/>
         <image name="userPhotoDefault.png" width="409.60000610351562" height="409.60000610351562"/>
     </resources>
 </document>

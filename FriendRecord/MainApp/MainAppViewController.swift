@@ -158,17 +158,25 @@ extension MainAppViewController: MyAppDelegate {
         //Analysis email to phtot.
         for photoData in Manager.recordData{
             let data = photoData.recordSendUser
+            let record = photoData.recordFileName
             
             guard let dataChanage = data else {
                 print("********** AppDelegate func downLoadRecordPenUserPhoto error. **********")
                 return
             }
+            
+            guard let recordfile = record else {
+                print("********** AppDelegate func downLoadRecordPenUserRecord error **********")
+                return
+            }
+            
             let imageNameChange = dataChanage.split(separator: "@")
             let fileName = "\(imageNameChange[0])"
             
-            print("\(fileName)")
             //Download photo func.
             Manager.shared.downLoadUserPhoto(fileName: fileName)
+            //Download Rcord File.
+            Manager.shared.downLoadRcordFile(fileName: recordfile)
         }
         
         
@@ -189,3 +197,4 @@ extension MainAppViewController :ManagerDelegate {
         }
     }
 }
+

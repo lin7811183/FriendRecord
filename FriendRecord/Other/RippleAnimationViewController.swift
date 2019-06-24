@@ -2,20 +2,33 @@ import UIKit
 
 class RippleAnimationViewController: UIViewController {
     
+    @IBOutlet weak var test: UIButton!
     
-    @IBOutlet weak var image: UIImageView!
+    var istest = false
+    let rippleLayer = RippleLayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let rippleLayer = RippleLayer()
-        rippleLayer.position = CGPoint(x: self.view.layer.bounds.midX, y: self.view.layer.bounds.midY);
-        
+        self.rippleLayer.position = CGPoint(x:test.center.x, y: test.center.y)
         self.view.layer.addSublayer(rippleLayer)
-        rippleLayer.startAnimation()
         
+        self.test.layer.cornerRadius = 0.5 * self.test.bounds.size.width
     }
 
     
+    @IBAction func test(_ sender: Any) {
+        
+        if istest == true {
+            print("true")
+            self.rippleLayer.startAnimation()
+            self.istest = false
+        } else {
+            print("false")
+            self.rippleLayer.stopAnimation()
+            self.istest = true
+        }
+        
+    }
     
 }

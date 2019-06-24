@@ -261,6 +261,7 @@ class RecordGoViewController: UIViewController {
                     print("********** get record id error. **********")
                     return
                 }
+                
                 DispatchQueue.main.async {
                     Manager.recordData[0].recordID = id
                     //push to server.
@@ -275,7 +276,6 @@ class RecordGoViewController: UIViewController {
                         
                         let session = URLSession.shared
                         let task = session.dataTask(with: request) { (data, response, error) in
-                            print("task")
                             if let e = error {
                                 print("erroe \(e)")
                             }else {
@@ -284,6 +284,27 @@ class RecordGoViewController: UIViewController {
                             }
                         }
                         task.resume()
+                    }
+                    //Upload Record File.
+                    if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Upload_Record_File.php?recordFileName=\(Manager.recordData[0].recordFileName!)") {
+                        var request = URLRequest(url: url)
+                        request.httpMethod = "POST"
+                        
+                        //Upload Record file.
+                        let filePath =  NSHomeDirectory()+"/Documents/"+Manager.recordData[0].recordFileName!
+                        let recordData = try! Data(contentsOf: URL(fileURLWithPath: filePath))
+                        
+                        let session = URLSession.shared
+                        let uploadTask = session.uploadTask(with: request, from: recordData) {
+                            (data:Data?, response:URLResponse?, error:Error?) -> Void in
+                            if let e = error {
+                                print("erroe \(e)")
+                            }else {
+                                let reCode = String(data: data!, encoding: .utf8)
+                                print(reCode)
+                            }
+                        }
+                        uploadTask.resume()
                     }
                     self.delegate.sendRecordPen(Record: Manager.recordData[0])
                     self.dismiss(animated: true, completion: nil)
