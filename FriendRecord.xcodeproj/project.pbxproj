@@ -124,7 +124,6 @@
 				CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */,
 				CE0B063F22ADF756007ADB36 /* CameraViewController.swift */,
 				CEFFF86F22B9E23A00D7BC8A /* RippleAnimationViewController.swift */,
-				CEFFF87122B9EAB600D7BC8A /* RippleLayer.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -167,6 +166,7 @@
 				CE100416229B726300660E82 /* Login */,
 				CE0102C222A783E600EDB18A /* MainApp */,
 				CE15D74822A6885700892340 /* PersonalApp */,
+				CE106C5422C1A26D005DF25E /* Animation */,
 				CE0102C322A7841700EDB18A /* Image */,
 				CE0102C722A784C900EDB18A /* Other */,
 			);
@@ -181,6 +181,14 @@
 				CE0102C822A7B4D100EDB18A /* UserData.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		CE106C5422C1A26D005DF25E /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				CEFFF87122B9EAB600D7BC8A /* RippleLayer.swift */,
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 		CE15D74822A6885700892340 /* PersonalApp */ = {

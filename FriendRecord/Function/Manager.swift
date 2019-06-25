@@ -227,8 +227,6 @@ class Manager :UIViewController {
         }
         downloadtask.resume()
         session.finishTasksAndInvalidate()//自訂session 須加這行，會若不加會造成memory link
-        //C400A58877BE124E4BA91BCC7DE56653
-        //D1E6BD4E5865E9EB70B9F13424E3B18Dd
     }
     
     //MARK: func - save thumbmailImage

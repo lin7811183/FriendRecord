@@ -11,7 +11,7 @@ class RippleLayer: CAReplicatorLayer {
     fileprivate var rippleEffect: CALayer?
     private var animationGroup: CAAnimationGroup?
     var rippleRadius: CGFloat = 50.0
-    var rippleColor: UIColor = UIColor.black
+    var rippleColor: UIColor = UIColor.blue
     var rippleRepeatCount: CGFloat = 10000.0
     var rippleWidth: CGFloat = 8
     

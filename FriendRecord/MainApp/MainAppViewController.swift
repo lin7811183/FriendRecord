@@ -9,10 +9,10 @@ class MainAppViewController: UIViewController {
         userCellValue.userCellLB = "發個錄音帶給大家聽聽~"
         Manager.recordDataUser.append(userCellValue)
         self.tableViewData = [Manager.recordDataUser,[]]
-        print("tableViewData[0]：\(self.tableViewData[0].count)")
-        print("tableViewData[1]：\(self.tableViewData[1].count)")
-        print("Manager.recordDataUser：\(Manager.recordDataUser.count)")
-        print("Manager.recordData：\(Manager.recordData.count)")
+//        print("tableViewData[0]：\(self.tableViewData[0].count)")
+//        print("tableViewData[1]：\(self.tableViewData[1].count)")
+//        print("Manager.recordDataUser：\(Manager.recordDataUser.count)")
+//        print("Manager.recordData：\(Manager.recordData.count)")
         
         if Manager.recordData.count > 0 {
             self.tableViewData[1] = Manager.recordData
@@ -21,11 +21,22 @@ class MainAppViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userPoRecordBT: UIButton!
+    @IBOutlet weak var mainSV: UIScrollView!
+    @IBOutlet weak var topActivityLn: UIActivityIndicatorView!
+    @IBOutlet weak var bottomActivityLn: UIActivityIndicatorView!
     
     //var record :[Record] = []
     var tableViewData = [Manager.recordDataUser,[Record]()]
     
     var userSelectRow :Int!
+    
+    var inCell = [0,0]
+    var outCell = [0,0]
+    var isFirstLoad = 0
+    var keyIndexRow :Int!
+    
+    var activityIN : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 100 ,y: 200, width: 50, height: 50)) as UIActivityIndicatorView
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +48,12 @@ class MainAppViewController: UIViewController {
         appDelegate.mydelegate = self
         
         Manager.delegate = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         //check User Photo is new or downLoad to server.
         let userPhoto = UserDefaults.standard
         let isUserPhoto = userPhoto.bool(forKey: "isUserPhoto")
@@ -54,6 +66,49 @@ class MainAppViewController: UIViewController {
             userDataDefault.bool(forKey: "isUserPhoto")
             userDataDefault.set(false , forKey: "isUserPhoto")
             return
+        }
+        
+    }
+    
+    func loadRecordPen() {
+        
+        guard self.isFirstLoad != 0 else {
+            print("First load pass load func")
+            self.isFirstLoad += 2
+            return
+        }
+        print("inCell : \(self.inCell) , outCell : \(self.outCell)")
+        print("isFirstLoad:\(self.isFirstLoad)")
+        
+        if self.inCell == self.outCell {
+            print("keyIndexRow:\(self.keyIndexRow!)")
+            if self.keyIndexRow == 0 , self.isFirstLoad > 2 {
+                self.mainSV.setContentOffset(CGPoint(x: 0, y: -25), animated: true)
+
+                self.activityIN.center = CGPoint(x: self.view.frame.width / 2, y: 100)
+                self.activityIN.hidesWhenStopped = true
+                self.activityIN.style = UIActivityIndicatorView.Style.gray
+                self.activityIN.startAnimating()
+                self.view.addSubview(self.activityIN)
+                
+                self.isFirstLoad += 1
+                self.keyIndexRow += 1
+            } else if self.isFirstLoad >= 2 {
+                self.mainSV.setContentOffset(CGPoint(x: 0, y: 25), animated: true)
+                
+                let tabbarIT = self.storyboard?.instantiateViewController(withIdentifier: "tabbarVC") as! MyTabBarController
+        
+                self.activityIN.center = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height - tabbarIT.tabbarItem.frame.height - 50)
+                self.activityIN.hidesWhenStopped = true
+                self.activityIN.style = UIActivityIndicatorView.Style.gray
+                self.activityIN.startAnimating()
+                self.view.addSubview(self.activityIN)
+                
+                self.isFirstLoad += 1
+            }
+        } else {
+            self.mainSV.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            self.activityIN.stopAnimating()
         }
     }
     
@@ -70,9 +125,7 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
         return self.tableViewData[section].count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if indexPath.section == 0 {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! MyUserTableViewCell
             cell.imageUserPhoto.layer.cornerRadius = cell.imageUserPhoto.bounds.height / 2
             //record file path URL.
@@ -85,7 +138,6 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             self.tableView.rowHeight = cell.showLB.bounds.height + 50
             return cell
         } else {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! MyRecordTableViewCell
             //cell.mainLB.text = Manager.recordData[indexPath.row].recordText
            cell.mainLB.text  = self.tableViewData[indexPath.section][indexPath.row].recordText
@@ -122,12 +174,24 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             Manager.indexPath = indexPath.row
         }
     }
-    //MARK: func - tableView Cell separatorInset.
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
+        self.inCell = [indexPath.section,indexPath.row]
+        
+        if indexPath.section == 0 , indexPath.row == 0 {
+            self.keyIndexRow = indexPath.row
+        }
+        
+        print("willDisplay :")
+        self.loadRecordPen()
     }
-
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.outCell = [indexPath.section,indexPath.row]
+    }
+    
 }
 
 extension MainAppViewController :RecordGoViewControllerDelegate {
@@ -137,11 +201,11 @@ extension MainAppViewController :RecordGoViewControllerDelegate {
         print("RecordGoViewControllerDelegate - sendRecordPen")
         if let selectIndex = Manager.recordData.firstIndex(of: Record) {
             self.tableViewData[1].insert(Record, at: 0)
-            print("tableViewData[0]：\(self.tableViewData[0].count)")
-            print("tableViewData[1]：\(self.tableViewData[1].count)")
-            print("Manager.recordDataUser：\(Manager.recordDataUser.count)")
-            print("Manager.recordData：\(Manager.recordData.count)")
-            print("selectIndex:\(selectIndex)")
+//            print("tableViewData[0]：\(self.tableViewData[0].count)")
+//            print("tableViewData[1]：\(self.tableViewData[1].count)")
+//            print("Manager.recordDataUser：\(Manager.recordDataUser.count)")
+//            print("Manager.recordData：\(Manager.recordData.count)")
+//            print("selectIndex:\(selectIndex)")
             //change indexPath
             let selectIndexPath = IndexPath(row: selectIndex, section: 1)
             //tableView Reload.
@@ -152,6 +216,7 @@ extension MainAppViewController :RecordGoViewControllerDelegate {
 }
 
 extension MainAppViewController: MyAppDelegate {
+    //MARK: Protocol - MyAppDelegate to AppDelegate.
     func updateManagerRecordData() {
         print("MyAppDelegate - updateManagerRecordData")
         
@@ -189,6 +254,7 @@ extension MainAppViewController: MyAppDelegate {
 }
 
 extension MainAppViewController :ManagerDelegate {
+    //MARK: Protocol - ManagerDelegate by Manager.
     func finishDownLoadUserPhoto() {
         print("ManagerDelegate - finishDownLoadUserPhoto")
         
