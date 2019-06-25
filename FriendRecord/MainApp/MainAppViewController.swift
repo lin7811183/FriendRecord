@@ -21,22 +21,16 @@ class MainAppViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userPoRecordBT: UIButton!
-    @IBOutlet weak var mainSV: UIScrollView!
-    @IBOutlet weak var topActivityLn: UIActivityIndicatorView!
-    @IBOutlet weak var bottomActivityLn: UIActivityIndicatorView!
     
     //var record :[Record] = []
     var tableViewData = [Manager.recordDataUser,[Record]()]
     
     var userSelectRow :Int!
     
-    var inCell = [0,0]
-    var outCell = [0,0]
-    var isFirstLoad = 0
-    var keyIndexRow :Int!
+    var refreshControl:UIRefreshControl!
+
     
-    var activityIN : UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 100 ,y: 200, width: 50, height: 50)) as UIActivityIndicatorView
-    
+    var loadDataArray :[Record]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +42,12 @@ class MainAppViewController: UIViewController {
         appDelegate.mydelegate = self
         
         Manager.delegate = self
+        
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "更新留言板")
+        self.refreshControl.addTarget(self, action: #selector(self.downLoadRecordPen), for: .valueChanged)
+        self.tableView.addSubview(refreshControl)
+        
         
     }
     
@@ -69,47 +69,10 @@ class MainAppViewController: UIViewController {
         }
         
     }
-    
-    func loadRecordPen() {
-        
-        guard self.isFirstLoad != 0 else {
-            print("First load pass load func")
-            self.isFirstLoad += 2
-            return
-        }
-        print("inCell : \(self.inCell) , outCell : \(self.outCell)")
-        print("isFirstLoad:\(self.isFirstLoad)")
-        
-        if self.inCell == self.outCell {
-            print("keyIndexRow:\(self.keyIndexRow!)")
-            if self.keyIndexRow == 0 , self.isFirstLoad > 2 {
-                self.mainSV.setContentOffset(CGPoint(x: 0, y: -25), animated: true)
 
-                self.activityIN.center = CGPoint(x: self.view.frame.width / 2, y: 100)
-                self.activityIN.hidesWhenStopped = true
-                self.activityIN.style = UIActivityIndicatorView.Style.gray
-                self.activityIN.startAnimating()
-                self.view.addSubview(self.activityIN)
-                
-                self.isFirstLoad += 1
-                self.keyIndexRow += 1
-            } else if self.isFirstLoad >= 2 {
-                self.mainSV.setContentOffset(CGPoint(x: 0, y: 25), animated: true)
-                
-                let tabbarIT = self.storyboard?.instantiateViewController(withIdentifier: "tabbarVC") as! MyTabBarController
-        
-                self.activityIN.center = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height - tabbarIT.tabbarItem.frame.height - 50)
-                self.activityIN.hidesWhenStopped = true
-                self.activityIN.style = UIActivityIndicatorView.Style.gray
-                self.activityIN.startAnimating()
-                self.view.addSubview(self.activityIN)
-                
-                self.isFirstLoad += 1
-            }
-        } else {
-            self.mainSV.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-            self.activityIN.stopAnimating()
-        }
+    @objc func downLoadRecordPen() {
+        print("downLoadRecordPen")
+        Manager.shared.downLoadRecordPen()
     }
     
     @IBAction func test(_ sender: Any) {
@@ -177,19 +140,6 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
-        self.inCell = [indexPath.section,indexPath.row]
-        
-        if indexPath.section == 0 , indexPath.row == 0 {
-            self.keyIndexRow = indexPath.row
-        }
-        
-        print("willDisplay :")
-        self.loadRecordPen()
-    }
-    
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        self.outCell = [indexPath.section,indexPath.row]
     }
     
 }
@@ -254,6 +204,18 @@ extension MainAppViewController: MyAppDelegate {
 }
 
 extension MainAppViewController :ManagerDelegate {
+    //MARK: Protocol - ManagerDelegate by Manager.
+    func finishDownLoadRecordPen() {
+        print("ManagerDelegate - finishDownLoadRecordPen")
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+            // 停止 refreshControl 動畫
+            self.refreshControl.endRefreshing()
+            self.tableViewData[1] = Manager.recordData
+            self.tableView.reloadData()
+        }
+    }
+    
     //MARK: Protocol - ManagerDelegate by Manager.
     func finishDownLoadUserPhoto() {
         print("ManagerDelegate - finishDownLoadUserPhoto")

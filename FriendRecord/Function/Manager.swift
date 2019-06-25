@@ -3,6 +3,7 @@ import UIKit
 
 protocol ManagerDelegate {
     func finishDownLoadUserPhoto()
+    func finishDownLoadRecordPen()
 }
 
 
@@ -268,6 +269,37 @@ class Manager :UIViewController {
             }
         }
         return smallImage
+    }
+    
+    //MARK: func - DownLoad Record Pen.
+    func downLoadRecordPen() {
+        //Test
+        //Post PHP(check user login data).
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Load_Record_Pen.php") {
+            
+            var request = URLRequest(url: url)
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, respones, error) in
+                if let e = error {
+                    print("uesr login check data URL Session error: \(e)")
+                    return
+                }
+                guard let jsonData = data else {
+                    return
+                }
+                //let reCode = String(data: data!, encoding: .utf8)
+                //print(reCode!)
+                let decoder = JSONDecoder()
+                do {
+                    Manager.recordData = try decoder.decode([Record].self, from: jsonData)//[Note].self 取得Note陣列的型態
+                    print("Manager.recordData.count:\(Manager.recordData.count)")
+                    Manager.delegate.finishDownLoadRecordPen()
+                } catch {
+                    print("error while parsing json \(error)")
+                }
+            }
+            task.resume()
+        }
     }
     
 }
