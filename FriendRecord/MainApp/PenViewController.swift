@@ -65,10 +65,7 @@ class PenViewController: UIViewController {
             
             self.playerBT.layer.cornerRadius = 0.5 * self.playerBT.bounds.size.width
         }
-        
-            
-        
-        
+
     }
     
     /*------------------------------------------------------------ function ------------------------------------------------------------*/

@@ -118,7 +118,9 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             self.tableView.rowHeight = cell.mainView.bounds.height + 30
             cell.mainView.layer.cornerRadius = 10
             cell.mainView.layer.masksToBounds = true
-            cell.backgroundColor = UIColor(red: 192/255, green: 192/255, blue: 192/255, alpha: 0.5)
+            cell.mainView.backgroundColor = UIColor.white
+            //cell.backgroundColor = UIColor(red: 192/255, green: 192/255, blue: 192/255, alpha: 0.5)
+            cell.backgroundColor = UIColor(named: "MyColor")
            return cell
         }
     }
@@ -143,6 +145,12 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return CGFloat(bitPattern: 5)
+        }
+        return tableView.sectionHeaderHeight
+    }
 }
 
 extension MainAppViewController :RecordGoViewControllerDelegate {

@@ -117,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7U-nW-g9B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="975" y="-36"/>
+            <point key="canvasLocation" x="904" y="-36"/>
         </scene>
         <!--個人資料-->
         <scene sceneID="kWH-fh-NhA">
@@ -204,6 +204,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="sYf-gg-kll"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="user.png" selectedImage="個人資料" id="Zxn-dP-f5W"/>
                     <navigationItem key="navigationItem" title="個人資料" id="FWu-6s-xj0">
                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="GyH-6l-EGK">
                             <connections>
@@ -211,11 +212,13 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="登出" id="59P-YN-lyq">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="logout:" destination="5jJ-ju-kVr" id="HyG-N3-jrQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="UserGenderLB" destination="QEB-pB-K4y" id="NfC-08-fe5"/>
                         <outlet property="userBfLB" destination="Z4s-qK-ZzW" id="Pem-yb-Unv"/>
@@ -320,17 +323,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HzQ-4X-Q44">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="HzQ-4X-Q44">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userCell" rowHeight="126" id="FRI-Fe-gNf" customClass="MyUserTableViewCell" customModule="FriendRecord" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="126"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="126"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FRI-Fe-gNf" id="kID-IT-wch" customClass="MyUserTableViewCell" customModule="FriendRecord" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="125.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="126"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fDp-gv-wzI">
@@ -352,10 +355,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recordCell" rowHeight="167" id="S21-3b-Mw9" customClass="MyRecordTableViewCell" customModule="FriendRecord" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="154" width="414" height="167"/>
+                                        <rect key="frame" x="0.0" y="181.5" width="414" height="167"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S21-3b-Mw9" id="3xL-fO-BRW" customClass="MyRecordTableViewCell" customModule="FriendRecord" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="166.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="167"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lTg-A4-5Ze">
@@ -407,9 +410,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="xWk-A0-umj"/>
                     </view>
-                    <navigationItem key="navigationItem" title="聆聽錄音帶" id="4cV-8L-5z8">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="dTg-Rv-ZmO"/>
-                    </navigationItem>
+                    <tabBarItem key="tabBarItem" title="錄音留言板" image="cassette.png" id="pTM-vf-4Nd"/>
+                    <navigationItem key="navigationItem" title="聆聽錄音帶" id="4cV-8L-5z8"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="HzQ-4X-Q44" id="Fok-h5-val"/>
                     </connections>
@@ -417,6 +420,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iB3-p9-rmz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3600" y="-36"/>
+        </scene>
+        <!--錄音者的心情-->
+        <scene sceneID="acy-lo-l5T">
+            <objects>
+                <viewController storyboardIdentifier="mapfriendVC" id="Uub-KT-1ZZ" customClass="MapFrienderViewController" customModule="FriendRecord" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="F3o-3j-7sw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="userLocation" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xBv-mQ-38T">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <viewLayoutGuide key="safeArea" id="ReC-no-FJI"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="找找大家" image="placeholder.png" selectedImage="placeholder.png" id="3mu-RR-7YW"/>
+                    <navigationItem key="navigationItem" title="錄音者的心情" id="dha-Dh-2fw"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="xBv-mQ-38T" id="lX2-7f-iHx"/>
+                        <outlet property="myTabBarIT" destination="3mu-RR-7YW" id="ie1-wh-ub2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tzL-2Z-Rz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3600.0000000000005" y="776.78571428571422"/>
         </scene>
         <!--Record Go View Controller-->
         <scene sceneID="N6B-Fi-WjW">
@@ -432,11 +465,13 @@
                                 <items>
                                     <navigationItem title="發個錄音" id="flP-Qg-TRV">
                                         <barButtonItem key="leftBarButtonItem" title="取消" id="ISF-Cu-Y0j">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="cancel:" destination="cZc-49-CRW" id="4Tb-iX-3CN"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="發布" id="PJk-OU-Nga">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="SendRecordPen:" destination="cZc-49-CRW" id="ii7-VM-H6g"/>
                                             </connections>
@@ -458,15 +493,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jT0-rq-f56">
-                                <rect key="frame" x="20" y="416" width="374" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="錄音測試"/>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ias-LH-B8x">
                                 <rect key="frame" x="172" y="103" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jT0-rq-f56">
+                                <rect key="frame" x="157" y="398" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="microphone.png"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="XgE-BR-X7r"/>
@@ -481,7 +516,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b5B-5J-ze5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5219" y="-36"/>
+            <point key="canvasLocation" x="5217.3913043478269" y="-36.160714285714285"/>
         </scene>
         <!--Pen View Controller-->
         <scene sceneID="hck-H9-W8o">
@@ -520,6 +555,16 @@
                                 <rect key="frame" x="0.0" y="380" width="414" height="433"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="123" id="NSe-xA-vvp">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="123"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NSe-xA-vvp" id="2fe-ql-dcu">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="122.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OTW-O1-WRP">
                                 <rect key="frame" x="167" y="292" width="80" height="80"/>
@@ -545,7 +590,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KFZ-DO-Ni4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4406" y="-36"/>
+            <point key="canvasLocation" x="4405.7971014492759" y="-36.160714285714285"/>
         </scene>
         <!--Ripple Animation View Controller-->
         <scene sceneID="J6w-dP-Mvl">
@@ -776,7 +821,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7f-Kp-3u9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="pNT-yp-T4V" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="974" y="750"/>
+            <point key="canvasLocation" x="903" y="777"/>
         </scene>
         <!--My Tab Bar Controller-->
         <scene sceneID="fZV-KM-U00">
@@ -791,6 +836,7 @@
                     <connections>
                         <outlet property="tabbarItem" destination="T44-uL-m84" id="Jyc-4C-uT9"/>
                         <segue destination="7LT-JW-KXu" kind="relationship" relationship="viewControllers" id="nha-cH-Qga"/>
+                        <segue destination="jpT-wO-IkL" kind="relationship" relationship="viewControllers" id="X56-Nu-5SX"/>
                         <segue destination="W5M-A8-ROz" kind="relationship" relationship="viewControllers" id="Zhz-9G-oz0"/>
                     </connections>
                 </tabBarController>
@@ -798,15 +844,16 @@
             </objects>
             <point key="canvasLocation" x="1861" y="-36"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--錄音留言板-->
         <scene sceneID="CJ1-p5-oEv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7LT-JW-KXu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="hvp-Kq-ftD"/>
+                    <tabBarItem key="tabBarItem" title="錄音留言板" image="cassette.png" selectedImage="cassette.png" id="hvp-Kq-ftD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cTV-3Z-Z54">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -817,11 +864,11 @@
             </objects>
             <point key="canvasLocation" x="2809" y="-36"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--個人資料-->
         <scene sceneID="cFq-v9-plg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="W5M-A8-ROz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="KIv-ar-wCz"/>
+                    <tabBarItem key="tabBarItem" title="個人資料" image="user.png" selectedImage="user.png" id="KIv-ar-wCz"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lrd-sR-RwG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -836,13 +883,38 @@
             </objects>
             <point key="canvasLocation" x="2809" y="-1002"/>
         </scene>
+        <!--找找大家-->
+        <scene sceneID="nXa-ub-CUI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jpT-wO-IkL" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="找找大家" selectedImage="worldwide.png" id="cHQ-PL-YAK"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zkd-dT-YKF">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Uub-KT-1ZZ" kind="relationship" relationship="rootViewController" id="vep-I0-ngp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Syv-hR-4wq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2809" y="777"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Login_Icon_ver_2_2.png" width="1024" height="768"/>
         <image name="Stop.png" width="192" height="192"/>
+        <image name="cassette.png" width="25.600000381469727" height="25.600000381469727"/>
+        <image name="microphone.png" width="384" height="384"/>
+        <image name="placeholder.png" width="25.600000381469727" height="25.600000381469727"/>
+        <image name="user.png" width="25.600000381469727" height="25.600000381469727"/>
         <image name="userPhotoDefault.png" width="409.60000610351562" height="409.60000610351562"/>
+        <image name="worldwide.png" width="48" height="48"/>
+        <image name="個人資料" width="16" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Pcd-et-zZd"/>
+        <segue reference="BM0-Fw-A0d"/>
     </inferredMetricsTieBreakers>
 </document>
