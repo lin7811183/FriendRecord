@@ -48,7 +48,6 @@ class MainAppViewController: UIViewController {
         self.refreshControl.addTarget(self, action: #selector(self.downLoadRecordPen), for: .valueChanged)
         self.tableView.addSubview(refreshControl)
         
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +72,7 @@ class MainAppViewController: UIViewController {
     @objc func downLoadRecordPen() {
         print("downLoadRecordPen")
         Manager.shared.downLoadRecordPen()
+        Manager.shared.downLoadUserPhoto()
     }
     
     @IBAction func test(_ sender: Any) {
@@ -208,10 +208,37 @@ extension MainAppViewController :ManagerDelegate {
     func finishDownLoadRecordPen() {
         print("ManagerDelegate - finishDownLoadRecordPen")
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
             // 停止 refreshControl 動畫
             self.refreshControl.endRefreshing()
+            
+            
+            //Analysis email to phtot.
+            for photoData in Manager.recordData{
+                let data = photoData.recordSendUser
+                let record = photoData.recordFileName
+                
+                guard let dataChanage = data else {
+                    print("********** MainAPP VC func downLoadRecordPenUserPhoto error. **********")
+                    return
+                }
+                
+                guard let recordfile = record else {
+                    print("********** MainAPP VC func downLoadRecordPenUserRecord error **********")
+                    return
+                }
+                
+                let imageNameChange = dataChanage.split(separator: "@")
+                let fileName = "\(imageNameChange[0])"
+                
+                //Download photo func.
+                Manager.shared.downLoadUserPhoto(fileName: fileName)
+                //Download Rcord File.
+                Manager.shared.downLoadRcordFile(fileName: recordfile)
+            }
+            
             self.tableViewData[1] = Manager.recordData
+            
             self.tableView.reloadData()
         }
     }

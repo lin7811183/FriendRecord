@@ -10,6 +10,7 @@ class UserViewController: UIViewController {
     @IBOutlet weak var UserGenderLB: UILabel!
     @IBOutlet weak var userBfLB: UILabel!
     @IBOutlet weak var userPhotoBT: UIButton!
+    @IBOutlet weak var userRecordPenCV: UICollectionView!
     
     var uploadArry :[String:Bool]!
     
@@ -28,6 +29,9 @@ class UserViewController: UIViewController {
         self.userBfLB.text = userDataBf
         
         //self.navigationItem.title = self.userNickNameLB.text
+        
+        self.userRecordPenCV.dataSource = self
+        self.userRecordPenCV.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +59,9 @@ class UserViewController: UIViewController {
         self.userPhotoBT.clipsToBounds = true
 
         self.userPhotoBT.setImage(Manager.shared.userPhotoRead(jpg: emailHead), for: .normal)
+        
+        // DownLoad User Local Record Pen.
+        
         
     }
     
@@ -112,8 +119,20 @@ class UserViewController: UIViewController {
     }
 }
 
-extension UserViewController :UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+extension UserViewController : UICollectionViewDataSource,UICollectionViewDelegate {
+    //MARK: Protocol - UICollectionViewDataSource.
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = self.userRecordPenCV.dequeueReusableCell(withReuseIdentifier: "userLocalRecordPenCell", for: indexPath)
+        return cell
+    }
+}
+
+extension UserViewController :UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+    //MARK: Protocol - CodeUIImagePickerControllerDelegate , UINavigationControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         let image = info[.originalImage] as! UIImage

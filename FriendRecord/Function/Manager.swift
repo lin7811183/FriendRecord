@@ -13,6 +13,7 @@ class Manager :UIViewController {
     static var recordDataUser :[Record] = []
     static var recordData :[Record] = []
     static var indexPath :Int!
+    var userLocalRecordPen :[Record]  = []
     
     static var delegate :ManagerDelegate!
     
@@ -296,6 +297,20 @@ class Manager :UIViewController {
                     Manager.delegate.finishDownLoadRecordPen()
                 } catch {
                     print("error while parsing json \(error)")
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    //MARK: func - DownLoad user local Record pen.
+    func downLoadUserLocalRecordPen() {
+        if let url = URL(string: <#URL#>) {
+            let request = URLRequest(url: url)
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let e = error {
+                    print("erroe \(e)")
                 }
             }
             task.resume()
