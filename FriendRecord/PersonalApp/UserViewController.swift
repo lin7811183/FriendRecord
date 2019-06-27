@@ -10,7 +10,9 @@ class UserViewController: UIViewController {
     @IBOutlet weak var UserGenderLB: UILabel!
     @IBOutlet weak var userBfLB: UILabel!
     @IBOutlet weak var userPhotoBT: UIButton!
+    
     @IBOutlet weak var userRecordPenCV: UICollectionView!
+    var collectionData = [Record]()
     
     var uploadArry :[String:Bool]!
     
@@ -60,9 +62,9 @@ class UserViewController: UIViewController {
 
         self.userPhotoBT.setImage(Manager.shared.userPhotoRead(jpg: emailHead), for: .normal)
         
-        // DownLoad User Local Record Pen.
-        
-        
+        //DownLoadUserRecordPen.
+        Manager.delegateUser = self
+        Manager.shared.downLoadUserLocalRecordPen()
     }
     
     /*------------------------------------------------------------ function ------------------------------------------------------------*/
@@ -117,17 +119,45 @@ class UserViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
         self.present(photoPicker, animated: true)
     }
+    
 }
 
-extension UserViewController : UICollectionViewDataSource,UICollectionViewDelegate {
+extension UserViewController :UICollectionViewDataSource,UICollectionViewDelegate {
     //MARK: Protocol - UICollectionViewDataSource.
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.collectionData.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.userRecordPenCV.dequeueReusableCell(withReuseIdentifier: "userLocalRecordPenCell", for: indexPath)
+        let cell = self.userRecordPenCV.dequeueReusableCell(withReuseIdentifier: "userRecordPenCell", for: indexPath) as! MyCollectionViewCell
+        cell.userRecordPenDateLB.text = self.collectionData[indexPath.row].recordDate
+        cell.userMainLB.text = self.collectionData[indexPath.row].recordText
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.userRecordPenCV.deselectItem(at: indexPath, animated: true)
+        
+        Manager.penVCType = 1
+        Manager.indexPath = indexPath.row
+        
+    }
+}
+
+extension UserViewController :ManagerDelegateUser {
+    //MARK: Protocol - CodeManagerDelegateUser
+    func finishDownLoadUserRecordPen() {
+        print("ManagerDelegate = finishDownLoadUserPhoto")
+        
+        DispatchQueue.main.async {
+            self.collectionData = Manager.userLocalRecordPen
+            print("self.collectionData: \(self.collectionData.count)")
+            self.userRecordPenCV.reloadData()
+        }
     }
 }
 

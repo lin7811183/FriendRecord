@@ -134,6 +134,7 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             recordgovc.delegate = self
             self.present(recordgovc, animated: true, completion: nil)
         } else {
+            Manager.penVCType = 0
             Manager.indexPath = indexPath.row
         }
     }
@@ -204,6 +205,10 @@ extension MainAppViewController: MyAppDelegate {
 }
 
 extension MainAppViewController :ManagerDelegate {
+    func finishDownLoadUserRecordPen() {
+        return
+    }
+    
     //MARK: Protocol - ManagerDelegate by Manager.
     func finishDownLoadRecordPen() {
         print("ManagerDelegate - finishDownLoadRecordPen")

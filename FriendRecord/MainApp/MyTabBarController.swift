@@ -23,10 +23,6 @@ class MyTabBarController: UITabBarController {
             self.present(loginVC, animated: true, completion: nil)
             return
         }
-        //let naVC = self.storyboard?.instantiateViewController(withIdentifier: "nVC") as! MyNavigationController
-        //self.present(naVC, animated: true, completion: nil)
-        //let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: "tabbarVC") as! MyTabBarController
-        //self.present(tabbarVC, animated: true, completion: nil)
     }
     
     

@@ -10,6 +10,7 @@ class PenViewController: UIViewController {
     @IBOutlet weak var penableView: UITableView!
     @IBOutlet weak var playerBT: UIButton!
     
+    var data: Record!
     var selectIndexPath :Int!
     
     var isPlayer = true
@@ -26,23 +27,47 @@ class PenViewController: UIViewController {
             print("********** get error index. **********")
             return
         }
-        let data = Manager.recordData[index]
-        let photoName = data.recordSendUser!
-        let photoNameChange = photoName.split(separator: "@")
-        let name = "\(photoNameChange[0])"
-        self.userImage.image = Manager.shared.userPhotoRead(jpg: name)
-        self.userImage.layer.cornerRadius = self.userImage.bounds.height / 2
         
-        self.userNameLB.text = data.userNickName
-
-        self.dateLB.text = data.recordDate!
+        if Manager.penVCType == 0 {
+            self.data = Manager.recordData[index]
+            let photoName = data.recordSendUser!
+            let photoNameChange = photoName.split(separator: "@")
+            let name = "\(photoNameChange[0])"
+            self.userImage.image = Manager.shared.userPhotoRead(jpg: name)
+            self.userImage.layer.cornerRadius = self.userImage.bounds.height / 2
+            
+            self.userNameLB.text = data.userNickName
+            
+            self.dateLB.text = data.recordDate!
+            
+            self.mainLB.text = data.recordText
+            
+            self.rippleLayer.position = CGPoint(x:self.playerBT.center.x, y: self.playerBT.center.y)
+            self.view.layer.addSublayer(rippleLayer)
+            
+            self.playerBT.layer.cornerRadius = 0.5 * self.playerBT.bounds.size.width
+        } else {
+            self.data = Manager.userLocalRecordPen[index]
+            let photoName = data.recordSendUser!
+            let photoNameChange = photoName.split(separator: "@")
+            let name = "\(photoNameChange[0])"
+            self.userImage.image = Manager.shared.userPhotoRead(jpg: name)
+            self.userImage.layer.cornerRadius = self.userImage.bounds.height / 2
+            
+            self.userNameLB.text = data.userNickName
+            
+            self.dateLB.text = data.recordDate!
+            
+            self.mainLB.text = data.recordText
+            
+            self.rippleLayer.position = CGPoint(x:self.playerBT.center.x, y: self.playerBT.center.y)
+            self.view.layer.addSublayer(rippleLayer)
+            
+            self.playerBT.layer.cornerRadius = 0.5 * self.playerBT.bounds.size.width
+        }
         
-        self.mainLB.text = data.recordText
+            
         
-        self.rippleLayer.position = CGPoint(x:self.playerBT.center.x, y: self.playerBT.center.y)
-        self.view.layer.addSublayer(rippleLayer)
-        
-        self.playerBT.layer.cornerRadius = 0.5 * self.playerBT.bounds.size.width
         
     }
     
@@ -67,7 +92,7 @@ class PenViewController: UIViewController {
         
         self.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
         
-        let filePathURL = Manager.shared.fileDocumentsPath(fileName: Manager.recordData[index].recordFileName!)
+        let filePathURL = Manager.shared.fileDocumentsPath(fileName: self.data.recordFileName!)
         //Play Record.
         self.muisePlayer = try? AVAudioPlayer(contentsOf: filePathURL)
         self.muisePlayer?.numberOfLoops = -1

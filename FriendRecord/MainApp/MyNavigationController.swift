@@ -17,7 +17,6 @@ class MyNavigationController: UINavigationController {
         
         guard checkLogin == true else {
             let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
-            
             self.present(loginVC, animated: true, completion: nil)
             return
         }

@@ -6,16 +6,22 @@ protocol ManagerDelegate {
     func finishDownLoadRecordPen()
 }
 
+protocol ManagerDelegateUser {
+    func finishDownLoadUserRecordPen()
+}
+
 
 class Manager :UIViewController {
     
     static let shared = Manager()
     static var recordDataUser :[Record] = []
     static var recordData :[Record] = []
+    static var penVCType :Int!
     static var indexPath :Int!
-    var userLocalRecordPen :[Record]  = []
+    static var userLocalRecordPen :[Record]  = []
     
     static var delegate :ManagerDelegate!
+    static var delegateUser :ManagerDelegateUser!
     
     //MARK: func - dismissKeyboard.
     func hideKeyboardWhenTappedAround() {
@@ -305,12 +311,31 @@ class Manager :UIViewController {
     
     //MARK: func - DownLoad user local Record pen.
     func downLoadUserLocalRecordPen() {
-        if let url = URL(string: <#URL#>) {
-            let request = URLRequest(url: url)
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Load_Local_User_RecordPen.php") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let userData = UserDefaults.standard
+            let email = userData.string(forKey: "email")
+            
+            let param = "usermail=\(email!)"
+            request.httpBody = param.data(using: .utf8)
+            
             let session = URLSession.shared
             let task = session.dataTask(with: request) { (data, response, error) in
                 if let e = error {
                     print("erroe \(e)")
+                }
+                guard let jsonData = data else {
+                    return
+                }
+                let decoder = JSONDecoder()
+                do {
+                    Manager.userLocalRecordPen = try decoder.decode([Record].self, from: jsonData)//[Note].self 取得Note陣列的型態
+                    print("userLocalRecordPen:\(Manager.userLocalRecordPen.count)")
+                    Manager.delegateUser.finishDownLoadUserRecordPen()
+                } catch {
+                    print("error while parsing json \(error)")
                 }
             }
             task.resume()
