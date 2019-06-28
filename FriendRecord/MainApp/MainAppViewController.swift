@@ -98,8 +98,8 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! MyRecordTableViewCell
-            //cell.mainLB.text = Manager.recordData[indexPath.row].recordText
-           cell.mainLB.text  = self.tableViewData[indexPath.section][indexPath.row].recordText
+            
+            cell.mainLB.text  = self.tableViewData[indexPath.section][indexPath.row].recordText
 
             if let imageName = self.tableViewData[indexPath.section][indexPath.row].recordSendUser {
                 let imageNameChange = imageName.split(separator: "@")

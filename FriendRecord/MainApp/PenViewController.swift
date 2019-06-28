@@ -9,6 +9,7 @@ class PenViewController: UIViewController {
     @IBOutlet weak var mainLB: UILabel!
     @IBOutlet weak var penableView: UITableView!
     @IBOutlet weak var playerBT: UIButton!
+    @IBOutlet weak var recordPenGoodCount: UILabel!
     
     var data: Record!
     var selectIndexPath :Int!
@@ -41,6 +42,8 @@ class PenViewController: UIViewController {
             self.dateLB.text = data.recordDate!
             
             self.mainLB.text = data.recordText
+            
+            self.recordPenGoodCount.text = "\(Int(data.goodSum!))"
             
             self.rippleLayer.position = CGPoint(x:self.playerBT.center.x, y: self.playerBT.center.y)
             self.view.layer.addSublayer(rippleLayer)

@@ -136,6 +136,16 @@ extension UserViewController :UICollectionViewDataSource,UICollectionViewDelegat
         let cell = self.userRecordPenCV.dequeueReusableCell(withReuseIdentifier: "userRecordPenCell", for: indexPath) as! MyCollectionViewCell
         cell.userRecordPenDateLB.text = self.collectionData[indexPath.row].recordDate
         cell.userMainLB.text = self.collectionData[indexPath.row].recordText
+        
+//        //check local app have user Photo.
+//        let userEmail = UserDefaults.standard
+//        if let emailHead = userEmail.string(forKey: "emailHead") {
+//            cell.userImage.layer.cornerRadius = cell.userImage.bounds.height / 2
+//            cell.userImage.image = Manager.shared.userPhotoRead(jpg: "\(emailHead).jpg")
+//        }
+
+        cell.cellView.layer.cornerRadius = 10
+        cell.cellView.backgroundColor = UIColor(named: "MyColor2")
         return cell
     }
     
