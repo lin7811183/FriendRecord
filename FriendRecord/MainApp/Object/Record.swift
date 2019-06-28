@@ -13,6 +13,9 @@ class Record: Equatable ,Codable {
     var recordText :String?//文章標內容
     var recordTime :String?//錄音時間
     
+    var goodSum :Double?//讚數
+    var isGood :Bool?//是否已按讚
+    
     //isDelete to mysql row.
     
     var userCellLB :String?

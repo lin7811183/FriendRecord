@@ -36,6 +36,8 @@
 		CE16A9E422C0A64D00B16983 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = CE16A9E322C0A64D00B16983 /* Star.png */; };
 		CE16A9E622C0ADB000B16983 /* Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = CE16A9E522C0ADAF00B16983 /* Stop.png */; };
 		CE21464822B4978100F39747 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21464722B4978100F39747 /* Record.swift */; };
+		CE419AB722C5C4CA0019D7FB /* isLike.png in Resources */ = {isa = PBXBuildFile; fileRef = CE419AB522C5C4CA0019D7FB /* isLike.png */; };
+		CE419AB822C5C4CA0019D7FB /* Like.png in Resources */ = {isa = PBXBuildFile; fileRef = CE419AB622C5C4CA0019D7FB /* Like.png */; };
 		CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */; };
 		CEC40AD1229FE6DD00674037 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */; };
 		CEF9016022B100CE004F5A4C /* RecordGoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */; };
@@ -76,6 +78,8 @@
 		CE16A9E322C0A64D00B16983 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star.png; sourceTree = "<group>"; };
 		CE16A9E522C0ADAF00B16983 /* Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stop.png; sourceTree = "<group>"; };
 		CE21464722B4978100F39747 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		CE419AB522C5C4CA0019D7FB /* isLike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = isLike.png; sourceTree = "<group>"; };
+		CE419AB622C5C4CA0019D7FB /* Like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Like.png; sourceTree = "<group>"; };
 		CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
 		CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGoViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 		CE0102C322A7841700EDB18A /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CE419AB622C5C4CA0019D7FB /* Like.png */,
+				CE419AB522C5C4CA0019D7FB /* isLike.png */,
 				CE0E6DD022C4BCD40028FF47 /* microphone.png */,
 				CE0E6DCA22C4BBCC0028FF47 /* user.png */,
 				CE0E6DC622C4BA9F0028FF47 /* placeholder.png */,
@@ -309,7 +315,9 @@
 				CE0DE89C22B08F7E00F49C5B /* userPhotoDefault.png in Resources */,
 				CE10040F229B725300660E82 /* LaunchScreen.storyboard in Resources */,
 				CE0E6DC722C4BA9F0028FF47 /* placeholder.png in Resources */,
+				CE419AB722C5C4CA0019D7FB /* isLike.png in Resources */,
 				CE0E6DD122C4BCD50028FF47 /* microphone.png in Resources */,
+				CE419AB822C5C4CA0019D7FB /* Like.png in Resources */,
 				CE0E6DCB22C4BBCC0028FF47 /* user.png in Resources */,
 				CE16A9E422C0A64D00B16983 /* Star.png in Resources */,
 				CE0A3C8D229E1FC900649E2E /* Login.png in Resources */,

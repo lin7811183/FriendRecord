@@ -294,12 +294,13 @@ class Manager :UIViewController {
                 guard let jsonData = data else {
                     return
                 }
-                //let reCode = String(data: data!, encoding: .utf8)
-                //print(reCode!)
+                let reCode = String(data: data!, encoding: .utf8)
+                print(reCode!)
                 let decoder = JSONDecoder()
                 do {
                     Manager.recordData = try decoder.decode([Record].self, from: jsonData)//[Note].self 取得Note陣列的型態
                     print("Manager.recordData.count:\(Manager.recordData.count)")
+                    
                     Manager.delegate.finishDownLoadRecordPen()
                 } catch {
                     print("error while parsing json \(error)")
@@ -343,27 +344,25 @@ class Manager :UIViewController {
     }
     
     //MARK: func - ReSize Image.
-    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
+    func resizeImage(image: UIImage) -> UIImage {
         
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        //設定縮圖大小
+        let thumbnailSize = CGSize(width: 20 ,height: 20)
+        //找出目前螢幕的scale
+        let scale = UIScreen.main.scale
+        //產生畫布
+        UIGraphicsBeginImageContextWithOptions(thumbnailSize,false,scale)
+        //計算長寬要縮圖比例
+        let width = thumbnailSize.width / image.size.width
+        let height = thumbnailSize.height / image.size.height
+        let ratio = max(width,height)
+        let imageSize = CGSize(width:image.size.width*ratio,height: image.size.height*ratio)
+        //在畫圖行前 切圓形
+        let circle = UIBezierPath(ovalIn: CGRect(x: 0,y: 0,width: thumbnailSize.width,height: thumbnailSize.height))
+        circle.addClip()
+        image.draw(in:CGRect(x: -(imageSize.width-thumbnailSize.width)/2.0,y: -(imageSize.height-thumbnailSize.height)/2.0,width: imageSize.width,height: imageSize.height))
+        //取得畫布上的圖
+        var newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         return newImage!

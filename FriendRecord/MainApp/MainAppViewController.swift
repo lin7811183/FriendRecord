@@ -28,9 +28,9 @@ class MainAppViewController: UIViewController {
     var userSelectRow :Int!
     
     var refreshControl:UIRefreshControl!
-
     
     var loadDataArray :[Record]!
+    var isGoodType :Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,18 +68,14 @@ class MainAppViewController: UIViewController {
         }
         
     }
-
+    
+    //MARK: func - DownLoad Record Pen.
     @objc func downLoadRecordPen() {
         print("downLoadRecordPen")
         Manager.shared.downLoadRecordPen()
         Manager.shared.downLoadUserPhoto()
     }
-    
-    @IBAction func test(_ sender: Any) {
-        print("Manager.recordData.count:\(Manager.recordData.count)")
-        print("self.tableViewData[1]:\(self.tableViewData[1].count)")
-    }
-    
+        
 }
 
 extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
@@ -114,6 +110,21 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             cell.sendUserNameLB.text = Manager.recordData[indexPath.row].userNickName
             cell.sendRecordDateLB.text = Manager.recordData[indexPath.row].recordDate
             
+//            if let bool = self.isGoodType , bool == false {
+//                cell.goodSumLB.text = "大家給\(Int(Manager.recordData[indexPath.row].goodSum ?? 0))給棒數"
+//            } else {
+//                cell.goodSumLB.text = "與其他人\(Int(Manager.recordData[indexPath.row].goodSum ?? 0))給棒數"
+//            }
+            
+            cell.goodSumLB.text = "總共有:\(Int(Manager.recordData[indexPath.row].goodSum ?? 0))棒數"
+            
+            cell.RecordID = Manager.recordData[indexPath.row].recordID
+            cell.email = Manager.recordData[indexPath.row].recordSendUser
+            
+            cell.delegate = self
+            
+            cell.recordPenGoodBT.addTarget(self, action: #selector(liked(sender:)), for: .touchUpInside)
+            
             //Auto change cell hight.
             self.tableView.rowHeight = cell.mainView.bounds.height + 30
             cell.mainView.layer.cornerRadius = 10
@@ -126,6 +137,17 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.tableViewData.count
+    }
+    
+    @objc func liked(sender: UIButton) {
+        if let bool = self.isGoodType , bool == true {
+            sender.setImage(UIImage(named: "isLike.png"), for: .normal)
+            
+            self.tableView.reloadData()
+        } else {
+            sender.setImage(UIImage(named: "Like.png"), for: .normal)
+            self.tableView.reloadData()
+        }
     }
     
     //MARK: Protocol - tableView delegate
@@ -263,6 +285,21 @@ extension MainAppViewController :ManagerDelegate {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+}
+
+extension MainAppViewController :MyRecordTableViewCellDelegate {
+    func updateIsGood(isGoodType: Bool, cell: UITableViewCell) {
+        print("MyRecordTableViewCellDelegate - updateIsGood")
+        guard let indexPath = self.tableView.indexPath(for: cell) else {
+            // Note, this shouldn't happen - how did the user tap on a button that wasn't on screen?
+            return
+        }
+        //  Do whatever you need to do with the indexPath
+        print("Button tapped on row \(indexPath.row)")
+        
+        self.isGoodType = isGoodType
+        print("\(self.isGoodType!)")
     }
 }
 
