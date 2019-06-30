@@ -5,13 +5,18 @@ import MobileCoreServices
 class UserViewController: UIViewController {
     
     //@IBOutlet weak var userImageView: UIImageView!
+    //@IBOutlet weak var userNickNameLB: UILabel!
+    //@IBOutlet weak var userRecordPenCV: UICollectionView!
     
-    @IBOutlet weak var userNickNameLB: UILabel!
+    @IBOutlet weak var userView: UIView!
+    @IBOutlet weak var userTF: UITextView!
     @IBOutlet weak var UserGenderLB: UILabel!
     @IBOutlet weak var userBfLB: UILabel!
     @IBOutlet weak var userPhotoBT: UIButton!
+    @IBOutlet weak var editUserTF_BT: UIButton!
     
-    @IBOutlet weak var userRecordPenCV: UICollectionView!
+    var isUserFTType = false
+    
     var collectionData = [Record]()
     
     var uploadArry :[String:Bool]!
@@ -22,7 +27,7 @@ class UserViewController: UIViewController {
         let userData = UserDefaults.standard
         
         let uesrDataNickName = userData.string(forKey: "nickname")
-        self.userNickNameLB.text = uesrDataNickName
+        //self.userNickNameLB.text = uesrDataNickName
         
         let userDataGender = userData.string(forKey: "gender")
         self.UserGenderLB.text = userDataGender
@@ -30,15 +35,22 @@ class UserViewController: UIViewController {
         let userDataBf = userData.string(forKey: "bf")
         self.userBfLB.text = userDataBf
         
-        //self.navigationItem.title = self.userNickNameLB.text
+        self.userView.layer.cornerRadius = 10
+        self.userView.layer.masksToBounds = true
+        self.userView.backgroundColor = UIColor.lightGray
         
-        self.userRecordPenCV.dataSource = self
-        self.userRecordPenCV.delegate = self
+        self.userTF.isEditable = false
+        self.userTF.isSelectable = false
+        //self.userTF.layer.borderColor = UIColor.black.cgColor
+        //self.userTF.layer.borderWidth = 1.0
+        self.userTF.layer.cornerRadius = 5.0
+        self.userTF.delegate = self
+        
+        self.navigationItem.title = uesrDataNickName
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         //check local app have user Photo.
         let userEmail = UserDefaults.standard
         guard let emailHead = userEmail.string(forKey: "emailHead") else {
@@ -73,6 +85,7 @@ class UserViewController: UIViewController {
         //let userPhotoVC = self.storyboard?.instantiateViewController(withIdentifier: "userphotoVC") as! UserPhotoViewController
         //self.present(userPhotoVC, animated: true, completion: nil)
     }
+    
     //MARK: func - logout button
     @IBAction func logout(_ sender: Any) {
         //set isLogin key to UserDefaults.
@@ -90,6 +103,25 @@ class UserViewController: UIViewController {
         print("********** user is logout secure. **********")
         Manager.recordDataUser.removeAll()
         Manager.recordData.removeAll()
+    }
+    
+    //MARK: func - Edit UserFT
+    @IBAction func editUserFT(_ sender: Any) {
+        if self.isUserFTType == false {
+            self.editUserTF_BT.setImage(UIImage(named: "pen.png"), for: .normal)
+            self.userTF.backgroundColor = UIColor(named: "MyColor4")
+            self.userTF.isSelectable = true
+            self.userTF.isEditable = true
+            self.isUserFTType = true
+        } else {
+            self.editUserTF_BT.setTitleColor(UIColor.black, for: .normal)
+            self.editUserTF_BT.setImage(UIImage(named: ""), for: .normal)
+            self.userTF.backgroundColor = UIColor.white
+            self.editUserTF_BT.setTitle("編輯", for: .normal)
+            self.userTF.isSelectable = false
+            self.userTF.isEditable = false
+            self.isUserFTType = false
+        }
     }
     
     //MARK: func - user imaage photo.
@@ -122,54 +154,27 @@ class UserViewController: UIViewController {
     
 }
 
-extension UserViewController :UICollectionViewDataSource,UICollectionViewDelegate {
-    //MARK: Protocol - UICollectionViewDataSource.
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.collectionData.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.userRecordPenCV.dequeueReusableCell(withReuseIdentifier: "userRecordPenCell", for: indexPath) as! MyCollectionViewCell
-        cell.userRecordPenDateLB.text = self.collectionData[indexPath.row].recordDate
-        cell.userMainLB.text = self.collectionData[indexPath.row].recordText
-        
-//        //check local app have user Photo.
-//        let userEmail = UserDefaults.standard
-//        if let emailHead = userEmail.string(forKey: "emailHead") {
-//            cell.userImage.layer.cornerRadius = cell.userImage.bounds.height / 2
-//            cell.userImage.image = Manager.shared.userPhotoRead(jpg: "\(emailHead).jpg")
-//        }
-
-        cell.cellView.layer.cornerRadius = 10
-        cell.cellView.backgroundColor = UIColor(named: "MyColor2")
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.userRecordPenCV.deselectItem(at: indexPath, animated: true)
-        
-        Manager.penVCType = 1
-        Manager.indexPath = indexPath.row
-        
-    }
-}
 
 extension UserViewController :ManagerDelegateUser {
     //MARK: Protocol - CodeManagerDelegateUser
     func finishDownLoadUserRecordPen() {
         print("ManagerDelegate = finishDownLoadUserPhoto")
         
-        DispatchQueue.main.async {
-            self.collectionData = Manager.userLocalRecordPen
-            print("self.collectionData: \(self.collectionData.count)")
-            self.userRecordPenCV.reloadData()
-        }
+//        DispatchQueue.main.async {
+//            self.collectionData = Manager.userLocalRecordPen
+//            print("self.collectionData: \(self.collectionData.count)")
+//        }
     }
 }
+
+extension UserViewController :UITextViewDelegate {
+    //MARK: Protocol - textFiel Delegate.
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        self.userTF.textColor = UIColor.black
+        return true
+    }
+}
+
 
 extension UserViewController :UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     //MARK: Protocol - CodeUIImagePickerControllerDelegate , UINavigationControllerDelegate

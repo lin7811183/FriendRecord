@@ -43,7 +43,7 @@ class PenViewController: UIViewController {
             
             self.mainLB.text = data.recordText
             
-            self.recordPenGoodCount.text = "\(Int(data.goodSum!))"
+            self.recordPenGoodCount.text = "\(Int(data.goodSum ?? 0))"
             
             self.rippleLayer.position = CGPoint(x:self.playerBT.center.x, y: self.playerBT.center.y)
             self.view.layer.addSublayer(rippleLayer)
