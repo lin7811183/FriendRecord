@@ -32,6 +32,7 @@ class MainAppViewController: UIViewController {
     var loadDataArray :[Record]!
     var isGoodType :Bool!
     var goodIndexPath :Int!
+    var reloadIndexPath :IndexPath!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,14 +152,19 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             goodsum += 1.0
             self.tableViewData[1][self.goodIndexPath].goodSum = goodsum
             Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
-            self.tableView.reloadData()
+            //self.tableView.reloadData()
+            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .automatic)
+            let indexpath = IndexPath(row: 0, section: 0)
+            self.tableView.reloadRows(at: [indexpath], with: .automatic)
         } else {
             sender.setImage(UIImage(named: "isLike.png"), for: .normal)
             self.tableView.reloadData()
             self.tableViewData[1][self.goodIndexPath].Good_user = nil
             self.tableViewData[1][self.goodIndexPath].goodSum! -= 1.0
             Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
-            self.tableView.reloadData()
+            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .automatic)
+            let indexpath = IndexPath(row: 0, section: 0)
+            self.tableView.reloadRows(at: [indexpath], with: .automatic)
         }
     }
     
@@ -310,6 +316,7 @@ extension MainAppViewController :MyRecordTableViewCellDelegate {
         //  Do whatever you need to do with the indexPath
         print("Button tapped on row \(indexPath.row)")
         self.goodIndexPath = indexPath.row
+        self.reloadIndexPath = indexPath
         self.isGoodType = isGoodType
         print("\(self.isGoodType)")
     }
