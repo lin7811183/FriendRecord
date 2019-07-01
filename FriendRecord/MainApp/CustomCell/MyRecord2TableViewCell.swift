@@ -1,36 +1,27 @@
 import UIKit
-
-protocol MyRecordTableViewCellDelegate {
+protocol MyRecordTableViewCell2Delegate {
     func updateIsGood(isGoodType :Bool ,cell :UITableViewCell)
 }
 
-class MyRecordTableViewCell: UITableViewCell {
+class MyRecord2TableViewCell: UITableViewCell {
     
-    @IBOutlet weak var mainLB: UILabel!
-    @IBOutlet weak var sendImage: UIImageView!
-    @IBOutlet weak var sendRecordDateLB: UILabel!
-    @IBOutlet weak var sendUserNameLB: UILabel!
+    
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var goodSumLB: UILabel!
+    @IBOutlet weak var sendImage: UIImageView!
     @IBOutlet weak var messageSumLB: UILabel!
-    
     @IBOutlet weak var recordPenGoodBT: UIButton!
     
     var RecordID :Double!
-    var email :String!
     var Good_user :String?
-    var buttonImage :(()->())!
+    var delegate :MyRecordTableViewCell2Delegate!
     
-    var delegate :MyRecordTableViewCellDelegate!
- 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
     
     //MARK: func - Give Good For Record Pen.
@@ -76,4 +67,5 @@ class MyRecordTableViewCell: UITableViewCell {
             task.resume()
         }
     }
+    
 }

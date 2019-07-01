@@ -37,7 +37,8 @@ class UserViewController: UIViewController {
         
         self.userView.layer.cornerRadius = 10
         self.userView.layer.masksToBounds = true
-        self.userView.backgroundColor = UIColor.lightGray
+//        self.userView.backgroundColor = UIColor.lightGray
+        self.userView.backgroundColor = UIColor(named: "MyColor4")
         
         self.userTF.isEditable = false
         self.userTF.isSelectable = false
@@ -109,7 +110,7 @@ class UserViewController: UIViewController {
     @IBAction func editUserFT(_ sender: Any) {
         if self.isUserFTType == false {
             self.editUserTF_BT.setImage(UIImage(named: "pen.png"), for: .normal)
-            self.userTF.backgroundColor = UIColor(named: "MyColor4")
+            self.userTF.backgroundColor = UIColor.gray
             self.userTF.isSelectable = true
             self.userTF.isEditable = true
             self.isUserFTType = true

@@ -261,7 +261,6 @@ class Manager :UIViewController {
         UIGraphicsEndImageContext()
         
         let userEmail = UserDefaults.standard
-        //read userdefault is login or registered?
         let emailHead = userEmail.string(forKey: "emailHead")
         let fileName = "\(emailHead!).jpg"
         
@@ -280,11 +279,19 @@ class Manager :UIViewController {
     
     //MARK: func - DownLoad Record Pen.
     func downLoadRecordPen() {
-        //Test
         //Post PHP(check user login data).
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Load_Record_Pen.php") {
             
             var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let userData = UserDefaults.standard
+            let email = userData.string(forKey: "email")
+            
+            let param = "usermail=\(email!)"
+
+            request.httpBody = param.data(using: .utf8)
+            
             let session = URLSession.shared
             let task = session.dataTask(with: request) { (data, respones, error) in
                 if let e = error {
@@ -300,7 +307,7 @@ class Manager :UIViewController {
                 do {
                     Manager.recordData = try decoder.decode([Record].self, from: jsonData)//[Note].self 取得Note陣列的型態
                     print("Manager.recordData.count:\(Manager.recordData.count)")
-                    
+
                     Manager.delegate.finishDownLoadRecordPen()
                 } catch {
                     print("error while parsing json \(error)")

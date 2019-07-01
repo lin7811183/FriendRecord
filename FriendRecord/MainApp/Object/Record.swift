@@ -14,7 +14,7 @@ class Record: Equatable ,Codable {
     var recordTime :String?//錄音時間
     
     var goodSum :Double?//讚數
-    var isGood :Bool?//是否已按讚
+    var Good_user :String?//是否已按讚
     
     //isDelete to mysql row.
     

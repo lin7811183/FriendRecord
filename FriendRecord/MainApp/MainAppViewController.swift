@@ -31,6 +31,7 @@ class MainAppViewController: UIViewController {
     
     var loadDataArray :[Record]!
     var isGoodType :Bool!
+    var goodIndexPath :Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,9 +98,10 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             self.tableView.rowHeight = cell.showLB.bounds.height + 50
             return cell
         } else {
+
             let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! MyRecordTableViewCell
-            
-            cell.mainLB.text  = self.tableViewData[indexPath.section][indexPath.row].recordText
+
+//            cell.mainLB.text  = self.tableViewData[indexPath.section][indexPath.row].recordText
 
             if let imageName = self.tableViewData[indexPath.section][indexPath.row].recordSendUser {
                 let imageNameChange = imageName.split(separator: "@")
@@ -107,24 +109,26 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
                 cell.sendImage.image = Manager.shared.userPhotoRead(jpg: name)
                 cell.sendImage.layer.cornerRadius = cell.sendImage.bounds.height / 2
             }
-            cell.sendUserNameLB.text = Manager.recordData[indexPath.row].userNickName
-            cell.sendRecordDateLB.text = Manager.recordData[indexPath.row].recordDate
-            
-//            if let bool = self.isGoodType , bool == false {
-//                cell.goodSumLB.text = "大家給\(Int(Manager.recordData[indexPath.row].goodSum ?? 0))給棒數"
-//            } else {
-//                cell.goodSumLB.text = "與其他人\(Int(Manager.recordData[indexPath.row].goodSum ?? 0))給棒數"
-//            }
-            
-            cell.goodSumLB.text = "總共有:\(Int(Manager.recordData[indexPath.row].goodSum ?? 0))棒數"
-            
-            cell.RecordID = Manager.recordData[indexPath.row].recordID
-            cell.email = Manager.recordData[indexPath.row].recordSendUser
-            
+//            cell.sendUserNameLB.text = self.tableViewData[indexPath.section][indexPath.row].userNickName
+//            cell.sendRecordDateLB.text = self.tableViewData[indexPath.section][indexPath.row].recordDate
+
+            if let data = self.tableViewData[indexPath.section][indexPath.row].Good_user {
+                print("isLike.png")
+                cell.recordPenGoodBT.setImage(UIImage(named: "isLike.png"), for: .normal)
+            } else {
+                print("Like.png")
+                cell.recordPenGoodBT.setImage(UIImage(named: "Like.png"), for: .normal)
+            }
+
+            cell.goodSumLB.text = "\(Int(self.tableViewData[indexPath.section][indexPath.row].goodSum ?? 0))"
+
+            cell.RecordID = self.tableViewData[indexPath.section][indexPath.row].recordID
+//            cell.email = self.tableViewData[indexPath.section][indexPath.row].recordSendUser
+
             cell.delegate = self
-            
+
             cell.recordPenGoodBT.addTarget(self, action: #selector(liked(sender:)), for: .touchUpInside)
-            
+
             //Auto change cell hight.
             self.tableView.rowHeight = cell.mainView.bounds.height + 30
             cell.mainView.layer.cornerRadius = 10
@@ -141,11 +145,19 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
     
     @objc func liked(sender: UIButton) {
         if let bool = self.isGoodType , bool == true {
-            sender.setImage(UIImage(named: "isLike.png"), for: .normal)
-            
+            sender.setImage(UIImage(named: "Like.png"), for: .normal)
+            self.tableViewData[1][self.goodIndexPath].Good_user = "UserIsLike"
+            var goodsum = self.tableViewData[1][self.goodIndexPath].goodSum ?? 0.0
+            goodsum += 1.0
+            self.tableViewData[1][self.goodIndexPath].goodSum = goodsum
+            Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
             self.tableView.reloadData()
         } else {
-            sender.setImage(UIImage(named: "Like.png"), for: .normal)
+            sender.setImage(UIImage(named: "isLike.png"), for: .normal)
+            self.tableView.reloadData()
+            self.tableViewData[1][self.goodIndexPath].Good_user = nil
+            self.tableViewData[1][self.goodIndexPath].goodSum! -= 1.0
+            Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
             self.tableView.reloadData()
         }
     }
@@ -297,9 +309,9 @@ extension MainAppViewController :MyRecordTableViewCellDelegate {
         }
         //  Do whatever you need to do with the indexPath
         print("Button tapped on row \(indexPath.row)")
-        
+        self.goodIndexPath = indexPath.row
         self.isGoodType = isGoodType
-        print("\(self.isGoodType!)")
+        print("\(self.isGoodType)")
     }
 }
 
