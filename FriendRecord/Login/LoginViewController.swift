@@ -180,7 +180,9 @@ class LoginViewController: UIViewController {
     */
 }
 
+/*------------------------------------------------------------ Protocol. ------------------------------------------------------------*/
 extension LoginViewController: UITextFieldDelegate {
+    
     //MARK: Protocol - UITextFiel Delegate.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //return close keyboard.

@@ -22,17 +22,17 @@ class MyRecordTableViewCell: UITableViewCell {
     var buttonImage :(()->())!
     
     var delegate :MyRecordTableViewCellDelegate!
- 
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
     
+    /*------------------------------------------------------------ Function. ------------------------------------------------------------*/
     //MARK: func - Give Good For Record Pen.
     @IBAction func giveRecordPenGood(_ sender: Any) {
         print("giveRecordPenGood")
@@ -61,7 +61,6 @@ class MyRecordTableViewCell: UITableViewCell {
                 return
             }
             let param = "recordId=\(self.RecordID!)&usermail=\(email)"
-            print("\(param)")
             request.httpBody = param.data(using: .utf8)
             
             let session = URLSession.shared

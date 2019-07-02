@@ -197,8 +197,9 @@ class RegisteredViewController: UIViewController {
     */
 }
 
-
+/*------------------------------------------------------------ Protocol. ------------------------------------------------------------*/
 extension RegisteredViewController :UITextFieldDelegate {
+    
     //MARK: Protocol - UITextFiel Delegate.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //return close keyboard.

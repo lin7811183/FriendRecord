@@ -2,7 +2,6 @@ import UIKit
 
 class UserPhotoViewController: UIViewController {
     
-    
     @IBOutlet weak var bigUserPhoto: UIImageView!
     
     override func viewDidLoad() {
@@ -15,6 +14,7 @@ class UserPhotoViewController: UIViewController {
         
     }
     
+    /*------------------------------------------------------------ Function. ------------------------------------------------------------*/
     //MARK: func - back to UserVC.
     @IBAction func backUserPersonal(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

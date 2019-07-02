@@ -19,10 +19,12 @@
 		CE0B064022ADF756007ADB36 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B063F22ADF756007ADB36 /* CameraViewController.swift */; };
 		CE0D3D53229F5ECD008033D7 /* Login_Icon_ver_2_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */; };
 		CE0D3D63229F92B0008033D7 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */; };
+		CE0DD11322CAE2700031D4BA /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0DD11222CAE26F0031D4BA /* speaker.png */; };
+		CE0DD11522CAE4720031D4BA /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0DD11422CAE4720031D4BA /* line.png */; };
+		CE0DD11722CAEEDC0031D4BA /* recordPen_Line.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0DD11622CAEEDC0031D4BA /* recordPen_Line.png */; };
 		CE0DE89C22B08F7E00F49C5B /* userPhotoDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0DE89B22B08F7E00F49C5B /* userPhotoDefault.png */; };
 		CE0DE8A022B0C7CE00F49C5B /* MyUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DE89F22B0C7CE00F49C5B /* MyUserTableViewCell.swift */; };
 		CE0DE8C222B0D96900F49C5B /* MyRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DE8C122B0D96900F49C5B /* MyRecordTableViewCell.swift */; };
-		CE0DE8C622B0DF9B00F49C5B /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DE8C522B0DF9B00F49C5B /* Cell.swift */; };
 		CE0E6DAE22C44C880028FF47 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E6DAD22C44C880028FF47 /* MyCollectionViewCell.swift */; };
 		CE0E6DB122C497030028FF47 /* MapFrienderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E6DB022C497030028FF47 /* MapFrienderViewController.swift */; };
 		CE0E6DC722C4BA9F0028FF47 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E6DC622C4BA9F0028FF47 /* placeholder.png */; };
@@ -39,8 +41,11 @@
 		CE16A9E622C0ADB000B16983 /* Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = CE16A9E522C0ADAF00B16983 /* Stop.png */; };
 		CE21464822B4978100F39747 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21464722B4978100F39747 /* Record.swift */; };
 		CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */; };
+		CEBAFDEC22CB0EB90055A4AE /* top_line.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBAFDEB22CB0EB90055A4AE /* top_line.png */; };
+		CEBAFDEE22CB188E0055A4AE /* wood1.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBAFDED22CB188E0055A4AE /* wood1.png */; };
+		CEBAFDF022CB19BB0055A4AE /* wood＿board.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBAFDEF22CB19BB0055A4AE /* wood＿board.png */; };
+		CEBAFDF222CB1BB20055A4AE /* wood.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBAFDF122CB1BB20055A4AE /* wood.png */; };
 		CEC40AD1229FE6DD00674037 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */; };
-		CEE9995C22C9FB24005F22ED /* MyRecord2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9995B22C9FB24005F22ED /* MyRecord2TableViewCell.swift */; };
 		CEF9016022B100CE004F5A4C /* RecordGoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */; };
 		CEFF4423229E961B006A7449 /* MainAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF4422229E961B006A7449 /* MainAppViewController.swift */; };
 		CEFFD38522CA5EA8000E46DF /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFFD38422CA5EA7000E46DF /* message.png */; };
@@ -64,10 +69,12 @@
 		CE0B063F22ADF756007ADB36 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login_Icon_ver_2_2.png; sourceTree = "<group>"; };
 		CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		CE0DD11222CAE26F0031D4BA /* speaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speaker.png; sourceTree = "<group>"; };
+		CE0DD11422CAE4720031D4BA /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
+		CE0DD11622CAEEDC0031D4BA /* recordPen_Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recordPen_Line.png; sourceTree = "<group>"; };
 		CE0DE89B22B08F7E00F49C5B /* userPhotoDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userPhotoDefault.png; sourceTree = "<group>"; };
 		CE0DE89F22B0C7CE00F49C5B /* MyUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserTableViewCell.swift; sourceTree = "<group>"; };
 		CE0DE8C122B0D96900F49C5B /* MyRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordTableViewCell.swift; sourceTree = "<group>"; };
-		CE0DE8C522B0DF9B00F49C5B /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		CE0E6DAD22C44C880028FF47 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE0E6DB022C497030028FF47 /* MapFrienderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFrienderViewController.swift; sourceTree = "<group>"; };
 		CE0E6DC622C4BA9F0028FF47 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -86,8 +93,11 @@
 		CE16A9E522C0ADAF00B16983 /* Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stop.png; sourceTree = "<group>"; };
 		CE21464722B4978100F39747 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		CEBAFDEB22CB0EB90055A4AE /* top_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_line.png; sourceTree = "<group>"; };
+		CEBAFDED22CB188E0055A4AE /* wood1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wood1.png; sourceTree = "<group>"; };
+		CEBAFDEF22CB19BB0055A4AE /* wood＿board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wood＿board.png"; sourceTree = "<group>"; };
+		CEBAFDF122CB1BB20055A4AE /* wood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wood.png; sourceTree = "<group>"; };
 		CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
-		CEE9995B22C9FB24005F22ED /* MyRecord2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecord2TableViewCell.swift; sourceTree = "<group>"; };
 		CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGoViewController.swift; sourceTree = "<group>"; };
 		CEFF4422229E961B006A7449 /* MainAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewController.swift; sourceTree = "<group>"; };
 		CEFFD38422CA5EA7000E46DF /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
@@ -151,7 +161,14 @@
 		CE0102C322A7841700EDB18A /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CEBAFDF122CB1BB20055A4AE /* wood.png */,
+				CEBAFDEF22CB19BB0055A4AE /* wood＿board.png */,
+				CEBAFDED22CB188E0055A4AE /* wood1.png */,
+				CEBAFDEB22CB0EB90055A4AE /* top_line.png */,
+				CE0DD11422CAE4720031D4BA /* line.png */,
+				CE0DD11622CAEEDC0031D4BA /* recordPen_Line.png */,
 				CEFFD38622CA5ED5000E46DF /* isLike.png */,
+				CE0DD11222CAE26F0031D4BA /* speaker.png */,
 				CEFFD38822CA5F93000E46DF /* Like.png */,
 				CEFFD38422CA5EA7000E46DF /* message.png */,
 				CE04BFC122C7390F00BC8300 /* pen.png */,
@@ -172,6 +189,7 @@
 		CE0102C722A784C900EDB18A /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				CE0E6DAF22C496D00028FF47 /* MapFriender */,
 				CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */,
 				CE0A3C8E229E5B0600649E2E /* functionswift.swift */,
 				CE0B063F22ADF756007ADB36 /* CameraViewController.swift */,
@@ -185,8 +203,6 @@
 			children = (
 				CE0DE89F22B0C7CE00F49C5B /* MyUserTableViewCell.swift */,
 				CE0DE8C122B0D96900F49C5B /* MyRecordTableViewCell.swift */,
-				CE0DE8C522B0DF9B00F49C5B /* Cell.swift */,
-				CEE9995B22C9FB24005F22ED /* MyRecord2TableViewCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -236,7 +252,6 @@
 				CE0102BD22A7831800EDB18A /* Function */,
 				CE100416229B726300660E82 /* Login */,
 				CE0102C222A783E600EDB18A /* MainApp */,
-				CE0E6DAF22C496D00028FF47 /* MapFriender */,
 				CE15D74822A6885700892340 /* PersonalApp */,
 				CE106C5422C1A26D005DF25E /* Animation */,
 				CE0102C322A7841700EDB18A /* Image */,
@@ -250,7 +265,7 @@
 			children = (
 				CE100417229B728D00660E82 /* LoginViewController.swift */,
 				CE100419229B764900660E82 /* RegisteredViewController.swift */,
-				CE0102C822A7B4D100EDB18A /* UserData.swift */,
+				CE63540622CB30D900E05A02 /* Object */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -277,6 +292,14 @@
 			isa = PBXGroup;
 			children = (
 				CE21464722B4978100F39747 /* Record.swift */,
+			);
+			path = Object;
+			sourceTree = "<group>";
+		};
+		CE63540622CB30D900E05A02 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				CE0102C822A7B4D100EDB18A /* UserData.swift */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -352,17 +375,24 @@
 				CE0E6DC722C4BA9F0028FF47 /* placeholder.png in Resources */,
 				CE0E6DD122C4BCD50028FF47 /* microphone.png in Resources */,
 				CEFFD38722CA5ED5000E46DF /* isLike.png in Resources */,
+				CEBAFDEE22CB188E0055A4AE /* wood1.png in Resources */,
+				CE0DD11522CAE4720031D4BA /* line.png in Resources */,
+				CEBAFDF222CB1BB20055A4AE /* wood.png in Resources */,
+				CE0DD11322CAE2700031D4BA /* speaker.png in Resources */,
 				CE0E6DCB22C4BBCC0028FF47 /* user.png in Resources */,
 				CEFFD38522CA5EA8000E46DF /* message.png in Resources */,
 				CEFFD38922CA5F93000E46DF /* Like.png in Resources */,
 				CE16A9E422C0A64D00B16983 /* Star.png in Resources */,
 				CE0A3C8D229E1FC900649E2E /* Login.png in Resources */,
 				CE04BFC422C7408300BC8300 /* Assets.xcassets in Resources */,
+				CE0DD11722CAEEDC0031D4BA /* recordPen_Line.png in Resources */,
 				CE0E6DC922C4BAF40028FF47 /* cassette.png in Resources */,
 				CE16A9E622C0ADB000B16983 /* Stop.png in Resources */,
 				CE04BFC222C7390F00BC8300 /* pen.png in Resources */,
+				CEBAFDEC22CB0EB90055A4AE /* top_line.png in Resources */,
 				CE10040A229B725200660E82 /* Main.storyboard in Resources */,
 				CE0102C622A784B700EDB18A /* Login_Icon_ver_2.png in Resources */,
+				CEBAFDF022CB19BB0055A4AE /* wood＿board.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +452,6 @@
 			files = (
 				CE100418229B728D00660E82 /* LoginViewController.swift in Sources */,
 				CE0B064022ADF756007ADB36 /* CameraViewController.swift in Sources */,
-				CE0DE8C622B0DF9B00F49C5B /* Cell.swift in Sources */,
 				CE0A949922B238A300F7F031 /* Manager.swift in Sources */,
 				CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */,
 				CEFF4423229E961B006A7449 /* MainAppViewController.swift in Sources */,
@@ -442,7 +471,6 @@
 				CEFFF87022B9E23A00D7BC8A /* RippleAnimationViewController.swift in Sources */,
 				CE0A945722B1D35F00F7F031 /* UserPhotoViewController.swift in Sources */,
 				CE0DE8C222B0D96900F49C5B /* MyRecordTableViewCell.swift in Sources */,
-				CEE9995C22C9FB24005F22ED /* MyRecord2TableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

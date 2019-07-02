@@ -80,7 +80,7 @@ class UserViewController: UIViewController {
         Manager.shared.downLoadUserLocalRecordPen()
     }
     
-    /*------------------------------------------------------------ function ------------------------------------------------------------*/
+    /*------------------------------------------------------------ Function ------------------------------------------------------------*/
     //MARK: func - User Photo Look.
     @IBAction func userPhotoLook(_ sender: Any) {
         //let userPhotoVC = self.storyboard?.instantiateViewController(withIdentifier: "userphotoVC") as! UserPhotoViewController
@@ -176,7 +176,7 @@ extension UserViewController :UITextViewDelegate {
     }
 }
 
-
+/*------------------------------------------------------------ Protcol. ------------------------------------------------------------*/
 extension UserViewController :UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     //MARK: Protocol - CodeUIImagePickerControllerDelegate , UINavigationControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

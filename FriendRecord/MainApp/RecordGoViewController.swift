@@ -315,6 +315,7 @@ class RecordGoViewController: UIViewController {
     }
 }
 
+/*------------------------------------------------------------ Protocl. ------------------------------------------------------------*/
 extension RecordGoViewController :UITextViewDelegate {
     //MARK: Protocol - textFiel Delegate.
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {

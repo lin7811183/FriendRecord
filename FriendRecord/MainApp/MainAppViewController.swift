@@ -34,6 +34,9 @@ class MainAppViewController: UIViewController {
     var goodIndexPath :Int!
     var reloadIndexPath :IndexPath!
     
+    
+    var isPiayer = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,7 +73,7 @@ class MainAppViewController: UIViewController {
         }
         
     }
-    
+    /*------------------------------------------------------------ Function. ------------------------------------------------------------*/
     //MARK: func - DownLoad Record Pen.
     @objc func downLoadRecordPen() {
         print("downLoadRecordPen")
@@ -80,6 +83,7 @@ class MainAppViewController: UIViewController {
         
 }
 
+/*------------------------------------------------------------ Protocol. ------------------------------------------------------------*/
 extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
     //MARK:UITableDataSource protocol
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,8 +103,9 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             self.tableView.rowHeight = cell.showLB.bounds.height + 50
             return cell
         } else {
-
-            let cell = tableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath) as! MyRecordTableViewCell
+            let cellIdentifier = self.cellStyle()
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MyRecordTableViewCell
 
 //            cell.mainLB.text  = self.tableViewData[indexPath.section][indexPath.row].recordText
 
@@ -109,19 +114,22 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
                 let name = "\(imageNameChange[0])"
                 cell.sendImage.image = Manager.shared.userPhotoRead(jpg: name)
                 cell.sendImage.layer.cornerRadius = cell.sendImage.bounds.height / 2
+                
+                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+                cell.sendImage.isUserInteractionEnabled = true
+                cell.sendImage.addGestureRecognizer(tapGestureRecognizer)
             }
-//            cell.sendUserNameLB.text = self.tableViewData[indexPath.section][indexPath.row].userNickName
+
+            cell.sendUserNameLB.text = self.tableViewData[indexPath.section][indexPath.row].userNickName
 //            cell.sendRecordDateLB.text = self.tableViewData[indexPath.section][indexPath.row].recordDate
 
             if let data = self.tableViewData[indexPath.section][indexPath.row].Good_user {
-                print("isLike.png")
                 cell.recordPenGoodBT.setImage(UIImage(named: "isLike.png"), for: .normal)
             } else {
-                print("Like.png")
                 cell.recordPenGoodBT.setImage(UIImage(named: "Like.png"), for: .normal)
             }
 
-            cell.goodSumLB.text = "\(Int(self.tableViewData[indexPath.section][indexPath.row].goodSum ?? 0))"
+            cell.goodSumLB.text = "x \(Int(self.tableViewData[indexPath.section][indexPath.row].goodSum ?? 0))"
 
             cell.RecordID = self.tableViewData[indexPath.section][indexPath.row].recordID
 //            cell.email = self.tableViewData[indexPath.section][indexPath.row].recordSendUser
@@ -131,41 +139,18 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             cell.recordPenGoodBT.addTarget(self, action: #selector(liked(sender:)), for: .touchUpInside)
 
             //Auto change cell hight.
-            self.tableView.rowHeight = cell.mainView.bounds.height + 30
-            cell.mainView.layer.cornerRadius = 10
-            cell.mainView.layer.masksToBounds = true
-            cell.mainView.backgroundColor = UIColor.white
+            self.tableView.rowHeight = cell.sendImage.bounds.height + 45
+            //cell.mainView.layer.cornerRadius = 10
+            //cell.mainView.layer.masksToBounds = true
+            //cell.mainView.backgroundColor = UIColor.white
             //cell.backgroundColor = UIColor(red: 192/255, green: 192/255, blue: 192/255, alpha: 0.5)
-            cell.backgroundColor = UIColor(named: "MyColor")
+            //cell.backgroundColor = UIColor(named: "MyColor")
+
            return cell
         }
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.tableViewData.count
-    }
-    
-    @objc func liked(sender: UIButton) {
-        if let bool = self.isGoodType , bool == true {
-            sender.setImage(UIImage(named: "Like.png"), for: .normal)
-            self.tableViewData[1][self.goodIndexPath].Good_user = "UserIsLike"
-            var goodsum = self.tableViewData[1][self.goodIndexPath].goodSum ?? 0.0
-            goodsum += 1.0
-            self.tableViewData[1][self.goodIndexPath].goodSum = goodsum
-            Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
-            //self.tableView.reloadData()
-            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .automatic)
-            let indexpath = IndexPath(row: 0, section: 0)
-            self.tableView.reloadRows(at: [indexpath], with: .automatic)
-        } else {
-            sender.setImage(UIImage(named: "isLike.png"), for: .normal)
-            self.tableView.reloadData()
-            self.tableViewData[1][self.goodIndexPath].Good_user = nil
-            self.tableViewData[1][self.goodIndexPath].goodSum! -= 1.0
-            Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
-            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .automatic)
-            let indexpath = IndexPath(row: 0, section: 0)
-            self.tableView.reloadRows(at: [indexpath], with: .automatic)
-        }
     }
     
     //MARK: Protocol - tableView delegate
@@ -180,16 +165,67 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             Manager.indexPath = indexPath.row
         }
     }
-    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
-    
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return CGFloat(bitPattern: 5)
         }
         return tableView.sectionHeaderHeight
+    }
+    /*------------------------------------------------------------ TableView Protocol function. ------------------------------------------------------------*/
+    //MARK: func - cell send image action , player record pen.
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+        // Your action
+        if self.isPiayer == true {
+            tappedImage.layer.borderWidth = 5
+            tappedImage.layer.borderColor = UIColor.green.cgColor
+            self.isPiayer = false
+        } else {
+            tappedImage.layer.borderWidth = 0
+            self.isPiayer = true
+        }
+    }
+    //MARK: func - cell style.
+    func cellStyle() -> String {
+        let number = Int(arc4random())
+        let cellName :String!
+        if number % 3 == 0 {
+            cellName = "recordCell"
+            return cellName
+        } else if number % 3 == 1 {
+            cellName = "recordCell2"
+            return cellName
+        } else {
+            cellName = "recordCell3"
+            return cellName
+        }
+    }
+    //MARK: func - uer give good button action.
+    @objc func liked(sender: UIButton) {
+        if let bool = self.isGoodType , bool == true {
+            sender.setImage(UIImage(named: "Like.png"), for: .normal)
+            self.tableViewData[1][self.goodIndexPath].Good_user = "UserIsLike"
+            var goodsum = self.tableViewData[1][self.goodIndexPath].goodSum ?? 0.0
+            goodsum += 1.0
+            self.tableViewData[1][self.goodIndexPath].goodSum = goodsum
+            Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
+            
+            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .none)
+            let indexpath = IndexPath(row: 0, section: 0)
+            self.tableView.reloadRows(at: [indexpath], with: .none)
+        } else {
+            sender.setImage(UIImage(named: "isLike.png"), for: .normal)
+            self.tableViewData[1][self.goodIndexPath].Good_user = nil
+            self.tableViewData[1][self.goodIndexPath].goodSum! -= 1.0
+            Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
+            
+            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .none)
+            let indexpath = IndexPath(row: 0, section: 0)
+            self.tableView.reloadRows(at: [indexpath], with: .none)
+        }
     }
 }
 
@@ -289,7 +325,6 @@ extension MainAppViewController :ManagerDelegate {
                 //Download Rcord File.
                 Manager.shared.downLoadRcordFile(fileName: recordfile)
             }
-            
             self.tableViewData[1] = Manager.recordData
             
             self.tableView.reloadData()
@@ -307,18 +342,17 @@ extension MainAppViewController :ManagerDelegate {
 }
 
 extension MainAppViewController :MyRecordTableViewCellDelegate {
+    //MARK: Protocol - MyRecordTableViewCellDelegate.
     func updateIsGood(isGoodType: Bool, cell: UITableViewCell) {
         print("MyRecordTableViewCellDelegate - updateIsGood")
         guard let indexPath = self.tableView.indexPath(for: cell) else {
             // Note, this shouldn't happen - how did the user tap on a button that wasn't on screen?
             return
         }
-        //  Do whatever you need to do with the indexPath
-        print("Button tapped on row \(indexPath.row)")
+        //  Do whatever you need to do with the indexPath.
         self.goodIndexPath = indexPath.row
         self.reloadIndexPath = indexPath
         self.isGoodType = isGoodType
-        print("\(self.isGoodType)")
     }
 }
 

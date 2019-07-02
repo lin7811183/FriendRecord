@@ -8,6 +8,16 @@
 import UIKit
 
 class RippleLayer: CAReplicatorLayer {
+    
+    required init?(coder aDecoder: NSCoder) {
+//        super.init()
+//        setupRippleEffect()
+//        
+//        repeatCount = Float(rippleRepeatCount)
+        
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     fileprivate var rippleEffect: CALayer?
     private var animationGroup: CAAnimationGroup?
     var rippleRadius: CGFloat = 50.0
@@ -22,9 +32,7 @@ class RippleLayer: CAReplicatorLayer {
         repeatCount = Float(rippleRepeatCount)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    
     
     override func layoutSublayers() {
         super.layoutSublayers()
