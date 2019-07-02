@@ -95,24 +95,23 @@ class Manager :UIViewController {
         let recordDay = Calendar.current.component(.day, from: dateChange!)
         let recordHour = Calendar.current.component(.hour, from: dateChange!)
         let recordMinute = Calendar.current.component(.minute, from: dateChange!)
-        let recordSecond = Calendar.current.component(.second, from: dateChange!)
+        //let recordSecond = Calendar.current.component(.second, from: dateChange!)
         
         let nowDayYear = Calendar.current.component(.year, from: nowDateLocaleCnage!)
         let nowDayMonth = Calendar.current.component(.month, from: nowDateLocaleCnage!)
         let nowDayDay = Calendar.current.component(.day, from: nowDateLocaleCnage!)
         let nowDayHour = Calendar.current.component(.hour, from: nowDateLocaleCnage!)
         let nowDayMinute = Calendar.current.component(.minute, from: nowDateLocaleCnage!)
-        let nowDaySecond = Calendar.current.component(.second, from: nowDateLocaleCnage!)
+        //let nowDaySecond = Calendar.current.component(.second, from: nowDateLocaleCnage!)
         
-//        print("record date :\(recordYear),\(recordMonth),\(recordDay)")
-//        print("Now date :\(noewDayYear),\(noewDayMonth),\(noewDayDay)")
         guard recordYear != nowDayYear || recordMonth != nowDayMonth || recordDay != nowDayDay else {
             if recordHour == nowDayHour {
-                let time = nowDayMonth - recordMonth
-                guard time != 0 else {
+                let time = nowDayMinute - recordMinute
+                if time == 0 {
                     return "稍早前"
+                } else {
+                    return "\(time)分鐘前"
                 }
-                return "\(time)分鐘前"
             }
             let time = "\( nowDayHour - recordHour )小時前"
             return time
