@@ -121,7 +121,9 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             }
 
             cell.sendUserNameLB.text = self.tableViewData[indexPath.section][indexPath.row].userNickName
-//            cell.sendRecordDateLB.text = self.tableViewData[indexPath.section][indexPath.row].recordDate
+            
+            let getDate = Manager.shared.dateChange(date: self.tableViewData[indexPath.section][indexPath.row].recordDate!)
+            cell.sendRecordDateLB.text = getDate
 
             if let data = self.tableViewData[indexPath.section][indexPath.row].Good_user {
                 cell.recordPenGoodBT.setImage(UIImage(named: "isLike.png"), for: .normal)

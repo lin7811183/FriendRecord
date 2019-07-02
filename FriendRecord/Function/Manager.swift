@@ -77,7 +77,50 @@ class Manager :UIViewController {
         }
         return nil
     }
-    
+    //MARK: func - date change.
+    func dateChange(date :String) -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateChange = dateFormatter.date(from: date)
+        
+        let nowDate = Date()
+        dateFormatter.locale = Locale(identifier: "zh_Hant_TW") // 設定地區(台灣)
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Taipei") // 設定時區(台灣)
+        let nowDateLocale = dateFormatter.string(from: nowDate)
+        let nowDateLocaleCnage = dateFormatter.date(from: nowDateLocale)
+        
+        let recordYear = Calendar.current.component(.year, from: dateChange!)
+        let recordMonth = Calendar.current.component(.month, from: dateChange!)
+        let recordDay = Calendar.current.component(.day, from: dateChange!)
+        let recordHour = Calendar.current.component(.hour, from: dateChange!)
+        let recordMinute = Calendar.current.component(.minute, from: dateChange!)
+        let recordSecond = Calendar.current.component(.second, from: dateChange!)
+        
+        let nowDayYear = Calendar.current.component(.year, from: nowDateLocaleCnage!)
+        let nowDayMonth = Calendar.current.component(.month, from: nowDateLocaleCnage!)
+        let nowDayDay = Calendar.current.component(.day, from: nowDateLocaleCnage!)
+        let nowDayHour = Calendar.current.component(.hour, from: nowDateLocaleCnage!)
+        let nowDayMinute = Calendar.current.component(.minute, from: nowDateLocaleCnage!)
+        let nowDaySecond = Calendar.current.component(.second, from: nowDateLocaleCnage!)
+        
+//        print("record date :\(recordYear),\(recordMonth),\(recordDay)")
+//        print("Now date :\(noewDayYear),\(noewDayMonth),\(noewDayDay)")
+        guard recordYear != nowDayYear || recordMonth != nowDayMonth || recordDay != nowDayDay else {
+            if recordHour == nowDayHour {
+                let time = "\( nowDayMonth - recordMonth )分鐘前"
+                return time
+            }
+            let time = "\( nowDayHour - recordHour )小時前"
+            return time
+        }
+        
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "yyyy/MM/dd"
+        let showDate = dateFormatter2.string(from: dateChange!)
+        
+        return showDate
+    }
     //MARK: downLoad user photo.
     func downLoadUserPhoto() {
         var recodeArry :[String:Int]!
