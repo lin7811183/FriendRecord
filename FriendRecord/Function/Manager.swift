@@ -108,8 +108,11 @@ class Manager :UIViewController {
 //        print("Now date :\(noewDayYear),\(noewDayMonth),\(noewDayDay)")
         guard recordYear != nowDayYear || recordMonth != nowDayMonth || recordDay != nowDayDay else {
             if recordHour == nowDayHour {
-                let time = "\( nowDayMonth - recordMonth )分鐘前"
-                return time
+                let time = nowDayMonth - recordMonth
+                guard time != 0 else {
+                    return "稍早前"
+                }
+                return "\(time)分鐘前"
             }
             let time = "\( nowDayHour - recordHour )小時前"
             return time
