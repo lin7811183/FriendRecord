@@ -107,7 +107,7 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MyRecordTableViewCell
 
-//            cell.mainLB.text  = self.tableViewData[indexPath.section][indexPath.row].recordText
+            cell.recordPenLB.text  = self.tableViewData[indexPath.section][indexPath.row].recordText
 
             if let imageName = self.tableViewData[indexPath.section][indexPath.row].recordSendUser {
                 let imageNameChange = imageName.split(separator: "@")
@@ -165,6 +165,33 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             Manager.indexPath = indexPath.row
         }
     }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = self.action(at: indexPath)
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+    //MARK: func - trailingSwipeActionsConfigurationForRowAt.
+    func action(at indexPath :IndexPath) -> UIContextualAction {
+        let data = self.tableViewData[1][indexPath.row]
+        let action = UIContextualAction(style: .normal, title: "編輯") { (action, view, completion) in
+            completion(true)
+        }
+        guard let user = data.recordSendUser else {
+            return action
+        }
+    
+        let userData = UserDefaults.standard
+        let recordPenUser = userData.string(forKey: "email")
+        
+        guard recordPenUser != user else {
+            action.image = UIImage(named: "edit.png")
+            return action
+        }
+        action.image = UIImage(named: "waring.png")
+        action.title = "檢舉"
+        action.backgroundColor = UIColor.red
+        return action
+    }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
@@ -214,8 +241,6 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
             
             self.tableView.reloadRows(at: [self.reloadIndexPath], with: .none)
-            let indexpath = IndexPath(row: 0, section: 0)
-            self.tableView.reloadRows(at: [indexpath], with: .none)
         } else {
             sender.setImage(UIImage(named: "isLike.png"), for: .normal)
             self.tableViewData[1][self.goodIndexPath].Good_user = nil
@@ -223,8 +248,6 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
             
             self.tableView.reloadRows(at: [self.reloadIndexPath], with: .none)
-            let indexpath = IndexPath(row: 0, section: 0)
-            self.tableView.reloadRows(at: [indexpath], with: .none)
         }
     }
 }

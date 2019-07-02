@@ -6,7 +6,8 @@ protocol MyRecordTableViewCellDelegate {
 
 class MyRecordTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var mainLB: UILabel!
+
+    @IBOutlet weak var recordPenLB: UILabel!
     @IBOutlet weak var sendImage: UIImageView!
     @IBOutlet weak var sendRecordDateLB: UILabel!
     @IBOutlet weak var sendUserNameLB: UILabel!
