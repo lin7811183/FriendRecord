@@ -20,6 +20,7 @@ class MyRecordTableViewCell: UITableViewCell {
     @IBOutlet weak var goodSumLB: UILabel!
     @IBOutlet weak var messageSumLB: UILabel!
     
+    @IBOutlet weak var messageSendBT: UIButton!
     @IBOutlet weak var recordPenGoodBT: UIButton!
     
     var RecordID :Double!
@@ -61,7 +62,6 @@ class MyRecordTableViewCell: UITableViewCell {
         print("\(recordIndexPath)")
         self.delegate2.pushIndexPath(indexPath: self.recordIndexPath)
     }
-    
     //MARK: func - upLoadRecordPenGood
     func upLoadRecordPenGood() {
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Record_Pen_Good.php") {

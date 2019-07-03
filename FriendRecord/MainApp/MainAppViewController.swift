@@ -184,7 +184,7 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             }
             
             let currentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
-
+            
             if self.isPiayer == false {
 
                 let filePathURL = Manager.shared.fileDocumentsPath(fileName: self.tableViewData[1][indexPath.row].recordFileName!)
@@ -222,6 +222,10 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
                 self.tableView.deselectRow(at: indexPath, animated: true) //選取後反灰消失.
             }
         }
+    }
+    
+    func imagePlayer() {
+        print("Test")
     }
     //MARK: Protocol - tableview delegate canEditRowAt.
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

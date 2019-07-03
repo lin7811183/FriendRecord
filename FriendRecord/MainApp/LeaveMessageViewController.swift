@@ -31,20 +31,27 @@ class LeaveMessageViewController: UIViewController {
     
     /*------------------------------------------------------------ Function. ------------------------------------------------------------*/
     @IBAction func messageSend(_ sender: Any) {
-        if Manager.recordData[self.messageIndexPath.row].messageSum == 0.0 {
-            print("1")
+        var sum = Manager.recordData[self.messageIndexPath.row].messageSum
+        if sum == 0.0 {
+            
+            sum! += 1.0
+            Manager.recordData[self.messageIndexPath.row].messageSum = sum
+            
             self.messageTVData.removeAll()
             
             let newMessage = Message()
             newMessage.message = self.messageTF.text
-            print("\(newMessage.message)")
+            self.messageTF.text = ""
             
             self.messageTVData.insert(newMessage, at: 0)
             self.messageTableView.reloadData()
         } else {
-            print("2")
+            sum! += 1.0
+            Manager.recordData[self.messageIndexPath.row].messageSum = sum
+            
             let newMessage = Message()
             newMessage.message = self.messageTF.text
+            self.messageTF.text = ""
             self.messageTVData.insert(newMessage, at: 0)
             self.messageTableView.reloadData()
         }
@@ -67,6 +74,16 @@ extension LeaveMessageViewController :UITableViewDataSource, UITableViewDelegate
         
         if Manager.recordData[self.messageIndexPath.row].messageSum == 0.0 {
             cell.messageLB.text = "目前尚未有人留言!"
+        } else {
+            let userData = UserDefaults.standard
+            let emailHead = userData.string(forKey: "emailHead")
+            let userNickName = userData.string(forKey: "nickname")
+            
+            cell.messageUserImage.image = Manager.shared.userPhotoRead(jpg: emailHead!)
+            cell.messageUserImage.layer.cornerRadius = cell.messageUserImage.bounds.height / 2
+            
+            cell.userLB.text = userNickName!
+            cell.messageLB.text = self.messageTF.text
         }
         
         self.messageTableView.rowHeight = cell.messageLB.bounds.height + 50
