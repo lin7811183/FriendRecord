@@ -38,6 +38,8 @@ class MainAppViewController: UIViewController {
     //建立AudioRecorder元件
     var recordPlayer :AVAudioPlayer?
     
+    var pushIndex :IndexPath!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,7 +60,9 @@ class MainAppViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
         //check User Photo is new or downLoad to server.
         let userPhoto = UserDefaults.standard
         let isUserPhoto = userPhoto.bool(forKey: "isUserPhoto")
@@ -80,6 +84,15 @@ class MainAppViewController: UIViewController {
         print("downLoadRecordPen")
         Manager.shared.downLoadRecordPen()
         Manager.shared.downLoadUserPhoto()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "push" {
+            let leavemessageVC = segue.destination as! LeaveMessageViewController
+            let currentCell = self.tableView.cellForRow(at: self.pushIndex!) as! MyRecordTableViewCell
+            leavemessageVC.recordId = Int(currentCell.RecordID)
+            leavemessageVC.messageIndexPath = self.pushIndex
+        }
     }
         
 }
@@ -132,11 +145,15 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             }
 
             cell.goodSumLB.text = "x \(Int(self.tableViewData[indexPath.section][indexPath.row].goodSum ?? 0))"
-
+            cell.messageSumLB.text = "x \(Int(self.tableViewData[indexPath.section][indexPath.row].messageSum ?? 0))"
+            
+            
             cell.RecordID = self.tableViewData[indexPath.section][indexPath.row].recordID
+            cell.recordIndexPath = indexPath
 //            cell.email = self.tableViewData[indexPath.section][indexPath.row].recordSendUser
 
             cell.delegate = self
+            cell.delegate2 = self
 
             cell.recordPenGoodBT.addTarget(self, action: #selector(liked(sender:)), for: .touchUpInside)
 
@@ -165,7 +182,8 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
                 print("Record Player indexPath error.")
                 return
             }
-            let currentCell = tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
+            
+            let currentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
 
             if self.isPiayer == false {
 
@@ -432,6 +450,12 @@ extension MainAppViewController :MyRecordTableViewCellDelegate {
         self.goodIndexPath = indexPath.row
         self.reloadIndexPath = indexPath
         self.isGoodType = isGoodType
+    }
+}
+
+extension MainAppViewController :MyRecordTableViewCellDelegate2 {
+    func pushIndexPath(indexPath: IndexPath) {
+        self.pushIndex = indexPath
     }
 }
 

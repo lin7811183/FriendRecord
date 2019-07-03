@@ -15,6 +15,7 @@ class Record: Equatable ,Codable {
     
     var goodSum :Double?//讚數
     var Good_user :String?//是否已按讚
+    var messageSum :Double?//留言數
     
     //isDelete to mysql row.
     var isDelete :Int?

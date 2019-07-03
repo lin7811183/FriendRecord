@@ -2,6 +2,11 @@ import UIKit
 
 protocol MyRecordTableViewCellDelegate {
     func updateIsGood(isGoodType :Bool ,cell :UITableViewCell)
+    func pushIndexPath(indexPath :IndexPath)
+}
+
+protocol MyRecordTableViewCellDelegate2 {
+    func pushIndexPath(indexPath :IndexPath)
 }
 
 class MyRecordTableViewCell: UITableViewCell {
@@ -18,10 +23,12 @@ class MyRecordTableViewCell: UITableViewCell {
     @IBOutlet weak var recordPenGoodBT: UIButton!
     
     var RecordID :Double!
+    var recordIndexPath :IndexPath!
     var email :String!
     var Good_user :String?
     
     var delegate :MyRecordTableViewCellDelegate!
+    var delegate2 :MyRecordTableViewCellDelegate2!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,6 +54,12 @@ class MyRecordTableViewCell: UITableViewCell {
             self.upLoadRecordPenGood()
             self.delegate.updateIsGood(isGoodType: true,cell: self)
         }
+    }
+    //MARK: func - message send.
+    @IBAction func messageSend(_ sender: Any) {
+        print("\(RecordID)")
+        print("\(recordIndexPath)")
+        self.delegate2.pushIndexPath(indexPath: self.recordIndexPath)
     }
     
     //MARK: func - upLoadRecordPenGood

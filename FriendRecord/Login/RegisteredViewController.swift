@@ -26,9 +26,9 @@ class RegisteredViewController: UIViewController {
 //        registeredBT.layer.borderWidth = 1
         
         //UITextFiel Delegate.
-        self.emailTF.delegate = self
-        self.passwordTF.delegate = self
-        self.userTF.delegate = self
+//        self.emailTF.delegate = self
+//        self.passwordTF.delegate = self
+//        self.userTF.delegate = self
         
         //dismissKeyboard.
         Manager.shared.hideKeyboardWhenTappedAround()
@@ -198,23 +198,23 @@ class RegisteredViewController: UIViewController {
 }
 
 /*------------------------------------------------------------ Protocol. ------------------------------------------------------------*/
-extension RegisteredViewController :UITextFieldDelegate {
-    
-    //MARK: Protocol - UITextFiel Delegate.
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //return close keyboard.
-        textField.resignFirstResponder()
-        return true
-    }
-    //touch textfiel begin.
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.registeredSV.setContentOffset(CGPoint(x: 0, y: 50), animated: true)
-    }
-    //touch textfiel end.
-    func textFieldDidEndEditing(_ textField: UITextField) {
-         self.registeredSV.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-    }
-}
+//extension RegisteredViewController :UITextFieldDelegate {
+//
+//    //MARK: Protocol - UITextFiel Delegate.
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        //return close keyboard.
+//        textField.resignFirstResponder()
+//        return true
+//    }
+//    //touch textfiel begin.
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        self.registeredSV.setContentOffset(CGPoint(x: 0, y: 50), animated: true)
+//    }
+//    //touch textfiel end.
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//         self.registeredSV.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+//    }
+//}
 
 extension RegisteredViewController :UIPickerViewDataSource {
     //MARK: Protocol - UIPickerView DataSiurce

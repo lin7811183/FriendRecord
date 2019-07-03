@@ -47,6 +47,9 @@
 		CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */; };
 		CEBAFDEC22CB0EB90055A4AE /* top_line.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBAFDEB22CB0EB90055A4AE /* top_line.png */; };
 		CEC40AD1229FE6DD00674037 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */; };
+		CED64B0922CC6F0B006DB0EE /* LeaveMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED64B0822CC6F0B006DB0EE /* LeaveMessageViewController.swift */; };
+		CED64B0B22CC8A6F006DB0EE /* MyMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED64B0A22CC8A6F006DB0EE /* MyMessageTableViewCell.swift */; };
+		CED64B0D22CC9AD8006DB0EE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED64B0C22CC9AD8006DB0EE /* Message.swift */; };
 		CEF9016022B100CE004F5A4C /* RecordGoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */; };
 		CEFF4423229E961B006A7449 /* MainAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF4422229E961B006A7449 /* MainAppViewController.swift */; };
 		CEFFD38522CA5EA8000E46DF /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFFD38422CA5EA7000E46DF /* message.png */; };
@@ -100,6 +103,9 @@
 		CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		CEBAFDEB22CB0EB90055A4AE /* top_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_line.png; sourceTree = "<group>"; };
 		CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
+		CED64B0822CC6F0B006DB0EE /* LeaveMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveMessageViewController.swift; sourceTree = "<group>"; };
+		CED64B0A22CC8A6F006DB0EE /* MyMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageTableViewCell.swift; sourceTree = "<group>"; };
+		CED64B0C22CC9AD8006DB0EE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGoViewController.swift; sourceTree = "<group>"; };
 		CEFF4422229E961B006A7449 /* MainAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewController.swift; sourceTree = "<group>"; };
 		CEFFD38422CA5EA7000E46DF /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 				CEFF4422229E961B006A7449 /* MainAppViewController.swift */,
 				CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */,
 				CE140C0922B8E30300EF1F1C /* PenViewController.swift */,
+				CED64B0822CC6F0B006DB0EE /* LeaveMessageViewController.swift */,
 				CE21464922B4978600F39747 /* Object */,
 				CE0DE89E22B0C78800F49C5B /* CustomCell */,
 			);
@@ -206,6 +213,7 @@
 			children = (
 				CE0DE89F22B0C7CE00F49C5B /* MyUserTableViewCell.swift */,
 				CE0DE8C122B0D96900F49C5B /* MyRecordTableViewCell.swift */,
+				CED64B0A22CC8A6F006DB0EE /* MyMessageTableViewCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -295,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				CE21464722B4978100F39747 /* Record.swift */,
+				CED64B0C22CC9AD8006DB0EE /* Message.swift */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -435,12 +444,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FriendRecord/Pods-FriendRecord-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -456,6 +467,7 @@
 			files = (
 				CE100418229B728D00660E82 /* LoginViewController.swift in Sources */,
 				CE0B064022ADF756007ADB36 /* CameraViewController.swift in Sources */,
+				CED64B0922CC6F0B006DB0EE /* LeaveMessageViewController.swift in Sources */,
 				CE0A949922B238A300F7F031 /* Manager.swift in Sources */,
 				CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */,
 				CEFF4423229E961B006A7449 /* MainAppViewController.swift in Sources */,
@@ -466,6 +478,7 @@
 				CE21464822B4978100F39747 /* Record.swift in Sources */,
 				CEFFF87222B9EAB600D7BC8A /* RippleLayer.swift in Sources */,
 				CE0A3C8F229E5B0600649E2E /* functionswift.swift in Sources */,
+				CED64B0B22CC8A6F006DB0EE /* MyMessageTableViewCell.swift in Sources */,
 				CEC40AD1229FE6DD00674037 /* MyNavigationController.swift in Sources */,
 				CEF9016022B100CE004F5A4C /* RecordGoViewController.swift in Sources */,
 				CE10041A229B764900660E82 /* RegisteredViewController.swift in Sources */,
@@ -473,6 +486,7 @@
 				CE140C0A22B8E30300EF1F1C /* PenViewController.swift in Sources */,
 				CE0D3D63229F92B0008033D7 /* MyTabBarController.swift in Sources */,
 				CEFFF87022B9E23A00D7BC8A /* RippleAnimationViewController.swift in Sources */,
+				CED64B0D22CC9AD8006DB0EE /* Message.swift in Sources */,
 				CE0A945722B1D35F00F7F031 /* UserPhotoViewController.swift in Sources */,
 				CE0DE8C222B0D96900F49C5B /* MyRecordTableViewCell.swift in Sources */,
 			);

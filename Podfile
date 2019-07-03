@@ -6,7 +6,8 @@ target 'FriendRecord' do
   use_frameworks!
 
   # Pods for FriendRecord
-  pod 'FoldingCell' 
+  pod 'FoldingCell'
+  pod 'IQKeyboardManagerSwift'
 
 
 end

@@ -1,16 +1,20 @@
 PODS:
   - FoldingCell (5.0.1)
+  - IQKeyboardManagerSwift (6.4.0)
 
 DEPENDENCIES:
   - FoldingCell
+  - IQKeyboardManagerSwift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - FoldingCell
+    - IQKeyboardManagerSwift
 
 SPEC CHECKSUMS:
   FoldingCell: 9197b915a415af9e52a857964066797af6a51c2b
+  IQKeyboardManagerSwift: ed9b04ee0e3067ffba543283462d619f944b05e5
 
-PODFILE CHECKSUM: 35cf9cddc1c5b22053fb858e91fe83b48aa5b2ec
+PODFILE CHECKSUM: 41a1a5b3f1050c348b2057d4c495ee9fa8f2da6d
 
 COCOAPODS: 1.6.1

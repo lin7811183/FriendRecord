@@ -1,4 +1,5 @@
 import UIKit
+import IQKeyboardManagerSwift
 
 protocol MyAppDelegate {
     func updateManagerRecordData()
@@ -23,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.registerUserNotificationSettings(settings)
         //UIApplicationBackgroundFetchIntervalMinimum
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
+        
+        IQKeyboardManager.shared.enable = true
+        
         return true
     }
 
