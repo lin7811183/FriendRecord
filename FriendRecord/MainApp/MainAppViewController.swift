@@ -1,4 +1,5 @@
 import UIKit
+import AVKit
 
 class MainAppViewController: UIViewController {
     
@@ -22,7 +23,6 @@ class MainAppViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userPoRecordBT: UIButton!
     
-    //var record :[Record] = []
     var tableViewData = [Manager.recordDataUser,[Record]()]
     
     var userSelectRow :Int!
@@ -34,8 +34,9 @@ class MainAppViewController: UIViewController {
     var goodIndexPath :Int!
     var reloadIndexPath :IndexPath!
     
-    
     var isPiayer = false
+    //建立AudioRecorder元件
+    var recordPlayer :AVAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,25 +100,24 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
                 cell.imageUserPhoto.image = Manager.shared.userPhotoRead(jpg: recordDataEmailHead)
             }
             cell.showLB.text = self.tableViewData[indexPath.section][indexPath.row].userCellLB
+            
             //Auto change cell hight.
             self.tableView.rowHeight = cell.showLB.bounds.height + 50
+            cell.selectionStyle = .none//讓選取顏色不會出現
+            
             return cell
         } else {
             let cellIdentifier = self.cellStyle()
             
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MyRecordTableViewCell
-
+            
             cell.recordPenLB.text  = self.tableViewData[indexPath.section][indexPath.row].recordText
-
+            
             if let imageName = self.tableViewData[indexPath.section][indexPath.row].recordSendUser {
                 let imageNameChange = imageName.split(separator: "@")
                 let name = "\(imageNameChange[0])"
                 cell.sendImage.image = Manager.shared.userPhotoRead(jpg: name)
                 cell.sendImage.layer.cornerRadius = cell.sendImage.bounds.height / 2
-                
-                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-                cell.sendImage.isUserInteractionEnabled = true
-                cell.sendImage.addGestureRecognizer(tapGestureRecognizer)
             }
 
             cell.sendUserNameLB.text = self.tableViewData[indexPath.section][indexPath.row].userNickName
@@ -142,13 +142,9 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
 
             //Auto change cell hight.
             self.tableView.rowHeight = cell.sendImage.bounds.height + 45
-            //cell.mainView.layer.cornerRadius = 10
-            //cell.mainView.layer.masksToBounds = true
-            //cell.mainView.backgroundColor = UIColor.white
-            //cell.backgroundColor = UIColor(red: 192/255, green: 192/255, blue: 192/255, alpha: 0.5)
-            //cell.backgroundColor = UIColor(named: "MyColor")
-
-           return cell
+            cell.selectionStyle = .none//讓選取顏色不會出現
+            
+            return cell
         }
     }
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -157,21 +153,79 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
     
     //MARK: Protocol - tableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
+
         if indexPath.section == 0 {
             let recordgovc = self.storyboard?.instantiateViewController(withIdentifier: "recordgoVC") as! RecordGoViewController
             recordgovc.delegate = self
             self.present(recordgovc, animated: true, completion: nil)
+            //選取後反灰消失.
+            self.tableView.deselectRow(at: indexPath, animated: true)
         } else {
-            Manager.penVCType = 0
-            Manager.indexPath = indexPath.row
+            guard let indexPath = tableView.indexPathForSelectedRow else {
+                print("Record Player indexPath error.")
+                return
+            }
+            let currentCell = tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
+
+            if self.isPiayer == false {
+
+                let filePathURL = Manager.shared.fileDocumentsPath(fileName: self.tableViewData[1][indexPath.row].recordFileName!)
+                //Play Record.
+                self.recordPlayer = try? AVAudioPlayer(contentsOf: filePathURL)
+                self.recordPlayer?.numberOfLoops = -1
+                self.recordPlayer?.prepareToPlay()
+
+                //Create Audio Session.
+                let audioSession = AVAudioSession.sharedInstance()
+                try? audioSession.setCategory(AVAudioSession.Category.playback)
+
+                //Record Player.
+                self.recordPlayer?.play()
+                print("********** Star player Record. **********")
+                
+                currentCell.sendImage.layer.borderWidth = 5
+                currentCell.sendImage.layer.borderColor = UIColor.green.cgColor
+                
+                self.isPiayer = true
+                
+                self.tableView.isScrollEnabled = false // Lock TableView not scroll.
+                
+                self.tableView.deselectRow(at: indexPath, animated: true) //選取後反灰消失.
+            } else {
+                self.recordPlayer?.stop()
+                print("********** Stop player Record. **********")
+                
+                currentCell.sendImage.layer.borderWidth = 0
+                
+                self.isPiayer = false
+                
+                self.tableView.isScrollEnabled = true // Lock TableView not scroll.
+                
+                self.tableView.deselectRow(at: indexPath, animated: true) //選取後反灰消失.
+            }
         }
     }
+    //MARK: Protocol - tableview delegate canEditRowAt.
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if self.tableView.isScrollEnabled == false {
+            return false
+        } else {
+            return true
+        }
+    }
+    func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        if self.tableView.isScrollEnabled == false {
+            return false
+        } else {
+            return true
+        }
+    }
+    //MARK: func - tableview delegate - trailingSwipeActionsConfigurationForRowAt.
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = self.action(at: indexPath)
         return UISwipeActionsConfiguration(actions: [action])
     }
-    //MARK: func - trailingSwipeActionsConfigurationForRowAt.
+    //MARK: func - tableview delegate - trailingSwipeActionsConfigurationForRowAt to action.
     func action(at indexPath :IndexPath) -> UIContextualAction {
         let data = self.tableViewData[1][indexPath.row]
         let action = UIContextualAction(style: .normal, title: "編輯") { (action, view, completion) in
@@ -204,19 +258,6 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
         return tableView.sectionHeaderHeight
     }
     /*------------------------------------------------------------ TableView Protocol function. ------------------------------------------------------------*/
-    //MARK: func - cell send image action , player record pen.
-    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
-        // Your action
-        if self.isPiayer == true {
-            tappedImage.layer.borderWidth = 5
-            tappedImage.layer.borderColor = UIColor.green.cgColor
-            self.isPiayer = false
-        } else {
-            tappedImage.layer.borderWidth = 0
-            self.isPiayer = true
-        }
-    }
     //MARK: func - cell style.
     func cellStyle() -> String {
         let number = Int(arc4random())
@@ -242,14 +283,28 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             self.tableViewData[1][self.goodIndexPath].goodSum = goodsum
             Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
             
-            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .none)
+            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .right)
+            
+            print("Stop Record.")
+            let currentCell = tableView.cellForRow(at: self.reloadIndexPath) as! MyRecordTableViewCell
+            currentCell.sendImage.layer.borderWidth = 0
+            self.tableView.isScrollEnabled = true
+            self.recordPlayer?.stop()
         } else {
             sender.setImage(UIImage(named: "isLike.png"), for: .normal)
             self.tableViewData[1][self.goodIndexPath].Good_user = nil
             self.tableViewData[1][self.goodIndexPath].goodSum! -= 1.0
             Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
             
-            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .none)
+            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .right)
+            
+            self.recordPlayer?.stop()
+            
+            print("Stop Record.")
+            let currentCell = tableView.cellForRow(at: self.reloadIndexPath) as! MyRecordTableViewCell
+            currentCell.sendImage.layer.borderWidth = 0
+            self.tableView.isScrollEnabled = true
+            self.recordPlayer?.stop()
         }
     }
 }
@@ -303,7 +358,6 @@ extension MainAppViewController: MyAppDelegate {
             //Download Rcord File.
             Manager.shared.downLoadRcordFile(fileName: recordfile)
         }
-        
         
         self.tableViewData[1] = Manager.recordData
 

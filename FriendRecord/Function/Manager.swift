@@ -10,7 +10,6 @@ protocol ManagerDelegateUser {
     func finishDownLoadUserRecordPen()
 }
 
-
 class Manager :UIViewController {
     
     static let shared = Manager()
@@ -77,6 +76,7 @@ class Manager :UIViewController {
         }
         return nil
     }
+    
     //MARK: func - date change.
     func dateChange(date :String) -> String {
         

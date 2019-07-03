@@ -20,10 +20,8 @@ class MyRecordTableViewCell: UITableViewCell {
     var RecordID :Double!
     var email :String!
     var Good_user :String?
-    var buttonImage :(()->())!
     
     var delegate :MyRecordTableViewCellDelegate!
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()

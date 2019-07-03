@@ -19,6 +19,9 @@ class RecordGoViewController: UIViewController {
     
     var recordIDArry :[String:Double]!
     
+    var textViewData :[String] = ["微笑","火爆","憂愁","心碎","厭世","驚恐","靈異","感情","職場"]
+    var textViewPicker = UIPickerView()
+    
     //建立AudioRecorder元件
     var voiceRecorder: AVAudioRecorder?
     
@@ -39,6 +42,11 @@ class RecordGoViewController: UIViewController {
         
         self.textView.delegate = self
         
+        //UIPickerView.
+        self.textViewPicker.delegate = self
+        self.textViewPicker.dataSource = self
+        self.textView.inputView = self.textViewPicker
+        
         let longGestre = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
         self.starRecordBT.addGestureRecognizer(longGestre)
     }
@@ -50,7 +58,7 @@ class RecordGoViewController: UIViewController {
         let emailHead = userEmail.string(forKey: "emailHead")
         self.userImage.image = Manager.shared.userPhotoRead(jpg: emailHead!)
         
-        self.textView.text = "請給錄音帶一個主題吧~"
+        self.textView.text = "請選擇心情~"
         self.textView.textColor = UIColor.gray
         self.textView.layer.borderColor = UIColor.black.cgColor
         self.textView.layer.borderWidth = 1.0
@@ -68,7 +76,7 @@ class RecordGoViewController: UIViewController {
         self.view.endEditing(true)
         
         guard self.textView.text != "" else{
-            self.textView.text = "請給錄音帶一個主題吧~"
+            self.textView.text = "請選擇心情~"
             self.textView.textColor = UIColor.gray
             return
         }
@@ -218,7 +226,13 @@ class RecordGoViewController: UIViewController {
             count = 0.0
             
             let row = 0
-            let recordDataString = "主旨:\(Manager.recordData[0].recordText!)\n時間:\(Manager.recordData[0].recordDate!)\n長度:\(Manager.recordData[0].recordTime!)"
+            let text :String!
+            if Manager.recordData[0].recordText! == "請選擇心情~" {
+                text = "健忘選心情了!"
+            } else {
+                text = Manager.recordData[0].recordText!
+            }
+            let recordDataString = "心情:\(text!)\n時間:\(Manager.recordData[0].recordDate!)\n長度:\(Manager.recordData[0].recordTime!)"
             self.textView.textColor = UIColor.black
             self.textView.text = recordDataString
             
@@ -322,6 +336,29 @@ extension RecordGoViewController :UITextViewDelegate {
         self.textView.text = ""
         self.textView.textColor = UIColor.black
         return true
+    }
+}
+
+extension RecordGoViewController :UIPickerViewDataSource {
+    //MARK: Protocol - UIPickerView DataSiurce
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.textViewData.count
+    }
+}
+
+extension RecordGoViewController :UIPickerViewDelegate {
+    //MARK: Protocol UIPicker Delegate
+    //gate data arry data
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.textViewData[row]
+    }
+    //Show textFiel text
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.textView.text = self.textViewData[row]
+        self.view.endEditing(false)
     }
 }
 

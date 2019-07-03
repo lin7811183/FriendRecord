@@ -17,7 +17,7 @@ class Record: Equatable ,Codable {
     var Good_user :String?//是否已按讚
     
     //isDelete to mysql row.
-    
+    var isDelete :Int?
     var userCellLB :String?
     
     /*  1.發文章前，先去server上取得 文章ID。
