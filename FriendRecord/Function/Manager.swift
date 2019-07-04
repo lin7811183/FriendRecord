@@ -65,7 +65,11 @@ class Manager :UIViewController {
         let exist = fileManager.fileExists(atPath: filePath)
         return exist
     }
-    
+    //MARK: func - email change
+    func emailChangeHead(email :String) -> String {
+        let head = email.split(separator: "@")
+        return "\(head[0])"
+    }
     //MARK: func - user Photo file read.
     func userPhotoRead(jpg: String) -> UIImage? {
         

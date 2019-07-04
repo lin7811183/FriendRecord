@@ -76,7 +76,6 @@ class MainAppViewController: UIViewController {
             userDataDefault.set(false , forKey: "isUserPhoto")
             return
         }
-        
     }
     /*------------------------------------------------------------ Function. ------------------------------------------------------------*/
     //MARK: func - DownLoad Record Pen.
@@ -92,6 +91,8 @@ class MainAppViewController: UIViewController {
             let currentCell = self.tableView.cellForRow(at: self.pushIndex!) as! MyRecordTableViewCell
             leavemessageVC.recordId = Int(currentCell.RecordID)
             leavemessageVC.messageIndexPath = self.pushIndex
+            
+            leavemessageVC.delegate = self
         }
     }
         
@@ -144,8 +145,8 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
                 cell.recordPenGoodBT.setImage(UIImage(named: "Like.png"), for: .normal)
             }
 
-            cell.goodSumLB.text = "x \(Int(self.tableViewData[indexPath.section][indexPath.row].goodSum ?? 0))"
-            cell.messageSumLB.text = "x \(Int(self.tableViewData[indexPath.section][indexPath.row].messageSum ?? 0))"
+            cell.goodSumLB.text = "\(Int(self.tableViewData[indexPath.section][indexPath.row].goodSum ?? 0))"
+            cell.messageSumLB.text = "\(Int(self.tableViewData[indexPath.section][indexPath.row].messageSum ?? 0))"
             
             
             cell.RecordID = self.tableViewData[indexPath.section][indexPath.row].recordID
@@ -223,10 +224,6 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             }
         }
     }
-    
-    func imagePlayer() {
-        print("Test")
-    }
     //MARK: Protocol - tableview delegate canEditRowAt.
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         if self.tableView.isScrollEnabled == false {
@@ -269,7 +266,6 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
         action.backgroundColor = UIColor.red
         return action
     }
-    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
@@ -305,7 +301,7 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             self.tableViewData[1][self.goodIndexPath].goodSum = goodsum
             Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
             
-            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .right)
+            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .fade)
             
             print("Stop Record.")
             let currentCell = tableView.cellForRow(at: self.reloadIndexPath) as! MyRecordTableViewCell
@@ -318,7 +314,7 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             self.tableViewData[1][self.goodIndexPath].goodSum! -= 1.0
             Manager.recordData[self.goodIndexPath] = self.tableViewData[1][self.goodIndexPath]
             
-            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .right)
+            self.tableView.reloadRows(at: [self.reloadIndexPath], with: .fade)
             
             self.recordPlayer?.stop()
             
@@ -459,7 +455,14 @@ extension MainAppViewController :MyRecordTableViewCellDelegate {
 
 extension MainAppViewController :MyRecordTableViewCellDelegate2 {
     func pushIndexPath(indexPath: IndexPath) {
+        print("MyRecordTableViewCellDelegate2 - pushIndexPath")
         self.pushIndex = indexPath
     }
 }
 
+extension MainAppViewController :LeaveMessageViewControllerDelegate {
+    func updateMessageSum() {
+        print("LeaveMessageViewControllerDelegate - updateMessageSum")
+        self.tableView.reloadData()
+    }
+}

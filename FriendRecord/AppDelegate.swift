@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let session = URLSession.shared
             let task = session.dataTask(with: request) { (data, respones, error) in
                 if let e = error {
-                    print("uesr login check data URL Session error: \(e)")
+                    print("background downLoad URL Session error: \(e)")
                     return
                 }
                 guard let jsonData = data else {
