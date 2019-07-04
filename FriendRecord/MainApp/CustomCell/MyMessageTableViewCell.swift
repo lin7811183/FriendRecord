@@ -5,6 +5,7 @@ class MyMessageTableViewCell: UITableViewCell {
     @IBOutlet weak var messageUserImage: UIImageView!
     @IBOutlet weak var userLB: UILabel!
     @IBOutlet weak var messageLB: UILabel!
+    @IBOutlet weak var messageTimeLB: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -386,6 +386,8 @@ class Manager :UIViewController {
                 guard let jsonData = data else {
                     return
                 }
+                let reCode = String(data: data!, encoding: .utf8)
+                print(reCode!)
                 let decoder = JSONDecoder()
                 do {
                     Manager.userLocalRecordPen = try decoder.decode([Record].self, from: jsonData)//[Note].self 取得Note陣列的型態

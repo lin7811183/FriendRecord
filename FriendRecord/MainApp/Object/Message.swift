@@ -1,6 +1,9 @@
 import Foundation
 
-class Message :Codable {
+class Message : Equatable,Codable {
+    static func == (lhs: Message, rhs: Message) -> Bool {
+        return lhs === rhs
+    }
     
     var recordID :Double?
     var messageUser :String?

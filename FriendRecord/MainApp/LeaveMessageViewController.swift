@@ -13,11 +13,14 @@ class LeaveMessageViewController: UIViewController {
     @IBOutlet weak var userMessageView: UIView!
     
     var messageTVData :[Message] = []
+    var tmp :[Message] = []
     
     var recordId :Int!
     var messageIndexPath :IndexPath!
     
     var delegate :LeaveMessageViewControllerDelegate!
+    
+    let playerBT = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +41,14 @@ class LeaveMessageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.playerBT.frame = CGRect(x: 350, y: 580, width: 30, height: 30)
+        //self.playerBT.setTitle("播放", for: .normal)
+        self.playerBT.setImage(UIImage(named: "horn.png"), for: .normal)
+        self.playerBT.backgroundColor = .clear
+        self.playerBT.layer.borderColor = UIColor.black.cgColor
+        self.playerBT.layer.cornerRadius = 0.5 * playerBT.bounds.size.width
+        self.messageTableView.addSubview(self.playerBT)
+        
         self.downLoadMessage()
     }
     
@@ -47,6 +58,10 @@ class LeaveMessageViewController: UIViewController {
         if self.isMovingFromParent {
             self.delegate.updateMessageSum()
         }
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let off = self.messageTableView.contentOffset.y
+        self.playerBT.frame = CGRect(x: 350, y: off + 580, width: self.playerBT.frame.size.width, height: self.playerBT.frame.size.height)
     }
     /*------------------------------------------------------------ Function. ------------------------------------------------------------*/
     //MARK: func - Message send to Reocrd pen.
@@ -175,6 +190,9 @@ extension LeaveMessageViewController :UITableViewDataSource, UITableViewDelegate
 
             cell.userLB.text = data.messageNickName!
             cell.messageLB.text = data.message
+            
+            let time = Manager.shared.dateChange(date: data.penDate!)
+            cell.messageTimeLB.text = time
         }
         
         self.messageTableView.rowHeight = cell.messageLB.bounds.height + 50
