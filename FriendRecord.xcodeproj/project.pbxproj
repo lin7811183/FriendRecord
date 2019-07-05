@@ -43,6 +43,8 @@
 		CE1FD20A22CE1A740073DD4A /* friend.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FD20822CE1A730073DD4A /* friend.png */; };
 		CE1FD20E22CE1AFA0073DD4A /* find.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FD20D22CE1AFA0073DD4A /* find.png */; };
 		CE21464822B4978100F39747 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21464722B4978100F39747 /* Record.swift */; };
+		CE22B5F822CF3563008D8C57 /* SearchFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE22B5F722CF3563008D8C57 /* SearchFriendViewController.swift */; };
+		CE22B5FC22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE22B5FB22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift */; };
 		CE63540C22CB3ED500E05A02 /* waring.png in Resources */ = {isa = PBXBuildFile; fileRef = CE63540B22CB3ED500E05A02 /* waring.png */; };
 		CE63540E22CB3F0200E05A02 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = CE63540D22CB3F0200E05A02 /* edit.png */; };
 		CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */; };
@@ -100,6 +102,8 @@
 		CE1FD20822CE1A730073DD4A /* friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend.png; sourceTree = "<group>"; };
 		CE1FD20D22CE1AFA0073DD4A /* find.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = find.png; sourceTree = "<group>"; };
 		CE21464722B4978100F39747 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		CE22B5F722CF3563008D8C57 /* SearchFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendViewController.swift; sourceTree = "<group>"; };
+		CE22B5FB22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserRecordTableViewCell.swift; sourceTree = "<group>"; };
 		CE63540B22CB3ED500E05A02 /* waring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waring.png; sourceTree = "<group>"; };
 		CE63540D22CB3F0200E05A02 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 		CE0102C722A784C900EDB18A /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				CE0E6DAD22C44C880028FF47 /* MyCollectionViewCell.swift */,
 				CE0E6DAF22C496D00028FF47 /* MapFriender */,
 				CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */,
 				CE0A3C8E229E5B0600649E2E /* functionswift.swift */,
@@ -224,7 +229,7 @@
 		CE0E6DAC22C44C490028FF47 /* CustomCell */ = {
 			isa = PBXGroup;
 			children = (
-				CE0E6DAD22C44C880028FF47 /* MyCollectionViewCell.swift */,
+				CE22B5FB22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -266,7 +271,8 @@
 				CE0102BD22A7831800EDB18A /* Function */,
 				CE100416229B726300660E82 /* Login */,
 				CE0102C222A783E600EDB18A /* MainApp */,
-				CE15D74822A6885700892340 /* PersonalApp */,
+				CE15D74822A6885700892340 /* Personal */,
+				CE22B5F422CF34E4008D8C57 /* SearchFriend */,
 				CE106C5422C1A26D005DF25E /* Animation */,
 				CE0102C322A7841700EDB18A /* Image */,
 				CE0102C722A784C900EDB18A /* Other */,
@@ -292,14 +298,14 @@
 			path = Animation;
 			sourceTree = "<group>";
 		};
-		CE15D74822A6885700892340 /* PersonalApp */ = {
+		CE15D74822A6885700892340 /* Personal */ = {
 			isa = PBXGroup;
 			children = (
 				CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */,
 				CE0A945622B1D35F00F7F031 /* UserPhotoViewController.swift */,
 				CE0E6DAC22C44C490028FF47 /* CustomCell */,
 			);
-			path = PersonalApp;
+			path = Personal;
 			sourceTree = "<group>";
 		};
 		CE21464922B4978600F39747 /* Object */ = {
@@ -309,6 +315,14 @@
 				CED64B0C22CC9AD8006DB0EE /* Message.swift */,
 			);
 			path = Object;
+			sourceTree = "<group>";
+		};
+		CE22B5F422CF34E4008D8C57 /* SearchFriend */ = {
+			isa = PBXGroup;
+			children = (
+				CE22B5F722CF3563008D8C57 /* SearchFriendViewController.swift */,
+			);
+			path = SearchFriend;
 			sourceTree = "<group>";
 		};
 		CE63540622CB30D900E05A02 /* Object */ = {
@@ -473,6 +487,7 @@
 				CE0B064022ADF756007ADB36 /* CameraViewController.swift in Sources */,
 				CED64B0922CC6F0B006DB0EE /* LeaveMessageViewController.swift in Sources */,
 				CE0A949922B238A300F7F031 /* Manager.swift in Sources */,
+				CE22B5F822CF3563008D8C57 /* SearchFriendViewController.swift in Sources */,
 				CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */,
 				CEFF4423229E961B006A7449 /* MainAppViewController.swift in Sources */,
 				CE0E6DB122C497030028FF47 /* MapFrienderViewController.swift in Sources */,
@@ -493,6 +508,7 @@
 				CED64B0D22CC9AD8006DB0EE /* Message.swift in Sources */,
 				CE0A945722B1D35F00F7F031 /* UserPhotoViewController.swift in Sources */,
 				CE0DE8C222B0D96900F49C5B /* MyRecordTableViewCell.swift in Sources */,
+				CE22B5FC22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

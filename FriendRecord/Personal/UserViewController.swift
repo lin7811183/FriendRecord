@@ -4,20 +4,17 @@ import MobileCoreServices
 
 class UserViewController: UIViewController {
     
-    //@IBOutlet weak var userImageView: UIImageView!
-    //@IBOutlet weak var userNickNameLB: UILabel!
-    //@IBOutlet weak var userRecordPenCV: UICollectionView!
-    
     @IBOutlet weak var userView: UIView!
     @IBOutlet weak var userTF: UITextView!
     @IBOutlet weak var UserGenderLB: UILabel!
     @IBOutlet weak var userBfLB: UILabel!
     @IBOutlet weak var userPhotoBT: UIButton!
     @IBOutlet weak var editUserTF_BT: UIButton!
+    @IBOutlet weak var userTableView: UITableView!
     
     var isUserFTType = false
     
-    var collectionData = [Record]()
+    var userRecordData = [Record]()
     
     var uploadArry :[String:Bool]!
     
@@ -38,7 +35,7 @@ class UserViewController: UIViewController {
         self.userView.layer.cornerRadius = 10
         self.userView.layer.masksToBounds = true
 //        self.userView.backgroundColor = UIColor.lightGray
-        self.userView.backgroundColor = UIColor(named: "MyColor4")
+        self.userView.backgroundColor = UIColor(displayP3Red: 192/220, green: 192/220, blue: 192/220, alpha: 0.5)
         
         self.userTF.isEditable = false
         self.userTF.isSelectable = false
@@ -46,6 +43,9 @@ class UserViewController: UIViewController {
         //self.userTF.layer.borderWidth = 1.0
         self.userTF.layer.cornerRadius = 5.0
         self.userTF.delegate = self
+        
+        self.userTableView.dataSource = self
+        self.userTableView.delegate = self
         
         self.navigationItem.title = uesrDataNickName
     }
@@ -155,16 +155,34 @@ class UserViewController: UIViewController {
     
 }
 
+extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
+    //MARK: Protocol - tableView - UITableViewDataSource.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.userRecordData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell", for: indexPath) as! MyUserRecordTableViewCell
+        
+        cell.goodSumLB.text = "\(Int(self.userRecordData[indexPath.row].goodSum ?? 0.0))"
+        cell.messageSumLB.text = "\(Int(self.userRecordData[indexPath.row].messageSum ?? 0.0))"
+        
+        cell.selectionStyle = .none//讓選取顏色不會出現
+        
+        return cell
+    }
+}
 
 extension UserViewController :ManagerDelegateUser {
     //MARK: Protocol - CodeManagerDelegateUser
     func finishDownLoadUserRecordPen() {
         print("ManagerDelegate = finishDownLoadUserPhoto")
         
-//        DispatchQueue.main.async {
-//            self.collectionData = Manager.userLocalRecordPen
-//            print("self.collectionData: \(self.collectionData.count)")
-//        }
+        DispatchQueue.main.async {
+            self.userRecordData = Manager.userLocalRecordPen
+            print("self.collectionData: \(self.userRecordData.count)")
+            self.userTableView.reloadData()
+        }
     }
 }
 
