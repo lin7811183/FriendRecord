@@ -179,6 +179,8 @@ class RecordGoViewController: UIViewController {
             
             let now :Date = Date()
             let dateFormat :DateFormatter = DateFormatter()
+            dateFormat.locale = Locale(identifier: "zh_Hant_TW") // 設定地區(台灣)
+            dateFormat.timeZone = TimeZone(identifier: "Asia/Taipei") // 設定時區(台灣)
             dateFormat.dateFormat = "yyyyMMddHHmmss"
             let dateString = dateFormat.string(from: now)
             
@@ -192,6 +194,8 @@ class RecordGoViewController: UIViewController {
             newRecord.recordText = self.textView.text
             
             let dateFormat2 :DateFormatter = DateFormatter()
+            dateFormat2.locale = Locale(identifier: "zh_Hant_TW") // 設定地區(台灣)
+            dateFormat2.timeZone = TimeZone(identifier: "Asia/Taipei") // 設定時區(台灣)
             dateFormat2.dateFormat = "yyyy-MM-dd HH:mm:ss"
             let dateString2 = dateFormat2.string(from: now)
             newRecord.recordDate = dateString2

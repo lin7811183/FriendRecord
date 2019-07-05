@@ -37,6 +37,8 @@ class MainAppViewController: UIViewController {
     var isPiayer = false
     //建立AudioRecorder元件
     var recordPlayer :AVAudioPlayer?
+    var recordIndexPath :IndexPath!
+    var oldRecordIndexPath :IndexPath!
     
     var pushIndex :IndexPath!
     
@@ -55,6 +57,7 @@ class MainAppViewController: UIViewController {
         self.refreshControl.attributedTitle = NSAttributedString(string: "更新留言板")
         self.refreshControl.addTarget(self, action: #selector(self.downLoadRecordPen), for: .valueChanged)
         self.tableView.addSubview(refreshControl)
+        
         
     }
     
@@ -131,6 +134,13 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
                 let imageNameChange = imageName.split(separator: "@")
                 let name = "\(imageNameChange[0])"
                 cell.sendImage.image = Manager.shared.userPhotoRead(jpg: name)
+                
+                cell.sendImage.tag = indexPath.row
+                
+                let action = UITapGestureRecognizer(target: self, action: #selector(self.player(sender:)))
+                cell.sendImage.addGestureRecognizer(action)
+                cell.sendImage.isUserInteractionEnabled = true
+                
                 cell.sendImage.layer.cornerRadius = cell.sendImage.bounds.height / 2
             }
 
@@ -144,14 +154,13 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             } else {
                 cell.recordPenGoodBT.setImage(UIImage(named: "Like.png"), for: .normal)
             }
-
+            
             cell.goodSumLB.text = "\(Int(self.tableViewData[indexPath.section][indexPath.row].goodSum ?? 0))"
             cell.messageSumLB.text = "\(Int(self.tableViewData[indexPath.section][indexPath.row].messageSum ?? 0))"
             
             
             cell.RecordID = self.tableViewData[indexPath.section][indexPath.row].recordID
             cell.recordIndexPath = indexPath
-//            cell.email = self.tableViewData[indexPath.section][indexPath.row].recordSendUser
 
             cell.delegate = self
             cell.delegate2 = self
@@ -168,60 +177,14 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.tableViewData.count
     }
-    
     //MARK: Protocol - tableView delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
         if indexPath.section == 0 {
             let recordgovc = self.storyboard?.instantiateViewController(withIdentifier: "recordgoVC") as! RecordGoViewController
             recordgovc.delegate = self
             self.present(recordgovc, animated: true, completion: nil)
             //選取後反灰消失.
             self.tableView.deselectRow(at: indexPath, animated: true)
-        } else {
-            guard let indexPath = tableView.indexPathForSelectedRow else {
-                print("Record Player indexPath error.")
-                return
-            }
-            
-            let currentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
-            
-            if self.isPiayer == false {
-
-                let filePathURL = Manager.shared.fileDocumentsPath(fileName: self.tableViewData[1][indexPath.row].recordFileName!)
-                //Play Record.
-                self.recordPlayer = try? AVAudioPlayer(contentsOf: filePathURL)
-                self.recordPlayer?.numberOfLoops = -1
-                self.recordPlayer?.prepareToPlay()
-
-                //Create Audio Session.
-                let audioSession = AVAudioSession.sharedInstance()
-                try? audioSession.setCategory(AVAudioSession.Category.playback)
-
-                //Record Player.
-                self.recordPlayer?.play()
-                print("********** Star player Record. **********")
-                
-                currentCell.sendImage.layer.borderWidth = 5
-                currentCell.sendImage.layer.borderColor = UIColor.green.cgColor
-                
-                self.isPiayer = true
-                
-                self.tableView.isScrollEnabled = false // Lock TableView not scroll.
-                
-                self.tableView.deselectRow(at: indexPath, animated: true) //選取後反灰消失.
-            } else {
-                self.recordPlayer?.stop()
-                print("********** Stop player Record. **********")
-                
-                currentCell.sendImage.layer.borderWidth = 0
-                
-                self.isPiayer = false
-                
-                self.tableView.isScrollEnabled = true // Lock TableView not scroll.
-                
-                self.tableView.deselectRow(at: indexPath, animated: true) //選取後反灰消失.
-            }
         }
     }
     //MARK: Protocol - tableview delegate canEditRowAt.
@@ -276,6 +239,72 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
         return tableView.sectionHeaderHeight
     }
     /*------------------------------------------------------------ TableView Protocol function. ------------------------------------------------------------*/
+    //MARK: func - player.
+    @objc func player(sender :UITapGestureRecognizer) {
+        // Check if player!?
+        if self.isPiayer ==  true {
+            let oldcurrentCell = self.tableView.cellForRow(at: self.oldRecordIndexPath) as! MyRecordTableViewCell
+            oldcurrentCell.sendImage.layer.borderWidth = 0
+            
+            guard let imageView = sender.view as? UIImageView  else {
+                return
+            }
+            let row = imageView.tag
+            let indexPath = IndexPath(row: row, section: 1)
+            self.recordIndexPath = indexPath
+            self.oldRecordIndexPath = indexPath
+            let currentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
+            
+            let filePathURL = Manager.shared.fileDocumentsPath(fileName: self.tableViewData[1][indexPath.row].recordFileName!)
+            //Play Record.
+            self.recordPlayer = try? AVAudioPlayer(contentsOf: filePathURL)
+            self.recordPlayer?.numberOfLoops = 0
+            self.recordPlayer?.prepareToPlay()
+            self.recordPlayer?.delegate = self
+            
+            //Create Audio Session.
+            let audioSession = AVAudioSession.sharedInstance()
+            try? audioSession.setCategory(AVAudioSession.Category.playback)
+            
+            //Record Player.
+            self.recordPlayer?.play()
+            print("********** Star player Record. **********")
+            
+            currentCell.sendImage.layer.borderWidth = 2
+            currentCell.sendImage.layer.borderColor = UIColor.green.cgColor
+            
+            self.isPiayer = true
+        } else {
+            guard let imageView = sender.view as? UIImageView  else {
+                return
+            }
+            let row = imageView.tag
+            let indexPath = IndexPath(row: row, section: 1)
+            self.recordIndexPath = indexPath
+            self.oldRecordIndexPath = indexPath
+            let currentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
+            
+            let filePathURL = Manager.shared.fileDocumentsPath(fileName: self.tableViewData[1][indexPath.row].recordFileName!)
+            //Play Record.
+            self.recordPlayer = try? AVAudioPlayer(contentsOf: filePathURL)
+            self.recordPlayer?.numberOfLoops = 0
+            self.recordPlayer?.prepareToPlay()
+            self.recordPlayer?.delegate = self
+            
+            //Create Audio Session.
+            let audioSession = AVAudioSession.sharedInstance()
+            try? audioSession.setCategory(AVAudioSession.Category.playback)
+            
+            //Record Player.
+            self.recordPlayer?.play()
+            print("********** Star player Record. **********")
+            
+            currentCell.sendImage.layer.borderWidth = 2
+            currentCell.sendImage.layer.borderColor = UIColor.green.cgColor
+            
+            self.isPiayer = true
+        }
+    }
     //MARK: func - cell style.
     func cellStyle() -> String {
         let number = Int(arc4random())
@@ -323,6 +352,19 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             currentCell.sendImage.layer.borderWidth = 0
             self.tableView.isScrollEnabled = true
             self.recordPlayer?.stop()
+        }
+    }
+}
+
+extension MainAppViewController :AVAudioPlayerDelegate {
+    //MARK: Protocol - AVAudioPlayerDelegate
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if flag == true {
+            let currentCell = self.tableView.cellForRow(at: self.recordIndexPath)  as! MyRecordTableViewCell
+            self.recordPlayer?.stop()
+            print("********** Stop player Record. **********")
+            currentCell.sendImage.layer.borderWidth = 0
+            self.isPiayer = false
         }
     }
 }

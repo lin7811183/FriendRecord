@@ -72,6 +72,12 @@ class LeaveMessageViewController: UIViewController {
         let email = userData.string(forKey: "email")
         let userNickName = userData.string(forKey: "nickname")
         
+        let nowDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "zh_Hant_TW") // 設定地區(台灣)
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Taipei") // 設定時區(台灣)
+        
         if sum == 0.0 {
             
             sum! += 1.0
@@ -84,7 +90,7 @@ class LeaveMessageViewController: UIViewController {
             newMessage.messageUser = email!
             newMessage.messageNickName = userNickName
             newMessage.message = self.messageTF.text
-            newMessage.penDate = "稍早前"
+            newMessage.penDate = dateFormatter.string(from: nowDate)
             self.messageTVData.append(newMessage)
             
             self.upLoadMessage(email: email!, nickName: userNickName!, message: newMessage.message!)
@@ -92,6 +98,7 @@ class LeaveMessageViewController: UIViewController {
             
             self.messageTF.text = ""
             self.messageTF.resignFirstResponder()
+            
         } else {
             sum! += 1.0
             Manager.recordData[self.messageIndexPath.row].messageSum = sum
@@ -101,7 +108,8 @@ class LeaveMessageViewController: UIViewController {
             newMessage.messageUser = email!
             newMessage.messageNickName = userNickName
             newMessage.message = self.messageTF.text
-            newMessage.penDate = "稍早前"
+
+            newMessage.penDate = dateFormatter.string(from: nowDate)
             self.messageTVData.append(newMessage)
             
             self.upLoadMessage(email: email!, nickName: userNickName!, message: newMessage.message!)
@@ -184,16 +192,17 @@ extension LeaveMessageViewController :UITableViewDataSource, UITableViewDelegate
             cell.messageLB.text = "目前尚未有人留言!"
         } else {
             let data = messageTVData[indexPath.row]
-            
+        
             cell.messageUserImage.image = Manager.shared.userPhotoRead(jpg: Manager.shared.emailChangeHead(email: data.messageUser!))
             cell.messageUserImage.layer.cornerRadius = cell.messageUserImage.bounds.height / 2
-
+            
             cell.userLB.text = data.messageNickName!
             cell.messageLB.text = data.message
-            
+
             let time = Manager.shared.dateChange(date: data.penDate!)
             cell.messageTimeLB.text = time
         }
+        
         
         self.messageTableView.rowHeight = cell.messageLB.bounds.height + 50
         return cell

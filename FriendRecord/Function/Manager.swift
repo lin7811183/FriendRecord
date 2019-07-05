@@ -108,7 +108,7 @@ class Manager :UIViewController {
         let nowDayMinute = Calendar.current.component(.minute, from: nowDateLocaleCnage!)
         //let nowDaySecond = Calendar.current.component(.second, from: nowDateLocaleCnage!)
         
-        guard recordYear != nowDayYear || recordMonth != nowDayMonth || recordDay != nowDayDay else {
+        guard recordYear != nowDayYear || recordMonth != nowDayMonth || (nowDayDay - recordDay) > 2 else {
             if recordHour == nowDayHour {
                 let time = nowDayMinute - recordMinute
                 if time == 0 {
@@ -116,11 +116,15 @@ class Manager :UIViewController {
                 } else {
                     return "\(time)分鐘前"
                 }
+            } else {
+                let time = nowDayHour - recordHour
+                
+                guard time > 0 else {
+                    return "\(time * -1)小時前"
+                }
+                return "\(time)小時前"
             }
-            let time = "\( nowDayHour - recordHour )小時前"
-            return time
         }
-        
         let dateFormatter2 = DateFormatter()
         dateFormatter2.dateFormat = "yyyy/MM/dd"
         let showDate = dateFormatter2.string(from: dateChange!)
