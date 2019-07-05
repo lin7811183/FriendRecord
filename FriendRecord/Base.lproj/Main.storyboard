@@ -860,6 +860,19 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="stx-cd-gRH">
+                                <rect key="frame" x="350" y="604" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="user.png"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLf-rF-yFX">
+                                <rect key="frame" x="350" y="650" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="horn.png"/>
+                                <connections>
+                                    <action selector="playerMemu:" destination="R3B-uV-Zai" eventType="touchUpInside" id="oEy-h6-UBK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="X8y-68-DDv"/>
@@ -870,6 +883,8 @@
                         <outlet property="messageSendImage" destination="zHR-uS-h5M" id="5vC-Uk-3VJ"/>
                         <outlet property="messageTF" destination="naf-23-ciM" id="4dB-1J-Zrv"/>
                         <outlet property="messageTableView" destination="WkZ-g4-lLs" id="w5T-5f-iDT"/>
+                        <outlet property="playerBT" destination="bLf-rF-yFX" id="yEs-yD-OZ5"/>
+                        <outlet property="userBT" destination="stx-cd-gRH" id="Uic-sK-qES"/>
                         <outlet property="userMessageView" destination="NJ6-df-bt3" id="vAh-cp-zhK"/>
                     </connections>
                 </viewController>
@@ -1409,6 +1424,7 @@
         <image name="cassette.png" width="25.600000381469727" height="25.600000381469727"/>
         <image name="find.png" width="25.600000381469727" height="25.600000381469727"/>
         <image name="friend.png" width="25.600000381469727" height="25.600000381469727"/>
+        <image name="horn.png" width="102.40000152587891" height="102.40000152587891"/>
         <image name="isLike.png" width="27.272727966308594" height="27.272727966308594"/>
         <image name="line.png" width="75" height="75"/>
         <image name="message.png" width="27.272727966308594" height="27.272727966308594"/>
@@ -1427,6 +1443,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TGQ-1a-A0Q"/>
+        <segue reference="mhU-J4-hJL"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -12,6 +12,12 @@ class LeaveMessageViewController: UIViewController {
     @IBOutlet weak var messageSendImage: UIImageView!
     @IBOutlet weak var userMessageView: UIView!
     
+    @IBOutlet weak var playerBT: UIButton!
+    @IBOutlet weak var userBT: UIButton!
+    
+    var userBTCenterPoint :CGPoint!
+    var test = false
+    
     var messageTVData :[Message] = []
     var tmp :[Message] = []
     
@@ -19,8 +25,6 @@ class LeaveMessageViewController: UIViewController {
     var messageIndexPath :IndexPath!
     
     var delegate :LeaveMessageViewControllerDelegate!
-    
-    let playerBT = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +36,12 @@ class LeaveMessageViewController: UIViewController {
         self.messageSendImage.image = Manager.shared.userPhotoRead(jpg: emailHead)
         self.messageSendImage.layer.cornerRadius = self.messageSendImage.bounds.height / 2
         
+        self.playerBT.layer.cornerRadius = self.playerBT.bounds.height / 2
+        
+        
+        self.userBTCenterPoint =  self.userBT.center
+        self.userBT.center = self.playerBT.center
+        
         self.messageTableView.dataSource = self
         self.messageTableView.delegate = self
         
@@ -40,15 +50,7 @@ class LeaveMessageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.playerBT.frame = CGRect(x: 350, y: 580, width: 30, height: 30)
-        //self.playerBT.setTitle("播放", for: .normal)
-        self.playerBT.setImage(UIImage(named: "horn.png"), for: .normal)
-        self.playerBT.backgroundColor = .clear
-        self.playerBT.layer.borderColor = UIColor.black.cgColor
-        self.playerBT.layer.cornerRadius = 0.5 * playerBT.bounds.size.width
-        self.messageTableView.addSubview(self.playerBT)
-        
+    
         self.downLoadMessage()
     }
     
@@ -60,10 +62,33 @@ class LeaveMessageViewController: UIViewController {
         }
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let off = self.messageTableView.contentOffset.y
-        self.playerBT.frame = CGRect(x: 350, y: off + 580, width: self.playerBT.frame.size.width, height: self.playerBT.frame.size.height)
+        self.playerBT.frame = CGRect(x: self.playerBT.frame.minX, y: self.playerBT.frame.minY, width: self.playerBT.frame.size.width, height: self.playerBT.frame.size.height)
     }
     /*------------------------------------------------------------ Function. ------------------------------------------------------------*/
+
+    @IBAction func playerMemu(_ sender: UIButton) {
+        if self.test == false {
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                self.userBT.alpha = 1
+                
+                self.userBT.center = self.userBTCenterPoint
+                
+                self.test = true
+                })
+        } else {
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                self.userBT.alpha = 0
+                
+                self.userBT.center  = self.playerBT.center
+                
+                self.test = false
+            })
+        }
+    }
+    
+    
     //MARK: func - Message send to Reocrd pen.
     @IBAction func messageSend(_ sender: Any) {
         var sum = Manager.recordData[self.messageIndexPath.row].messageSum
@@ -202,7 +227,7 @@ extension LeaveMessageViewController :UITableViewDataSource, UITableViewDelegate
             let time = Manager.shared.dateChange(date: data.penDate!)
             cell.messageTimeLB.text = time
         }
-        
+        cell.selectionStyle = .none
         
         self.messageTableView.rowHeight = cell.messageLB.bounds.height + 50
         return cell
@@ -224,9 +249,6 @@ extension LeaveMessageViewController :UITextFieldDelegate {
         self.userMessageView.bottomAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 0).isActive = true
         self.userMessageView.leftAnchor.constraint(equalTo: self.mainView.leftAnchor, constant: 0).isActive = true
         self.userMessageView.rightAnchor.constraint(equalTo: self.mainView.rightAnchor, constant: 0).isActive = true //往回縮
-        
-        
-        
     }
     //touch textfiel end.
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -235,7 +257,6 @@ extension LeaveMessageViewController :UITextFieldDelegate {
         self.userMessageView.bottomAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 0).isActive = true
         self.userMessageView.leftAnchor.constraint(equalTo: self.mainView.leftAnchor, constant: 0).isActive = true
         self.userMessageView.rightAnchor.constraint(equalTo: self.mainView.rightAnchor, constant: 0).isActive = true //往回縮
-        
-        
+
     }
 }
