@@ -421,7 +421,7 @@
             </objects>
             <point key="canvasLocation" x="5280" y="-1002"/>
         </scene>
-        <!--錄音留言板-->
+        <!--Main App View Controller-->
         <scene sceneID="EDu-xl-Dpz">
             <objects>
                 <viewController storyboardIdentifier="mainVC" id="09T-vU-Bsr" customClass="MainAppViewController" customModule="FriendRecord" customModuleProvider="target" sceneMemberID="viewController">
@@ -756,7 +756,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="xWk-A0-umj"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="錄音留言板" image="cassette.png" id="pTM-vf-4Nd"/>
+                    <tabBarItem key="tabBarItem" title="" image="mainIcon.png" selectedImage="mainIcon.png" id="pTM-vf-4Nd"/>
                     <navigationItem key="navigationItem" id="4cV-8L-5z8">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="kml-TR-lWm"/>
                         <rightBarButtonItems>
@@ -1390,6 +1390,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <outlet property="tabbarItem" destination="T44-uL-m84" id="Jyc-4C-uT9"/>
@@ -1401,11 +1402,11 @@
             </objects>
             <point key="canvasLocation" x="1861" y="-36"/>
         </scene>
-        <!--錄音留言板-->
+        <!--Navigation Controller-->
         <scene sceneID="CJ1-p5-oEv">
             <objects>
                 <navigationController storyboardIdentifier="myNA" automaticallyAdjustsScrollViewInsets="NO" id="7LT-JW-KXu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="錄音留言板" image="cassette.png" selectedImage="cassette.png" id="hvp-Kq-ftD"/>
+                    <tabBarItem key="tabBarItem" title="" image="mainIcon.png" selectedImage="mainIcon.png" id="hvp-Kq-ftD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cTV-3Z-Z54">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1421,11 +1422,11 @@
             </objects>
             <point key="canvasLocation" x="2809" y="-36"/>
         </scene>
-        <!--個人資料-->
+        <!--Navigation Controller-->
         <scene sceneID="cFq-v9-plg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="W5M-A8-ROz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="個人資料" image="user.png" selectedImage="user.png" id="KIv-ar-wCz"/>
+                    <tabBarItem key="tabBarItem" title="" image="user.png" selectedImage="user.png" id="KIv-ar-wCz"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lrd-sR-RwG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1465,12 +1466,12 @@
         <image name="Login_Icon_ver_2_2.png" width="1024" height="768"/>
         <image name="Star.png" width="192" height="192"/>
         <image name="Stop.png" width="192" height="192"/>
-        <image name="cassette.png" width="25.600000381469727" height="25.600000381469727"/>
         <image name="find.png" width="25.600000381469727" height="25.600000381469727"/>
         <image name="friend.png" width="25.600000381469727" height="25.600000381469727"/>
         <image name="horn.png" width="102.40000152587891" height="102.40000152587891"/>
         <image name="isLike.png" width="27.272727966308594" height="27.272727966308594"/>
         <image name="line.png" width="75" height="75"/>
+        <image name="mainIcon.png" width="10.909090995788574" height="10.909090995788574"/>
         <image name="message.png" width="27.272727966308594" height="27.272727966308594"/>
         <image name="microphone.png" width="384" height="384"/>
         <image name="placeholder.png" width="25.600000381469727" height="25.600000381469727"/>
