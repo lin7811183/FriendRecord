@@ -14,7 +14,8 @@ class UserViewController: UIViewController {
     
     var isUserFTType = false
     
-    var userRecordData = [Record]()
+    //var userRecordData = [Record]()
+    var tableArray = [TableStruct]()
     
     var uploadArry :[String:Bool]!
     
@@ -59,25 +60,26 @@ class UserViewController: UIViewController {
         }
         
         let exist = Manager.shared.checkFile(fileName: "\(emailHead).jpg")
-
-        guard exist == true else {
-            print("********** user photo not in local app(userVC). **********")
-            //self.userImageView.image = UIImage(named: "userPhotoDefault.png")
-            
+        
+        if exist != true {
             self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
             self.userPhotoBT.clipsToBounds = true
             self.userPhotoBT.setImage(UIImage(named: "userPhotoDefault.png"), for: .normal)
-            return
+        } else {
+            self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
+            self.userPhotoBT.clipsToBounds = true
+            self.userPhotoBT.setImage(Manager.shared.userPhotoRead(jpg: emailHead), for: .normal)
         }
-        //self.userImageView.image = self.userPhotoRead()
-        self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
-        self.userPhotoBT.clipsToBounds = true
-
-        self.userPhotoBT.setImage(Manager.shared.userPhotoRead(jpg: emailHead), for: .normal)
         
         //DownLoadUserRecordPen.
         Manager.delegateUser = self
         Manager.shared.downLoadUserLocalRecordPen()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("self.tableArray clear.")
+        self.tableArray.removeAll()
     }
     
     /*------------------------------------------------------------ Function ------------------------------------------------------------*/
@@ -157,19 +159,52 @@ class UserViewController: UIViewController {
 
 extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
     //MARK: Protocol - tableView - UITableViewDataSource.
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.tableArray.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.userRecordData.count
+        if self.tableArray[section].isOpen! == true {
+            return 2
+        } else {
+            return 1
+        }
+        //return self.userRecordData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell", for: indexPath) as! MyUserRecordTableViewCell
+//        let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell", for: indexPath) as! MyUserRecordTableViewCell
+//
+//        cell.goodSumLB.text = "\(Int(self.userRecordData[indexPath.row].goodSum ?? 0.0))"
+//        cell.messageSumLB.text = "\(Int(self.userRecordData[indexPath.row].messageSum ?? 0.0))"
+//
+//
+//
+//        cell.selectionStyle = .none//讓選取顏色不會出現
         
-        cell.goodSumLB.text = "\(Int(self.userRecordData[indexPath.row].goodSum ?? 0.0))"
-        cell.messageSumLB.text = "\(Int(self.userRecordData[indexPath.row].messageSum ?? 0.0))"
-        
-        cell.selectionStyle = .none//讓選取顏色不會出現
-        
-        return cell
+        if indexPath.row == 0 {
+            let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell", for: indexPath) as! MyUserRecordTableViewCell
+            cell.goodSumLB.text = "\(Int(self.tableArray[indexPath.section].main.goodSum ?? 0.0))"
+            cell.messageSumLB.text = "\(Int(self.tableArray[indexPath.section].main.messageSum ?? 0.0))"
+            return cell
+        } else {
+            let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell2", for: indexPath) as! MyUserRecord2TableViewCell
+            cell.dateLB.text = self.tableArray[indexPath.section].sub.recordDate
+            cell.mainLB.text = self.tableArray[indexPath.section].sub.recordText
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.tableArray[indexPath.section].isOpen == true {
+            self.tableArray[indexPath.section].isOpen = false
+            let section = IndexSet.init(integer: indexPath.section)
+            self.userTableView.reloadSections(section, with: .fade)
+        } else {
+            self.tableArray[indexPath.section].isOpen = true
+            let section = IndexSet.init(integer: indexPath.section)
+            self.userTableView.reloadSections(section, with: .fade)
+        }
     }
 }
 
@@ -179,8 +214,18 @@ extension UserViewController :ManagerDelegateUser {
         print("ManagerDelegate = finishDownLoadUserPhoto")
         
         DispatchQueue.main.async {
-            self.userRecordData = Manager.userLocalRecordPen
-            print("self.collectionData: \(self.userRecordData.count)")
+//            self.userRecordData = Manager.userLocalRecordPen
+            
+            for i in 0 ..< Manager.userLocalRecordPen.count {
+                var newData = TableStruct()
+                newData.isOpen = false
+                newData.main = Manager.userLocalRecordPen[i]
+                newData.sub = Manager.userLocalRecordPen[i]
+                
+                self.tableArray.append(newData)
+            }
+            print("tableArray: \(self.tableArray.count)")
+//            print("userRecordData: \(self.userRecordData.count)")
             self.userTableView.reloadData()
         }
     }
