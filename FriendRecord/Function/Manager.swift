@@ -108,7 +108,9 @@ class Manager :UIViewController {
         let nowDayMinute = Calendar.current.component(.minute, from: nowDateLocaleCnage!)
         //let nowDaySecond = Calendar.current.component(.second, from: nowDateLocaleCnage!)
         
-        guard recordYear != nowDayYear || recordMonth != nowDayMonth || (nowDayDay - recordDay) > 2 else {
+        //確認是不是同一天
+        guard recordYear != nowDayYear || recordMonth != nowDayMonth || (nowDayDay - recordDay) >= 2 else {
+            //確認是不是同一小時
             if recordHour == nowDayHour {
                 let time = nowDayMinute - recordMinute
                 if time == 0 {
@@ -117,12 +119,18 @@ class Manager :UIViewController {
                     return "\(time)分鐘前"
                 }
             } else {
+                //不是同一小時
                 let time = nowDayHour - recordHour
-                
-                guard time > 0 else {
-                    return "\(time * -1)小時前"
+                //確認同一天
+                if recordDay == nowDayDay {
+                    if time > 0 {
+                        return "\(time)小時前"
+                    } else {
+                        return "\(time * -1)小時前"
+                    }
+                } else {
+                    return "\(time * -1 + 12)小時前"
                 }
-                return "\(time)小時前"
             }
         }
         let dateFormatter2 = DateFormatter()

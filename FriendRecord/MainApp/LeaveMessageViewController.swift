@@ -223,7 +223,7 @@ extension LeaveMessageViewController :UITableViewDataSource, UITableViewDelegate
             
             cell.userLB.text = data.messageNickName!
             cell.messageLB.text = data.message
-
+            
             let time = Manager.shared.dateChange(date: data.penDate!)
             cell.messageTimeLB.text = time
         }
