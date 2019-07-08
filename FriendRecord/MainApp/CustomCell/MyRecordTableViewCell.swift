@@ -58,8 +58,6 @@ class MyRecordTableViewCell: UITableViewCell {
     }
     //MARK: func - message send.
     @IBAction func messageSend(_ sender: Any) {
-        print("\(RecordID)")
-        print("\(recordIndexPath)")
         self.delegate2.pushIndexPath(indexPath: self.recordIndexPath)
     }
     //MARK: func - upLoadRecordPenGood

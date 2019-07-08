@@ -379,15 +379,15 @@ class Manager :UIViewController {
     }
     
     //MARK: func - DownLoad user local Record pen.
-    func downLoadUserLocalRecordPen() {
+    func downLoadUserLocalRecordPen(email :String) {
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Load_Local_User_RecordPen.php") {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             
-            let userData = UserDefaults.standard
-            let email = userData.string(forKey: "email")
+//            let userData = UserDefaults.standard
+//            let email = userData.string(forKey: "email")
             
-            let param = "usermail=\(email!)"
+            let param = "usermail=\(email)"
             request.httpBody = param.data(using: .utf8)
             
             let session = URLSession.shared

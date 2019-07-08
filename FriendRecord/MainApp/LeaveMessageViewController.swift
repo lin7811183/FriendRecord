@@ -15,6 +15,9 @@ class LeaveMessageViewController: UIViewController {
     @IBOutlet weak var playerBT: UIButton!
     @IBOutlet weak var userBT: UIButton!
     
+    var formVC :Int!
+    var dataArray :[Record]!
+    
     var userBTCenterPoint :CGPoint!
     var test = false
     
@@ -23,6 +26,8 @@ class LeaveMessageViewController: UIViewController {
     
     var recordId :Int!
     var messageIndexPath :IndexPath!
+    
+    var messageSumType :Int!
     
     var delegate :LeaveMessageViewControllerDelegate!
     
@@ -47,11 +52,22 @@ class LeaveMessageViewController: UIViewController {
         
         self.messageTF.delegate = self
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
+        
         self.downLoadMessage()
+        
+        if self.formVC == 0 {
+            print("form MainAppVC.")
+            self.dataArray = Manager.recordData
+            
+        } else {
+            print("form UserVC.")
+            self.dataArray = Manager.userLocalRecordPen
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -61,6 +77,7 @@ class LeaveMessageViewController: UIViewController {
             self.delegate.updateMessageSum()
         }
     }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.playerBT.frame = CGRect(x: self.playerBT.frame.minX, y: self.playerBT.frame.minY, width: self.playerBT.frame.size.width, height: self.playerBT.frame.size.height)
     }
@@ -91,7 +108,7 @@ class LeaveMessageViewController: UIViewController {
     
     //MARK: func - Message send to Reocrd pen.
     @IBAction func messageSend(_ sender: Any) {
-        var sum = Manager.recordData[self.messageIndexPath.row].messageSum
+        var sum = self.dataArray[self.messageIndexPath.row].messageSum
         
         let userData = UserDefaults.standard
         let email = userData.string(forKey: "email")
@@ -106,7 +123,7 @@ class LeaveMessageViewController: UIViewController {
         if sum == 0.0 {
             
             sum! += 1.0
-            Manager.recordData[self.messageIndexPath.row].messageSum = sum
+            self.dataArray[self.messageIndexPath.row].messageSum = sum
             
             self.messageTVData.removeAll()
             
@@ -126,7 +143,7 @@ class LeaveMessageViewController: UIViewController {
             
         } else {
             sum! += 1.0
-            Manager.recordData[self.messageIndexPath.row].messageSum = sum
+            self.dataArray[self.messageIndexPath.row].messageSum = sum
             
             let newMessage = Message()
             newMessage.recordID = Double(self.recordId)
@@ -186,8 +203,9 @@ class LeaveMessageViewController: UIViewController {
                 let decoder = JSONDecoder()
                 do {
                     self.messageTVData = try decoder.decode([Message].self, from: jsonData)//[Note].self 取得Note陣列的型態
-                    print("Manager.recordData.count:\(self.messageTVData.count)")
+                    
                     DispatchQueue.main.async {
+                        print("messageTVData count:\(self.messageTVData.count)")
                         self.messageTableView.reloadData()
                     }
                 } catch {
@@ -204,7 +222,7 @@ class LeaveMessageViewController: UIViewController {
 extension LeaveMessageViewController :UITableViewDataSource, UITableViewDelegate {
     //MARK: Protocol - tableView UITableViewDataSource.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Manager.recordData[self.messageIndexPath.row].messageSum == 0.0 {
+        if self.messageTVData.count == 0 {
             return 1
         } else {
             return self.messageTVData.count
@@ -212,8 +230,9 @@ extension LeaveMessageViewController :UITableViewDataSource, UITableViewDelegate
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.messageTableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! MyMessageTableViewCell
-        
+        print("\(self.messageTVData.count)")
         if self.messageTVData.count == 0 {
+            print("目前尚未有人留言")
             cell.messageLB.text = "目前尚未有人留言!"
         } else {
             let data = messageTVData[indexPath.row]

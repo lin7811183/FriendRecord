@@ -19,6 +19,9 @@ class UserViewController: UIViewController {
     
     var uploadArry :[String:Bool]!
     
+    var pushRecordID :Double!
+    var pushIndex :IndexPath!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,8 +57,8 @@ class UserViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //check local app have user Photo.
-        let userEmail = UserDefaults.standard
-        guard let emailHead = userEmail.string(forKey: "emailHead") else {
+        let userData = UserDefaults.standard
+        guard let emailHead = userData.string(forKey: "emailHead") else {
             return
         }
         
@@ -73,12 +76,14 @@ class UserViewController: UIViewController {
         
         //DownLoadUserRecordPen.
         Manager.delegateUser = self
-        Manager.shared.downLoadUserLocalRecordPen()
+        guard let email = userData.string(forKey: "email") else {
+            return
+        }
+        Manager.shared.downLoadUserLocalRecordPen(email: email)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("self.tableArray clear.")
         self.tableArray.removeAll()
     }
     
@@ -155,6 +160,18 @@ class UserViewController: UIViewController {
         self.present(photoPicker, animated: true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "userpush" {
+            print("prepare")
+            let cell = sender as! MyUserRecordTableViewCell
+            let leavemessageVC = segue.destination as! LeaveMessageViewController
+            leavemessageVC.recordId = Int(cell.recordID)
+            leavemessageVC.messageIndexPath = cell.recordIndexPath
+            leavemessageVC.formVC = 1
+            
+            leavemessageVC.delegate = self
+        }
+    }
 }
 
 extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
@@ -177,20 +194,26 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
 //
 //        cell.goodSumLB.text = "\(Int(self.userRecordData[indexPath.row].goodSum ?? 0.0))"
 //        cell.messageSumLB.text = "\(Int(self.userRecordData[indexPath.row].messageSum ?? 0.0))"
-//
-//
-//
 //        cell.selectionStyle = .none//讓選取顏色不會出現
         
         if indexPath.row == 0 {
             let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell", for: indexPath) as! MyUserRecordTableViewCell
             cell.goodSumLB.text = "\(Int(self.tableArray[indexPath.section].main.goodSum ?? 0.0))"
             cell.messageSumLB.text = "\(Int(self.tableArray[indexPath.section].main.messageSum ?? 0.0))"
+            
+            cell.recordID = self.tableArray[indexPath.section].main.recordID!
+            cell.recordIndexPath = indexPath
+            
+            cell.delegate = self
+            
+            //Auto change cell hight.
+            self.userTableView.rowHeight = 80
             return cell
         } else {
             let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell2", for: indexPath) as! MyUserRecord2TableViewCell
             cell.dateLB.text = self.tableArray[indexPath.section].sub.recordDate
             cell.mainLB.text = self.tableArray[indexPath.section].sub.recordText
+            self.userTableView.rowHeight = 25
             return cell
         }
     }
@@ -314,5 +337,19 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
             }
         }
         uploadTask.resume()
+    }
+}
+
+extension UserViewController :MyUserRecordTableViewCellDelegate {
+    func userPushIndexPath(cell: UITableViewCell) {
+        print("MyUserRecordTableViewCellDelegate - userPushIndexPath")
+        self.performSegue(withIdentifier: "userpush", sender: cell)
+    }
+}
+
+extension UserViewController :LeaveMessageViewControllerDelegate {
+    func updateMessageSum() {
+        print("LeaveMessageViewControllerDelegate - updateMessageSum")
+        self.userTableView.reloadData()
     }
 }

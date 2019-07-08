@@ -80,6 +80,17 @@ class MainAppViewController: UIViewController {
             return
         }
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        //Stop old Record pen muice.
+        if let indexPath = self.oldRecordIndexPath {
+            print("user is out MainAppVC.")
+            let oldcurrentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
+            oldcurrentCell.sendImage.layer.borderWidth = 0
+            self.recordPlayer?.stop()
+        }
+    }
     /*------------------------------------------------------------ Function. ------------------------------------------------------------*/
     //MARK: func - DownLoad Record Pen.
     @objc func downLoadRecordPen() {
@@ -90,10 +101,12 @@ class MainAppViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "push" {
+            print("push")
             let leavemessageVC = segue.destination as! LeaveMessageViewController
             let currentCell = self.tableView.cellForRow(at: self.pushIndex!) as! MyRecordTableViewCell
             leavemessageVC.recordId = Int(currentCell.RecordID)
             leavemessageVC.messageIndexPath = self.pushIndex
+            leavemessageVC.formVC = 0
             
             leavemessageVC.delegate = self
         }
@@ -254,26 +267,13 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             self.recordIndexPath = indexPath
             self.oldRecordIndexPath = indexPath
             let currentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
+            currentCell.sendImage.layer.borderWidth = 0
             
-            let filePathURL = Manager.shared.fileDocumentsPath(fileName: self.tableViewData[1][indexPath.row].recordFileName!)
-            //Play Record.
-            self.recordPlayer = try? AVAudioPlayer(contentsOf: filePathURL)
-            self.recordPlayer?.numberOfLoops = 0
-            self.recordPlayer?.prepareToPlay()
-            self.recordPlayer?.delegate = self
+            //Record stop Player.
+            self.recordPlayer?.stop()
+            print("********** Stop player Record. **********")
             
-            //Create Audio Session.
-            let audioSession = AVAudioSession.sharedInstance()
-            try? audioSession.setCategory(AVAudioSession.Category.playback)
-            
-            //Record Player.
-            self.recordPlayer?.play()
-            print("********** Star player Record. **********")
-            
-            currentCell.sendImage.layer.borderWidth = 2
-            currentCell.sendImage.layer.borderColor = UIColor.green.cgColor
-            
-            self.isPiayer = true
+            self.isPiayer = false
         } else {
             guard let imageView = sender.view as? UIImageView  else {
                 return
