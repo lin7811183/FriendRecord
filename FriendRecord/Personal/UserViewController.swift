@@ -206,14 +206,11 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
             
             cell.delegate = self
             
-            //Auto change cell hight.
-            self.userTableView.rowHeight = 80
             return cell
         } else {
             let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell2", for: indexPath) as! MyUserRecord2TableViewCell
             cell.dateLB.text = self.tableArray[indexPath.section].sub.recordDate
             cell.mainLB.text = self.tableArray[indexPath.section].sub.recordText
-            self.userTableView.rowHeight = 25
             return cell
         }
     }
@@ -222,11 +219,13 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
         if self.tableArray[indexPath.section].isOpen == true {
             self.tableArray[indexPath.section].isOpen = false
             let section = IndexSet.init(integer: indexPath.section)
-            self.userTableView.reloadSections(section, with: .fade)
+            self.userTableView.reloadSections(section, with: .automatic)
+            self.userTableView.reloadData()
         } else {
             self.tableArray[indexPath.section].isOpen = true
             let section = IndexSet.init(integer: indexPath.section)
-            self.userTableView.reloadSections(section, with: .fade)
+            self.userTableView.reloadSections(section, with: .automatic)
+            self.userTableView.reloadData()
         }
     }
 }
@@ -285,23 +284,6 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
         
         let fileName = "\(emailChange).jpg"
 
-//
-//        let filePath = self.fileDocumentsPath(fileName: fileName)
-//
-//        //write file
-//        if let imageData = image.jpegData(compressionQuality: 1) {//compressionQuality:0~1之間
-//            do{
-//                try imageData.write(to: filePath, options: [.atomicWrite])
-//            }catch {
-//                print("uer photo fiel save is eror : \(error)")
-//            }
-//        }
-        
-//        //save user photo name by UserDefaults.
-//        let userPhotoName = UserDefaults.standard
-//        userPhotoName.string(forKey: "userPhotoName")
-//        userPhotoName.set("\(fileName)" , forKey: "userPhotoName")
-        
         self.dismiss(animated: true, completion: nil)//關閉imagePickController
         
         //Upload user Photo to server.
