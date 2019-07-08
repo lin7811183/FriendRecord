@@ -89,6 +89,7 @@ class MainAppViewController: UIViewController {
             let oldcurrentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
             oldcurrentCell.sendImage.layer.borderWidth = 0
             self.recordPlayer?.stop()
+            self.isPiayer = false
         }
     }
     /*------------------------------------------------------------ Function. ------------------------------------------------------------*/

@@ -8,6 +8,7 @@ protocol ManagerDelegate {
 
 protocol ManagerDelegateUser {
     func finishDownLoadUserRecordPen()
+    func finishDownLoadUserPresent(preenst :String)
 }
 
 class Manager :UIViewController {
@@ -21,6 +22,7 @@ class Manager :UIViewController {
     
     static var delegate :ManagerDelegate!
     static var delegateUser :ManagerDelegateUser!
+    
     
     //MARK: func - dismissKeyboard.
     func hideKeyboardWhenTappedAround() {
@@ -384,9 +386,6 @@ class Manager :UIViewController {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             
-//            let userData = UserDefaults.standard
-//            let email = userData.string(forKey: "email")
-            
             let param = "usermail=\(email)"
             request.httpBody = param.data(using: .utf8)
             
@@ -405,6 +404,36 @@ class Manager :UIViewController {
                     Manager.userLocalRecordPen = try decoder.decode([Record].self, from: jsonData)//[Note].self 取得Note陣列的型態
                     print("userLocalRecordPen:\(Manager.userLocalRecordPen.count)")
                     Manager.delegateUser.finishDownLoadUserRecordPen()
+                } catch {
+                    print("error while parsing json \(error)")
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    //MARK: func - DownLoad user present.
+    func downLoadUserPresent(email :String) {
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Account_Down_User_Present.php") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let param = "email=\(email)"
+            request.httpBody = param.data(using: .utf8)
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let e = error {
+                    print("erroe \(e)")
+                }
+                guard let jsonData = data else {
+                    return
+                }
+                let decoder = JSONDecoder()
+                do {
+                    var data :[String:String]!
+                    data = try decoder.decode([String:String].self, from: jsonData)//[Note].self 取得Note陣列的型態
+                    Manager.delegateUser.finishDownLoadUserPresent(preenst: data["presentation"]!)
                 } catch {
                     print("error while parsing json \(error)")
                 }

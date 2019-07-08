@@ -22,40 +22,54 @@ class UserViewController: UIViewController {
     var pushRecordID :Double!
     var pushIndex :IndexPath!
     
+    var userDataType = 0
+    
+    var isPiayer = false
+    //建立AudioRecorder元件
+    var recordPlayer :AVAudioPlayer?
+    var recordIndexPath :IndexPath!
+    var oldRecordIndexPath :IndexPath!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let userData = UserDefaults.standard
+        if self.userDataType == 0 {
+            let userData = UserDefaults.standard
+            
+            let uesrDataNickName = userData.string(forKey: "nickname")
+            //self.userNickNameLB.text = uesrDataNickName
+            
+            let userDataGender = userData.string(forKey: "gender")
+            self.UserGenderLB.text = userDataGender
+            
+            let userDataBf = userData.string(forKey: "bf")
+            self.userBfLB.text = userDataBf
+            
+            self.userView.layer.cornerRadius = 10
+            self.userView.layer.masksToBounds = true
+            //        self.userView.backgroundColor = UIColor.lightGray
+            self.userView.backgroundColor = UIColor(displayP3Red: 192/220, green: 192/220, blue: 192/220, alpha: 0.5)
+            
+            self.userTF.isEditable = false
+            self.userTF.isSelectable = false
+            //self.userTF.layer.borderColor = UIColor.black.cgColor
+            //self.userTF.layer.borderWidth = 1.0
+            self.userTF.layer.cornerRadius = 5.0
+            self.userTF.delegate = self
+            
+            self.userTableView.dataSource = self
+            self.userTableView.delegate = self
+            
+            self.navigationItem.title = uesrDataNickName
+        }
         
-        let uesrDataNickName = userData.string(forKey: "nickname")
-        //self.userNickNameLB.text = uesrDataNickName
-        
-        let userDataGender = userData.string(forKey: "gender")
-        self.UserGenderLB.text = userDataGender
-        
-        let userDataBf = userData.string(forKey: "bf")
-        self.userBfLB.text = userDataBf
-        
-        self.userView.layer.cornerRadius = 10
-        self.userView.layer.masksToBounds = true
-//        self.userView.backgroundColor = UIColor.lightGray
-        self.userView.backgroundColor = UIColor(displayP3Red: 192/220, green: 192/220, blue: 192/220, alpha: 0.5)
-        
-        self.userTF.isEditable = false
-        self.userTF.isSelectable = false
-        //self.userTF.layer.borderColor = UIColor.black.cgColor
-        //self.userTF.layer.borderWidth = 1.0
-        self.userTF.layer.cornerRadius = 5.0
-        self.userTF.delegate = self
-        
-        self.userTableView.dataSource = self
-        self.userTableView.delegate = self
-        
-        self.navigationItem.title = uesrDataNickName
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.editUserTF_BT.setTitle("編輯", for: .normal)
+        
         //check local app have user Photo.
         let userData = UserDefaults.standard
         guard let emailHead = userData.string(forKey: "emailHead") else {
@@ -80,11 +94,22 @@ class UserViewController: UIViewController {
             return
         }
         Manager.shared.downLoadUserLocalRecordPen(email: email)
+        Manager.shared.downLoadUserPresent(email: email
+        )
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.tableArray.removeAll()
+        
+        //Stop old Record pen muice.
+        if let indexPath = self.oldRecordIndexPath {
+            print("user is out UserVC.")
+            let oldcurrentCell = self.userTableView.cellForRow(at: indexPath) as! MyUserRecordTableViewCell
+            oldcurrentCell.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
+            self.recordPlayer?.stop()
+            self.isPiayer = false
+        }
     }
     
     /*------------------------------------------------------------ Function ------------------------------------------------------------*/
@@ -117,6 +142,7 @@ class UserViewController: UIViewController {
     @IBAction func editUserFT(_ sender: Any) {
         if self.isUserFTType == false {
             self.editUserTF_BT.setImage(UIImage(named: "pen.png"), for: .normal)
+            self.editUserTF_BT.setTitle("", for: .normal)
             self.userTF.backgroundColor = UIColor.gray
             self.userTF.isSelectable = true
             self.userTF.isEditable = true
@@ -129,6 +155,32 @@ class UserViewController: UIViewController {
             self.userTF.isSelectable = false
             self.userTF.isEditable = false
             self.isUserFTType = false
+            
+            let userData = UserDefaults.standard
+            let useremail = userData.string(forKey: "email")
+            self.uploadUserPresent(email: useremail!, present: self.userTF.text)
+            userData.string(forKey: "present")
+            userData.set("\(self.userTF.text!)" , forKey: "present")
+        }
+    }
+    
+    //MARK: func - user upload present.
+    func uploadUserPresent(email :String ,present :String) {
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Account_Upload_Present.php") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            let session = URLSession.shared
+            let param = "email=\(email)&present=\(present)"
+            
+            request.httpBody = param.data(using: .utf8)
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let e = error {
+                    print("erroe \(e)")
+                }
+                let reCode = String(data: data!, encoding: .utf8)
+                print(reCode!)
+            }
+            task.resume()
         }
     }
     
@@ -206,6 +258,10 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
             
             cell.delegate = self
             
+            cell.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
+            cell.playerBT.addTarget(self, action: #selector(player(sender:)), for: .touchUpInside)
+            cell.playerBT.tag = indexPath.section
+            
             return cell
         } else {
             let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell2", for: indexPath) as! MyUserRecord2TableViewCell
@@ -228,6 +284,70 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
             self.userTableView.reloadData()
         }
     }
+    
+    @objc func player(sender :UIButton){
+        
+        if self.isPiayer == true {
+            let oldcurrentCell = self.userTableView.cellForRow(at: self.oldRecordIndexPath) as! MyUserRecordTableViewCell
+            oldcurrentCell.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
+            
+            guard let bt = sender as? UIButton  else {
+                return
+            }
+            let row = bt.tag
+            let indexPath = IndexPath(row: 0, section: row)
+            self.recordIndexPath = indexPath
+            self.oldRecordIndexPath = indexPath
+            let currentCell = self.userTableView.cellForRow(at: indexPath) as! MyUserRecordTableViewCell
+            currentCell.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
+            
+            //Record stop Player.
+            self.recordPlayer?.stop()
+            print("********** Stop player Record. **********")
+            
+            self.isPiayer = false
+        } else {
+            guard let bt = sender as? UIButton  else {
+                return
+            }
+            let row = bt.tag
+            let indexPath = IndexPath(row: 0, section: row)
+            self.recordIndexPath = indexPath
+            self.oldRecordIndexPath = indexPath
+            let currentCell = self.userTableView.cellForRow(at: indexPath) as! MyUserRecordTableViewCell
+            
+            let filePathURL = Manager.shared.fileDocumentsPath(fileName: self.tableArray[indexPath.section].main.recordFileName!)
+            //Play Record.
+            self.recordPlayer = try? AVAudioPlayer(contentsOf: filePathURL)
+            self.recordPlayer?.numberOfLoops = 0
+            self.recordPlayer?.prepareToPlay()
+            self.recordPlayer?.delegate = self
+            
+            //Create Audio Session.
+            let audioSession = AVAudioSession.sharedInstance()
+            try? audioSession.setCategory(AVAudioSession.Category.playback)
+            
+            //Record Player.
+            self.recordPlayer?.play()
+            print("********** Star player Record. **********")
+            
+            currentCell.playerBT.setImage(UIImage(named: "Stop.png"), for: .normal)
+            
+            self.isPiayer = true
+        }
+    }
+}
+
+extension UserViewController :AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if flag == true {
+            let currentCell = self.userTableView.cellForRow(at: self.recordIndexPath)  as! MyUserRecordTableViewCell
+            self.recordPlayer?.stop()
+            print("********** Stop player Record. **********")
+            currentCell.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
+            self.isPiayer = false
+        }
+    }
 }
 
 extension UserViewController :ManagerDelegateUser {
@@ -236,8 +356,6 @@ extension UserViewController :ManagerDelegateUser {
         print("ManagerDelegate = finishDownLoadUserPhoto")
         
         DispatchQueue.main.async {
-//            self.userRecordData = Manager.userLocalRecordPen
-            
             for i in 0 ..< Manager.userLocalRecordPen.count {
                 var newData = TableStruct()
                 newData.isOpen = false
@@ -247,10 +365,15 @@ extension UserViewController :ManagerDelegateUser {
                 self.tableArray.append(newData)
             }
             print("tableArray: \(self.tableArray.count)")
-//            print("userRecordData: \(self.userRecordData.count)")
             self.userTableView.reloadData()
         }
     }
+    func finishDownLoadUserPresent(preenst: String) {
+        DispatchQueue.main.async {
+            self.userTF.text = preenst
+        }
+    }
+    
 }
 
 extension UserViewController :UITextViewDelegate {
