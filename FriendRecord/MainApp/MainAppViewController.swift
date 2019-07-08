@@ -22,6 +22,7 @@ class MainAppViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userPoRecordBT: UIButton!
+    @IBOutlet weak var recordPenModeBT: UIBarButtonItem!
     
     var tableViewData = [Manager.recordDataUser,[Record]()]
     
@@ -42,8 +43,12 @@ class MainAppViewController: UIViewController {
     
     var pushIndex :IndexPath!
     
+    var recordPenMode = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.navigationItem.largeTitleDisplayMode = .never
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -98,6 +103,17 @@ class MainAppViewController: UIViewController {
         print("downLoadRecordPen")
         Manager.shared.downLoadRecordPen()
         Manager.shared.downLoadUserPhoto()
+    }
+    //MARK: func - Change record pen show mode.
+    @IBAction func recordPenMode(_ sender: Any) {
+        if self.recordPenMode == true {
+            self.recordPenModeBT.title = "好音模式"
+            self.recordPenMode = false
+        } else {
+            self.recordPenModeBT.title = "好友模式"
+            self.recordPenMode = true
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

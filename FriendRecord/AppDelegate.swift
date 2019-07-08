@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         print("Home : \(NSHomeDirectory())")
         
+        UITabBar.appearance().barTintColor = .white
+        UITabBar.appearance().tintColor = .black
+        
         //open Notice.
         let settings = UIUserNotificationSettings(types: UIUserNotificationType.alert, categories: nil)
         UIApplication.shared.registerUserNotificationSettings(settings)

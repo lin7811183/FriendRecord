@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -797,7 +796,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="speaker" selectedImage="speaker" id="pTM-vf-4Nd"/>
                     <navigationItem key="navigationItem" id="4cV-8L-5z8">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="kml-TR-lWm"/>
+                        <barButtonItem key="leftBarButtonItem" title="全音模式" id="kml-TR-lWm">
+                            <connections>
+                                <action selector="recordPenMode:" destination="09T-vU-Bsr" id="8BZ-45-yn4"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="friend.png" id="PId-s3-J5a"/>
                             <barButtonItem image="find.png" id="Dqz-m0-f2G">
@@ -809,6 +812,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="recordPenModeBT" destination="kml-TR-lWm" id="5h5-EW-feE"/>
                         <outlet property="tableView" destination="HzQ-4X-Q44" id="Fok-h5-val"/>
                     </connections>
                 </viewController>
@@ -825,32 +829,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1iw-1Q-Q9J">
-                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19c-Zf-8fR">
-                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="F10-cG-UFP"/>
-                                </constraints>
-                                <color key="barTintColor" name="backColor"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="19c-Zf-8fR" firstAttribute="leading" secondItem="6as-TX-hha" secondAttribute="leading" id="3dn-Uh-fts"/>
-                            <constraint firstItem="19c-Zf-8fR" firstAttribute="top" secondItem="6as-TX-hha" secondAttribute="top" id="6J2-FO-alv"/>
-                            <constraint firstItem="1iw-1Q-Q9J" firstAttribute="trailing" secondItem="6as-TX-hha" secondAttribute="trailing" id="eU1-1W-kxu"/>
-                            <constraint firstItem="1iw-1Q-Q9J" firstAttribute="bottom" secondItem="6as-TX-hha" secondAttribute="bottom" id="foE-9u-M0R"/>
-                            <constraint firstItem="19c-Zf-8fR" firstAttribute="trailing" secondItem="6as-TX-hha" secondAttribute="trailing" id="kwt-0i-Uo3"/>
-                            <constraint firstItem="1iw-1Q-Q9J" firstAttribute="leading" secondItem="6as-TX-hha" secondAttribute="leading" id="pBf-pk-dT9"/>
-                            <constraint firstItem="1iw-1Q-Q9J" firstAttribute="top" secondItem="19c-Zf-8fR" secondAttribute="bottom" id="wNC-IR-Nfh"/>
-                            <constraint firstItem="1iw-1Q-Q9J" firstAttribute="top" secondItem="19c-Zf-8fR" secondAttribute="bottom" id="zMf-G6-roU"/>
+                            <constraint firstItem="1iw-1Q-Q9J" firstAttribute="top" secondItem="6as-TX-hha" secondAttribute="top" id="bJI-y7-GIT"/>
+                            <constraint firstItem="1iw-1Q-Q9J" firstAttribute="leading" secondItem="6as-TX-hha" secondAttribute="leading" id="ij4-GV-th0"/>
+                            <constraint firstItem="1iw-1Q-Q9J" firstAttribute="trailing" secondItem="6as-TX-hha" secondAttribute="trailing" id="r0z-C3-4rQ"/>
+                            <constraint firstItem="1iw-1Q-Q9J" firstAttribute="bottom" secondItem="6as-TX-hha" secondAttribute="bottom" id="tqj-jp-vib"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6as-TX-hha"/>
                     </view>
@@ -944,14 +932,19 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="stx-cd-gRH">
-                                <rect key="frame" x="350" y="604" width="40" height="40"/>
+                                <rect key="frame" x="350" y="610" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="user.png"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLf-rF-yFX">
-                                <rect key="frame" x="350" y="650" width="40" height="40"/>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBu-KL-Udh">
+                                <rect key="frame" x="350" y="573" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="horn.png"/>
+                                <state key="normal" image="add"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLf-rF-yFX">
+                                <rect key="frame" x="350" y="650" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="horn"/>
                                 <connections>
                                     <action selector="playerMemu:" destination="R3B-uV-Zai" eventType="touchUpInside" id="oEy-h6-UBK"/>
                                 </connections>
@@ -962,6 +955,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="留言" id="cCo-IC-TqG"/>
                     <connections>
+                        <outlet property="addBT" destination="JBu-KL-Udh" id="uGD-Ke-gy3"/>
                         <outlet property="mainView" destination="uIq-o2-wDJ" id="17b-YB-li7"/>
                         <outlet property="messageSendImage" destination="zHR-uS-h5M" id="5vC-Uk-3VJ"/>
                         <outlet property="messageTF" destination="naf-23-ciM" id="4dB-1J-Zrv"/>
@@ -1506,10 +1500,11 @@
         <image name="Login_Icon_ver_2_2.png" width="1024" height="768"/>
         <image name="Star.png" width="192" height="192"/>
         <image name="Stop.png" width="192" height="192"/>
+        <image name="add" width="64" height="64"/>
         <image name="camera" width="32" height="32"/>
         <image name="find.png" width="25.600000381469727" height="25.600000381469727"/>
         <image name="friend.png" width="25.600000381469727" height="25.600000381469727"/>
-        <image name="horn.png" width="102.40000152587891" height="102.40000152587891"/>
+        <image name="horn" width="64" height="64"/>
         <image name="isLike.png" width="27.272727966308594" height="27.272727966308594"/>
         <image name="line.png" width="75" height="75"/>
         <image name="mainIcon" width="61" height="42"/>
@@ -1524,11 +1519,8 @@
         <image name="wood.png" width="400.69564819335938" height="400.69564819335938"/>
         <image name="worldwide.png" width="48" height="48"/>
         <image name="個人資料" width="16" height="16"/>
-        <namedColor name="backColor">
-            <color red="0.82352941176470584" green="0.9137254901960784" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jWD-bR-eYF"/>
+        <segue reference="Y28-H3-uVH"/>
     </inferredMetricsTieBreakers>
 </document>

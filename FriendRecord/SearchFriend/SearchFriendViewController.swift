@@ -4,19 +4,28 @@ class SearchFriendViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        let searchController = UISearchController(searchResultsController: nil)
-//        searchController.searchResultsUpdater = self
-//        searchController.dimsBackgroundDuringPresentation = false
-//        navigationItem.searchController = searchController
-//        definesPresentationContext = true
+    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setTabBarSearchItem()
+        
+    }
+    
+    /*------------------------------------------------------------ Functions. ------------------------------------------------------------*/
+    //MARK: func - set TarBar SearchBar.
+    func setTabBarSearchItem() {
+        let searchBar = UISearchBar()
+        searchBar.showsCancelButton = true
+        searchBar.placeholder = "搜尋知音"
+        searchBar.delegate = self
+        
+        self.navigationItem.titleView = searchBar
     }
 }
 
 /*------------------------------------------------------------ Protocol ------------------------------------------------------------*/
-extension SearchFriendViewController :UISearchResultsUpdating {
-    //MARK: func - UISearchResultsUpdating.
-    func updateSearchResults(for searchController: UISearchController) {
-        //...
-    }
+extension SearchFriendViewController :UISearchBarDelegate {
+    
 }

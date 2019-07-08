@@ -14,10 +14,12 @@ class LeaveMessageViewController: UIViewController {
     
     @IBOutlet weak var playerBT: UIButton!
     @IBOutlet weak var userBT: UIButton!
+    @IBOutlet weak var addBT: UIButton!
     
     var formVC :Int!
     var dataArray :[Record]!
     
+    var addBTCenterPoint :CGPoint!
     var userBTCenterPoint :CGPoint!
     var test = false
     
@@ -41,11 +43,16 @@ class LeaveMessageViewController: UIViewController {
         self.messageSendImage.image = Manager.shared.userPhotoRead(jpg: emailHead)
         self.messageSendImage.layer.cornerRadius = self.messageSendImage.bounds.height / 2
         
-        self.playerBT.layer.cornerRadius = self.playerBT.bounds.height / 2
+        self.playerBT.layer.cornerRadius = self.playerBT.frame.height / 2
         
+        self.userBT.layer.cornerRadius = self.playerBT.frame.height / 2
+//        self.userBT.layer.borderWidth = 1
+//        self.userBT.layer.borderColor = UIColor.black.cgColor
         
         self.userBTCenterPoint =  self.userBT.center
         self.userBT.center = self.playerBT.center
+        self.addBTCenterPoint = self.addBT.center
+        self.addBT.center = self.playerBT.center
         
         self.messageTableView.dataSource = self
         self.messageTableView.delegate = self
@@ -88,8 +95,10 @@ class LeaveMessageViewController: UIViewController {
             
             UIView.animate(withDuration: 0.3, animations: {
                 self.userBT.alpha = 1
+                self.addBT.alpha = 1
                 
                 self.userBT.center = self.userBTCenterPoint
+                self.addBT.center = self.addBTCenterPoint
                 
                 self.test = true
                 })
@@ -97,8 +106,10 @@ class LeaveMessageViewController: UIViewController {
             
             UIView.animate(withDuration: 0.3, animations: {
                 self.userBT.alpha = 0
+                self.addBT.alpha = 0
                 
                 self.userBT.center  = self.playerBT.center
+                self.addBT.center = self.playerBT.center
                 
                 self.test = false
             })
