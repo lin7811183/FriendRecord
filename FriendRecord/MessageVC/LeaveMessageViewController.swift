@@ -11,10 +11,11 @@ class LeaveMessageViewController: UIViewController {
     @IBOutlet weak var messageTF: UITextField!
     @IBOutlet weak var messageSendImage: UIImageView!
     @IBOutlet weak var userMessageView: UIView!
+    @IBOutlet weak var messageSendView: UIView!
     
-    @IBOutlet weak var playerBT: UIButton!
-    @IBOutlet weak var userBT: UIButton!
-    @IBOutlet weak var addBT: UIButton!
+    @IBOutlet weak var moreBT: UIButton!
+    @IBOutlet weak var listenBT: UIButton!
+    @IBOutlet weak var addFriendBT: UIButton!
     
     var formVC :Int!
     var dataArray :[Record]!
@@ -28,16 +29,20 @@ class LeaveMessageViewController: UIViewController {
     
     var recordId :Int!
     var messageIndexPath :IndexPath!
-    var recordEmail :String!
+    var recordSendUser :String!
+    var recorduserNickName :String!
     
     var messageSumType :Int!
     
     var delegate :LeaveMessageViewControllerDelegate!
     
+    var isFriend :Bool!
+    
     var backView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let userData = UserDefaults.standard
         guard let emailHead = userData.string(forKey: "emailHead") else {
             return
@@ -45,16 +50,16 @@ class LeaveMessageViewController: UIViewController {
         self.messageSendImage.image = Manager.shared.userPhotoRead(jpg: emailHead)
         self.messageSendImage.layer.cornerRadius = self.messageSendImage.bounds.height / 2
         
-        self.playerBT.layer.cornerRadius = self.playerBT.frame.height / 2
+        self.moreBT.layer.cornerRadius = self.moreBT.frame.height / 2
         
-        self.userBT.layer.cornerRadius = self.playerBT.frame.height / 2
+        self.listenBT.layer.cornerRadius = self.moreBT.frame.height / 2
 //        self.userBT.layer.borderWidth = 1
 //        self.userBT.layer.borderColor = UIColor.black.cgColor
         
-        self.userBTCenterPoint =  self.userBT.center
-        self.userBT.center = self.playerBT.center
-        self.addBTCenterPoint = self.addBT.center
-        self.addBT.center = self.playerBT.center
+        self.userBTCenterPoint =  self.listenBT.center
+        self.listenBT.center = self.moreBT.center
+        self.addBTCenterPoint = self.addFriendBT.center
+        self.addFriendBT.center = self.moreBT.center
         
         self.messageTableView.dataSource = self
         self.messageTableView.delegate = self
@@ -75,6 +80,9 @@ class LeaveMessageViewController: UIViewController {
         } else {
             print("form UserVC.")
             self.dataArray = Manager.userLocalRecordPen
+            self.moreBT.isHidden = true
+            self.addFriendBT.isHidden = true
+            self.listenBT.isHidden = true
         }
     }
     
@@ -87,40 +95,66 @@ class LeaveMessageViewController: UIViewController {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.playerBT.frame = CGRect(x: self.playerBT.frame.minX, y: self.playerBT.frame.minY, width: self.playerBT.frame.size.width, height: self.playerBT.frame.size.height)
+        self.moreBT.frame = CGRect(x: self.moreBT.frame.minX, y: self.moreBT.frame.minY, width: self.moreBT.frame.size.width, height: self.moreBT.frame.size.height)
     }
     /*------------------------------------------------------------ Function. ------------------------------------------------------------*/
     //MARK: func - player Menu.
     @IBAction func playerMemu(_ sender: UIButton) {
         if self.test == false {
             UIView.animate(withDuration: 0.3, animations: {
-                self.userBT.alpha = 1
-                self.addBT.alpha = 1
+                self.listenBT.alpha = 1
+                self.addFriendBT.alpha = 1
                 
-                self.userBT.center = self.userBTCenterPoint
-                self.addBT.center = self.addBTCenterPoint
+                self.listenBT.center = self.userBTCenterPoint
+                self.addFriendBT.center = self.addBTCenterPoint
                 
                 self.test = true
                 })
         } else {
             UIView.animate(withDuration: 0.3, animations: {
-                self.userBT.alpha = 0
-                self.addBT.alpha = 0
+                self.listenBT.alpha = 0
+                self.addFriendBT.alpha = 0
                 
-                self.userBT.center  = self.playerBT.center
-                self.addBT.center = self.playerBT.center
+                self.listenBT.center  = self.moreBT.center
+                self.addFriendBT.center = self.moreBT.center
                 
                 self.test = false
             })
         }
     }
+    //MARK: func - Add to Friend.
+    @IBAction func addToFriend(_ sender: UIButton) {
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Account_Add_Friend.php") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let userData = UserDefaults.standard
+            guard let email = userData.string(forKey: "email") else {
+                return
+            }
+            let param = "email=\(email)&Femail=\(self.recordSendUser!)&Fname=\(self.recorduserNickName!)"
+            print("\(param)")
+            request.httpBody = param.data(using: .utf8)
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let e = error {
+                    print("erroe \(e)")
+                }
+                let reCode = String(data: data!, encoding: .utf8)
+                print(reCode!)
+            }
+            task.resume()
+        }
+    }
     //MARK: func - Look User.
     @IBAction func lookUser(_ sender: Any) {
-        let seeUserVC = self.storyboard?.instantiateViewController(withIdentifier: "seeuserVC") as! UIViewController
-        let width = self.view.frame.width * 0.5
-        let hight = self.view.frame.height * 0.5
-        seeUserVC.view.frame = CGRect(x: width, y: hight, width: width, height: hight)
-        self.view.addSubview(seeUserVC.view)
+        let userCardVC = self.storyboard?.instantiateViewController(withIdentifier: "usercardVC") as! UserCardViewController
+        let userCardVCCenter = CGPoint(x: self.view.frame.size.width  / 2, y: self.view.frame.size.height / 2)
+        
+        //userCardVC.view.frame = CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
+//        seeUserVC.view.frame = CGRect(x: width, y: hight, width: width, height: hight)
+        //self.view.addSubview(userCardVC.vi)
         
 //        let userVC2 = self.storyboard?.instantiateViewController(withIdentifier: "userVC2") as! UserViewController
 //        userVC2.fromUserVC = 1

@@ -143,7 +143,8 @@ class MainAppViewController: UIViewController {
             let currentCell = self.tableView.cellForRow(at: self.pushIndex!) as! MyRecordTableViewCell
             leavemessageVC.recordId = Int(currentCell.RecordID)
             leavemessageVC.messageIndexPath = self.pushIndex
-            leavemessageVC.recordEmail = self.tableViewData[1][self.pushIndex.row].recordSendUser
+            leavemessageVC.recordSendUser = self.tableViewData[1][self.pushIndex.row].recordSendUser
+            leavemessageVC.recorduserNickName = self.tableViewData[1][self.pushIndex.row].userNickName
             leavemessageVC.formVC = 0
             
             leavemessageVC.delegate = self

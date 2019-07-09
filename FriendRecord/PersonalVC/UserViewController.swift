@@ -237,7 +237,6 @@ class UserViewController: UIViewController {
             let leavemessageVC = segue.destination as! LeaveMessageViewController
             leavemessageVC.recordId = Int(cell.recordID)
             leavemessageVC.messageIndexPath = cell.recordIndexPath
-            //leavemessageVC.recordEmail = Manager.userLocalRecordPen[recordIndexPath.row].recordSendUser
             leavemessageVC.formVC = 1
             
             leavemessageVC.delegate = self
