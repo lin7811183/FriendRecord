@@ -11,6 +11,7 @@ class UserViewController: UIViewController {
     @IBOutlet weak var userPhotoBT: UIButton!
     @IBOutlet weak var editUserTF_BT: UIButton!
     @IBOutlet weak var userTableView: UITableView!
+    @IBOutlet weak var userTabBar: UINavigationItem!
     
     var isUserFTType = false
     
@@ -22,7 +23,8 @@ class UserViewController: UIViewController {
     var pushRecordID :Double!
     var pushIndex :IndexPath!
     
-    var userDataType = 0
+    var fromUserVC = 0
+    var reocrdPenEmail :String!
     
     var isPiayer = false
     //建立AudioRecorder元件
@@ -33,7 +35,7 @@ class UserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.userDataType == 0 {
+        if self.fromUserVC == 0 {
             let userData = UserDefaults.standard
             
             let uesrDataNickName = userData.string(forKey: "nickname")
@@ -44,24 +46,26 @@ class UserViewController: UIViewController {
             
             let userDataBf = userData.string(forKey: "bf")
             self.userBfLB.text = userDataBf
-            
-            self.userView.layer.cornerRadius = 10
-            self.userView.layer.masksToBounds = true
-            //        self.userView.backgroundColor = UIColor.lightGray
-            self.userView.backgroundColor = UIColor(displayP3Red: 192/220, green: 192/220, blue: 192/220, alpha: 0.5)
-            
-            self.userTF.isEditable = false
-            self.userTF.isSelectable = false
-            //self.userTF.layer.borderColor = UIColor.black.cgColor
-            //self.userTF.layer.borderWidth = 1.0
-            self.userTF.layer.cornerRadius = 5.0
-            self.userTF.delegate = self
-            
-            self.userTableView.dataSource = self
-            self.userTableView.delegate = self
-            
+
             self.navigationItem.title = uesrDataNickName
+        } else {
+            
         }
+        
+        self.userView.layer.cornerRadius = 10
+        self.userView.layer.masksToBounds = true
+        //        self.userView.backgroundColor = UIColor.lightGray
+        self.userView.backgroundColor = UIColor(displayP3Red: 192/220, green: 192/220, blue: 192/220, alpha: 0.5)
+        
+        self.userTF.isEditable = false
+        self.userTF.isSelectable = false
+        //self.userTF.layer.borderColor = UIColor.black.cgColor
+        //self.userTF.layer.borderWidth = 1.0
+        self.userTF.layer.cornerRadius = 5.0
+        self.userTF.delegate = self
+        
+        self.userTableView.dataSource = self
+        self.userTableView.delegate = self
         
     }
     
@@ -70,49 +74,64 @@ class UserViewController: UIViewController {
         
         self.editUserTF_BT.setTitle("編輯", for: .normal)
         
-        //check local app have user Photo.
-        let userData = UserDefaults.standard
-        guard let emailHead = userData.string(forKey: "emailHead") else {
-            return
-        }
-        
-        let exist = Manager.shared.checkFile(fileName: "\(emailHead).jpg")
-        
-        if exist != true {
-            self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
-            self.userPhotoBT.clipsToBounds = true
-            self.userPhotoBT.setImage(UIImage(named: "userPhotoDefault.png"), for: .normal)
+        if self.fromUserVC == 0 {
+            //check local app have user Photo.
+            let userData = UserDefaults.standard
+            guard let emailHead = userData.string(forKey: "emailHead") else {
+                return
+            }
+            
+            let exist = Manager.shared.checkFile(fileName: "\(emailHead).jpg")
+            
+            if exist != true {
+                self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
+                self.userPhotoBT.clipsToBounds = true
+                self.userPhotoBT.setImage(UIImage(named: "userPhotoDefault.png"), for: .normal)
+            } else {
+                self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
+                self.userPhotoBT.clipsToBounds = true
+                self.userPhotoBT.setImage(Manager.shared.userPhotoRead(jpg: emailHead), for: .normal)
+            }
+            
+            //DownLoadUserRecordPen.
+            Manager.delegateUser = self
+            guard let email = userData.string(forKey: "email") else {
+                return
+            }
+            Manager.shared.downLoadUserLocalRecordPen(email: email)
+            Manager.shared.downLoadUserPresent(email: email
+            )
         } else {
-            self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
-            self.userPhotoBT.clipsToBounds = true
-            self.userPhotoBT.setImage(Manager.shared.userPhotoRead(jpg: emailHead), for: .normal)
+            //DownLoadUserRecordPen.
+            Manager.delegateUser = self
+            Manager.shared.downLoadUserLocalRecordPen(email: self.reocrdPenEmail!)
+            Manager.shared.downLoadUserPresent(email: self.reocrdPenEmail!)
         }
         
-        //DownLoadUserRecordPen.
-        Manager.delegateUser = self
-        guard let email = userData.string(forKey: "email") else {
-            return
-        }
-        Manager.shared.downLoadUserLocalRecordPen(email: email)
-        Manager.shared.downLoadUserPresent(email: email
-        )
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.tableArray.removeAll()
-        
+        self.stopOldRecordMuice()
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.stopOldRecordMuice()
+    }
+    /*------------------------------------------------------------ Function ------------------------------------------------------------*/
+    //MARK: func - Stop Old Record Muice.
+    func stopOldRecordMuice() {
         //Stop old Record pen muice.
-        if let indexPath = self.oldRecordIndexPath {
-            print("user is out UserVC.")
-            let oldcurrentCell = self.userTableView.cellForRow(at: indexPath) as! MyUserRecordTableViewCell
-            oldcurrentCell.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
-            self.recordPlayer?.stop()
-            self.isPiayer = false
+        if self.isPiayer == true {
+            if let indexPath = self.oldRecordIndexPath {
+                print("user is out UserVC.")
+                let oldcurrentCell = self.userTableView.cellForRow(at: indexPath) as! MyUserRecordTableViewCell
+                oldcurrentCell.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
+                self.recordPlayer?.stop()
+                self.isPiayer = false
+            }
         }
     }
-    
-    /*------------------------------------------------------------ Function ------------------------------------------------------------*/
     //MARK: func - User Photo Look.
     @IBAction func userPhotoLook(_ sender: Any) {
         //let userPhotoVC = self.storyboard?.instantiateViewController(withIdentifier: "userphotoVC") as! UserPhotoViewController
@@ -214,11 +233,11 @@ class UserViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "userpush" {
-            print("prepare")
             let cell = sender as! MyUserRecordTableViewCell
             let leavemessageVC = segue.destination as! LeaveMessageViewController
             leavemessageVC.recordId = Int(cell.recordID)
             leavemessageVC.messageIndexPath = cell.recordIndexPath
+            //leavemessageVC.recordEmail = Manager.userLocalRecordPen[recordIndexPath.row].recordSendUser
             leavemessageVC.formVC = 1
             
             leavemessageVC.delegate = self
@@ -262,11 +281,15 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
             cell.playerBT.addTarget(self, action: #selector(player(sender:)), for: .touchUpInside)
             cell.playerBT.tag = indexPath.section
             
+//            cell.layer.borderWidth = 1.0
+//            cell.layer.borderColor = UIColor.gray.cgColor
+            
             return cell
         } else {
             let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell2", for: indexPath) as! MyUserRecord2TableViewCell
             cell.dateLB.text = self.tableArray[indexPath.section].sub.recordDate
             cell.mainLB.text = self.tableArray[indexPath.section].sub.recordText
+            
             return cell
         }
     }
@@ -275,13 +298,13 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
         if self.tableArray[indexPath.section].isOpen == true {
             self.tableArray[indexPath.section].isOpen = false
             let section = IndexSet.init(integer: indexPath.section)
-            self.userTableView.reloadSections(section, with: .automatic)
-            self.userTableView.reloadData()
+            self.userTableView.reloadSections(section, with: .fade)
+
         } else {
             self.tableArray[indexPath.section].isOpen = true
             let section = IndexSet.init(integer: indexPath.section)
-            self.userTableView.reloadSections(section, with: .automatic)
-            self.userTableView.reloadData()
+            self.userTableView.reloadSections(section, with: .fade)
+
         }
     }
     

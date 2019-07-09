@@ -129,6 +129,7 @@ class RecordGoViewController: UIViewController {
                 newRecord.recordFileName = "\(fileName).caf"
                 newRecord.userNickName = userNickName!
                 newRecord.recordText = self.textView.text
+                newRecord.messageSum = 0.0
                 
                 let dateFormat2 :DateFormatter = DateFormatter()
                 dateFormat2.dateFormat = "yyyy-MM-dd HH:mm:ss"

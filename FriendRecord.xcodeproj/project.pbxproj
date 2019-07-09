@@ -40,6 +40,8 @@
 		CE15DEE622D3453B00670BA2 /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = CE15DEE522D3453A00670BA2 /* speaker.png */; };
 		CE16A9E422C0A64D00B16983 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = CE16A9E322C0A64D00B16983 /* Star.png */; };
 		CE16A9E622C0ADB000B16983 /* Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = CE16A9E522C0ADAF00B16983 /* Stop.png */; };
+		CE19634A22D41EDD004C6D32 /* FriendMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19634922D41EDD004C6D32 /* FriendMenuViewController.swift */; };
+		CE19634C22D42184004C6D32 /* SlideInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19634B22D42184004C6D32 /* SlideInTransition.swift */; };
 		CE21464822B4978100F39747 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21464722B4978100F39747 /* Record.swift */; };
 		CE22B5F822CF3563008D8C57 /* SearchFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE22B5F722CF3563008D8C57 /* SearchFriendViewController.swift */; };
 		CE22B5FC22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE22B5FB22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift */; };
@@ -97,6 +99,8 @@
 		CE15DEE522D3453A00670BA2 /* speaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speaker.png; sourceTree = "<group>"; };
 		CE16A9E322C0A64D00B16983 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star.png; sourceTree = "<group>"; };
 		CE16A9E522C0ADAF00B16983 /* Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stop.png; sourceTree = "<group>"; };
+		CE19634922D41EDD004C6D32 /* FriendMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendMenuViewController.swift; sourceTree = "<group>"; };
+		CE19634B22D42184004C6D32 /* SlideInTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInTransition.swift; sourceTree = "<group>"; };
 		CE21464722B4978100F39747 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		CE22B5F722CF3563008D8C57 /* SearchFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendViewController.swift; sourceTree = "<group>"; };
 		CE22B5FB22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserRecordTableViewCell.swift; sourceTree = "<group>"; };
@@ -155,18 +159,17 @@
 			path = Function;
 			sourceTree = "<group>";
 		};
-		CE0102C222A783E600EDB18A /* MainApp */ = {
+		CE0102C222A783E600EDB18A /* MainAppVC */ = {
 			isa = PBXGroup;
 			children = (
 				CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */,
 				CEFF4422229E961B006A7449 /* MainAppViewController.swift */,
 				CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */,
 				CE140C0922B8E30300EF1F1C /* PenViewController.swift */,
-				CED64B0822CC6F0B006DB0EE /* LeaveMessageViewController.swift */,
 				CE21464922B4978600F39747 /* Object */,
 				CE0DE89E22B0C78800F49C5B /* CustomCell */,
 			);
-			path = MainApp;
+			path = MainAppVC;
 			sourceTree = "<group>";
 		};
 		CE0102C322A7841700EDB18A /* Image */ = {
@@ -213,7 +216,6 @@
 			children = (
 				CE0DE89F22B0C7CE00F49C5B /* MyUserTableViewCell.swift */,
 				CE0DE8C122B0D96900F49C5B /* MyRecordTableViewCell.swift */,
-				CED64B0A22CC8A6F006DB0EE /* MyMessageTableViewCell.swift */,
 			);
 			path = CustomCell;
 			sourceTree = "<group>";
@@ -270,9 +272,11 @@
 				CE100404229B725200660E82 /* AppDelegate.swift */,
 				CE100410229B725300660E82 /* Info.plist */,
 				CE0102BD22A7831800EDB18A /* Function */,
-				CE100416229B726300660E82 /* Login */,
-				CE0102C222A783E600EDB18A /* MainApp */,
-				CE15D74822A6885700892340 /* Personal */,
+				CE100416229B726300660E82 /* LoginVC */,
+				CE0102C222A783E600EDB18A /* MainAppVC */,
+				CE9B6ADF22D46F0600247800 /* MessageVC */,
+				CE15D74822A6885700892340 /* PersonalVC */,
+				CE19634822D41EB4004C6D32 /* FriendMenu */,
 				CE22B5F422CF34E4008D8C57 /* SearchFriend */,
 				CE106C5422C1A26D005DF25E /* Animation */,
 				CE0102C322A7841700EDB18A /* Image */,
@@ -281,14 +285,14 @@
 			path = FriendRecord;
 			sourceTree = "<group>";
 		};
-		CE100416229B726300660E82 /* Login */ = {
+		CE100416229B726300660E82 /* LoginVC */ = {
 			isa = PBXGroup;
 			children = (
 				CE100417229B728D00660E82 /* LoginViewController.swift */,
 				CE100419229B764900660E82 /* RegisteredViewController.swift */,
 				CE63540622CB30D900E05A02 /* Object */,
 			);
-			path = Login;
+			path = LoginVC;
 			sourceTree = "<group>";
 		};
 		CE106C5422C1A26D005DF25E /* Animation */ = {
@@ -299,7 +303,7 @@
 			path = Animation;
 			sourceTree = "<group>";
 		};
-		CE15D74822A6885700892340 /* Personal */ = {
+		CE15D74822A6885700892340 /* PersonalVC */ = {
 			isa = PBXGroup;
 			children = (
 				CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */,
@@ -307,14 +311,22 @@
 				CE0E9AD522D03B95007CA9D6 /* Object */,
 				CE0E6DAC22C44C490028FF47 /* CustomCell */,
 			);
-			path = Personal;
+			path = PersonalVC;
+			sourceTree = "<group>";
+		};
+		CE19634822D41EB4004C6D32 /* FriendMenu */ = {
+			isa = PBXGroup;
+			children = (
+				CE19634922D41EDD004C6D32 /* FriendMenuViewController.swift */,
+				CE19634B22D42184004C6D32 /* SlideInTransition.swift */,
+			);
+			path = FriendMenu;
 			sourceTree = "<group>";
 		};
 		CE21464922B4978600F39747 /* Object */ = {
 			isa = PBXGroup;
 			children = (
 				CE21464722B4978100F39747 /* Record.swift */,
-				CED64B0C22CC9AD8006DB0EE /* Message.swift */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -333,6 +345,32 @@
 				CE0102C822A7B4D100EDB18A /* UserData.swift */,
 			);
 			path = Object;
+			sourceTree = "<group>";
+		};
+		CE9B6ADF22D46F0600247800 /* MessageVC */ = {
+			isa = PBXGroup;
+			children = (
+				CED64B0822CC6F0B006DB0EE /* LeaveMessageViewController.swift */,
+				CE9B6AE022D46F3A00247800 /* Object */,
+				CE9B6AE122D46F4700247800 /* CustonCell */,
+			);
+			path = MessageVC;
+			sourceTree = "<group>";
+		};
+		CE9B6AE022D46F3A00247800 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				CED64B0C22CC9AD8006DB0EE /* Message.swift */,
+			);
+			path = Object;
+			sourceTree = "<group>";
+		};
+		CE9B6AE122D46F4700247800 /* CustonCell */ = {
+			isa = PBXGroup;
+			children = (
+				CED64B0A22CC8A6F006DB0EE /* MyMessageTableViewCell.swift */,
+			);
+			path = CustonCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -501,12 +539,14 @@
 				CEF9016022B100CE004F5A4C /* RecordGoViewController.swift in Sources */,
 				CE10041A229B764900660E82 /* RegisteredViewController.swift in Sources */,
 				CE100405229B725200660E82 /* AppDelegate.swift in Sources */,
+				CE19634C22D42184004C6D32 /* SlideInTransition.swift in Sources */,
 				CE140C0A22B8E30300EF1F1C /* PenViewController.swift in Sources */,
 				CE0E9AD722D03BC5007CA9D6 /* TableStruct.swift in Sources */,
 				CE0D3D63229F92B0008033D7 /* MyTabBarController.swift in Sources */,
 				CEFFF87022B9E23A00D7BC8A /* RippleAnimationViewController.swift in Sources */,
 				CED64B0D22CC9AD8006DB0EE /* Message.swift in Sources */,
 				CE0A945722B1D35F00F7F031 /* UserPhotoViewController.swift in Sources */,
+				CE19634A22D41EDD004C6D32 /* FriendMenuViewController.swift in Sources */,
 				CE0DE8C222B0D96900F49C5B /* MyRecordTableViewCell.swift in Sources */,
 				CE22B5FC22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift in Sources */,
 			);

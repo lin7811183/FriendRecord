@@ -28,14 +28,16 @@ class LeaveMessageViewController: UIViewController {
     
     var recordId :Int!
     var messageIndexPath :IndexPath!
+    var recordEmail :String!
     
     var messageSumType :Int!
     
     var delegate :LeaveMessageViewControllerDelegate!
     
+    var backView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let userData = UserDefaults.standard
         guard let emailHead = userData.string(forKey: "emailHead") else {
             return
@@ -74,7 +76,6 @@ class LeaveMessageViewController: UIViewController {
             print("form UserVC.")
             self.dataArray = Manager.userLocalRecordPen
         }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,10 +90,9 @@ class LeaveMessageViewController: UIViewController {
         self.playerBT.frame = CGRect(x: self.playerBT.frame.minX, y: self.playerBT.frame.minY, width: self.playerBT.frame.size.width, height: self.playerBT.frame.size.height)
     }
     /*------------------------------------------------------------ Function. ------------------------------------------------------------*/
-
+    //MARK: func - player Menu.
     @IBAction func playerMemu(_ sender: UIButton) {
         if self.test == false {
-            
             UIView.animate(withDuration: 0.3, animations: {
                 self.userBT.alpha = 1
                 self.addBT.alpha = 1
@@ -103,7 +103,6 @@ class LeaveMessageViewController: UIViewController {
                 self.test = true
                 })
         } else {
-            
             UIView.animate(withDuration: 0.3, animations: {
                 self.userBT.alpha = 0
                 self.addBT.alpha = 0
@@ -115,8 +114,21 @@ class LeaveMessageViewController: UIViewController {
             })
         }
     }
-    
-    
+    //MARK: func - Look User.
+    @IBAction func lookUser(_ sender: Any) {
+        let seeUserVC = self.storyboard?.instantiateViewController(withIdentifier: "seeuserVC") as! UIViewController
+        let width = self.view.frame.width * 0.5
+        let hight = self.view.frame.height * 0.5
+        seeUserVC.view.frame = CGRect(x: width, y: hight, width: width, height: hight)
+        self.view.addSubview(seeUserVC.view)
+        
+//        let userVC2 = self.storyboard?.instantiateViewController(withIdentifier: "userVC2") as! UserViewController
+//        userVC2.fromUserVC = 1
+//        userVC2.reocrdPenEmail = self.recordEmail!
+//        self.navigationController?.pushViewController(userVC2, animated: true)
+        
+//        self.performSegue(withIdentifier: "seeuser", sender: nil)
+    }
     //MARK: func - Message send to Reocrd pen.
     @IBAction func messageSend(_ sender: Any) {
         var sum = self.dataArray[self.messageIndexPath.row].messageSum
@@ -172,7 +184,6 @@ class LeaveMessageViewController: UIViewController {
             self.messageTF.resignFirstResponder()
         }
     }
-    
     //MARK: func - UpLoad Message to MySQL.
     func upLoadMessage(email :String, nickName :String, message :String) {
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/message/UpLoad_Message.php") {
@@ -191,7 +202,6 @@ class LeaveMessageViewController: UIViewController {
             task.resume()
         }
     }
-    
     //MARK: func - DownLoad Message.
     func downLoadMessage() {
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/message/DownLoad_Message.php") {
@@ -227,6 +237,13 @@ class LeaveMessageViewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "seeuser" {
+//            let userVC = segue.destination as! UserViewController
+//            userVC.fromUserVC = 1
+//            userVC.reocrdPenEmail = self.recordEmail!
+//        }
+    }
 }
 
 /*------------------------------------------------------------ Protocol ------------------------------------------------------------*/
@@ -241,9 +258,7 @@ extension LeaveMessageViewController :UITableViewDataSource, UITableViewDelegate
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.messageTableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! MyMessageTableViewCell
-        print("\(self.messageTVData.count)")
         if self.messageTVData.count == 0 {
-            print("目前尚未有人留言")
             cell.messageLB.text = "目前尚未有人留言!"
         } else {
             let data = messageTVData[indexPath.row]

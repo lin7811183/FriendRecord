@@ -349,12 +349,11 @@ class Manager :UIViewController {
             request.httpMethod = "POST"
             
             let userData = UserDefaults.standard
-            let email = userData.string(forKey: "email")
-            
-            let param = "usermail=\(email!)"
+            if let email = userData.string(forKey: "email") {
+                let param = "usermail=\(email)"
+                request.httpBody = param.data(using: .utf8)
+            }
 
-            request.httpBody = param.data(using: .utf8)
-            
             let session = URLSession.shared
             let task = session.dataTask(with: request) { (data, respones, error) in
                 if let e = error {

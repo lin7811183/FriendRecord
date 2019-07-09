@@ -45,10 +45,15 @@ class MainAppViewController: UIViewController {
     
     var recordPenMode = false
     
+    let transiton = SlideInTransition()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
 //        self.navigationItem.largeTitleDisplayMode = .never
+        // 預載資料
+        Manager.shared.downLoadRecordPen()
+        Manager.shared.downLoadUserPhoto()
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -62,7 +67,6 @@ class MainAppViewController: UIViewController {
         self.refreshControl.attributedTitle = NSAttributedString(string: "更新留言板")
         self.refreshControl.addTarget(self, action: #selector(self.downLoadRecordPen), for: .valueChanged)
         self.tableView.addSubview(refreshControl)
-        
         
     }
     
@@ -87,17 +91,13 @@ class MainAppViewController: UIViewController {
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        //Stop old Record pen muice.
-        if let indexPath = self.oldRecordIndexPath {
-            print("user is out MainAppVC.")
-            let oldcurrentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
-            oldcurrentCell.sendImage.layer.borderWidth = 0
-            self.recordPlayer?.stop()
-            self.isPiayer = false
-        }
+        self.stopOldRecordMuice()
     }
-    /*------------------------------------------------------------ Function. ------------------------------------------------------------*/
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.stopOldRecordMuice()
+    }
+    /*------------------------------------------------------------ Functions. ------------------------------------------------------------*/
     //MARK: func - DownLoad Record Pen.
     @objc func downLoadRecordPen() {
         print("downLoadRecordPen")
@@ -115,14 +115,35 @@ class MainAppViewController: UIViewController {
         }
         
     }
+    //MARK: func - Show friend Menu.
+    @IBAction func friendMenu(_ sender: Any) {
+        
+        guard let friendMenuVC = self.storyboard?.instantiateViewController(withIdentifier: "friendmenuVC") as? FriendMenuViewController else { return }
+        friendMenuVC.modalPresentationStyle = .overCurrentContext
+        friendMenuVC.transitioningDelegate = self
+        present(friendMenuVC, animated: true)
+    }
+    //MARK: func - Stop old Record Muice.
+    func stopOldRecordMuice() {
+        //Stop old Record pen muice.
+        if self.isPiayer == true {
+            if let indexPath = self.oldRecordIndexPath {
+                print("user is out MainAppVC.")
+                let oldcurrentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
+                oldcurrentCell.sendImage.layer.borderWidth = 0
+                self.recordPlayer?.stop()
+                self.isPiayer = false
+            }
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "push" {
-            print("push")
             let leavemessageVC = segue.destination as! LeaveMessageViewController
             let currentCell = self.tableView.cellForRow(at: self.pushIndex!) as! MyRecordTableViewCell
             leavemessageVC.recordId = Int(currentCell.RecordID)
             leavemessageVC.messageIndexPath = self.pushIndex
+            leavemessageVC.recordEmail = self.tableViewData[1][self.pushIndex.row].recordSendUser
             leavemessageVC.formVC = 0
             
             leavemessageVC.delegate = self
@@ -373,6 +394,19 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
     }
 }
 
+extension MainAppViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        self.transiton.isPresenting = true
+        return transiton
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        self.transiton.isPresenting = false
+        return transiton
+    }
+}
+
+
 extension MainAppViewController :AVAudioPlayerDelegate {
     //MARK: Protocol - AVAudioPlayerDelegate
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
@@ -448,7 +482,6 @@ extension MainAppViewController :ManagerDelegate {
     func finishDownLoadUserRecordPen() {
         return
     }
-    
     //MARK: Protocol - ManagerDelegate by Manager.
     func finishDownLoadRecordPen() {
         print("ManagerDelegate - finishDownLoadRecordPen")
@@ -456,7 +489,6 @@ extension MainAppViewController :ManagerDelegate {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
             // 停止 refreshControl 動畫
             self.refreshControl.endRefreshing()
-            
             
             //Analysis email to phtot.
             for photoData in Manager.recordData{
@@ -467,12 +499,10 @@ extension MainAppViewController :ManagerDelegate {
                     print("********** MainAPP VC func downLoadRecordPenUserPhoto error. **********")
                     return
                 }
-                
                 guard let recordfile = record else {
                     print("********** MainAPP VC func downLoadRecordPenUserRecord error **********")
                     return
                 }
-                
                 let imageNameChange = dataChanage.split(separator: "@")
                 let fileName = "\(imageNameChange[0])"
                 
@@ -483,10 +513,10 @@ extension MainAppViewController :ManagerDelegate {
             }
             self.tableViewData[1] = Manager.recordData
             
-            self.tableView.reloadData()
+            // left out the unnecessary syntax in the completion block and the optional completion parameter
+            UIView.transition(with: self.tableView, duration: 0.35, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() })
         }
     }
-    
     //MARK: Protocol - ManagerDelegate by Manager.
     func finishDownLoadUserPhoto() {
         print("ManagerDelegate - finishDownLoadUserPhoto")

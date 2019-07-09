@@ -10,5 +10,6 @@ class Message : Equatable,Codable {
     var messageNickName :String?
     var message :String?
     var penDate :String?
+    var messageSum :Double?
 
 }
