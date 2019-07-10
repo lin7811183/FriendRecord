@@ -8,6 +8,11 @@ target 'FriendRecord' do
   # Pods for FriendRecord
   pod 'FoldingCell'
   pod 'IQKeyboardManagerSwift'
-
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Messaging'
 
 end

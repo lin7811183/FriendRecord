@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1061438445960-6s1f5ekko0jp39sb5ndohim6mncghenu.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1061438445960-6s1f5ekko0jp39sb5ndohim6mncghenu</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB_N25E6K46nBmBFPsvIztJ8NOce92_bD4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1061438445960</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ej.www.FriendRecord</string>
+	<key>PROJECT_ID</key>
+	<string>ejlin-friendrecord</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ejlin-friendrecord.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1061438445960:ios:b97cbe31ba994e68</string>
+	<key>DATABASE_URL</key>
+	<string>https://ejlin-friendrecord.firebaseio.com</string>
+</dict>
+</plist>

@@ -17,6 +17,7 @@
 		CE0B064022ADF756007ADB36 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B063F22ADF756007ADB36 /* CameraViewController.swift */; };
 		CE0D3D53229F5ECD008033D7 /* Login_Icon_ver_2_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */; };
 		CE0D3D63229F92B0008033D7 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */; };
+		CE0DB35B22D5BD450053B86C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE0DB35A22D5BD450053B86C /* GoogleService-Info.plist */; };
 		CE0DD11522CAE4720031D4BA /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0DD11422CAE4720031D4BA /* line.png */; };
 		CE0DD11722CAEEDC0031D4BA /* recordPen_Line.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0DD11622CAEEDC0031D4BA /* recordPen_Line.png */; };
 		CE0DDC3C22D06A0B00E89E0E /* Login.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0DDC3B22D06A0B00E89E0E /* Login.png */; };
@@ -82,6 +83,8 @@
 		CE0B063F22ADF756007ADB36 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login_Icon_ver_2_2.png; sourceTree = "<group>"; };
 		CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		CE0DB35922D5A9C60053B86C /* FriendRecord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FriendRecord.entitlements; sourceTree = "<group>"; };
+		CE0DB35A22D5BD450053B86C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE0DD11422CAE4720031D4BA /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = line.png; sourceTree = "<group>"; };
 		CE0DD11622CAEEDC0031D4BA /* recordPen_Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recordPen_Line.png; sourceTree = "<group>"; };
 		CE0DDC3B22D06A0B00E89E0E /* Login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login.png; sourceTree = "<group>"; };
@@ -287,6 +290,8 @@
 		CE100403229B725200660E82 /* FriendRecord */ = {
 			isa = PBXGroup;
 			children = (
+				CE0DB35A22D5BD450053B86C /* GoogleService-Info.plist */,
+				CE0DB35922D5A9C60053B86C /* FriendRecord.entitlements */,
 				CE100408229B725200660E82 /* Main.storyboard */,
 				CE10040D229B725300660E82 /* LaunchScreen.storyboard */,
 				CE04BFC322C7408200BC8300 /* Assets.xcassets */,
@@ -451,6 +456,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -503,6 +511,7 @@
 				CE10040A229B725200660E82 /* Main.storyboard in Resources */,
 				CE15DEE622D3453B00670BA2 /* speaker.png in Resources */,
 				CE1D3AED22D4CFC80076F73F /* 未命名80 (14).png in Resources */,
+				CE0DB35B22D5BD450053B86C /* GoogleService-Info.plist in Resources */,
 				CE0102C622A784B700EDB18A /* Login_Icon_ver_2.png in Resources */,
 				CE1D3AEE22D4CFC80076F73F /* 未命名80 (12).png in Resources */,
 			);
@@ -543,14 +552,24 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FriendRecord/Pods-FriendRecord-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FoldingCell/FoldingCell.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoldingCell.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -655,6 +674,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -743,6 +763,9 @@
 			baseConfigurationReference = 21E5157AEA82F1F2130B3B2D /* Pods-FriendRecord.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FriendRecord/FriendRecord.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Yixing Lin (6Y8RK23U73)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6Y8RK23U73;
 				INFOPLIST_FILE = FriendRecord/Info.plist;
@@ -752,6 +775,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ej.www.FriendRecord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -762,6 +786,8 @@
 			baseConfigurationReference = D392B1B28DCD8BE790EA3ED6 /* Pods-FriendRecord.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FriendRecord/FriendRecord.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6Y8RK23U73;
 				INFOPLIST_FILE = FriendRecord/Info.plist;

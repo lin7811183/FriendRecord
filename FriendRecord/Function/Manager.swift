@@ -514,4 +514,24 @@ class Manager :UIViewController {
             task.resume()
         }
     }
+    
+    func fireBasePostMessaging() {
+        if let url = URL(string: "https://fcm.googleapis.com/fcm/send") {
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let param = "egistration_ids=AIzaSyCI2U4N5vkIH7OPFYI1rM7owlPVawhd9js"
+            request.httpBody = param.data(using: .utf8)
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, respones, error) in
+                if let e = error {
+                    print("User Online : \(e)")
+                    return
+                }
+            }
+            task.resume()
+        }
+    }
 }
