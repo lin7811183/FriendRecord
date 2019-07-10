@@ -1,6 +1,6 @@
 import Foundation
 
-class Friend {
+class Friend :Codable{
     
     var userEmail :String?
     var friendEmail :String?

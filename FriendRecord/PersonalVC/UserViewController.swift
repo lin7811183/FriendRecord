@@ -387,7 +387,8 @@ extension UserViewController :ManagerDelegateUser {
                 self.tableArray.append(newData)
             }
             print("tableArray: \(self.tableArray.count)")
-            self.userTableView.reloadData()
+            //self.userTableView.reloadData()
+            UIView.transition(with: self.userTableView, duration: 0.5, options: .transitionCrossDissolve, animations: { self.userTableView.reloadData() })
         }
     }
     func finishDownLoadUserPresent(preenst: String) {

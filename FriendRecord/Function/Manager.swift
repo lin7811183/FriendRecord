@@ -141,6 +141,72 @@ class Manager :UIViewController {
         
         return showDate
     }
+    
+    //MARK: func - save thumbmailImage
+    func thumbmailImage(image :UIImage) -> UIImage? {
+        
+        //設定縮圖大小
+        let thumbnailSize = CGSize(width: 400 ,height: 400)
+        //找出目前螢幕的scale
+        let scale = UIScreen.main.scale
+        //產生畫布
+        UIGraphicsBeginImageContextWithOptions(thumbnailSize,false,scale)
+        //計算長寬要縮圖比例
+        let width = thumbnailSize.width / image.size.width
+        let height = thumbnailSize.height / image.size.height
+        let ratio = max(width,height)
+        let imageSize = CGSize(width:image.size.width*ratio,height: image.size.height*ratio)
+        //在畫圖行前 切圓形
+//        let circle = UIBezierPath(ovalIn: CGRect(x: 0,y: 0,width: thumbnailSize.width,height: thumbnailSize.height))
+//        circle.addClip()
+        image.draw(in:CGRect(x: -(imageSize.width-thumbnailSize.width)/2.0,y: -(imageSize.height-thumbnailSize.height)/2.0,width: imageSize.width,height: imageSize.height))
+        //取得畫布上的圖
+        let smallImage = UIGraphicsGetImageFromCurrentImageContext()
+        //關掉畫布
+        UIGraphicsEndImageContext()
+        
+        let userEmail = UserDefaults.standard
+        let emailHead = userEmail.string(forKey: "emailHead")
+        let fileName = "\(emailHead!).jpg"
+        
+        let filePath = self.fileDocumentsPath(fileName: fileName)
+        
+        //write file
+        if let imageData = smallImage?.jpegData(compressionQuality: 1) {//compressionQuality:0~1之間
+            do{
+                try imageData.write(to: filePath, options: [.atomicWrite])
+            }catch {
+                print("uer photo fiel save is eror : \(error)")
+            }
+        }
+        return smallImage
+    }
+    
+    //MARK: func - ReSize Image.
+    func resizeImage(image: UIImage) -> UIImage {
+        
+        //設定縮圖大小
+        let thumbnailSize = CGSize(width: 20 ,height: 20)
+        //找出目前螢幕的scale
+        let scale = UIScreen.main.scale
+        //產生畫布
+        UIGraphicsBeginImageContextWithOptions(thumbnailSize,false,scale)
+        //計算長寬要縮圖比例
+        let width = thumbnailSize.width / image.size.width
+        let height = thumbnailSize.height / image.size.height
+        let ratio = max(width,height)
+        let imageSize = CGSize(width:image.size.width*ratio,height: image.size.height*ratio)
+        //在畫圖行前 切圓形
+        let circle = UIBezierPath(ovalIn: CGRect(x: 0,y: 0,width: thumbnailSize.width,height: thumbnailSize.height))
+        circle.addClip()
+        image.draw(in:CGRect(x: -(imageSize.width-thumbnailSize.width)/2.0,y: -(imageSize.height-thumbnailSize.height)/2.0,width: imageSize.width,height: imageSize.height))
+        //取得畫布上的圖
+        var newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
     //MARK: downLoad user photo.
     func downLoadUserPhoto() {
         var recodeArry :[String:Int]!
@@ -300,46 +366,6 @@ class Manager :UIViewController {
         session.finishTasksAndInvalidate()//自訂session 須加這行，會若不加會造成memory link
     }
     
-    //MARK: func - save thumbmailImage
-    func thumbmailImage(image :UIImage) -> UIImage? {
-        
-        //設定縮圖大小
-        let thumbnailSize = CGSize(width: 400 ,height: 400)
-        //找出目前螢幕的scale
-        let scale = UIScreen.main.scale
-        //產生畫布
-        UIGraphicsBeginImageContextWithOptions(thumbnailSize,false,scale)
-        //計算長寬要縮圖比例
-        let width = thumbnailSize.width / image.size.width
-        let height = thumbnailSize.height / image.size.height
-        let ratio = max(width,height)
-        let imageSize = CGSize(width:image.size.width*ratio,height: image.size.height*ratio)
-        //在畫圖行前 切圓形
-//        let circle = UIBezierPath(ovalIn: CGRect(x: 0,y: 0,width: thumbnailSize.width,height: thumbnailSize.height))
-//        circle.addClip()
-        image.draw(in:CGRect(x: -(imageSize.width-thumbnailSize.width)/2.0,y: -(imageSize.height-thumbnailSize.height)/2.0,width: imageSize.width,height: imageSize.height))
-        //取得畫布上的圖
-        let smallImage = UIGraphicsGetImageFromCurrentImageContext()
-        //關掉畫布
-        UIGraphicsEndImageContext()
-        
-        let userEmail = UserDefaults.standard
-        let emailHead = userEmail.string(forKey: "emailHead")
-        let fileName = "\(emailHead!).jpg"
-        
-        let filePath = self.fileDocumentsPath(fileName: fileName)
-        
-        //write file
-        if let imageData = smallImage?.jpegData(compressionQuality: 1) {//compressionQuality:0~1之間
-            do{
-                try imageData.write(to: filePath, options: [.atomicWrite])
-            }catch {
-                print("uer photo fiel save is eror : \(error)")
-            }
-        }
-        return smallImage
-    }
-    
     //MARK: func - DownLoad Record Pen.
     func downLoadRecordPen() {
         //Post PHP(check user login data).
@@ -357,7 +383,7 @@ class Manager :UIViewController {
             let session = URLSession.shared
             let task = session.dataTask(with: request) { (data, respones, error) in
                 if let e = error {
-                    print("uesr login check data URL Session error: \(e)")
+                    print("DownLoad Record Pen: \(e)")
                     return
                 }
                 guard let jsonData = data else {
@@ -441,29 +467,51 @@ class Manager :UIViewController {
         }
     }
     
-    //MARK: func - ReSize Image.
-    func resizeImage(image: UIImage) -> UIImage {
-        
-        //設定縮圖大小
-        let thumbnailSize = CGSize(width: 20 ,height: 20)
-        //找出目前螢幕的scale
-        let scale = UIScreen.main.scale
-        //產生畫布
-        UIGraphicsBeginImageContextWithOptions(thumbnailSize,false,scale)
-        //計算長寬要縮圖比例
-        let width = thumbnailSize.width / image.size.width
-        let height = thumbnailSize.height / image.size.height
-        let ratio = max(width,height)
-        let imageSize = CGSize(width:image.size.width*ratio,height: image.size.height*ratio)
-        //在畫圖行前 切圓形
-        let circle = UIBezierPath(ovalIn: CGRect(x: 0,y: 0,width: thumbnailSize.width,height: thumbnailSize.height))
-        circle.addClip()
-        image.draw(in:CGRect(x: -(imageSize.width-thumbnailSize.width)/2.0,y: -(imageSize.height-thumbnailSize.height)/2.0,width: imageSize.width,height: imageSize.height))
-        //取得畫布上的圖
-        var newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
+    //MARK: func - user Online.
+    func userOnline() {
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Account_Online.php") {
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let userData = UserDefaults.standard
+            if let email = userData.string(forKey: "email") {
+                let param = "email=\(email)"
+                request.httpBody = param.data(using: .utf8)
+            }
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, respones, error) in
+                if let e = error {
+                    print("User Online : \(e)")
+                    return
+                }
+            }
+            task.resume()
+        }
     }
     
+    //MARK: func - user Offline.
+    func userOffline() {
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Account_Offline.php") {
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let userData = UserDefaults.standard
+            if let email = userData.string(forKey: "email") {
+                let param = "email=\(email)"
+                request.httpBody = param.data(using: .utf8)
+            }
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, respones, error) in
+                if let e = error {
+                    print("User Online : \(e)")
+                    return
+                }
+            }
+            task.resume()
+        }
+    }
 }

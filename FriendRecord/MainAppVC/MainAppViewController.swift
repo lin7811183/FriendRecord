@@ -23,6 +23,8 @@ class MainAppViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userPoRecordBT: UIButton!
     @IBOutlet weak var recordPenModeBT: UIBarButtonItem!
+    @IBOutlet weak var goToTop: UIButton!
+    
     
     var tableViewData = [Manager.recordDataUser,[Record]()]
     
@@ -54,6 +56,7 @@ class MainAppViewController: UIViewController {
         // 預載資料
         Manager.shared.downLoadRecordPen()
         Manager.shared.downLoadUserPhoto()
+        Manager.shared.userOnline()
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -68,6 +71,10 @@ class MainAppViewController: UIViewController {
         self.refreshControl.addTarget(self, action: #selector(self.downLoadRecordPen), for: .valueChanged)
         self.tableView.addSubview(refreshControl)
         
+        self.goToTop.layer.borderWidth = 1
+        self.goToTop.layer.borderColor = UIColor.black.cgColor
+        self.goToTop.layer.cornerRadius = self.goToTop.frame.height / 2
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +110,12 @@ class MainAppViewController: UIViewController {
         print("downLoadRecordPen")
         Manager.shared.downLoadRecordPen()
         Manager.shared.downLoadUserPhoto()
+    }
+    //MARK: func - Go to TableView Top.
+    @IBAction func goToTableViewTop(_ sender: Any) {
+        print("Top")
+        let topIndex = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
     }
     //MARK: func - Change record pen show mode.
     @IBAction func recordPenMode(_ sender: Any) {
