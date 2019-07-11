@@ -35,6 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //UIApplicationBackgroundFetchIntervalMinimum
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         
+        // IQKeyboardManager.
+        IQKeyboardManager.shared.enable = true
+        
         //FireBase.
         FirebaseApp.configure()
         
@@ -53,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         Messaging.messaging().delegate = self
         application.registerForRemoteNotifications()
-
+        
         return true
     }
     
@@ -62,15 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("userInfo : \(userInfo)")
     }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let chars = deviceToken
-        var token = ""
-        
-        for i in 0..<deviceToken.count {
-            token += String(format: "%02.2hhx", arguments: [chars[i]])
-        }
-        
         print("Registration succeeded!")
-        print("Token: ", token)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -86,25 +81,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
-//        Manager.shared.downLoadRecordPen()
+        Manager.shared.downLoadRecordPen()
         Manager.shared.userOffline()
         print("********** User Offline. **********")
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        Manager.shared.userOffline()
+        print("********** App Close User Offline. **********")
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        
         Manager.shared.userOnline()
         print("********** User Online. **********")
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        Manager.shared.userOffline()
+        print("********** App Close User Offline. **********")
     }
+    
+    
     
     //Application UIBackgroundFetchResult.
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -167,4 +167,5 @@ extension AppDelegate :MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
         print("Messaging Data : \(remoteMessage.appData) ")
     }
+    
 }

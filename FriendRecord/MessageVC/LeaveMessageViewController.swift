@@ -36,6 +36,7 @@ class LeaveMessageViewController: UIViewController {
     
     var delegate :LeaveMessageViewControllerDelegate!
     
+    var isFriendArray :[MessageIsFriend]!
     var isFriend :Bool!
     
     var backView = UIView()
@@ -63,8 +64,6 @@ class LeaveMessageViewController: UIViewController {
         
         self.messageTableView.dataSource = self
         self.messageTableView.delegate = self
-        
-        self.messageTF.delegate = self
     }
 
     
@@ -72,6 +71,7 @@ class LeaveMessageViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.downLoadMessage()
+        self.downLoadMessageIsFriend()
         
         if self.formVC == 0 {
             print("form MainAppVC.")
@@ -92,6 +92,10 @@ class LeaveMessageViewController: UIViewController {
         if self.isMovingFromParent {
             self.delegate.updateMessageSum()
         }
+        self.isFriendArray.removeAll()
+        self.dataArray.removeAll()
+        self.messageTVData.removeAll()
+        print("isFriendArray Clear.")
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -124,27 +128,36 @@ class LeaveMessageViewController: UIViewController {
     }
     //MARK: func - Add to Friend.
     @IBAction func addToFriend(_ sender: UIButton) {
-        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Account_Add_Friend.php") {
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            
-            let userData = UserDefaults.standard
-            guard let email = userData.string(forKey: "email") else {
-                return
-            }
-            let param = "email=\(email)&Femail=\(self.recordSendUser!)&Fname=\(self.recorduserNickName!)"
-            print("\(param)")
-            request.httpBody = param.data(using: .utf8)
-            
-            let session = URLSession.shared
-            let task = session.dataTask(with: request) { (data, response, error) in
-                if let e = error {
-                    print("erroe \(e)")
+        print("TTTTTT")
+        if self.isFriend != true {
+            if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Account_Add_Friend.php") {
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                
+                let userData = UserDefaults.standard
+                guard let email = userData.string(forKey: "email") else {
+                    return
                 }
-                let reCode = String(data: data!, encoding: .utf8)
-                print(reCode!)
+                let param = "email=\(email)&Femail=\(self.recordSendUser!)&Fname=\(self.recorduserNickName!)"
+                print("\(param)")
+                request.httpBody = param.data(using: .utf8)
+                
+                let session = URLSession.shared
+                let task = session.dataTask(with: request) { (data, response, error) in
+                    if let e = error {
+                        print("erroe \(e)")
+                    }
+                    let reCode = String(data: data!, encoding: .utf8)
+                    print(reCode!)
+                }
+                task.resume()
+                DispatchQueue.main.async {
+                    Manager.shared.okAlter(vc: self, title: "已成為您的知音", message: "可在好友清單確認")
+                }
             }
-            task.resume()
+        }
+        else {
+            Manager.shared.okAlter(vc: self, title: "已經是你的知音摟", message: "")
         }
     }
     //MARK: func - Look User.
@@ -269,6 +282,67 @@ class LeaveMessageViewController: UIViewController {
             }
             task.resume()
         }
+        
+    }
+    
+    //MARK: func - DownLoad Message isFriend?.
+    func downLoadMessageIsFriend() {
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/message/DownLoad_Message_IsFriend.php") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let param = "recordID=\(self.recordId!)"
+            request.httpBody = param.data(using: .utf8)
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let e = error {
+                    print("erroe \(e)")
+                }
+                guard let jsonData = data else {
+                    return
+                }
+                let reCode = String(data: data!, encoding: .utf8)
+                print(reCode!)
+                let decoder = JSONDecoder()
+                do {
+                    self.isFriendArray = try decoder.decode([MessageIsFriend].self, from: jsonData)//[Note].self 取得Note陣列的型態
+                    print("isFriendArray count : \(self.isFriendArray.count)")
+                    DispatchQueue.main.async {
+                        let userData = UserDefaults.standard
+                        if let userEmail = userData.string(forKey: "email") {
+                            for i in 0 ..< self.isFriendArray.count {
+                                // Check This Record Pen in Me!?
+                                if self.isFriendArray[i].recordSendUser! != userEmail {
+                                    if let friendName = self.isFriendArray[i].isFriend {
+                                        if friendName == userEmail {
+                                            print("********** This Record Pen is My Friend Pen. **********")
+                                            self.addFriendBT.setImage(UIImage(named: "AddFriend"), for: .normal)
+                                            self.isFriend = true
+                                            break
+                                        } else {
+                                            print("********** This Record Pen is not My Friend Pen. **********")
+                                            self.addFriendBT.setImage(UIImage(named: "isNoFriend"), for: .normal)
+                                            self.isFriend = false
+                                        }
+                                    } else {
+                                        print("********** This Record Pen is not Friend. **********")
+                                        self.addFriendBT.setImage(UIImage(named: "isNoFriend"), for: .normal)
+                                        self.isFriend = false
+                                    }
+                                } else {
+                                    print("********** This Record Pen is me. **********")
+                                    self.isFriend = true
+                                }
+                            }
+                        }
+                    }
+                } catch {
+                    print("error while parsing json \(error)")
+                }
+            }
+            task.resume()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -312,30 +386,4 @@ extension LeaveMessageViewController :UITableViewDataSource, UITableViewDelegate
         return cell
     }
     //MARK: Protocol -  tableViewe UITableViewDelegate.
-}
-
-extension LeaveMessageViewController :UITextFieldDelegate {
-    //MARK: Protocol - UITextFiel Delegate.
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //return close keyboard.
-        textField.resignFirstResponder()
-        return true
-    }
-    //touch textfiel begin.
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.mainView.translatesAutoresizingMaskIntoConstraints = false//一定要加，不加會有錯，關閉舊有的Layout機制(autoreizing mask)
-        self.userMessageView.frame.size.height = 100
-        self.userMessageView.bottomAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 0).isActive = true
-        self.userMessageView.leftAnchor.constraint(equalTo: self.mainView.leftAnchor, constant: 0).isActive = true
-        self.userMessageView.rightAnchor.constraint(equalTo: self.mainView.rightAnchor, constant: 0).isActive = true //往回縮
-    }
-    //touch textfiel end.
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.mainView.translatesAutoresizingMaskIntoConstraints = false//一定要加，不加會有錯，關閉舊有的Layout機制(autoreizing mask)
-        self.userMessageView.frame.size.height = 86
-        self.userMessageView.bottomAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 0).isActive = true
-        self.userMessageView.leftAnchor.constraint(equalTo: self.mainView.leftAnchor, constant: 0).isActive = true
-        self.userMessageView.rightAnchor.constraint(equalTo: self.mainView.rightAnchor, constant: 0).isActive = true //往回縮
-
-    }
 }

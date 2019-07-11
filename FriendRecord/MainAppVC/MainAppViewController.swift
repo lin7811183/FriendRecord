@@ -1,5 +1,7 @@
 import UIKit
 import AVKit
+import Firebase
+import FirebaseMessaging
 
 class MainAppViewController: UIViewController {
     
@@ -30,7 +32,7 @@ class MainAppViewController: UIViewController {
     
     var userSelectRow :Int!
     
-    var refreshControl:UIRefreshControl!
+    var refreshControl :UIRefreshControl!
     
     var loadDataArray :[Record]!
     var isGoodType :Bool!
@@ -113,24 +115,25 @@ class MainAppViewController: UIViewController {
     }
     //MARK: func - Go to TableView Top.
     @IBAction func goToTableViewTop(_ sender: Any) {
-        print("Top")
+        print("********** User Record Pen Go to Top. **********")
         let topIndex = IndexPath(row: 0, section: 0)
         self.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
     }
     //MARK: func - Change record pen show mode.
     @IBAction func recordPenMode(_ sender: Any) {
         if self.recordPenMode == true {
-            self.recordPenModeBT.title = "好音模式"
+            self.recordPenModeBT.title = "全音模式"
             self.recordPenMode = false
+            Manager.shared.downLoadRecordPen()
         } else {
             self.recordPenModeBT.title = "好友模式"
             self.recordPenMode = true
+            Manager.shared.downLoadRecordPenFriend()
         }
         
     }
     //MARK: func - Show friend Menu.
     @IBAction func friendMenu(_ sender: Any) {
-        
         guard let friendMenuVC = self.storyboard?.instantiateViewController(withIdentifier: "friendmenuVC") as? FriendMenuViewController else { return }
         friendMenuVC.modalPresentationStyle = .overCurrentContext
         friendMenuVC.transitioningDelegate = self

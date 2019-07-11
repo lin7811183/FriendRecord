@@ -80,7 +80,7 @@ class Manager :UIViewController {
         if let imageData = try? Data(contentsOf: photoFileURL) {
             return UIImage(data: imageData)
         }
-        return nil
+        return UIImage(named: "userImage")
     }
     
     //MARK: func - date change.
@@ -405,6 +405,45 @@ class Manager :UIViewController {
         }
     }
     
+    //MARK: func - DownLoad Record Pen.
+    func downLoadRecordPenFriend() {
+        //Post PHP(check user login data).
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Load_Record_Pen_Friend.php") {
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let userData = UserDefaults.standard
+            if let email = userData.string(forKey: "email") {
+                let param = "usermail=\(email)"
+                request.httpBody = param.data(using: .utf8)
+            }
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, respones, error) in
+                if let e = error {
+                    print("DownLoad Record Pen: \(e)")
+                    return
+                }
+                guard let jsonData = data else {
+                    return
+                }
+                let reCode = String(data: data!, encoding: .utf8)
+                print(reCode!)
+                let decoder = JSONDecoder()
+                do {
+                    Manager.recordData = try decoder.decode([Record].self, from: jsonData)//[Note].self 取得Note陣列的型態
+                    print("Manager.recordData.count:\(Manager.recordData.count)")
+                    
+                    Manager.delegate.finishDownLoadRecordPen()
+                } catch {
+                    print("error while parsing json \(error)")
+                }
+            }
+            task.resume()
+        }
+    }
+    
     //MARK: func - DownLoad user local Record pen.
     func downLoadUserLocalRecordPen(email :String) {
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Load_Local_User_RecordPen.php") {
@@ -486,6 +525,8 @@ class Manager :UIViewController {
                     print("User Online : \(e)")
                     return
                 }
+                let reCode = String(data: data!, encoding: .utf8)
+                print(reCode!)
             }
             task.resume()
         }
@@ -510,6 +551,8 @@ class Manager :UIViewController {
                     print("User Online : \(e)")
                     return
                 }
+                let reCode = String(data: data!, encoding: .utf8)
+                print(reCode!)
             }
             task.resume()
         }

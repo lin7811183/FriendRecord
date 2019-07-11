@@ -11,5 +11,6 @@ class Message : Equatable,Codable {
     var message :String?
     var penDate :String?
     var messageSum :Double?
+    var isFriend :String?
 
 }
