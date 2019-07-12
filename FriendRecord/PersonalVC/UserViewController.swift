@@ -427,7 +427,6 @@ extension UserViewController :UIImagePickerControllerDelegate , UINavigationCont
             print("user photo emeil change fail(imagePickerController).")
             return
         }
-        
         let fileName = "\(emailChange).jpg"
 
         self.dismiss(animated: true, completion: nil)//關閉imagePickController

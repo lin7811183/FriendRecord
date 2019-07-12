@@ -947,15 +947,15 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="stx-cd-gRH">
-                                <rect key="frame" x="364" y="637" width="40" height="40"/>
+                                <rect key="frame" x="345" y="604" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="listner"/>
                                 <connections>
-                                    <action selector="lookUser:" destination="R3B-uV-Zai" eventType="touchUpInside" id="UcM-KO-rRM"/>
+                                    <action selector="RecordPlayer:" destination="R3B-uV-Zai" eventType="touchUpInside" id="oPe-hg-h6J"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBu-KL-Udh">
-                                <rect key="frame" x="364" y="593" width="40" height="40"/>
+                                <rect key="frame" x="345" y="537" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="AddFriend"/>
                                 <connections>
@@ -963,7 +963,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLf-rF-yFX">
-                                <rect key="frame" x="364" y="677" width="40" height="40"/>
+                                <rect key="frame" x="345" y="664" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="more"/>
                                 <connections>
@@ -991,7 +991,7 @@
             </objects>
             <point key="canvasLocation" x="4525" y="-36"/>
         </scene>
-        <!--錄音者的心情-->
+        <!--知音之圖-->
         <scene sceneID="acy-lo-l5T">
             <objects>
                 <viewController storyboardIdentifier="mapfriendVC" id="Uub-KT-1ZZ" customClass="MapFrienderViewController" customModule="FriendRecord" customModuleProvider="target" sceneMemberID="viewController">
@@ -1009,8 +1009,8 @@
                         <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="Xsh-rp-3KX"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="找找大家" image="placeholder.png" selectedImage="placeholder.png" id="3mu-RR-7YW"/>
-                    <navigationItem key="navigationItem" title="錄音者的心情" id="dha-Dh-2fw"/>
+                    <tabBarItem key="tabBarItem" title="" image="placeholder" selectedImage="placeholder" id="3mu-RR-7YW"/>
+                    <navigationItem key="navigationItem" title="知音之圖" id="dha-Dh-2fw"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="xBv-mQ-38T" id="lX2-7f-iHx"/>
@@ -1625,11 +1625,11 @@
             </objects>
             <point key="canvasLocation" x="2809" y="-970"/>
         </scene>
-        <!--找找大家-->
+        <!--Navigation Controller-->
         <scene sceneID="nXa-ub-CUI">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jpT-wO-IkL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="找找大家" selectedImage="worldwide.png" id="cHQ-PL-YAK"/>
+                    <tabBarItem key="tabBarItem" title="" image="placeholder" selectedImage="placeholder" id="cHQ-PL-YAK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zkd-dT-YKF">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -1654,7 +1654,7 @@
         <image name="camera" width="32" height="32"/>
         <image name="find" width="21.333333969116211" height="21.333333969116211"/>
         <image name="friend" width="21.333333969116211" height="21.333333969116211"/>
-        <image name="gotoTop" width="32" height="32"/>
+        <image name="gotoTop" width="100" height="100"/>
         <image name="isLike.png" width="27.272727966308594" height="27.272727966308594"/>
         <image name="line.png" width="75" height="75"/>
         <image name="listner" width="100" height="100"/>
@@ -1662,14 +1662,13 @@
         <image name="message.png" width="27.272727966308594" height="27.272727966308594"/>
         <image name="microphone.png" width="384" height="384"/>
         <image name="more" width="100" height="100"/>
-        <image name="placeholder.png" width="25.600000381469727" height="25.600000381469727"/>
+        <image name="placeholder" width="32" height="32"/>
         <image name="recordPen_Line.png" width="75" height="75"/>
         <image name="speaker" width="33.333332061767578" height="33.333332061767578"/>
         <image name="top_line.png" width="75" height="75"/>
         <image name="user.png" width="25.600000381469727" height="25.600000381469727"/>
         <image name="userPhotoDefault.png" width="409.60000610351562" height="409.60000610351562"/>
         <image name="wood.png" width="400.69564819335938" height="400.69564819335938"/>
-        <image name="worldwide.png" width="48" height="48"/>
         <image name="個人資料" width="16" height="16"/>
         <namedColor name="MyColor4">
             <color red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1679,6 +1678,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Y28-H3-uVH"/>
+        <segue reference="jWD-bR-eYF"/>
     </inferredMetricsTieBreakers>
 </document>

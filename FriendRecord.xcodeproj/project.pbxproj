@@ -28,7 +28,6 @@
 		CE0DE8C222B0D96900F49C5B /* MyRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0DE8C122B0D96900F49C5B /* MyRecordTableViewCell.swift */; };
 		CE0E6DAE22C44C880028FF47 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E6DAD22C44C880028FF47 /* MyCollectionViewCell.swift */; };
 		CE0E6DB122C497030028FF47 /* MapFrienderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0E6DB022C497030028FF47 /* MapFrienderViewController.swift */; };
-		CE0E6DC722C4BA9F0028FF47 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E6DC622C4BA9F0028FF47 /* placeholder.png */; };
 		CE0E6DC922C4BAF40028FF47 /* cassette.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E6DC822C4BAF40028FF47 /* cassette.png */; };
 		CE0E6DCB22C4BBCC0028FF47 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E6DCA22C4BBCC0028FF47 /* user.png */; };
 		CE0E6DD122C4BCD50028FF47 /* microphone.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0E6DD022C4BCD40028FF47 /* microphone.png */; };
@@ -93,7 +92,6 @@
 		CE0DE8C122B0D96900F49C5B /* MyRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordTableViewCell.swift; sourceTree = "<group>"; };
 		CE0E6DAD22C44C880028FF47 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE0E6DB022C497030028FF47 /* MapFrienderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFrienderViewController.swift; sourceTree = "<group>"; };
-		CE0E6DC622C4BA9F0028FF47 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		CE0E6DC822C4BAF40028FF47 /* cassette.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cassette.png; sourceTree = "<group>"; };
 		CE0E6DCA22C4BBCC0028FF47 /* user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user.png; sourceTree = "<group>"; };
 		CE0E6DD022C4BCD40028FF47 /* microphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = microphone.png; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 				CEFFD38422CA5EA7000E46DF /* message.png */,
 				CE15DEE522D3453A00670BA2 /* speaker.png */,
 				CE0E6DD022C4BCD40028FF47 /* microphone.png */,
-				CE0E6DC622C4BA9F0028FF47 /* placeholder.png */,
 				CE16A9E322C0A64D00B16983 /* Star.png */,
 				CE16A9E522C0ADAF00B16983 /* Stop.png */,
 				CE0DE89B22B08F7E00F49C5B /* userPhotoDefault.png */,
@@ -219,7 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				CE0E6DAD22C44C880028FF47 /* MyCollectionViewCell.swift */,
-				CE0E6DAF22C496D00028FF47 /* MapFriender */,
 				CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */,
 				CE0A3C8E229E5B0600649E2E /* functionswift.swift */,
 				CE0B063F22ADF756007ADB36 /* CameraViewController.swift */,
@@ -295,6 +291,7 @@
 				CE0102C222A783E600EDB18A /* MainAppVC */,
 				CE9B6ADF22D46F0600247800 /* MessageVC */,
 				CE15D74822A6885700892340 /* PersonalVC */,
+				CE0E6DAF22C496D00028FF47 /* MapFriender */,
 				CE19634822D41EB4004C6D32 /* FriendMenu */,
 				CE22B5F422CF34E4008D8C57 /* SearchFriend */,
 				CE106C5422C1A26D005DF25E /* Animation */,
@@ -483,7 +480,6 @@
 				CE0D3D53229F5ECD008033D7 /* Login_Icon_ver_2_2.png in Resources */,
 				CE0DE89C22B08F7E00F49C5B /* userPhotoDefault.png in Resources */,
 				CE10040F229B725300660E82 /* LaunchScreen.storyboard in Resources */,
-				CE0E6DC722C4BA9F0028FF47 /* placeholder.png in Resources */,
 				CE0E6DD122C4BCD50028FF47 /* microphone.png in Resources */,
 				CEFFD38722CA5ED5000E46DF /* isLike.png in Resources */,
 				CE63540E22CB3F0200E05A02 /* edit.png in Resources */,

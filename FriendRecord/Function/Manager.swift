@@ -110,36 +110,43 @@ class Manager :UIViewController {
         let nowDayMinute = Calendar.current.component(.minute, from: nowDateLocaleCnage!)
         //let nowDaySecond = Calendar.current.component(.second, from: nowDateLocaleCnage!)
         
-        //確認是不是同一天
-        guard recordYear != nowDayYear || recordMonth != nowDayMonth || (nowDayDay - recordDay) >= 2 else {
-            //確認是不是同一小時
-            if recordHour == nowDayHour {
-                let time = nowDayMinute - recordMinute
-                if time == 0 {
-                    return "稍早前"
-                } else {
-                    return "\(time)分鐘前"
-                }
-            } else {
-                //不是同一小時
-                let time = nowDayHour - recordHour
-                //確認同一天
-                if recordDay == nowDayDay {
-                    if time > 0 {
-                        return "\(time)小時前"
+        if recordYear == nowDayYear || recordMonth == nowDayMonth || (nowDayDay - recordDay) <= 1 {
+            //是不是同一天!?
+            if nowDayDay == recordDay {
+                if nowDayHour == recordHour {
+                    let time = nowDayMinute - recordMinute
+                    if time == 0 {
+                        return "稍早前"
                     } else {
-                        return "\(time * -1)小時前"
+                        return "\(time)分鐘前"
                     }
                 } else {
-                    return "\(time * -1 + 12)小時前"
+                    let hour = nowDayHour - recordHour
+                    return "\(hour)小時前"
+                }
+            } else {
+                //前一天
+                if nowDayHour >= recordHour {
+                    //已超過24小時
+                    let dateFormatter2 = DateFormatter()
+                    dateFormatter2.dateFormat = "yyyy/MM/dd"
+                    let showDate = dateFormatter2.string(from: dateChange!)
+                    return showDate
+                } else {
+                    //算出前一天距離當天結束多少小時
+                    let BefterTime = 24 - recordHour
+                    //算出前一天加今天時間有多久
+                    let totalTime = nowDayHour + BefterTime
+                    return "\(totalTime)小時前"
                 }
             }
+        } else {
+            let dateFormatter2 = DateFormatter()
+            dateFormatter2.dateFormat = "yyyy/MM/dd"
+            let showDate = dateFormatter2.string(from: dateChange!)
+            
+            return showDate
         }
-        let dateFormatter2 = DateFormatter()
-        dateFormatter2.dateFormat = "yyyy/MM/dd"
-        let showDate = dateFormatter2.string(from: dateChange!)
-        
-        return showDate
     }
     
     //MARK: func - save thumbmailImage

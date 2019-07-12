@@ -1,4 +1,5 @@
 import UIKit
+import AVKit
 
 protocol LeaveMessageViewControllerDelegate {
     func updateMessageSum()
@@ -38,6 +39,11 @@ class LeaveMessageViewController: UIViewController {
     
     var isFriendArray :[MessageIsFriend]!
     var isFriend :Bool!
+    
+    var isPlayer = false
+    //建立AudioRecorder元件
+    var recordPlayer :AVAudioPlayer?
+    var recordFileName :String!
     
     var backView = UIView()
     
@@ -92,6 +98,12 @@ class LeaveMessageViewController: UIViewController {
         if self.isMovingFromParent {
             self.delegate.updateMessageSum()
         }
+        // Stop Record Pen Player.
+        self.listenBT.setImage(UIImage(named: "listner"), for: .normal)
+        self.recordPlayer?.stop()
+        print("********** Stop player Record. **********")
+        self.isPlayer = false
+        
         self.isFriendArray.removeAll()
         self.dataArray.removeAll()
         self.messageTVData.removeAll()
@@ -128,7 +140,7 @@ class LeaveMessageViewController: UIViewController {
     }
     //MARK: func - Add to Friend.
     @IBAction func addToFriend(_ sender: UIButton) {
-        print("TTTTTT")
+
         if self.isFriend != true {
             if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Account_Add_Friend.php") {
                 var request = URLRequest(url: url)
@@ -153,6 +165,7 @@ class LeaveMessageViewController: UIViewController {
                 task.resume()
                 DispatchQueue.main.async {
                     Manager.shared.okAlter(vc: self, title: "已成為您的知音", message: "可在好友清單確認")
+                    self.addFriendBT.setImage(UIImage(named: "AddFriend"), for: .normal)
                 }
             }
         }
@@ -160,21 +173,33 @@ class LeaveMessageViewController: UIViewController {
             Manager.shared.okAlter(vc: self, title: "已經是你的知音摟", message: "")
         }
     }
-    //MARK: func - Look User.
-    @IBAction func lookUser(_ sender: Any) {
-        let userCardVC = self.storyboard?.instantiateViewController(withIdentifier: "usercardVC") as! UserCardViewController
-        let userCardVCCenter = CGPoint(x: self.view.frame.size.width  / 2, y: self.view.frame.size.height / 2)
-        
-        //userCardVC.view.frame = CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
-//        seeUserVC.view.frame = CGRect(x: width, y: hight, width: width, height: hight)
-        //self.view.addSubview(userCardVC.vi)
-        
-//        let userVC2 = self.storyboard?.instantiateViewController(withIdentifier: "userVC2") as! UserViewController
-//        userVC2.fromUserVC = 1
-//        userVC2.reocrdPenEmail = self.recordEmail!
-//        self.navigationController?.pushViewController(userVC2, animated: true)
-        
-//        self.performSegue(withIdentifier: "seeuser", sender: nil)
+    //MARK: func - Record Playe
+    @IBAction func RecordPlayer(_ sender: Any) {
+        if self.isPlayer == false {
+            self.listenBT.setImage(UIImage(named: "listnering"), for: .normal)
+            
+            let filePathURL = Manager.shared.fileDocumentsPath(fileName: self.recordFileName)
+            //Play Record.
+            self.recordPlayer = try? AVAudioPlayer(contentsOf: filePathURL)
+            self.recordPlayer?.numberOfLoops = 0
+            self.recordPlayer?.prepareToPlay()
+            self.recordPlayer?.delegate = self
+            
+            //Create Audio Session.
+            let audioSession = AVAudioSession.sharedInstance()
+            try? audioSession.setCategory(AVAudioSession.Category.playback)
+            
+            //Record Player.
+            self.recordPlayer?.play()
+            print("********** Star player Record. **********")
+            self.isPlayer = true
+        } else {
+            self.listenBT.setImage(UIImage(named: "listner"), for: .normal)
+            
+            self.recordPlayer?.stop()
+            print("********** Stop player Record. **********")
+            self.isPlayer = false
+        }
     }
     //MARK: func - Message send to Reocrd pen.
     @IBAction func messageSend(_ sender: Any) {
@@ -386,4 +411,15 @@ extension LeaveMessageViewController :UITableViewDataSource, UITableViewDelegate
         return cell
     }
     //MARK: Protocol -  tableViewe UITableViewDelegate.
+}
+
+extension LeaveMessageViewController :AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if flag == true {
+            self.listenBT.setImage(UIImage(named: "listner"), for: .normal)
+            self.recordPlayer?.stop()
+            print("********** Stop player Record. **********")
+            self.isPlayer = false
+        }
+    }
 }

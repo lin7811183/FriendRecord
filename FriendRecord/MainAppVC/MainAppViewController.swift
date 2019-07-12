@@ -73,9 +73,9 @@ class MainAppViewController: UIViewController {
         self.refreshControl.addTarget(self, action: #selector(self.downLoadRecordPen), for: .valueChanged)
         self.tableView.addSubview(refreshControl)
         
-        self.goToTop.layer.borderWidth = 1
-        self.goToTop.layer.borderColor = UIColor.black.cgColor
-        self.goToTop.layer.cornerRadius = self.goToTop.frame.height / 2
+//        self.goToTop.layer.borderWidth = 1
+//        self.goToTop.layer.borderColor = UIColor.black.cgColorxw
+//        self.goToTop.layer.cornerRadius = self.goToTop.frame.height / 2
 
     }
     
@@ -161,6 +161,7 @@ class MainAppViewController: UIViewController {
             leavemessageVC.messageIndexPath = self.pushIndex
             leavemessageVC.recordSendUser = self.tableViewData[1][self.pushIndex.row].recordSendUser
             leavemessageVC.recorduserNickName = self.tableViewData[1][self.pushIndex.row].userNickName
+            leavemessageVC.recordFileName = self.tableViewData[1][self.pushIndex.row].recordFileName
             leavemessageVC.formVC = 0
             
             leavemessageVC.delegate = self
@@ -490,7 +491,7 @@ extension MainAppViewController: MyAppDelegate {
         self.tableViewData[1] = Manager.recordData
 
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            UIView.transition(with: self.tableView, duration: 0.2, options: .transitionCurlUp, animations: { self.tableView.reloadData() })
         }
     }
 }
@@ -537,9 +538,8 @@ extension MainAppViewController :ManagerDelegate {
     //MARK: Protocol - ManagerDelegate by Manager.
     func finishDownLoadUserPhoto() {
         print("ManagerDelegate - finishDownLoadUserPhoto")
-        
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            UIView.transition(with: self.tableView, duration: 1, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() })
         }
     }
 }

@@ -61,9 +61,9 @@ class RecordGoViewController: UIViewController {
         
         self.textView.text = "請選擇心情~"
         self.textView.textColor = UIColor.gray
-        self.textView.layer.borderColor = UIColor.black.cgColor
-        self.textView.layer.borderWidth = 1.0
-        self.textView.layer.cornerRadius = 5.0
+//        self.textView.layer.borderColor = UIColor.black.cgColor
+//        self.textView.layer.borderWidth = 1.0
+//        self.textView.layer.cornerRadius = 5.0
         
         self.userImage.layer.cornerRadius = self.userImage.frame.size.width / 2
         self.userImage.clipsToBounds = true
@@ -238,7 +238,7 @@ class RecordGoViewController: UIViewController {
             } else {
                 text = Manager.recordData[0].recordText!
             }
-            let recordDataString = "心情:\(text!)\n時間:\(Manager.recordData[0].recordDate!)\n長度:\(Manager.recordData[0].recordTime!)"
+            let recordDataString = "心情 : \(text!)\n長度 : \(Manager.recordData[0].recordTime!)"
             self.textView.textColor = UIColor.black
             self.textView.text = recordDataString
             

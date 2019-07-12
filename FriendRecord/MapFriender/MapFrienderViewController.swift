@@ -19,7 +19,15 @@ class MapFrienderViewController: UIViewController {
             return
         }
         //Ask user's permission
-        mapManaager.requestAlwaysAuthorization()
+        self.mapManaager.requestAlwaysAuthorization()
+        self.mapManaager.allowsBackgroundLocationUpdates = true //背景持續取得位置改變
+        
+        //Start to update loctation
+        self.mapManaager.delegate = self //important
+        self.mapManaager.desiredAccuracy = kCLLocationAccuracyBest
+        self.mapManaager.activityType = .automotiveNavigation
+        self.mapManaager.startUpdatingLocation() //important
+        //manager.startMonitoringSignificantLocationChanges() //持長時間監控
         
         self.mapView.delegate = self
     }
@@ -29,6 +37,16 @@ class MapFrienderViewController: UIViewController {
     }
 }
 
+extension MapFrienderViewController : CLLocationManagerDelegate {
+    //MARL: CLLocationManagerDelegate methods.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let coordinate = locations.last?.coordinate else {
+            assertionFailure("Fail to get location")
+            return
+        }
+        print("Lat:\(coordinate.latitude) , Lon:\(coordinate.longitude)")
+    }
+}
 
 extension MapFrienderViewController :MKMapViewDelegate{
 //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
