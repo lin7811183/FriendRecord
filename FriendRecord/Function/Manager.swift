@@ -109,8 +109,8 @@ class Manager :UIViewController {
         let nowDayHour = Calendar.current.component(.hour, from: nowDateLocaleCnage!)
         let nowDayMinute = Calendar.current.component(.minute, from: nowDateLocaleCnage!)
         //let nowDaySecond = Calendar.current.component(.second, from: nowDateLocaleCnage!)
-        
-        if recordYear == nowDayYear || recordMonth == nowDayMonth || (nowDayDay - recordDay) <= 1 {
+
+        if recordYear == nowDayYear ,recordMonth == nowDayMonth ,(nowDayDay - recordDay) <= 1 {
             //是不是同一天!?
             if nowDayDay == recordDay {
                 if nowDayHour == recordHour {
