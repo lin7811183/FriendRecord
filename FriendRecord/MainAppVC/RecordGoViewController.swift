@@ -159,7 +159,7 @@ class RecordGoViewController: UIViewController {
             Manager.recordData.remove(at: 0)
             //self.starRecordBT.titleLabel?.text = "再次錄音"
             self.starRecordBT.setTitle("再次錄音", for: .normal)
-//            self.textView.text = ""
+            self.textView.text = ""
             
             
             //Star timer.
@@ -194,6 +194,7 @@ class RecordGoViewController: UIViewController {
             newRecord.recordFileName = "\(fileName).caf"
             newRecord.userNickName = userNickName!
             newRecord.recordText = self.textView.text
+            newRecord.messageSum = 0.0
             
             let dateFormat2 :DateFormatter = DateFormatter()
             dateFormat2.locale = Locale(identifier: "zh_Hant_TW") // 設定地區(台灣)

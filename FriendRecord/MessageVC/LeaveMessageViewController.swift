@@ -17,12 +17,15 @@ class LeaveMessageViewController: UIViewController {
     @IBOutlet weak var moreBT: UIButton!
     @IBOutlet weak var listenBT: UIButton!
     @IBOutlet weak var addFriendBT: UIButton!
+    @IBOutlet weak var lookUserCard: UIButton!
+    
+    var addBTCenterPoint :CGPoint!
+    var userBTCenterPoint :CGPoint!
+    var lookUserCardCenterPoint :CGPoint!
     
     var formVC :Int!
     var dataArray :[Record]!
     
-    var addBTCenterPoint :CGPoint!
-    var userBTCenterPoint :CGPoint!
     var test = false
     
     var messageTVData :[Message] = []
@@ -67,6 +70,8 @@ class LeaveMessageViewController: UIViewController {
         self.listenBT.center = self.moreBT.center
         self.addBTCenterPoint = self.addFriendBT.center
         self.addFriendBT.center = self.moreBT.center
+        self.lookUserCardCenterPoint = self.lookUserCard.center
+        self.lookUserCard.center = self.moreBT.center
         
         self.messageTableView.dataSource = self
         self.messageTableView.delegate = self
@@ -120,9 +125,11 @@ class LeaveMessageViewController: UIViewController {
             UIView.animate(withDuration: 0.3, animations: {
                 self.listenBT.alpha = 1
                 self.addFriendBT.alpha = 1
+                self.lookUserCard.alpha = 1
                 
                 self.listenBT.center = self.userBTCenterPoint
                 self.addFriendBT.center = self.addBTCenterPoint
+                self.lookUserCard.center = self.lookUserCardCenterPoint
                 
                 self.test = true
                 })
@@ -130,9 +137,11 @@ class LeaveMessageViewController: UIViewController {
             UIView.animate(withDuration: 0.3, animations: {
                 self.listenBT.alpha = 0
                 self.addFriendBT.alpha = 0
+                self.lookUserCard.alpha = 0
                 
                 self.listenBT.center  = self.moreBT.center
                 self.addFriendBT.center = self.moreBT.center
+                self.lookUserCard.center = self.moreBT.center
                 
                 self.test = false
             })
@@ -172,6 +181,10 @@ class LeaveMessageViewController: UIViewController {
         else {
             Manager.shared.okAlter(vc: self, title: "已經是你的知音摟", message: "")
         }
+    }
+    //MARK: func - Look user card.
+    @IBAction func lookUserCard(_ sender: Any) {
+        
     }
     //MARK: func - Record Playe
     @IBAction func RecordPlayer(_ sender: Any) {

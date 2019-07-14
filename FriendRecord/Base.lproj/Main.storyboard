@@ -946,8 +946,17 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9tH-JP-syL">
+                                <rect key="frame" x="354" y="585" width="40" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="lookUserCard"/>
+                                <connections>
+                                    <action selector="lookUserCard:" destination="R3B-uV-Zai" eventType="touchUpInside" id="yg7-w0-InD"/>
+                                    <action selector="playerMemu:" destination="R3B-uV-Zai" eventType="touchUpInside" id="c0r-zO-DIQ"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="stx-cd-gRH">
-                                <rect key="frame" x="345" y="604" width="60" height="60"/>
+                                <rect key="frame" x="294" y="600" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="listner"/>
                                 <connections>
@@ -955,7 +964,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBu-KL-Udh">
-                                <rect key="frame" x="345" y="537" width="60" height="60"/>
+                                <rect key="frame" x="290" y="660" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="AddFriend"/>
                                 <connections>
@@ -963,7 +972,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLf-rF-yFX">
-                                <rect key="frame" x="345" y="664" width="60" height="60"/>
+                                <rect key="frame" x="345" y="648" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="more"/>
                                 <connections>
@@ -978,6 +987,7 @@
                     <connections>
                         <outlet property="addFriendBT" destination="JBu-KL-Udh" id="li3-2E-U5T"/>
                         <outlet property="listenBT" destination="stx-cd-gRH" id="9m5-9y-zio"/>
+                        <outlet property="lookUserCard" destination="9tH-JP-syL" id="ENJ-Vs-A4w"/>
                         <outlet property="mainView" destination="uIq-o2-wDJ" id="17b-YB-li7"/>
                         <outlet property="messageSendImage" destination="zHR-uS-h5M" id="5vC-Uk-3VJ"/>
                         <outlet property="messageSendView" destination="NJ6-df-bt3" id="7WL-ZV-geI"/>
@@ -989,7 +999,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dx8-ai-fMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4525" y="-36"/>
+            <point key="canvasLocation" x="4524.6376811594209" y="-36.160714285714285"/>
         </scene>
         <!--知音之圖-->
         <scene sceneID="acy-lo-l5T">
@@ -1658,15 +1668,16 @@
         <image name="isLike.png" width="27.272727966308594" height="27.272727966308594"/>
         <image name="line.png" width="75" height="75"/>
         <image name="listner" width="100" height="100"/>
+        <image name="lookUserCard" width="70" height="100"/>
         <image name="mainIcon" width="61" height="42"/>
         <image name="message.png" width="27.272727966308594" height="27.272727966308594"/>
         <image name="microphone.png" width="384" height="384"/>
         <image name="more" width="100" height="100"/>
         <image name="placeholder" width="32" height="32"/>
         <image name="recordPen_Line.png" width="75" height="75"/>
-        <image name="speaker" width="23.333333969116211" height="33.333332061767578"/>
+        <image name="speaker" width="35" height="50"/>
         <image name="top_line.png" width="75" height="75"/>
-        <image name="user" width="23.333333969116211" height="33.333332061767578"/>
+        <image name="user" width="35" height="50"/>
         <image name="userPhotoDefault.png" width="409.60000610351562" height="409.60000610351562"/>
         <image name="wood.png" width="400.69564819335938" height="400.69564819335938"/>
         <image name="個人資料" width="16" height="16"/>
