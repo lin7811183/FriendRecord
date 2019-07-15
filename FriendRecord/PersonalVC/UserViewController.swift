@@ -48,7 +48,8 @@ class UserViewController: UIViewController {
             let userDataBf = userData.string(forKey: "bf")
             self.userBfLB.text = userDataBf
 
-            self.navigationItem.title = uesrDataNickName
+            //self.navigationItem.title = uesrDataNickName
+            self.userBT.setImage(UIImage(named: "down"), for: .normal)
             self.userBT.setTitle(uesrDataNickName, for: .normal)
         } else {
             
@@ -142,12 +143,15 @@ class UserViewController: UIViewController {
     //MARK: func - User More
     @IBAction func userMore(_ sender: Any) {
         let moreAlert = UIAlertController(title: "知音", message: "更多功能", preferredStyle: .actionSheet)
-        let appPresentAction = UIAlertAction(title: "知音導覽", style: .default) { (actopn) in
+        let appPresentAction = UIAlertAction(title: "知音導覽", style: .default) { (action) in
             let AppPresent = self.storyboard?.instantiateViewController(withIdentifier: "AppPresnetVC") as! AppPresentViewController
             self.present(AppPresent, animated: true, completion: nil)
-
         }
         moreAlert.addAction(appPresentAction)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
+            
+        }
+        moreAlert.addAction(cancelAction)
         self.present(moreAlert, animated: true, completion: nil)
     }
     //MARK: func - logout button

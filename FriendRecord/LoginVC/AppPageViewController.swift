@@ -19,7 +19,10 @@ protocol AppPageViewControllerDelegate: class {
 
 
 class AppPageViewController: UIPageViewController {
-    
+    required init?(coder: NSCoder) {
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    }
+
     var viewControllerList: [UIViewController] = [UIViewController]()
     var AppPagedelegate :AppPageViewControllerDelegate?
     
