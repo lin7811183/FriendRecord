@@ -11,6 +11,7 @@ class MyTabBarController: UITabBarController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
         //check is login and registered.
         let loginUserDefault = UserDefaults.standard
         

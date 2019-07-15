@@ -48,6 +48,7 @@ class LeaveMessageViewController: UIViewController {
     var recordPlayer :AVAudioPlayer?
     var recordFileName :String!
     
+    var userCardView = UIView()
     var backView = UIView()
     
     override func viewDidLoad() {
@@ -83,6 +84,7 @@ class LeaveMessageViewController: UIViewController {
         
         self.downLoadMessage()
         self.downLoadMessageIsFriend()
+        Manager.shared.loadUserCardData(email: self.recordSendUser)
         
         if self.formVC == 0 {
             print("form MainAppVC.")
@@ -112,7 +114,8 @@ class LeaveMessageViewController: UIViewController {
         self.isFriendArray.removeAll()
         self.dataArray.removeAll()
         self.messageTVData.removeAll()
-        print("isFriendArray Clear.")
+        Manager.userCardData.removeAll()
+        print("********** Clear Array. **********")
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -184,7 +187,40 @@ class LeaveMessageViewController: UIViewController {
     }
     //MARK: func - Look user card.
     @IBAction func lookUserCard(_ sender: Any) {
+        self.backView.frame = self.view.frame
+        self.backView.tag = 997
+        self.backView.backgroundColor = UIColor.black
+        backView.alpha = 0.3
+        self.view.addSubview(self.backView)
         
+        let userCardView = UserCardView()
+        userCardView.tag = 998
+        userCardView.frame = CGRect(x: 12.5 ,y: (self.navigationController?.navigationBar.frame.size.height)! + 100, width:self.userCardView.frame.size.width, height: self.userCardView.frame.size.height)
+        userCardView.mainView.layer.cornerRadius = 5.0
+        let imageName = Manager.shared.emailChangeHead(email: self.recordSendUser)
+        userCardView.userImage.image = Manager.shared.userPhotoRead(jpg: imageName)
+        userCardView.userImage.layer.cornerRadius = userCardView.userImage.bounds.height / 2
+        userCardView.userName.text = Manager.userCardData.first?.nickname
+        userCardView.userBF.text = Manager.userCardData.first?.bf
+        userCardView.userGender.text = Manager.userCardData.first?.gender
+        userCardView.userSend.text = Manager.userCardData.first?.presentation
+        UIView.transition(with: self.view, duration: 0.3, options: [.transitionCrossDissolve], animations: {self.view.addSubview(userCardView)}, completion: nil)//加入此視窗
+        
+        let cancelBT = UIButton()
+        cancelBT.tag = 999
+        cancelBT.frame = CGRect(x: self.view.center.x - 25, y: (self.view.frame.height - (self.tabBarController?.tabBar.frame.size.height)!) - 100, width: 50, height: 50)
+        cancelBT.setImage(UIImage(named: "cencel"), for: .normal)
+        cancelBT.addTarget(self, action: #selector(dissMissUserCardView), for: .touchUpInside)
+        UIView.transition(with: self.view, duration: 0.3, options: [.transitionCrossDissolve], animations: {self.view.addSubview(cancelBT)}, completion: nil)//加入此視窗
+    }
+    // diss Miss UserCardView BT
+    @objc func dissMissUserCardView() {
+        let back = self.view.viewWithTag(997)
+        UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: {back?.removeFromSuperview()}, completion: nil)
+        let card = self.view.viewWithTag(998)
+        UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: {card?.removeFromSuperview()}, completion: nil)
+        let cancel = self.view.viewWithTag(999)
+        UIView.transition(with: self.view, duration: 0.25, options: [.transitionCrossDissolve], animations: {cancel?.removeFromSuperview()}, completion: nil)
     }
     //MARK: func - Record Playe
     @IBAction func RecordPlayer(_ sender: Any) {

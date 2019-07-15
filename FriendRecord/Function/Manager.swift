@@ -19,6 +19,7 @@ class Manager :UIViewController {
     static var penVCType :Int!
     static var indexPath :Int!
     static var userLocalRecordPen :[Record]  = []
+    static var userCardData :[UserCatdData] = []
     
     static var delegate :ManagerDelegate!
     static var delegateUser :ManagerDelegateUser!
@@ -505,6 +506,34 @@ class Manager :UIViewController {
                     var data :[String:String]!
                     data = try decoder.decode([String:String].self, from: jsonData)//[Note].self 取得Note陣列的型態
                     Manager.delegateUser.finishDownLoadUserPresent(preenst: data["presentation"]!)
+                } catch {
+                    print("error while parsing json \(error)")
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    //MARK: func - Load User Card Data.
+    func loadUserCardData(email :String) {
+        print("********** Load User Card Data : \(email) **********")
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/message/Load_UserCard.php") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let param = "email=\(email)"
+            request.httpBody = param.data(using: .utf8)
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let e = error {
+                    print("erroe \(e)")
+                }
+                let reCode = String(data: data!, encoding: .utf8)
+                print(reCode!)
+                let decoder = JSONDecoder()
+                do {
+                    Manager.userCardData = try decoder.decode([UserCatdData].self, from: data!)//[Note].self 取得Note陣列的型態
                 } catch {
                     print("error while parsing json \(error)")
                 }

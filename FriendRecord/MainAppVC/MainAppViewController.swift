@@ -27,7 +27,6 @@ class MainAppViewController: UIViewController {
     @IBOutlet weak var recordPenModeBT: UIBarButtonItem!
     @IBOutlet weak var goToTop: UIButton!
     
-    
     var tableViewData = [Manager.recordDataUser,[Record]()]
     
     var userSelectRow :Int!
@@ -47,8 +46,6 @@ class MainAppViewController: UIViewController {
     
     var pushIndex :IndexPath!
     
-    var recordPenMode = false
-    
     let transiton = SlideInTransition()
     
     override func viewDidLoad() {
@@ -59,6 +56,11 @@ class MainAppViewController: UIViewController {
         Manager.shared.downLoadRecordPen()
         Manager.shared.downLoadUserPhoto()
         Manager.shared.userOnline()
+        
+        // add navigationItem Logo item
+//        let logo = UIImage(named: "Logo")
+//        let imageView = UIImageView(image:logo)
+//        self.navigationItem.titleView = imageView
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -120,17 +122,15 @@ class MainAppViewController: UIViewController {
         self.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
     }
     //MARK: func - Change record pen show mode.
-    @IBAction func recordPenMode(_ sender: Any) {
-        if self.recordPenMode == true {
-            self.recordPenModeBT.title = "全音模式"
-            self.recordPenMode = false
+    @IBAction func showRecordPenShow(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            //全音模式
             Manager.shared.downLoadRecordPen()
-        } else {
-            self.recordPenModeBT.title = "好友模式"
-            self.recordPenMode = true
+        } else if sender.selectedSegmentIndex == 1 {
+            //好友模式
             Manager.shared.downLoadRecordPenFriend()
         }
-        
+        print(sender.selectedSegmentIndex)
     }
     //MARK: func - Show friend Menu.
     @IBAction func friendMenu(_ sender: Any) {
@@ -200,9 +200,8 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             cell.recordPenLB.text  = self.tableViewData[indexPath.section][indexPath.row].recordText
             
             if let imageName = self.tableViewData[indexPath.section][indexPath.row].recordSendUser {
-                let imageNameChange = imageName.split(separator: "@")
-                let name = "\(imageNameChange[0])"
-                cell.sendImage.image = Manager.shared.userPhotoRead(jpg: name)
+                let fileName = Manager.shared.emailChangeHead(email: imageName)
+                cell.sendImage.image = Manager.shared.userPhotoRead(jpg: fileName)
                 
                 cell.sendImage.tag = indexPath.row
                 

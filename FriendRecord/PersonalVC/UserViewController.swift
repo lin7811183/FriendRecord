@@ -126,7 +126,7 @@ class UserViewController: UIViewController {
             if let indexPath = self.oldRecordIndexPath {
                 print("user is out UserVC.")
                 let oldcurrentCell = self.userTableView.cellForRow(at: indexPath) as! MyUserRecordTableViewCell
-                oldcurrentCell.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
+                oldcurrentCell.playerBT.setImage(UIImage(named: "Star"), for: .normal)
                 self.recordPlayer?.stop()
                 self.isPiayer = false
             }
@@ -276,7 +276,7 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
             
             cell.delegate = self
             
-            cell.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
+            cell.playerBT.setImage(UIImage(named: "Star"), for: .normal)
             cell.playerBT.addTarget(self, action: #selector(player(sender:)), for: .touchUpInside)
             cell.playerBT.tag = indexPath.section
             
@@ -311,7 +311,7 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
         
         if self.isPiayer == true {
             let oldcurrentCell = self.userTableView.cellForRow(at: self.oldRecordIndexPath) as! MyUserRecordTableViewCell
-            oldcurrentCell.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
+            oldcurrentCell.playerBT.setImage(UIImage(named: "Star"), for: .normal)
             
             guard let bt = sender as? UIButton  else {
                 return
@@ -321,7 +321,7 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
             self.recordIndexPath = indexPath
             self.oldRecordIndexPath = indexPath
             let currentCell = self.userTableView.cellForRow(at: indexPath) as! MyUserRecordTableViewCell
-            currentCell.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
+            currentCell.playerBT.setImage(UIImage(named: "Star"), for: .normal)
             
             //Record stop Player.
             self.recordPlayer?.stop()
@@ -353,7 +353,7 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
             self.recordPlayer?.play()
             print("********** Star player Record. **********")
             
-            currentCell.playerBT.setImage(UIImage(named: "Stop.png"), for: .normal)
+            currentCell.playerBT.setImage(UIImage(named: "Stop"), for: .normal)
             
             self.isPiayer = true
         }
@@ -366,7 +366,7 @@ extension UserViewController :AVAudioPlayerDelegate {
             let currentCell = self.userTableView.cellForRow(at: self.recordIndexPath)  as! MyUserRecordTableViewCell
             self.recordPlayer?.stop()
             print("********** Stop player Record. **********")
-            currentCell.playerBT.setImage(UIImage(named: "Star.png"), for: .normal)
+            currentCell.playerBT.setImage(UIImage(named: "Star"), for: .normal)
             self.isPiayer = false
         }
     }

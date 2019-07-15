@@ -160,7 +160,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="Imz-qG-Rdd"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="10"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                         <state key="normal">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -237,7 +237,7 @@
                                                         <constraint firstAttribute="width" constant="60" id="ZAA-Q0-MIg"/>
                                                         <constraint firstAttribute="height" constant="60" id="ZZp-yr-1YI"/>
                                                     </constraints>
-                                                    <state key="normal" image="Star.png"/>
+                                                    <state key="normal" image="Star"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xmx-zU-zdg">
                                                     <rect key="frame" x="342" y="47" width="20" height="20"/>
@@ -458,7 +458,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sfm-Fm-fb7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6245" y="-970"/>
+            <point key="canvasLocation" x="7041" y="-917"/>
         </scene>
         <!--Main App View Controller-->
         <scene sceneID="EDu-xl-Dpz">
@@ -806,28 +806,32 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="speaker" selectedImage="speaker" id="pTM-vf-4Nd"/>
                     <navigationItem key="navigationItem" id="4cV-8L-5z8">
-                        <barButtonItem key="leftBarButtonItem" title="全音模式" id="kml-TR-lWm">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="2k1-4x-ntd">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="YMB-kT-Y8E">
+                                <rect key="frame" x="20" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="全音"/>
+                                    <segment title="知音"/>
+                                </segments>
+                                <connections>
+                                    <action selector="showRecordPenShow:" destination="09T-vU-Bsr" eventType="valueChanged" id="waf-hb-bws"/>
+                                </connections>
+                            </segmentedControl>
                             <connections>
-                                <action selector="recordPenMode:" destination="09T-vU-Bsr" id="8BZ-45-yn4"/>
+                                <action selector="showRecordPenMode:" destination="09T-vU-Bsr" id="lRZ-5P-7hf"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem image="friend" id="PId-s3-J5a">
-                                <connections>
-                                    <action selector="friendMenu:" destination="09T-vU-Bsr" id="mK9-go-ph3"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="find" id="Dqz-m0-f2G">
-                                <connections>
-                                    <segue destination="6bZ-fc-fjJ" kind="show" id="u1O-Ul-vHj"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="friend" id="PId-s3-J5a">
+                            <connections>
+                                <action selector="friendMenu:" destination="09T-vU-Bsr" id="mK9-go-ph3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="goToTop" destination="12A-8n-ayD" id="Okm-5s-XBD"/>
-                        <outlet property="recordPenModeBT" destination="kml-TR-lWm" id="5h5-EW-feE"/>
                         <outlet property="tableView" destination="HzQ-4X-Q44" id="Fok-h5-val"/>
                     </connections>
                 </viewController>
@@ -844,7 +848,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1iw-1Q-Q9J">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -947,7 +951,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9tH-JP-syL">
-                                <rect key="frame" x="354" y="585" width="40" height="50"/>
+                                <rect key="frame" x="345" y="472" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="lookUserCard"/>
                                 <connections>
@@ -956,7 +960,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="stx-cd-gRH">
-                                <rect key="frame" x="294" y="600" width="40" height="40"/>
+                                <rect key="frame" x="345" y="583" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="listner"/>
                                 <connections>
@@ -964,7 +968,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBu-KL-Udh">
-                                <rect key="frame" x="290" y="660" width="40" height="40"/>
+                                <rect key="frame" x="345" y="530" width="60" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="AddFriend"/>
                                 <connections>
@@ -1208,7 +1212,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KFZ-DO-Ni4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7146" y="-36"/>
+            <point key="canvasLocation" x="7819" y="-36"/>
         </scene>
         <!--Ripple Animation View Controller-->
         <scene sceneID="J6w-dP-Mvl">
@@ -1241,7 +1245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXf-EG-Khs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6246" y="-36"/>
+            <point key="canvasLocation" x="7041" y="-36"/>
         </scene>
         <!--Registered View Controller-->
         <scene sceneID="IFu-gi-Kal">
@@ -1558,21 +1562,93 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ln2-2x-AFH">
-                                <rect key="frame" x="20" y="68" width="374" height="213"/>
+                                <rect key="frame" x="20" y="68" width="374" height="219"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tn9-s4-kPm">
+                                        <rect key="frame" x="8" y="184" width="110" height="20.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Tv-iN-CQh">
+                                        <rect key="frame" x="8" y="126" width="110" height="20.5"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0AV-t2-GQQ">
+                                        <rect key="frame" x="8" y="155" width="110" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="I4I-Nx-rfR">
+                                        <rect key="frame" x="126" y="11" width="233" height="194"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
                                 <color key="backgroundColor" name="MyColor4"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jmo-SJ-edf" userLabel="UserPhotoBT">
+                                <rect key="frame" x="30" y="78" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="userPhotoDefault.png"/>
+                                <connections>
+                                    <action selector="userPhotoLook:" destination="5jJ-ju-kVr" eventType="touchUpInside" id="JU2-5P-hDx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="backColor"/>
                         <viewLayoutGuide key="safeArea" id="KDp-tG-VoR"/>
                     </view>
                     <connections>
+                        <outlet property="userBfLB" destination="0AV-t2-GQQ" id="5SU-ap-aa0"/>
                         <outlet property="userCardView" destination="Ln2-2x-AFH" id="TOB-9k-DOY"/>
+                        <outlet property="userGenderLB" destination="Tn9-s4-kPm" id="iso-4H-JEX"/>
+                        <outlet property="userImageBT" destination="Jmo-SJ-edf" id="Lmr-zt-1fZ"/>
+                        <outlet property="userNameLB" destination="0Tv-iN-CQh" id="QOs-sW-IXU"/>
+                        <outlet property="userSendTF" destination="I4I-Nx-rfR" id="2t4-el-GFS"/>
                     </connections>
                 </viewController>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ghi-eB-suX">
+                    <rect key="frame" x="0.0" y="0.0" width="110" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="hny-oW-stC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="qDA-kj-kw7">
+                    <rect key="frame" x="0.0" y="0.0" width="233" height="171"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZr-Ho-kGR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qoV-bA-4gi" userLabel="UserPhotoBT">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="7qR-Gh-zb5"/>
+                        <constraint firstAttribute="height" constant="100" id="t2U-1m-7NI"/>
+                    </constraints>
+                    <state key="normal" image="userPhotoDefault.png"/>
+                    <connections>
+                        <action selector="userPhotoLook:" destination="5jJ-ju-kVr" eventType="touchUpInside" id="zHa-iI-P2T"/>
+                    </connections>
+                </button>
             </objects>
-            <point key="canvasLocation" x="6245" y="770"/>
+            <point key="canvasLocation" x="6202.898550724638" y="-36.160714285714285"/>
         </scene>
         <!--My Tab Bar Controller-->
         <scene sceneID="fZV-KM-U00">
@@ -1659,16 +1735,15 @@
         <image name="AddFriend" width="100" height="100"/>
         <image name="Like.png" width="27.272727966308594" height="27.272727966308594"/>
         <image name="Login_Icon_ver_2_2.png" width="1024" height="768"/>
-        <image name="Star.png" width="192" height="192"/>
+        <image name="Star" width="256" height="256"/>
         <image name="Stop.png" width="192" height="192"/>
         <image name="camera" width="32" height="32"/>
-        <image name="find" width="21.333333969116211" height="21.333333969116211"/>
         <image name="friend" width="21.333333969116211" height="21.333333969116211"/>
         <image name="gotoTop" width="100" height="100"/>
         <image name="isLike.png" width="27.272727966308594" height="27.272727966308594"/>
         <image name="line.png" width="75" height="75"/>
         <image name="listner" width="100" height="100"/>
-        <image name="lookUserCard" width="70" height="100"/>
+        <image name="lookUserCard" width="100" height="100"/>
         <image name="mainIcon" width="61" height="42"/>
         <image name="message.png" width="27.272727966308594" height="27.272727966308594"/>
         <image name="microphone.png" width="384" height="384"/>
@@ -1689,6 +1764,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mhU-J4-hJL"/>
+        <segue reference="TGQ-1a-A0Q"/>
     </inferredMetricsTieBreakers>
 </document>
