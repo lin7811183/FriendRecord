@@ -86,6 +86,7 @@ extension FriendMenuViewController :UITableViewDataSource, UITableViewDelegate {
         
         if self.friendListData.count == 0 {
             cell.userNickName.text = "目前0位知音~"
+            cell.selectionStyle = .none//讓選取顏色不會出現
         } else {
             cell.userNickName.text = self.friendListData[indexPath.row].friendNickName
             
@@ -94,11 +95,13 @@ extension FriendMenuViewController :UITableViewDataSource, UITableViewDelegate {
             cell.userImage.layer.cornerRadius = cell.userImage.bounds.height / 2
             
             cell.isOnlineImage.isHidden = false
+            
             if self.friendListData[indexPath.row].isLogin != 0 {
                 cell.isOnlineImage.image = UIImage(named: "online")
             } else {
                 cell.isOnlineImage.image = UIImage(named: "offline")
             }
+            cell.selectionStyle = .none//讓選取顏色不會出現
         }
         return cell
     }

@@ -35,7 +35,7 @@ class SlideInTransition: NSObject, UIViewControllerAnimatedTransitioning {
             toViewController.view.frame = CGRect(x: newWidth, y: 0, width: finalWidth, height: finalHeight)
             containerView.addSubview(toViewController.view)
             
-            print("\(toViewController.view.frame)")
+            //print("\(toViewController.view.frame)")
         }
         
         // Move on screen

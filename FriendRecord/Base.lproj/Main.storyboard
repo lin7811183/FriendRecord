@@ -120,7 +120,7 @@
             </objects>
             <point key="canvasLocation" x="642" y="-36"/>
         </scene>
-        <!--個人資料-->
+        <!--User View Controller-->
         <scene sceneID="kWH-fh-NhA">
             <objects>
                 <viewController storyboardIdentifier="userVC" id="5jJ-ju-kVr" customClass="UserViewController" customModule="FriendRecord" customModuleProvider="target" sceneMemberID="viewController">
@@ -346,13 +346,22 @@
                         <viewLayoutGuide key="safeArea" id="vz4-9b-KRr"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="user" selectedImage="個人資料" id="Zxn-dP-f5W"/>
-                    <navigationItem key="navigationItem" title="個人資料" id="FWu-6s-xj0">
+                    <navigationItem key="navigationItem" id="FWu-6s-xj0">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" image="camera" id="GyH-6l-EGK">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="userImagePhoto:" destination="5jJ-ju-kVr" id="beU-Rg-MFE"/>
                             </connections>
                         </barButtonItem>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9N8-Tt-EY0">
+                            <rect key="frame" x="109" y="7" width="196" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="個人資料"/>
+                            <connections>
+                                <action selector="userMore:" destination="5jJ-ju-kVr" eventType="touchUpInside" id="MQ0-mm-UQE"/>
+                            </connections>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" title="登出" id="59P-YN-lyq">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -364,6 +373,7 @@
                     <connections>
                         <outlet property="UserGenderLB" destination="QEB-pB-K4y" id="NfC-08-fe5"/>
                         <outlet property="editUserTF_BT" destination="kaz-yb-xjr" id="PTL-sX-iZo"/>
+                        <outlet property="userBT" destination="9N8-Tt-EY0" id="zCE-e8-M8M"/>
                         <outlet property="userBfLB" destination="Z4s-qK-ZzW" id="Pem-yb-Unv"/>
                         <outlet property="userPhotoBT" destination="p3D-KN-6YF" id="1ev-a9-pJu"/>
                         <outlet property="userTF" destination="dN7-Pb-5z7" id="7bo-iZ-VDG"/>
@@ -374,7 +384,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Bh-0S-VDU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4525" y="-970"/>
+            <point key="canvasLocation" x="4524.6376811594209" y="-970.3125"/>
         </scene>
         <!--User Photo View Controller-->
         <scene sceneID="9i3-tm-E7t">
@@ -458,7 +468,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sfm-Fm-fb7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7041" y="-917"/>
+            <point key="canvasLocation" x="7041" y="-970"/>
         </scene>
         <!--Main App View Controller-->
         <scene sceneID="EDu-xl-Dpz">
@@ -865,7 +875,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pVa-Cw-rgl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4525" y="785"/>
+            <point key="canvasLocation" x="7041" y="785"/>
         </scene>
         <!--留言-->
         <scene sceneID="9gt-fc-boC">
@@ -1033,7 +1043,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tzL-2Z-Rz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3800" y="1511"/>
+            <point key="canvasLocation" x="3693" y="2970"/>
         </scene>
         <!--Record Go View Controller-->
         <scene sceneID="N6B-Fi-WjW">
@@ -1045,6 +1055,7 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Wf-8J-5UB">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem title="發個錄音" id="flP-Qg-TRV">
                                         <barButtonItem key="leftBarButtonItem" title="取消" id="ISF-Cu-Y0j">
@@ -1212,7 +1223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KFZ-DO-Ni4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7819" y="-36"/>
+            <point key="canvasLocation" x="8978" y="-36"/>
         </scene>
         <!--Ripple Animation View Controller-->
         <scene sceneID="J6w-dP-Mvl">
@@ -1245,7 +1256,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXf-EG-Khs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7041" y="-36"/>
+            <point key="canvasLocation" x="8074" y="-36"/>
         </scene>
         <!--Registered View Controller-->
         <scene sceneID="IFu-gi-Kal">
@@ -1450,6 +1461,97 @@
             </objects>
             <point key="canvasLocation" x="641" y="785"/>
         </scene>
+        <!--App Present View Controller-->
+        <scene sceneID="VYz-F4-RAo">
+            <objects>
+                <viewController storyboardIdentifier="AppPresnetVC" id="wts-c7-RZL" customClass="AppPresentViewController" customModule="FriendRecord" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aVO-NE-Q3C">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5C-XX-MmD">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <connections>
+                                    <segue destination="8Dh-Ep-Gxn" kind="embed" id="ebc-Qd-eb9"/>
+                                </connections>
+                            </containerView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="p1n-Ba-3jG">
+                                <rect key="frame" x="0.0" y="825" width="414" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="TER-jE-JWE"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" red="1" green="0.49953066470000002" blue="0.88039179450000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="krg-kY-egh">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="h4T-Hw-klL"/>
+                                </constraints>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="知音介紹" id="JrS-Xi-9lH">
+                                        <barButtonItem key="rightBarButtonItem" title="開始使用" id="oDT-X2-rqp">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="goToMainApp:" destination="wts-c7-RZL" id="w2F-gh-DbI"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Z5C-XX-MmD" firstAttribute="bottom" secondItem="qfg-Ux-k6Q" secondAttribute="bottom" id="1vN-Xx-0uQ"/>
+                            <constraint firstItem="p1n-Ba-3jG" firstAttribute="trailing" secondItem="qfg-Ux-k6Q" secondAttribute="trailing" id="7e3-an-E4Z"/>
+                            <constraint firstItem="Z5C-XX-MmD" firstAttribute="trailing" secondItem="qfg-Ux-k6Q" secondAttribute="trailing" id="8UF-PS-xMc"/>
+                            <constraint firstItem="p1n-Ba-3jG" firstAttribute="bottom" secondItem="qfg-Ux-k6Q" secondAttribute="bottom" id="ArV-0c-fXv"/>
+                            <constraint firstItem="p1n-Ba-3jG" firstAttribute="top" secondItem="krg-kY-egh" secondAttribute="bottom" constant="737" id="L6L-Uk-PIa"/>
+                            <constraint firstItem="krg-kY-egh" firstAttribute="top" secondItem="qfg-Ux-k6Q" secondAttribute="top" id="a4R-gw-ACt"/>
+                            <constraint firstItem="Z5C-XX-MmD" firstAttribute="top" secondItem="krg-kY-egh" secondAttribute="bottom" id="bgp-W1-rfV"/>
+                            <constraint firstItem="krg-kY-egh" firstAttribute="leading" secondItem="qfg-Ux-k6Q" secondAttribute="leading" id="d9T-nJ-7al"/>
+                            <constraint firstItem="Z5C-XX-MmD" firstAttribute="leading" secondItem="qfg-Ux-k6Q" secondAttribute="leading" id="hE9-5C-ASe"/>
+                            <constraint firstItem="krg-kY-egh" firstAttribute="trailing" secondItem="qfg-Ux-k6Q" secondAttribute="trailing" id="hHn-ZV-z6p"/>
+                            <constraint firstItem="p1n-Ba-3jG" firstAttribute="leading" secondItem="qfg-Ux-k6Q" secondAttribute="leading" id="nSb-RL-0R3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qfg-Ux-k6Q"/>
+                    </view>
+                    <connections>
+                        <outlet property="pageControl" destination="p1n-Ba-3jG" id="rgt-yD-ZYh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zKE-5s-HGO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1632" y="785"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ofP-JE-dIv">
+            <objects>
+                <viewController storyboardIdentifier="page-1" id="LDN-1B-OYn" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="page-1" id="YEr-m4-RNC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Page-1.png" translatesAutoresizingMaskIntoConstraints="NO" id="hlG-a8-IZp">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hlG-a8-IZp" firstAttribute="leading" secondItem="su1-3X-Bck" secondAttribute="leading" id="D6R-2b-2tI"/>
+                            <constraint firstItem="hlG-a8-IZp" firstAttribute="top" secondItem="su1-3X-Bck" secondAttribute="top" id="GOO-uL-dgD"/>
+                            <constraint firstItem="hlG-a8-IZp" firstAttribute="trailing" secondItem="su1-3X-Bck" secondAttribute="trailing" id="GWN-Qh-Snc"/>
+                            <constraint firstItem="hlG-a8-IZp" firstAttribute="bottom" secondItem="su1-3X-Bck" secondAttribute="bottom" id="cuE-5E-7gv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="su1-3X-Bck"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Zc-mf-f93" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2808.6956521739135" y="1544.8660714285713"/>
+        </scene>
         <!--Friend Menu View Controller-->
         <scene sceneID="28K-V3-oOU">
             <objects>
@@ -1519,6 +1621,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="8S6-Jz-qw3"/>
                                 </constraints>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem title="知音" id="W6E-zZ-hV8">
                                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="NCx-Zp-ZzV">
@@ -1551,7 +1654,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lhb-S4-7Wr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5377" y="769"/>
+            <point key="canvasLocation" x="3693" y="785"/>
         </scene>
         <!--User Card View Controller-->
         <scene sceneID="nvN-dU-dkg">
@@ -1648,7 +1751,7 @@
                     </connections>
                 </button>
             </objects>
-            <point key="canvasLocation" x="6202.898550724638" y="-36.160714285714285"/>
+            <point key="canvasLocation" x="7041" y="-36"/>
         </scene>
         <!--My Tab Bar Controller-->
         <scene sceneID="fZV-KM-U00">
@@ -1728,13 +1831,112 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Syv-hR-4wq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2809" y="1511"/>
+            <point key="canvasLocation" x="2809" y="2970"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="HhJ-DD-3Ls">
+            <objects>
+                <viewController storyboardIdentifier="page-2" id="NNB-cT-ItZ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5YE-EQ-XQd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Page-2.png" translatesAutoresizingMaskIntoConstraints="NO" id="JOK-GJ-CCl">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="JOK-GJ-CCl" firstAttribute="leading" secondItem="XMn-g4-oej" secondAttribute="leading" id="6jQ-Mq-rCV"/>
+                            <constraint firstItem="JOK-GJ-CCl" firstAttribute="top" secondItem="XMn-g4-oej" secondAttribute="top" id="Vx6-21-xiH"/>
+                            <constraint firstItem="JOK-GJ-CCl" firstAttribute="trailing" secondItem="XMn-g4-oej" secondAttribute="trailing" id="b2B-E1-ATY"/>
+                            <constraint firstItem="JOK-GJ-CCl" firstAttribute="bottom" secondItem="XMn-g4-oej" secondAttribute="bottom" id="lvV-NT-9wu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="XMn-g4-oej"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="492-vm-YaS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3692.753623188406" y="1544.8660714285713"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="7Fj-jb-H9h">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uXh-AU-Ih7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="page-3" id="gMQ-CU-9UU" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TV2-4t-cbn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Page-3.png" translatesAutoresizingMaskIntoConstraints="NO" id="Y5s-TC-YJ2">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Y5s-TC-YJ2" firstAttribute="top" secondItem="8nT-bs-s8h" secondAttribute="top" id="GsF-0E-XQh"/>
+                            <constraint firstItem="Y5s-TC-YJ2" firstAttribute="bottom" secondItem="8nT-bs-s8h" secondAttribute="bottom" id="Khz-qN-yVJ"/>
+                            <constraint firstItem="Y5s-TC-YJ2" firstAttribute="trailing" secondItem="8nT-bs-s8h" secondAttribute="trailing" id="faj-b0-kin"/>
+                            <constraint firstItem="Y5s-TC-YJ2" firstAttribute="leading" secondItem="8nT-bs-s8h" secondAttribute="leading" id="kws-vw-G6c"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8nT-bs-s8h"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="4524.6376811594209" y="1544.8660714285713"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="AJN-JL-FdS">
+            <objects>
+                <viewController storyboardIdentifier="page-4" id="kV5-3J-d93" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fTN-e3-JQ2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Page-4.png" translatesAutoresizingMaskIntoConstraints="NO" id="OMp-c6-2Sy">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OMp-c6-2Sy" firstAttribute="trailing" secondItem="SGP-SI-PDu" secondAttribute="trailing" id="CRm-Bn-y3w"/>
+                            <constraint firstItem="OMp-c6-2Sy" firstAttribute="leading" secondItem="SGP-SI-PDu" secondAttribute="leading" id="Jhs-d1-sGC"/>
+                            <constraint firstItem="OMp-c6-2Sy" firstAttribute="bottom" secondItem="SGP-SI-PDu" secondAttribute="bottom" id="PFF-N7-pzY"/>
+                            <constraint firstItem="OMp-c6-2Sy" firstAttribute="top" secondItem="SGP-SI-PDu" secondAttribute="top" id="pBh-Br-0I6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SGP-SI-PDu"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FD9-S0-MAE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5376.811594202899" y="1544.8660714285713"/>
+        </scene>
+        <!--App Page View Controller-->
+        <scene sceneID="Npr-ah-8Mn">
+            <objects>
+                <viewController storyboardIdentifier="AppPageVC" id="8Dh-Ep-Gxn" customClass="AppPageViewController" customModule="FriendRecord" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HdI-WN-mFG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zBt-L2-ync" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1633" y="1545"/>
         </scene>
     </scenes>
     <resources>
         <image name="AddFriend" width="100" height="100"/>
         <image name="Like.png" width="27.272727966308594" height="27.272727966308594"/>
         <image name="Login_Icon_ver_2_2.png" width="1024" height="768"/>
+        <image name="Page-1.png" width="828" height="1792"/>
+        <image name="Page-2.png" width="828" height="1792"/>
+        <image name="Page-3.png" width="828" height="1792"/>
+        <image name="Page-4.png" width="828" height="1792"/>
         <image name="Star" width="256" height="256"/>
         <image name="Stop.png" width="192" height="192"/>
         <image name="camera" width="32" height="32"/>

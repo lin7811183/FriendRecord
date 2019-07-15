@@ -55,6 +55,12 @@
 		CE7F14D522DC035C003FF41D /* UserCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14D422DC035C003FF41D /* UserCardView.xib */; };
 		CE7F14D922DC0470003FF41D /* UserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F14D822DC0470003FF41D /* UserCardView.swift */; };
 		CE7F14DB22DC26D0003FF41D /* UserCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F14DA22DC26D0003FF41D /* UserCardData.swift */; };
+		CE7F14DD22DC47B7003FF41D /* AppPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F14DC22DC47B7003FF41D /* AppPresentViewController.swift */; };
+		CE7F14E522DC4AC9003FF41D /* AppPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F14E422DC4AC9003FF41D /* AppPageViewController.swift */; };
+		CE7F14E822DC6564003FF41D /* Page-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14E722DC6564003FF41D /* Page-1.png */; };
+		CE7F14EA22DC6577003FF41D /* Page-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14E922DC6577003FF41D /* Page-2.png */; };
+		CE7F14EC22DC6581003FF41D /* Page-3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14EB22DC6581003FF41D /* Page-3.png */; };
+		CE7F14EE22DC658D003FF41D /* Page-4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14ED22DC658D003FF41D /* Page-4.png */; };
 		CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */; };
 		CEBAFDEC22CB0EB90055A4AE /* top_line.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBAFDEB22CB0EB90055A4AE /* top_line.png */; };
 		CEC40AD1229FE6DD00674037 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */; };
@@ -123,6 +129,12 @@
 		CE7F14D422DC035C003FF41D /* UserCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCardView.xib; sourceTree = "<group>"; };
 		CE7F14D822DC0470003FF41D /* UserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardView.swift; sourceTree = "<group>"; };
 		CE7F14DA22DC26D0003FF41D /* UserCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardData.swift; sourceTree = "<group>"; };
+		CE7F14DC22DC47B7003FF41D /* AppPresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPresentViewController.swift; sourceTree = "<group>"; };
+		CE7F14E422DC4AC9003FF41D /* AppPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPageViewController.swift; sourceTree = "<group>"; };
+		CE7F14E722DC6564003FF41D /* Page-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-1.png"; sourceTree = "<group>"; };
+		CE7F14E922DC6577003FF41D /* Page-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-2.png"; sourceTree = "<group>"; };
+		CE7F14EB22DC6581003FF41D /* Page-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-3.png"; sourceTree = "<group>"; };
+		CE7F14ED22DC658D003FF41D /* Page-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-4.png"; sourceTree = "<group>"; };
 		CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		CEBAFDEB22CB0EB90055A4AE /* top_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_line.png; sourceTree = "<group>"; };
 		CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
@@ -192,6 +204,7 @@
 		CE0102C322A7841700EDB18A /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CE7F14E622DC6556003FF41D /* AppPresent */,
 				CEBAFDEB22CB0EB90055A4AE /* top_line.png */,
 				CE63540B22CB3ED500E05A02 /* waring.png */,
 				CE7F14C922DB5178003FF41D /* add-friend.png */,
@@ -295,11 +308,11 @@
 				CE0102C222A783E600EDB18A /* MainAppVC */,
 				CE9B6ADF22D46F0600247800 /* MessageVC */,
 				CE15D74822A6885700892340 /* PersonalVC */,
-				CE0E6DAF22C496D00028FF47 /* MapFriender */,
 				CE19634822D41EB4004C6D32 /* FriendMenu */,
+				CE0102C322A7841700EDB18A /* Image */,
+				CE0E6DAF22C496D00028FF47 /* MapFriender */,
 				CE22B5F422CF34E4008D8C57 /* SearchFriend */,
 				CE106C5422C1A26D005DF25E /* Animation */,
-				CE0102C322A7841700EDB18A /* Image */,
 				CE0102C722A784C900EDB18A /* Other */,
 			);
 			path = FriendRecord;
@@ -311,6 +324,8 @@
 				CE100417229B728D00660E82 /* LoginViewController.swift */,
 				CE100419229B764900660E82 /* RegisteredViewController.swift */,
 				CE63540622CB30D900E05A02 /* Object */,
+				CE7F14DC22DC47B7003FF41D /* AppPresentViewController.swift */,
+				CE7F14E422DC4AC9003FF41D /* AppPageViewController.swift */,
 			);
 			path = LoginVC;
 			sourceTree = "<group>";
@@ -392,6 +407,17 @@
 				CE7F14D822DC0470003FF41D /* UserCardView.swift */,
 			);
 			path = UserCard;
+			sourceTree = "<group>";
+		};
+		CE7F14E622DC6556003FF41D /* AppPresent */ = {
+			isa = PBXGroup;
+			children = (
+				CE7F14E722DC6564003FF41D /* Page-1.png */,
+				CE7F14E922DC6577003FF41D /* Page-2.png */,
+				CE7F14EB22DC6581003FF41D /* Page-3.png */,
+				CE7F14ED22DC658D003FF41D /* Page-4.png */,
+			);
+			path = AppPresent;
 			sourceTree = "<group>";
 		};
 		CE9B6ADF22D46F0600247800 /* MessageVC */ = {
@@ -491,6 +517,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE7F14EE22DC658D003FF41D /* Page-4.png in Resources */,
 				CE0D3D53229F5ECD008033D7 /* Login_Icon_ver_2_2.png in Resources */,
 				CE7F14D522DC035C003FF41D /* UserCardView.xib in Resources */,
 				CE0DE89C22B08F7E00F49C5B /* userPhotoDefault.png in Resources */,
@@ -503,8 +530,10 @@
 				CE63540C22CB3ED500E05A02 /* waring.png in Resources */,
 				CE0E6DCB22C4BBCC0028FF47 /* user.png in Resources */,
 				CEFFD38522CA5EA8000E46DF /* message.png in Resources */,
+				CE7F14EC22DC6581003FF41D /* Page-3.png in Resources */,
 				CE7F14C822DB513B003FF41D /* 未命名89.png in Resources */,
 				CEFFD38922CA5F93000E46DF /* Like.png in Resources */,
+				CE7F14EA22DC6577003FF41D /* Page-2.png in Resources */,
 				CE16A9E422C0A64D00B16983 /* Star.png in Resources */,
 				CE04BFC422C7408300BC8300 /* Assets.xcassets in Resources */,
 				CE0DD11722CAEEDC0031D4BA /* recordPen_Line.png in Resources */,
@@ -515,6 +544,7 @@
 				CE10040A229B725200660E82 /* Main.storyboard in Resources */,
 				CE7F14CA22DB5178003FF41D /* add-friend.png in Resources */,
 				CE0DB35B22D5BD450053B86C /* GoogleService-Info.plist in Resources */,
+				CE7F14E822DC6564003FF41D /* Page-1.png in Resources */,
 				CE0102C622A784B700EDB18A /* Login_Icon_ver_2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -611,6 +641,8 @@
 				CE19634C22D42184004C6D32 /* SlideInTransition.swift in Sources */,
 				CE1D3AF522D4D7AB0076F73F /* Friend.swift in Sources */,
 				CE140C0A22B8E30300EF1F1C /* PenViewController.swift in Sources */,
+				CE7F14DD22DC47B7003FF41D /* AppPresentViewController.swift in Sources */,
+				CE7F14E522DC4AC9003FF41D /* AppPageViewController.swift in Sources */,
 				CE0E9AD722D03BC5007CA9D6 /* TableStruct.swift in Sources */,
 				CE1D3AF222D4D53D0076F73F /* MyFriendTableViewCell.swift in Sources */,
 				CE0D3D63229F92B0008033D7 /* MyTabBarController.swift in Sources */,

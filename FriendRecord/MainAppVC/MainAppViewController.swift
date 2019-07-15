@@ -103,6 +103,7 @@ class MainAppViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.stopOldRecordMuice()
+        Manager.recordDataUser.removeAll()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

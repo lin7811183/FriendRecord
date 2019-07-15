@@ -113,8 +113,8 @@ class RegisteredViewController: UIViewController {
                                 Manager.recordDataUser.removeAll()
                                 
                                 //present to tabbarVC.
-                                let tabbarVC = self.storyboard?.instantiateViewController(withIdentifier: "tabbarVC") as! MyTabBarController
-                                self.present(tabbarVC, animated: true, completion: nil)
+                                let appPresentVC = self.storyboard?.instantiateViewController(withIdentifier: "AppPresnetVC") as! AppPresentViewController
+                                self.present(appPresentVC, animated: true, completion: nil)
                                 
                                 //set user data key to UserDefaults.
                                 let userDataDefault = UserDefaults.standard

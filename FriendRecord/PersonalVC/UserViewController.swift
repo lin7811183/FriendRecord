@@ -12,6 +12,7 @@ class UserViewController: UIViewController {
     @IBOutlet weak var editUserTF_BT: UIButton!
     @IBOutlet weak var userTableView: UITableView!
     @IBOutlet weak var userTabBar: UINavigationItem!
+    @IBOutlet weak var userBT: UIButton!
     
     var isUserFTType = false
     
@@ -48,6 +49,7 @@ class UserViewController: UIViewController {
             self.userBfLB.text = userDataBf
 
             self.navigationItem.title = uesrDataNickName
+            self.userBT.setTitle(uesrDataNickName, for: .normal)
         } else {
             
         }
@@ -137,7 +139,17 @@ class UserViewController: UIViewController {
         //let userPhotoVC = self.storyboard?.instantiateViewController(withIdentifier: "userphotoVC") as! UserPhotoViewController
         //self.present(userPhotoVC, animated: true, completion: nil)
     }
-    
+    //MARK: func - User More
+    @IBAction func userMore(_ sender: Any) {
+        let moreAlert = UIAlertController(title: "知音", message: "更多功能", preferredStyle: .actionSheet)
+        let appPresentAction = UIAlertAction(title: "知音導覽", style: .default) { (actopn) in
+            let AppPresent = self.storyboard?.instantiateViewController(withIdentifier: "AppPresnetVC") as! AppPresentViewController
+            self.present(AppPresent, animated: true, completion: nil)
+
+        }
+        moreAlert.addAction(appPresentAction)
+        self.present(moreAlert, animated: true, completion: nil)
+    }
     //MARK: func - logout button
     @IBAction func logout(_ sender: Any) {
         //set isLogin key to UserDefaults.
@@ -260,12 +272,6 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell", for: indexPath) as! MyUserRecordTableViewCell
-//
-//        cell.goodSumLB.text = "\(Int(self.userRecordData[indexPath.row].goodSum ?? 0.0))"
-//        cell.messageSumLB.text = "\(Int(self.userRecordData[indexPath.row].messageSum ?? 0.0))"
-//        cell.selectionStyle = .none//讓選取顏色不會出現
-        
         if indexPath.row == 0 {
             let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell", for: indexPath) as! MyUserRecordTableViewCell
             cell.goodSumLB.text = "\(Int(self.tableArray[indexPath.section].main.goodSum ?? 0.0))"
@@ -280,6 +286,8 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
             cell.playerBT.addTarget(self, action: #selector(player(sender:)), for: .touchUpInside)
             cell.playerBT.tag = indexPath.section
             
+            cell.selectionStyle = .none//讓選取顏色不會出現
+            
 //            cell.layer.borderWidth = 1.0
 //            cell.layer.borderColor = UIColor.gray.cgColor
             
@@ -288,6 +296,8 @@ extension UserViewController :UITableViewDataSource ,UITableViewDelegate {
             let cell = self.userTableView.dequeueReusableCell(withIdentifier: "userrecordCell2", for: indexPath) as! MyUserRecord2TableViewCell
             cell.dateLB.text = self.tableArray[indexPath.section].sub.recordDate
             cell.mainLB.text = self.tableArray[indexPath.section].sub.recordText
+            
+            cell.selectionStyle = .none//讓選取顏色不會出現
             
             return cell
         }
