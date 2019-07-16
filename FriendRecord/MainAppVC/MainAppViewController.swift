@@ -256,51 +256,41 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             self.tableView.deselectRow(at: indexPath, animated: true)
         }
     }
-    //MARK: Protocol - tableview delegate canEditRowAt.
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if self.tableView.isScrollEnabled == false {
-            return false
-        } else {
-            return true
-        }
-    }
-    func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        if self.tableView.isScrollEnabled == false {
-            return false
-        } else {
-            return true
-        }
-    }
-    //MARK: func - tableview delegate - trailingSwipeActionsConfigurationForRowAt.
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let action = self.action(at: indexPath)
-        return UISwipeActionsConfiguration(actions: [action])
-    }
-    //MARK: func - tableview delegate - trailingSwipeActionsConfigurationForRowAt to action.
-    func action(at indexPath :IndexPath) -> UIContextualAction {
-        let data = self.tableViewData[1][indexPath.row]
-        let action = UIContextualAction(style: .normal, title: "編輯") { (action, view, completion) in
-            completion(true)
-        }
-        guard let user = data.recordSendUser else {
-            return action
-        }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let userData = UserDefaults.standard
         let recordPenUser = userData.string(forKey: "email")
         
-        guard recordPenUser != user else {
-            action.image = UIImage(named: "edit.png")
-            return action
+        let data = self.tableViewData[1][indexPath.row]
+        
+        guard let user = data.recordSendUser else {
+            let none = UITableViewRowAction(style: .default, title: "None") { (action, indexPath) in
+            }
+            return [none]
         }
-        action.image = UIImage(named: "waring.png")
-        action.title = "檢舉"
-        action.backgroundColor = UIColor.red
-        return action
+        guard recordPenUser != user else {
+            let deleteAction = UITableViewRowAction(style: .default, title: "刪除") { (action, indexPath) in
+
+                self.tableViewData[1].remove(at: indexPath.row)
+                Manager.recordData.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .fade)
+                self.tableView.rectForRow(at: indexPath)
+                Manager.shared.deleteRecordPen(recordID: Int(data.recordID!))
+            }
+            deleteAction.backgroundColor = UIColor.red
+            return [deleteAction]
+        }
+        let action = UITableViewRowAction(style: .default, title: "檢舉") { (action, indexPath) in
+            Manager.shared.okAlter(vc: self, title: "按下OK後，送出檢舉", message: "後續會進行查證")
+        }
+        action.backgroundColor = UIColor.gray
+        return [action]
     }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
+    
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return CGFloat(bitPattern: 5)

@@ -15,6 +15,8 @@
 		CE0A945722B1D35F00F7F031 /* UserPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A945622B1D35F00F7F031 /* UserPhotoViewController.swift */; };
 		CE0A949922B238A300F7F031 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A949822B238A300F7F031 /* Manager.swift */; };
 		CE0B064022ADF756007ADB36 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0B063F22ADF756007ADB36 /* CameraViewController.swift */; };
+		CE0C5E2C22DD6FC500223AE0 /* Page-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0C5E2A22DD6FC400223AE0 /* Page-2.png */; };
+		CE0C5E2D22DD6FC500223AE0 /* Page-3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0C5E2B22DD6FC400223AE0 /* Page-3.png */; };
 		CE0D3D53229F5ECD008033D7 /* Login_Icon_ver_2_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */; };
 		CE0D3D63229F92B0008033D7 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */; };
 		CE0D550C22D6F5AA00E67642 /* MessageIsFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D550B22D6F5AA00E67642 /* MessageIsFriend.swift */; };
@@ -58,9 +60,9 @@
 		CE7F14DD22DC47B7003FF41D /* AppPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F14DC22DC47B7003FF41D /* AppPresentViewController.swift */; };
 		CE7F14E522DC4AC9003FF41D /* AppPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7F14E422DC4AC9003FF41D /* AppPageViewController.swift */; };
 		CE7F14E822DC6564003FF41D /* Page-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14E722DC6564003FF41D /* Page-1.png */; };
-		CE7F14EA22DC6577003FF41D /* Page-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14E922DC6577003FF41D /* Page-2.png */; };
-		CE7F14EC22DC6581003FF41D /* Page-3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14EB22DC6581003FF41D /* Page-3.png */; };
-		CE7F14EE22DC658D003FF41D /* Page-4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14ED22DC658D003FF41D /* Page-4.png */; };
+		CE7F14EA22DC6577003FF41D /* Page-4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14E922DC6577003FF41D /* Page-4.png */; };
+		CE7F14EC22DC6581003FF41D /* Page-5.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14EB22DC6581003FF41D /* Page-5.png */; };
+		CE7F14EE22DC658D003FF41D /* Page-6.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14ED22DC658D003FF41D /* Page-6.png */; };
 		CE94BC4D22A11FAF0005B8D0 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */; };
 		CEBAFDEC22CB0EB90055A4AE /* top_line.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBAFDEB22CB0EB90055A4AE /* top_line.png */; };
 		CEC40AD1229FE6DD00674037 /* MyNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */; };
@@ -87,6 +89,8 @@
 		CE0A945622B1D35F00F7F031 /* UserPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotoViewController.swift; sourceTree = "<group>"; };
 		CE0A949822B238A300F7F031 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		CE0B063F22ADF756007ADB36 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		CE0C5E2A22DD6FC400223AE0 /* Page-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-2.png"; sourceTree = "<group>"; };
+		CE0C5E2B22DD6FC400223AE0 /* Page-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-3.png"; sourceTree = "<group>"; };
 		CE0D3D52229F5ECD008033D7 /* Login_Icon_ver_2_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Login_Icon_ver_2_2.png; sourceTree = "<group>"; };
 		CE0D3D62229F92B0008033D7 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		CE0D550B22D6F5AA00E67642 /* MessageIsFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageIsFriend.swift; sourceTree = "<group>"; };
@@ -132,9 +136,9 @@
 		CE7F14DC22DC47B7003FF41D /* AppPresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPresentViewController.swift; sourceTree = "<group>"; };
 		CE7F14E422DC4AC9003FF41D /* AppPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPageViewController.swift; sourceTree = "<group>"; };
 		CE7F14E722DC6564003FF41D /* Page-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-1.png"; sourceTree = "<group>"; };
-		CE7F14E922DC6577003FF41D /* Page-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-2.png"; sourceTree = "<group>"; };
-		CE7F14EB22DC6581003FF41D /* Page-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-3.png"; sourceTree = "<group>"; };
-		CE7F14ED22DC658D003FF41D /* Page-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-4.png"; sourceTree = "<group>"; };
+		CE7F14E922DC6577003FF41D /* Page-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-4.png"; sourceTree = "<group>"; };
+		CE7F14EB22DC6581003FF41D /* Page-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-5.png"; sourceTree = "<group>"; };
+		CE7F14ED22DC658D003FF41D /* Page-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-6.png"; sourceTree = "<group>"; };
 		CE94BC4C22A11FAF0005B8D0 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		CEBAFDEB22CB0EB90055A4AE /* top_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_line.png; sourceTree = "<group>"; };
 		CEC40AD0229FE6DD00674037 /* MyNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationController.swift; sourceTree = "<group>"; };
@@ -413,9 +417,11 @@
 			isa = PBXGroup;
 			children = (
 				CE7F14E722DC6564003FF41D /* Page-1.png */,
-				CE7F14E922DC6577003FF41D /* Page-2.png */,
-				CE7F14EB22DC6581003FF41D /* Page-3.png */,
-				CE7F14ED22DC658D003FF41D /* Page-4.png */,
+				CE0C5E2A22DD6FC400223AE0 /* Page-2.png */,
+				CE0C5E2B22DD6FC400223AE0 /* Page-3.png */,
+				CE7F14E922DC6577003FF41D /* Page-4.png */,
+				CE7F14EB22DC6581003FF41D /* Page-5.png */,
+				CE7F14ED22DC658D003FF41D /* Page-6.png */,
 			);
 			path = AppPresent;
 			sourceTree = "<group>";
@@ -517,7 +523,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE7F14EE22DC658D003FF41D /* Page-4.png in Resources */,
+				CE7F14EE22DC658D003FF41D /* Page-6.png in Resources */,
+				CE0C5E2C22DD6FC500223AE0 /* Page-2.png in Resources */,
 				CE0D3D53229F5ECD008033D7 /* Login_Icon_ver_2_2.png in Resources */,
 				CE7F14D522DC035C003FF41D /* UserCardView.xib in Resources */,
 				CE0DE89C22B08F7E00F49C5B /* userPhotoDefault.png in Resources */,
@@ -530,14 +537,15 @@
 				CE63540C22CB3ED500E05A02 /* waring.png in Resources */,
 				CE0E6DCB22C4BBCC0028FF47 /* user.png in Resources */,
 				CEFFD38522CA5EA8000E46DF /* message.png in Resources */,
-				CE7F14EC22DC6581003FF41D /* Page-3.png in Resources */,
+				CE7F14EC22DC6581003FF41D /* Page-5.png in Resources */,
 				CE7F14C822DB513B003FF41D /* 未命名89.png in Resources */,
 				CEFFD38922CA5F93000E46DF /* Like.png in Resources */,
-				CE7F14EA22DC6577003FF41D /* Page-2.png in Resources */,
+				CE7F14EA22DC6577003FF41D /* Page-4.png in Resources */,
 				CE16A9E422C0A64D00B16983 /* Star.png in Resources */,
 				CE04BFC422C7408300BC8300 /* Assets.xcassets in Resources */,
 				CE0DD11722CAEEDC0031D4BA /* recordPen_Line.png in Resources */,
 				CE0E6DC922C4BAF40028FF47 /* cassette.png in Resources */,
+				CE0C5E2D22DD6FC500223AE0 /* Page-3.png in Resources */,
 				CE16A9E622C0ADB000B16983 /* Stop.png in Resources */,
 				CE1D642A22D8F1EA00D9FCAE /* speaker.png in Resources */,
 				CEBAFDEC22CB0EB90055A4AE /* top_line.png in Resources */,

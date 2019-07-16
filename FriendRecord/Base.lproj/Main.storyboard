@@ -118,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7U-nW-g9B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="642" y="-36"/>
+            <point key="canvasLocation" x="-328" y="-36"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="kWH-fh-NhA">
@@ -468,7 +468,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sfm-Fm-fb7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7041" y="-970"/>
+            <point key="canvasLocation" x="8074" y="-970"/>
         </scene>
         <!--Main App View Controller-->
         <scene sceneID="EDu-xl-Dpz">
@@ -875,7 +875,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pVa-Cw-rgl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7041" y="785"/>
+            <point key="canvasLocation" x="8074" y="785"/>
         </scene>
         <!--留言-->
         <scene sceneID="9gt-fc-boC">
@@ -1223,7 +1223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KFZ-DO-Ni4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8978" y="-36"/>
+            <point key="canvasLocation" x="10190" y="-36"/>
         </scene>
         <!--Ripple Animation View Controller-->
         <scene sceneID="J6w-dP-Mvl">
@@ -1256,7 +1256,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXf-EG-Khs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8074" y="-36"/>
+            <point key="canvasLocation" x="9283" y="-36"/>
         </scene>
         <!--Registered View Controller-->
         <scene sceneID="IFu-gi-Kal">
@@ -1459,7 +1459,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a7f-Kp-3u9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="pNT-yp-T4V" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="641" y="785"/>
+            <point key="canvasLocation" x="-329" y="785"/>
         </scene>
         <!--App Present View Controller-->
         <scene sceneID="VYz-F4-RAo">
@@ -1475,7 +1475,7 @@
                                     <segue destination="8Dh-Ep-Gxn" kind="embed" id="ebc-Qd-eb9"/>
                                 </connections>
                             </containerView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="p1n-Ba-3jG">
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="6" translatesAutoresizingMaskIntoConstraints="NO" id="p1n-Ba-3jG">
                                 <rect key="frame" x="0.0" y="825" width="414" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="414" id="TER-jE-JWE"/>
@@ -1550,7 +1550,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Zc-mf-f93" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2808.6956521739135" y="1544.8660714285713"/>
+            <point key="canvasLocation" x="2809" y="1545"/>
         </scene>
         <!--Friend Menu View Controller-->
         <scene sceneID="28K-V3-oOU">
@@ -1751,7 +1751,7 @@
                     </connections>
                 </button>
             </objects>
-            <point key="canvasLocation" x="7041" y="-36"/>
+            <point key="canvasLocation" x="8074" y="-36"/>
         </scene>
         <!--My Tab Bar Controller-->
         <scene sceneID="fZV-KM-U00">
@@ -1836,7 +1836,7 @@
         <!--View Controller-->
         <scene sceneID="HhJ-DD-3Ls">
             <objects>
-                <viewController storyboardIdentifier="page-2" id="NNB-cT-ItZ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="page-4" id="NNB-cT-ItZ" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5YE-EQ-XQd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1858,12 +1858,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="492-vm-YaS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3692.753623188406" y="1544.8660714285713"/>
+            <point key="canvasLocation" x="5377" y="1545"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="7Fj-jb-H9h">
             <objects>
-                <viewController storyboardIdentifier="page-3" id="gMQ-CU-9UU" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="page-5" id="gMQ-CU-9UU" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TV2-4t-cbn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1885,12 +1885,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uXh-AU-Ih7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4524.6376811594209" y="1544.8660714285713"/>
+            <point key="canvasLocation" x="6288" y="1545"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="AJN-JL-FdS">
             <objects>
-                <viewController storyboardIdentifier="page-4" id="kV5-3J-d93" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="page-6" id="kV5-3J-d93" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fTN-e3-JQ2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1912,7 +1912,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FD9-S0-MAE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5376.811594202899" y="1544.8660714285713"/>
+            <point key="canvasLocation" x="7151" y="1545"/>
         </scene>
         <!--App Page View Controller-->
         <scene sceneID="Npr-ah-8Mn">
@@ -1928,6 +1928,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBt-L2-ync" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1633" y="1545"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="zKh-49-qwo">
+            <objects>
+                <viewController storyboardIdentifier="page-2" id="W36-6z-UuB" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="page-1" id="IRR-i3-LRQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Page-2.png" translatesAutoresizingMaskIntoConstraints="NO" id="SF0-LU-FWU">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SF0-LU-FWU" firstAttribute="bottom" secondItem="QDu-Aa-O28" secondAttribute="bottom" id="Gg4-DZ-2PC"/>
+                            <constraint firstItem="SF0-LU-FWU" firstAttribute="leading" secondItem="QDu-Aa-O28" secondAttribute="leading" id="UL9-z1-zdK"/>
+                            <constraint firstItem="SF0-LU-FWU" firstAttribute="trailing" secondItem="QDu-Aa-O28" secondAttribute="trailing" id="WBM-Wm-sSD"/>
+                            <constraint firstItem="SF0-LU-FWU" firstAttribute="top" secondItem="QDu-Aa-O28" secondAttribute="top" id="xWL-nw-Cqj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QDu-Aa-O28"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TX6-OK-RRi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3693" y="1545"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="dBQ-aw-tsp">
+            <objects>
+                <viewController storyboardIdentifier="page-3" id="r30-mG-7JK" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="page-1" id="r17-kX-ATZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Page-3.png" translatesAutoresizingMaskIntoConstraints="NO" id="H0T-Uo-8Bu">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="H0T-Uo-8Bu" firstAttribute="trailing" secondItem="4Zw-sA-4hu" secondAttribute="trailing" id="4ow-Yr-LSA"/>
+                            <constraint firstItem="H0T-Uo-8Bu" firstAttribute="top" secondItem="4Zw-sA-4hu" secondAttribute="top" id="HPb-36-ddr"/>
+                            <constraint firstItem="H0T-Uo-8Bu" firstAttribute="bottom" secondItem="4Zw-sA-4hu" secondAttribute="bottom" id="jtT-9V-CwE"/>
+                            <constraint firstItem="H0T-Uo-8Bu" firstAttribute="leading" secondItem="4Zw-sA-4hu" secondAttribute="leading" id="qSC-6X-L6o"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4Zw-sA-4hu"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZTj-FM-2B5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4525" y="1545"/>
         </scene>
     </scenes>
     <resources>

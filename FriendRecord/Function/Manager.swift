@@ -542,6 +542,25 @@ class Manager :UIViewController {
         }
     }
     
+    //MARK: func - Delete Record Pen.
+    func deleteRecordPen(recordID :Int) {
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Delete_Record_Pen.php") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let param = "id=\(recordID)"
+            request.httpBody = param.data(using: .utf8)
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let e = error {
+                    print("erroe \(e)")
+                }
+            }
+            task.resume()
+        }
+    }
+    
     //MARK: func - user Online.
     func userOnline() {
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Account_Online.php") {
