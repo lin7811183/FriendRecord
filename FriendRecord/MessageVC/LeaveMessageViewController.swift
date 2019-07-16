@@ -84,11 +84,12 @@ class LeaveMessageViewController: UIViewController {
         
         self.downLoadMessage()
         self.downLoadMessageIsFriend()
-        Manager.shared.loadUserCardData(email: self.recordSendUser)
+
         
         if self.formVC == 0 {
             print("form MainAppVC.")
             self.dataArray = Manager.recordData
+            Manager.shared.loadUserCardData(email: self.recordSendUser)
             
         } else {
             print("form UserVC.")
