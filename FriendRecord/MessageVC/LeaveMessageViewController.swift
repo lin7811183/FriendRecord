@@ -20,8 +20,8 @@ class LeaveMessageViewController: UIViewController {
     @IBOutlet weak var lookUserCard: UIButton!
     
     var addBTCenterPoint :CGPoint!
-    var userBTCenterPoint :CGPoint!
-    var lookUserCardCenterPoint :CGPoint!
+    var listenBTCenterPoint :CGPoint!
+    var lookUserCardBTCenterPoint :CGPoint!
     
     var formVC :Int!
     var dataArray :[Record]!
@@ -67,15 +67,19 @@ class LeaveMessageViewController: UIViewController {
 //        self.userBT.layer.borderWidth = 1
 //        self.userBT.layer.borderColor = UIColor.black.cgColor
         
-        self.userBTCenterPoint =  self.listenBT.center
+        self.listenBTCenterPoint =  self.listenBT.center
         self.listenBT.center = self.moreBT.center
+        
         self.addBTCenterPoint = self.addFriendBT.center
         self.addFriendBT.center = self.moreBT.center
-        self.lookUserCardCenterPoint = self.lookUserCard.center
+        
+        self.lookUserCardBTCenterPoint = self.lookUserCard.center
         self.lookUserCard.center = self.moreBT.center
         
         self.messageTableView.dataSource = self
         self.messageTableView.delegate = self
+        
+        self.messageTF.delegate = self
     }
 
     
@@ -84,13 +88,12 @@ class LeaveMessageViewController: UIViewController {
         
         self.downLoadMessage()
         self.downLoadMessageIsFriend()
-
         
         if self.formVC == 0 {
             print("form MainAppVC.")
             self.dataArray = Manager.recordData
             Manager.shared.loadUserCardData(email: self.recordSendUser)
-            
+
         } else {
             print("form UserVC.")
             self.dataArray = Manager.userLocalRecordPen
@@ -131,9 +134,9 @@ class LeaveMessageViewController: UIViewController {
                 self.addFriendBT.alpha = 1
                 self.lookUserCard.alpha = 1
                 
-                self.listenBT.center = self.userBTCenterPoint
+                self.listenBT.center = self.listenBTCenterPoint
                 self.addFriendBT.center = self.addBTCenterPoint
-                self.lookUserCard.center = self.lookUserCardCenterPoint
+                self.lookUserCard.center = self.lookUserCardBTCenterPoint
                 
                 self.test = true
                 })
@@ -473,3 +476,32 @@ extension LeaveMessageViewController :AVAudioPlayerDelegate {
         }
     }
 }
+
+extension LeaveMessageViewController :UITextFieldDelegate {
+    //touch textfiel begin.
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        self.messageTableView.setContentOffset(CGPoint(x: 0, y: 50), animated: true)
+//        self.mainView.translatesAutoresizingMaskIntoConstraints = false//一定要加，不加會有錯，關閉舊有的Layout機制(autoreizing mask)
+//        self.userMessageView.frame.size.height = 150
+//        print("Begin前\(self.mainView.frame.size.height)")
+//        self.mainView.frame.size.height = self.mainView.frame.size.height - (self.tabBarController?.tabBar.frame.size.height)!
+//        print("Begin後\(self.mainView.frame.size.height)")
+//        self.userMessageView.bottomAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 0).isActive = true
+//        self.userMessageView.leftAnchor.constraint(equalTo: self.mainView.leftAnchor, constant: 0).isActive = true
+//        self.userMessageView.rightAnchor.constraint(equalTo: self.mainView.rightAnchor, constant: 0).isActive = true //往回縮
+
+    }
+    //touch textfiel end.
+    func textFieldDidEndEditing(_ textField: UITextField) {
+//        self.messageTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+//        self.mainView.translatesAutoresizingMaskIntoConstraints = false//一定要加，不加會有錯，關閉舊有的Layout機制(autoreizing mask)
+//        self.userMessageView.frame.size.height = 86
+//        print("Did前\(self.mainView.frame.size.height)")
+//        self.mainView.frame.size.height = self.mainView.frame.size.height + (self.tabBarController?.tabBar.frame.size.height)!
+//        print("Did後\(self.mainView.frame.size.height)")
+//        self.userMessageView.bottomAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 0).isActive = true
+//        self.userMessageView.leftAnchor.constraint(equalTo: self.mainView.leftAnchor, constant: 0).isActive = true
+//        self.userMessageView.rightAnchor.constraint(equalTo: self.mainView.rightAnchor, constant: 0).isActive = true //往回縮
+    }
+}
+

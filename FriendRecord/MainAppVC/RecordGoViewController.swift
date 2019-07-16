@@ -159,8 +159,7 @@ class RecordGoViewController: UIViewController {
             Manager.recordData.remove(at: 0)
             //self.starRecordBT.titleLabel?.text = "再次錄音"
             self.starRecordBT.setTitle("再次錄音", for: .normal)
-            self.textView.text = ""
-            
+            //self.textView.text = ""
             
             //Star timer.
             self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
@@ -239,7 +238,8 @@ class RecordGoViewController: UIViewController {
             } else {
                 text = Manager.recordData[0].recordText!
             }
-            let recordDataString = "心情 : \(text!)\n長度 : \(Manager.recordData[0].recordTime!)"
+            let recordDataString = "\(text!)"
+            self.timerLB.text = "\(Manager.recordData[0].recordTime!)"
             self.textView.textColor = UIColor.black
             self.textView.text = recordDataString
             
