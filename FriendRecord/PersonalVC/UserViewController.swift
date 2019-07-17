@@ -7,6 +7,7 @@ class UserViewController: UIViewController {
     @IBOutlet weak var userView: UIView!
     @IBOutlet weak var userTF: UITextView!
     @IBOutlet weak var UserGenderLB: UILabel!
+    @IBOutlet weak var userGenderImage: UIImageView!
     @IBOutlet weak var userBfLB: UILabel!
     @IBOutlet weak var userPhotoBT: UIButton!
     @IBOutlet weak var editUserTF_BT: UIButton!
@@ -43,10 +44,11 @@ class UserViewController: UIViewController {
             //self.userNickNameLB.text = uesrDataNickName
             
             let userDataGender = userData.string(forKey: "gender")
-            self.UserGenderLB.text = userDataGender
+            //self.UserGenderLB.text = userDataGender
+            self.userGenderImage.image = Manager.shared.userGenderChangeImage(gender: userDataGender!)
             
             let userDataBf = userData.string(forKey: "bf")
-            self.userBfLB.text = userDataBf
+            self.userBfLB.text = Manager.shared.userBFChange(bf: userDataBf!)
 
             //self.navigationItem.title = uesrDataNickName
             self.userBT.setImage(UIImage(named: "down"), for: .normal)
@@ -57,8 +59,8 @@ class UserViewController: UIViewController {
         
         self.userView.layer.cornerRadius = 10
         self.userView.layer.masksToBounds = true
-        //        self.userView.backgroundColor = UIColor.lightGray
-        self.userView.backgroundColor = UIColor(displayP3Red: 192/220, green: 192/220, blue: 192/220, alpha: 0.5)
+        //self.userView.backgroundColor = UIColor.lightGray
+        //self.userView.backgroundColor = UIColor(displayP3Red: 192/220, green: 192/220, blue: 192/220, alpha: 0.5)
         
         self.userTF.isEditable = false
         self.userTF.isSelectable = false
@@ -178,14 +180,14 @@ class UserViewController: UIViewController {
         if self.isUserFTType == false {
             self.editUserTF_BT.setImage(UIImage(named: "pen.png"), for: .normal)
             self.editUserTF_BT.setTitle("", for: .normal)
-            self.userTF.backgroundColor = UIColor.gray
+            self.userTF.backgroundColor = UIColor(named: "MyColor4")
             self.userTF.isSelectable = true
             self.userTF.isEditable = true
             self.isUserFTType = true
         } else {
             self.editUserTF_BT.setTitleColor(UIColor.black, for: .normal)
             self.editUserTF_BT.setImage(UIImage(named: ""), for: .normal)
-            self.userTF.backgroundColor = UIColor.white
+            self.userTF.backgroundColor = UIColor(named: "UserViewColor")
             self.editUserTF_BT.setTitle("編輯", for: .normal)
             self.userTF.isSelectable = false
             self.userTF.isEditable = false

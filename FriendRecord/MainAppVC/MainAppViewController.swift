@@ -26,6 +26,7 @@ class MainAppViewController: UIViewController {
     @IBOutlet weak var userPoRecordBT: UIButton!
     @IBOutlet weak var recordPenModeBT: UIBarButtonItem!
     @IBOutlet weak var goToTop: UIButton!
+    @IBOutlet weak var loadingActivity: UIActivityIndicatorView!
     
     var tableViewData = [Manager.recordDataUser,[Record]()]
     
@@ -53,6 +54,7 @@ class MainAppViewController: UIViewController {
         
 //        self.navigationItem.largeTitleDisplayMode = .never
         // 預載資料
+        self.loadingActivity.startAnimating()
         Manager.shared.downLoadRecordPen()
         Manager.shared.downLoadUserPhoto()
         Manager.shared.userOnline()
@@ -124,6 +126,7 @@ class MainAppViewController: UIViewController {
     }
     //MARK: func - Change record pen show mode.
     @IBAction func showRecordPenShow(_ sender: UISegmentedControl) {
+        self.loadingActivity.startAnimating()
         if sender.selectedSegmentIndex == 0 {
             //全音模式
             Manager.shared.downLoadRecordPen()
@@ -138,7 +141,7 @@ class MainAppViewController: UIViewController {
         guard let friendMenuVC = self.storyboard?.instantiateViewController(withIdentifier: "friendmenuVC") as? FriendMenuViewController else { return }
         friendMenuVC.modalPresentationStyle = .overCurrentContext
         friendMenuVC.transitioningDelegate = self
-        present(friendMenuVC, animated: true)
+        self.present(friendMenuVC, animated: true)
     }
     //MARK: func - Stop old Record Muice.
     func stopOldRecordMuice() {
@@ -522,14 +525,17 @@ extension MainAppViewController :ManagerDelegate {
             self.tableViewData[1] = Manager.recordData
             
             // left out the unnecessary syntax in the completion block and the optional completion parameter
-            UIView.transition(with: self.tableView, duration: 0.35, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() })
+            UIView.transition(with: self.tableView, duration: 0.35, options: .transitionCrossDissolve, animations: {self.tableView.reloadData() })
+            self.loadingActivity.stopAnimating()
         }
     }
     //MARK: Protocol - ManagerDelegate by Manager.
     func finishDownLoadUserPhoto() {
         print("ManagerDelegate - finishDownLoadUserPhoto")
         DispatchQueue.main.async {
-            UIView.transition(with: self.tableView, duration: 1, options: .transitionCrossDissolve, animations: { self.tableView.reloadData() })
+            UIView.transition(with: self.tableView, duration: 1, options: .transitionCrossDissolve, animations: { self.tableView.reloadData()
+                
+            })
         }
     }
 }

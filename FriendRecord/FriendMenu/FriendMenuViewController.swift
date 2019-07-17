@@ -105,6 +105,19 @@ extension FriendMenuViewController :UITableViewDataSource, UITableViewDelegate {
         }
         return cell
     }
-    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
     //MARK: Protocol - TableView Delegate.
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let userEmail = self.friendListData[indexPath.row].userEmail!
+            let friendEmail = self.friendListData[indexPath.row].friendEmail!
+            Manager.shared.deleteFriend(email: userEmail, friendEmail: friendEmail)
+            
+            self.friendListData.remove(at: indexPath.row)
+            self.friendTableView.deleteRows(at: [indexPath], with: .automatic)
+            self.friendTableView.reloadData()
+        }
+    }
 }

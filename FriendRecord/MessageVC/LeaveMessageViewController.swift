@@ -87,10 +87,7 @@ class LeaveMessageViewController: UIViewController {
         
         self.messageTableView.dataSource = self
         self.messageTableView.delegate = self
-        
-        self.messageTF.delegate = self
     }
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -222,9 +219,11 @@ class LeaveMessageViewController: UIViewController {
         userCardView.userImage.image = Manager.shared.userPhotoRead(jpg: imageName)
         userCardView.userImage.layer.cornerRadius = userCardView.userImage.bounds.height / 2
         userCardView.userName.text = Manager.userCardData.first?.nickname
-        userCardView.userBF.text = Manager.userCardData.first?.bf
-        userCardView.userGender.text = Manager.userCardData.first?.gender
+        userCardView.userBF.text = Manager.shared.userBFChange(bf: Manager.userCardData.first!.bf!)
+        //userCardView.userGender.text = Manager.userCardData.first?.gender
+        userCardView.userGenderImage.image = Manager.shared.userGenderChangeImage(gender: Manager.userCardData.first!.gender!)
         userCardView.userSend.text = Manager.userCardData.first?.presentation
+        userCardView.userSend.layer.cornerRadius = 5.0
         UIView.transition(with: self.view, duration: 0.3, options: [.transitionCrossDissolve], animations: {self.view.addSubview(userCardView)}, completion: nil)//加入此視窗
         
         let cancelBT = UIButton()
@@ -493,32 +492,3 @@ extension LeaveMessageViewController :AVAudioPlayerDelegate {
         }
     }
 }
-
-extension LeaveMessageViewController :UITextFieldDelegate {
-    //touch textfiel begin.
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        self.messageTableView.setContentOffset(CGPoint(x: 0, y: 50), animated: true)
-//        self.mainView.translatesAutoresizingMaskIntoConstraints = false//一定要加，不加會有錯，關閉舊有的Layout機制(autoreizing mask)
-//        self.userMessageView.frame.size.height = 150
-//        print("Begin前\(self.mainView.frame.size.height)")
-//        self.mainView.frame.size.height = self.mainView.frame.size.height - (self.tabBarController?.tabBar.frame.size.height)!
-//        print("Begin後\(self.mainView.frame.size.height)")
-//        self.userMessageView.bottomAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 0).isActive = true
-//        self.userMessageView.leftAnchor.constraint(equalTo: self.mainView.leftAnchor, constant: 0).isActive = true
-//        self.userMessageView.rightAnchor.constraint(equalTo: self.mainView.rightAnchor, constant: 0).isActive = true //往回縮
-
-    }
-    //touch textfiel end.
-    func textFieldDidEndEditing(_ textField: UITextField) {
-//        self.messageTableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-//        self.mainView.translatesAutoresizingMaskIntoConstraints = false//一定要加，不加會有錯，關閉舊有的Layout機制(autoreizing mask)
-//        self.userMessageView.frame.size.height = 86
-//        print("Did前\(self.mainView.frame.size.height)")
-//        self.mainView.frame.size.height = self.mainView.frame.size.height + (self.tabBarController?.tabBar.frame.size.height)!
-//        print("Did後\(self.mainView.frame.size.height)")
-//        self.userMessageView.bottomAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 0).isActive = true
-//        self.userMessageView.leftAnchor.constraint(equalTo: self.mainView.leftAnchor, constant: 0).isActive = true
-//        self.userMessageView.rightAnchor.constraint(equalTo: self.mainView.rightAnchor, constant: 0).isActive = true //往回縮
-    }
-}
-

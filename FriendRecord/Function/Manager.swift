@@ -61,6 +61,25 @@ class Manager :UIViewController {
         return filePath
     }
     
+    //MARK: func - User gender change Image.
+    func userGenderChangeImage(gender :String) -> UIImage? {
+        if gender == "男孩" {
+            return UIImage(named: "boy")
+        } else if gender == "女孩" {
+            return UIImage(named: "girl")
+        } else if gender == "不說" {
+            return UIImage(named: "none")
+        } else {
+            return UIImage(named: "tomore")
+        }
+    }
+    
+    //MARK: func - User BF day Change.
+    func userBFChange(bf :String) -> String{
+        let bfArray = bf.split(separator: "/")
+        return "\(bfArray[1])\(bfArray[2])"
+    }
+    
     //MARK: func - check file in app.
     func checkFile(fileName :String) -> Bool {
         let fileManager = FileManager.default
@@ -549,6 +568,25 @@ class Manager :UIViewController {
             request.httpMethod = "POST"
             
             let param = "id=\(recordID)"
+            request.httpBody = param.data(using: .utf8)
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let e = error {
+                    print("erroe \(e)")
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    //MARK: func - Delete Friend.
+    func deleteFriend(email :String, friendEmail :String) {
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Account_Delete_Friend.php") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let param = "email=\(email)&Femail=\(friendEmail)"
             request.httpBody = param.data(using: .utf8)
             
             let session = URLSession.shared

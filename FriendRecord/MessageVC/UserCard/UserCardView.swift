@@ -8,6 +8,7 @@ class UserCardView: UIView {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userBF: UILabel!
     @IBOutlet weak var userGender: UILabel!
+    @IBOutlet weak var userGenderImage: UIImageView!
     @IBOutlet weak var userSend: UITextView!
     
     override init(frame: CGRect) {
