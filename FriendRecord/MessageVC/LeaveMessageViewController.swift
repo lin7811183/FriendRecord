@@ -23,6 +23,15 @@ class LeaveMessageViewController: UIViewController {
     var listenBTCenterPoint :CGPoint!
     var lookUserCardBTCenterPoint :CGPoint!
     
+    @IBOutlet weak var moreToViewBottomAL: NSLayoutConstraint! //91
+    @IBOutlet weak var listenToViewBottom: NSLayoutConstraint! //166
+    @IBOutlet weak var addFriendToViewBottom: NSLayoutConstraint! //226
+    @IBOutlet weak var userLookToViewBottom: NSLayoutConstraint! //286
+    
+    @IBOutlet weak var listenToViewBotto_B: NSLayoutConstraint!
+    @IBOutlet weak var addFriendToViewBottom_B: NSLayoutConstraint!
+    @IBOutlet weak var userLookToViewBottom_B: NSLayoutConstraint!
+    
     var formVC :Int!
     var dataArray :[Record]!
     
@@ -40,7 +49,7 @@ class LeaveMessageViewController: UIViewController {
     
     var delegate :LeaveMessageViewControllerDelegate!
     
-    var isFriendArray :[MessageIsFriend]!
+    var isFriendArray :[MessageIsFriend] = []
     var isFriend :Bool!
     
     var isPlayer = false
@@ -134,6 +143,10 @@ class LeaveMessageViewController: UIViewController {
                 self.addFriendBT.alpha = 1
                 self.lookUserCard.alpha = 1
                 
+                self.listenToViewBottom.priority = UILayoutPriority(rawValue: 200)
+                self.addFriendToViewBottom.priority = UILayoutPriority(rawValue: 200)
+                self.userLookToViewBottom.priority = UILayoutPriority(rawValue: 200)
+                
                 self.listenBT.center = self.listenBTCenterPoint
                 self.addFriendBT.center = self.addBTCenterPoint
                 self.lookUserCard.center = self.lookUserCardBTCenterPoint
@@ -145,6 +158,10 @@ class LeaveMessageViewController: UIViewController {
                 self.listenBT.alpha = 0
                 self.addFriendBT.alpha = 0
                 self.lookUserCard.alpha = 0
+                
+                self.listenToViewBottom.priority = UILayoutPriority(rawValue: 100)
+                self.addFriendToViewBottom.priority = UILayoutPriority(rawValue: 100)
+                self.userLookToViewBottom.priority = UILayoutPriority(rawValue: 100)
                 
                 self.listenBT.center  = self.moreBT.center
                 self.addFriendBT.center = self.moreBT.center
