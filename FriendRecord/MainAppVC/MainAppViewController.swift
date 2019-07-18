@@ -23,8 +23,8 @@ class MainAppViewController: UIViewController {
     }
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var userPoRecordBT: UIButton!
-    @IBOutlet weak var recordPenModeBT: UIBarButtonItem!
+    @IBOutlet weak var recordPenShowMode: UIBarButtonItem!
+    var recordPenShowMode2 :UIBarButtonItem!
     @IBOutlet weak var goToTop: UIButton!
     @IBOutlet weak var loadingActivity: UIActivityIndicatorView!
     
@@ -48,6 +48,8 @@ class MainAppViewController: UIViewController {
     var pushIndex :IndexPath!
     
     let transiton = SlideInTransition()
+    
+    var isSearch = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,6 +156,22 @@ class MainAppViewController: UIViewController {
                 self.recordPlayer?.stop()
                 self.isPiayer = false
             }
+        }
+    }
+    //MARK: func - Search User
+    @IBAction func searchUser(_ sender: Any) {
+        if self.isSearch == false {
+            let searchBar = UISearchBar()
+            searchBar.placeholder = "Test ..."
+            self.navigationItem.titleView = searchBar
+            self.navigationItem.leftBarButtonItems = []
+            
+            self.isSearch = true
+        } else {
+            self.navigationItem.titleView = nil
+            self.recordPenShowMode2 = UIBarButtonItem()
+            self.navigationItem.leftBarButtonItems = [self.recordPenShowMode2]
+            self.isSearch = false
         }
     }
     
