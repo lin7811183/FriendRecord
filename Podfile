@@ -1,4 +1,4 @@
-# Uncomment the next line to define a global platform for your project
+·# Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
 target 'FriendRecord' do
@@ -14,5 +14,9 @@ target 'FriendRecord' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Storage'
   pod 'Firebase/Messaging'
+  pod 'FBSDKCoreKit'  
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKShareKit'
+  pod 'FBSDKPlacesKit'
 
 end

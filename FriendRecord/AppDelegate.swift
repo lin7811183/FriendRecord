@@ -4,6 +4,7 @@ import UserNotifications
 import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
+import FBSDKCoreKit
 
 protocol MyAppDelegate {
     func updateManagerRecordData()

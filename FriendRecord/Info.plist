@@ -8,6 +8,8 @@
 	<string>知音</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -26,6 +28,14 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.1061438445960-6s1f5ekko0jp39sb5ndohim6mncghenu</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>632157750585863</string>
 			</array>
 		</dict>
 	</array>
@@ -74,5 +84,23 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+
+
+
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>fb2227739867487385</string>
+    </array>
+  </dict>
+</array>
+<key>FacebookAppID</key>
+<string>2227739867487385</string>
+<key>FacebookDisplayName</key>
+<string>Friend_Record_EJLin</string>
+
+	
 </dict>
 </plist>

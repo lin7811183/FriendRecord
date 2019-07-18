@@ -1,10 +1,15 @@
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
+import FBSDKShareKit
 
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginEmailTF: UITextField!
     @IBOutlet weak var loginPassWordTF: UITextField!
     @IBOutlet weak var loginSV: UIScrollView!
+    @IBOutlet weak var loginFBBT: FBLoginButton!
+    
     
     var isloginOK: Int = 0
     var recodeArry :[String:Int]!
@@ -13,9 +18,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //dismissKeyboard.
-        Manager.shared.hideKeyboardWhenTappedAround()
-        
+        self.loginFBBT.permissions = ["public_profile","email"]
+        self.loginFBBT.delegate = self
 //        self.loginEmailTF.delegate = self
 //        self.loginPassWordTF.delegate = self
         
@@ -181,6 +185,13 @@ class LoginViewController: UIViewController {
 }
 
 /*------------------------------------------------------------ Protocol. ------------------------------------------------------------*/
+extension LoginViewController :LoginButtonDelegate {
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+    }
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+    }
+}
+
 extension LoginViewController: UITextFieldDelegate {
     
 //    //MARK: Protocol - UITextFiel Delegate.
