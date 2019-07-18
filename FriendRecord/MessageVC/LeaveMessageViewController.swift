@@ -212,18 +212,26 @@ class LeaveMessageViewController: UIViewController {
         self.view.addSubview(self.backView)
         
         let userCardView = UserCardView()
+       
+        
         userCardView.tag = 998
         userCardView.frame = CGRect(x: 12.5 ,y: (self.navigationController?.navigationBar.frame.size.height)! + 100, width:self.userCardView.frame.size.width, height: self.userCardView.frame.size.height)
         userCardView.mainView.layer.cornerRadius = 5.0
+        
         let imageName = Manager.shared.emailChangeHead(email: self.recordSendUser)
         userCardView.userImage.image = Manager.shared.userPhotoRead(jpg: imageName)
         userCardView.userImage.layer.cornerRadius = userCardView.userImage.bounds.height / 2
+        
         userCardView.userName.text = Manager.userCardData.first?.nickname
+
         userCardView.userBF.text = Manager.shared.userBFChange(bf: Manager.userCardData.first!.bf!)
+        
         //userCardView.userGender.text = Manager.userCardData.first?.gender
         userCardView.userGenderImage.image = Manager.shared.userGenderChangeImage(gender: Manager.userCardData.first!.gender!)
+        
         userCardView.userSend.text = Manager.userCardData.first?.presentation
         userCardView.userSend.layer.cornerRadius = 5.0
+        
         UIView.transition(with: self.view, duration: 0.3, options: [.transitionCrossDissolve], animations: {self.view.addSubview(userCardView)}, completion: nil)//加入此視窗
         
         let cancelBT = UIButton()
@@ -232,6 +240,10 @@ class LeaveMessageViewController: UIViewController {
         cancelBT.setImage(UIImage(named: "cencel"), for: .normal)
         cancelBT.addTarget(self, action: #selector(dissMissUserCardView), for: .touchUpInside)
         UIView.transition(with: self.view, duration: 0.3, options: [.transitionCrossDissolve], animations: {self.view.addSubview(cancelBT)}, completion: nil)//加入此視窗
+    }
+    //MARK: func - Look User Image.
+    @objc func lookUserImage() {
+        print("TTTT")
     }
     // diss Miss UserCardView BT
     @objc func dissMissUserCardView() {

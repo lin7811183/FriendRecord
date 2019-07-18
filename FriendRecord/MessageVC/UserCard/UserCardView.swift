@@ -11,6 +11,8 @@ class UserCardView: UIView {
     @IBOutlet weak var userGenderImage: UIImageView!
     @IBOutlet weak var userSend: UITextView!
     
+    @IBOutlet weak var Test: UIButton!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()

@@ -86,6 +86,8 @@ extension FriendMenuViewController :UITableViewDataSource, UITableViewDelegate {
         
         if self.friendListData.count == 0 {
             cell.userNickName.text = "目前0位知音~"
+            cell.isOnlineImage.image = nil
+            cell.userImage.image = nil
             cell.selectionStyle = .none//讓選取顏色不會出現
         } else {
             cell.userNickName.text = self.friendListData[indexPath.row].friendNickName
@@ -120,7 +122,6 @@ extension FriendMenuViewController :UITableViewDataSource, UITableViewDelegate {
             Manager.shared.deleteFriend(email: userEmail, friendEmail: friendEmail)
             
             self.friendListData.remove(at: indexPath.row)
-            self.friendTableView.deleteRows(at: [indexPath], with: .automatic)
             self.friendTableView.reloadData()
         }
     }
