@@ -34,8 +34,8 @@ class AppPageViewController: UIPageViewController {
         self.viewControllerList.append(self.getViewController(withStoryboardID: "page-2"))
         self.viewControllerList.append(self.getViewController(withStoryboardID: "page-3"))
         self.viewControllerList.append(self.getViewController(withStoryboardID: "page-4"))
-        self.viewControllerList.append(self.getViewController(withStoryboardID: "page-5"))
-        self.viewControllerList.append(self.getViewController(withStoryboardID: "page-6"))
+//        self.viewControllerList.append(self.getViewController(withStoryboardID: "page-5"))
+//        self.viewControllerList.append(self.getViewController(withStoryboardID: "page-6"))
         
         self.delegate = self
         self.dataSource = self

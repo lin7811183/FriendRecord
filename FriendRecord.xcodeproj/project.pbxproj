@@ -42,15 +42,13 @@
 		CE16A9E622C0ADB000B16983 /* Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = CE16A9E522C0ADAF00B16983 /* Stop.png */; };
 		CE19634A22D41EDD004C6D32 /* FriendMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19634922D41EDD004C6D32 /* FriendMenuViewController.swift */; };
 		CE19634C22D42184004C6D32 /* SlideInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19634B22D42184004C6D32 /* SlideInTransition.swift */; };
+		CE1A365722E01BEE0047280B /* Page-3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1A365322E01BED0047280B /* Page-3.png */; };
+		CE1A365822E01BEE0047280B /* Page-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1A365422E01BED0047280B /* Page-1.png */; };
+		CE1A365922E01BEE0047280B /* Page-4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1A365522E01BED0047280B /* Page-4.png */; };
+		CE1A365A22E01BEE0047280B /* Page-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1A365622E01BEE0047280B /* Page-2.png */; };
 		CE1D3AF222D4D53D0076F73F /* MyFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D3AF122D4D53D0076F73F /* MyFriendTableViewCell.swift */; };
 		CE1D3AF522D4D7AB0076F73F /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D3AF422D4D7AB0076F73F /* Friend.swift */; };
 		CE1D642A22D8F1EA00D9FCAE /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1D642922D8F1EA00D9FCAE /* speaker.png */; };
-		CE1FA5F122DF15D1001EBF4D /* Page-4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA5EB22DF15D1001EBF4D /* Page-4.png */; };
-		CE1FA5F222DF15D1001EBF4D /* Page-6.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA5EC22DF15D1001EBF4D /* Page-6.png */; };
-		CE1FA5F322DF15D1001EBF4D /* Page-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA5ED22DF15D1001EBF4D /* Page-1.png */; };
-		CE1FA5F422DF15D1001EBF4D /* Page-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA5EE22DF15D1001EBF4D /* Page-2.png */; };
-		CE1FA5F522DF15D1001EBF4D /* Page-5.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA5EF22DF15D1001EBF4D /* Page-5.png */; };
-		CE1FA5F622DF15D1001EBF4D /* Page-3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA5F022DF15D1001EBF4D /* Page-3.png */; };
 		CE21464822B4978100F39747 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE21464722B4978100F39747 /* Record.swift */; };
 		CE22B5F822CF3563008D8C57 /* SearchFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE22B5F722CF3563008D8C57 /* SearchFriendViewController.swift */; };
 		CE22B5FC22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE22B5FB22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift */; };
@@ -118,15 +116,13 @@
 		CE16A9E522C0ADAF00B16983 /* Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stop.png; sourceTree = "<group>"; };
 		CE19634922D41EDD004C6D32 /* FriendMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendMenuViewController.swift; sourceTree = "<group>"; };
 		CE19634B22D42184004C6D32 /* SlideInTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInTransition.swift; sourceTree = "<group>"; };
+		CE1A365322E01BED0047280B /* Page-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-3.png"; sourceTree = "<group>"; };
+		CE1A365422E01BED0047280B /* Page-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-1.png"; sourceTree = "<group>"; };
+		CE1A365522E01BED0047280B /* Page-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-4.png"; sourceTree = "<group>"; };
+		CE1A365622E01BEE0047280B /* Page-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-2.png"; sourceTree = "<group>"; };
 		CE1D3AF122D4D53D0076F73F /* MyFriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendTableViewCell.swift; sourceTree = "<group>"; };
 		CE1D3AF422D4D7AB0076F73F /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		CE1D642922D8F1EA00D9FCAE /* speaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speaker.png; sourceTree = "<group>"; };
-		CE1FA5EB22DF15D1001EBF4D /* Page-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-4.png"; sourceTree = "<group>"; };
-		CE1FA5EC22DF15D1001EBF4D /* Page-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-6.png"; sourceTree = "<group>"; };
-		CE1FA5ED22DF15D1001EBF4D /* Page-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-1.png"; sourceTree = "<group>"; };
-		CE1FA5EE22DF15D1001EBF4D /* Page-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-2.png"; sourceTree = "<group>"; };
-		CE1FA5EF22DF15D1001EBF4D /* Page-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-5.png"; sourceTree = "<group>"; };
-		CE1FA5F022DF15D1001EBF4D /* Page-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-3.png"; sourceTree = "<group>"; };
 		CE21464722B4978100F39747 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		CE22B5F722CF3563008D8C57 /* SearchFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendViewController.swift; sourceTree = "<group>"; };
 		CE22B5FB22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserRecordTableViewCell.swift; sourceTree = "<group>"; };
@@ -416,12 +412,10 @@
 		CE7F14E622DC6556003FF41D /* AppPresent */ = {
 			isa = PBXGroup;
 			children = (
-				CE1FA5ED22DF15D1001EBF4D /* Page-1.png */,
-				CE1FA5EE22DF15D1001EBF4D /* Page-2.png */,
-				CE1FA5F022DF15D1001EBF4D /* Page-3.png */,
-				CE1FA5EB22DF15D1001EBF4D /* Page-4.png */,
-				CE1FA5EF22DF15D1001EBF4D /* Page-5.png */,
-				CE1FA5EC22DF15D1001EBF4D /* Page-6.png */,
+				CE1A365422E01BED0047280B /* Page-1.png */,
+				CE1A365622E01BEE0047280B /* Page-2.png */,
+				CE1A365322E01BED0047280B /* Page-3.png */,
+				CE1A365522E01BED0047280B /* Page-4.png */,
 			);
 			path = AppPresent;
 			sourceTree = "<group>";
@@ -523,11 +517,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE1A365722E01BEE0047280B /* Page-3.png in Resources */,
 				CE0D3D53229F5ECD008033D7 /* Login_Icon_ver_2_2.png in Resources */,
+				CE1A365A22E01BEE0047280B /* Page-2.png in Resources */,
 				CE7F14D522DC035C003FF41D /* UserCardView.xib in Resources */,
 				CE0DE89C22B08F7E00F49C5B /* userPhotoDefault.png in Resources */,
 				CE10040F229B725300660E82 /* LaunchScreen.storyboard in Resources */,
-				CE1FA5F122DF15D1001EBF4D /* Page-4.png in Resources */,
 				CE0E6DD122C4BCD50028FF47 /* microphone.png in Resources */,
 				CEFFD38722CA5ED5000E46DF /* isLike.png in Resources */,
 				CE63540E22CB3F0200E05A02 /* edit.png in Resources */,
@@ -536,20 +531,17 @@
 				CE63540C22CB3ED500E05A02 /* waring.png in Resources */,
 				CE0E6DCB22C4BBCC0028FF47 /* user.png in Resources */,
 				CEFFD38522CA5EA8000E46DF /* message.png in Resources */,
-				CE1FA5F622DF15D1001EBF4D /* Page-3.png in Resources */,
 				CE7F14C822DB513B003FF41D /* 未命名89.png in Resources */,
-				CE1FA5F522DF15D1001EBF4D /* Page-5.png in Resources */,
-				CE1FA5F422DF15D1001EBF4D /* Page-2.png in Resources */,
+				CE1A365822E01BEE0047280B /* Page-1.png in Resources */,
+				CE1A365922E01BEE0047280B /* Page-4.png in Resources */,
 				CEFFD38922CA5F93000E46DF /* Like.png in Resources */,
 				CE16A9E422C0A64D00B16983 /* Star.png in Resources */,
-				CE1FA5F322DF15D1001EBF4D /* Page-1.png in Resources */,
 				CE04BFC422C7408300BC8300 /* Assets.xcassets in Resources */,
 				CE0DD11722CAEEDC0031D4BA /* recordPen_Line.png in Resources */,
 				CE0E6DC922C4BAF40028FF47 /* cassette.png in Resources */,
 				CE16A9E622C0ADB000B16983 /* Stop.png in Resources */,
 				CE1D642A22D8F1EA00D9FCAE /* speaker.png in Resources */,
 				CEBAFDEC22CB0EB90055A4AE /* top_line.png in Resources */,
-				CE1FA5F222DF15D1001EBF4D /* Page-6.png in Resources */,
 				CE10040A229B725200660E82 /* Main.storyboard in Resources */,
 				CE7F14CA22DB5178003FF41D /* add-friend.png in Resources */,
 				CE0DB35B22D5BD450053B86C /* GoogleService-Info.plist in Resources */,

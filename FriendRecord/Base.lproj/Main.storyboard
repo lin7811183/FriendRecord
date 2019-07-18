@@ -1475,7 +1475,7 @@
                                     <segue destination="8Dh-Ep-Gxn" kind="embed" id="ebc-Qd-eb9"/>
                                 </connections>
                             </containerView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="6" translatesAutoresizingMaskIntoConstraints="NO" id="p1n-Ba-3jG">
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="p1n-Ba-3jG">
                                 <rect key="frame" x="0.0" y="825" width="414" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="414" id="TER-jE-JWE"/>
@@ -1839,7 +1839,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Page-2.png" translatesAutoresizingMaskIntoConstraints="NO" id="JOK-GJ-CCl">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Page-4.png" translatesAutoresizingMaskIntoConstraints="NO" id="JOK-GJ-CCl">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
@@ -1883,7 +1883,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uXh-AU-Ih7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6288" y="1545"/>
+            <point key="canvasLocation" x="6478" y="1545"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="AJN-JL-FdS">
