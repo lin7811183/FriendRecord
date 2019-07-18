@@ -111,6 +111,10 @@ extension FriendMenuViewController :UITableViewDataSource, UITableViewDelegate {
     //MARK: Protocol - TableView Delegate.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            guard self.friendListData.count != 0 else {
+                print("********** User is no Friens. **********")
+                return
+            }
             let userEmail = self.friendListData[indexPath.row].userEmail!
             let friendEmail = self.friendListData[indexPath.row].friendEmail!
             Manager.shared.deleteFriend(email: userEmail, friendEmail: friendEmail)
