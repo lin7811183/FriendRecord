@@ -44,7 +44,11 @@ class RegisteredViewController: UIViewController {
         self.bfTF.keyboardAppearance = .dark
         self.bfTF.inputView = self.bfDatePicker
         bfDatePicker.addTarget(self, action: #selector(changDate(datePicker:)), for: .valueChanged)
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Manager.shared.okAlter(vc: self, title: "註冊個人資料說明", message: "知音為社群App，分享以下資料可以讓知音更認識大家呦")
     }
     
     /*------------------------------------------------------------ Function ------------------------------------------------------------*/

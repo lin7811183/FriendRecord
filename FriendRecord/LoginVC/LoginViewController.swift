@@ -5,29 +5,43 @@ import FBSDKShareKit
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet var mainView: UIView!
     @IBOutlet weak var loginEmailTF: UITextField!
     @IBOutlet weak var loginPassWordTF: UITextField!
     @IBOutlet weak var loginSV: UIScrollView!
     @IBOutlet weak var loginFBBT: FBLoginButton!
     
-    
     var isloginOK: Int = 0
     var recodeArry :[String:Int]!
     var userLoginArry :[UserData] = []
     
+    var t :UIButton!
+    
+//    var gradientLayer: CAGradientLayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.loginFBBT.permissions = ["public_profile","email"]
-        self.loginFBBT.delegate = self
+//        self.loginFBBT.permissions = ["public_profile","email"]
+//        self.loginFBBT.delegate = self
+        
+        Profile.enableUpdatesOnAccessTokenChange(true)//把通知打開 by fb
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateProfile), name: Notification.Name.ProfileDidChange, object: nil)
+        
 //        self.loginEmailTF.delegate = self
 //        self.loginPassWordTF.delegate = self
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        self.createGradientLayer()
+    }
+    
     /*------------------------------------------------------------ function ------------------------------------------------------------*/
     //MARK: func - Login to app.
     @IBAction func loginGo(_ sender: Any) {
+        //self.t.setTitle("T", for: .normal)
         self.checkTextfiel()
         self.checkEmail()
         self.checkPassword()
@@ -167,26 +181,55 @@ class LoginViewController: UIViewController {
         }
     }
     
+    //MARK: func - <#code#>
+    func getFBSDKUserDetails(){
+        guard let _ = AccessToken.current else{return}
+        let param = ["fields":"email ,birthday ,gender"]
+        let graphRequest = GraphRequest(graphPath: "me",parameters: param)
+        graphRequest.start(completionHandler: { (connection, result, error) in
+            if(error == nil) {
+                //print("result \(result!)")
+                let info = result as! Dictionary<String,AnyObject>
+                if let email = info["email"] {
+                    print("email  = \(email)")
+                }
+                if let birthday = info["birthday"] {
+                    print("birthday = \(birthday)")
+                }
+                if let gender = info["gender"] {
+                    print("gender = \(gender)")
+                }
+            } else {
+                print("error \(error!)")
+            }
+        })
+    }
     
-    //MARKL
-    @IBAction func loginVC(segue :UIStoryboardSegue) {
+    @objc func updateProfile() {
+        
+        if let profile = Profile.current { //current 使用者登入帳號
+            print("\(profile.userID)")
+            print("\(profile.name!)")
+        }
         
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+//    func createGradientLayer() {
+//        self.gradientLayer = CAGradientLayer()
+//
+//        self.gradientLayer.frame = self.view.bounds
+//
+//        self.gradientLayer.colors = [UIColor.red.cgColor, UIColor.yellow.cgColor]
+//
+//        self.mainView.layer.addSublayer(gradientLayer)
+//    }
+    
 }
 
 /*------------------------------------------------------------ Protocol. ------------------------------------------------------------*/
 extension LoginViewController :LoginButtonDelegate {
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        self.getFBSDKUserDetails()
     }
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
     }

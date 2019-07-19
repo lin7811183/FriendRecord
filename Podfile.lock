@@ -1,4 +1,7 @@
 PODS:
+  - Crashlytics (3.13.4):
+    - Fabric (~> 1.10.2)
+  - Fabric (1.10.2)
   - FBSDKCoreKit (5.0.2):
     - FBSDKCoreKit/Basics (= 5.0.2)
     - FBSDKCoreKit/Core (= 5.0.2)
@@ -107,6 +110,8 @@ PODS:
   - Protobuf (3.8.0)
 
 DEPENDENCIES:
+  - Crashlytics
+  - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKPlacesKit
@@ -122,6 +127,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Crashlytics
+    - Fabric
     - FBSDKCoreKit
     - FBSDKLoginKit
     - FBSDKPlacesKit
@@ -146,6 +153,8 @@ SPEC REPOS:
     - Protobuf
 
 SPEC CHECKSUMS:
+  Crashlytics: 2dfd686bcb918dc10ee0e76f7f853fe42c7bd552
+  Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   FBSDKCoreKit: 3e41c402eb64ea7799c71833ff9e5690f27b9c42
   FBSDKLoginKit: a88f36da648e4c5d60eb261c63eac067abb97130
   FBSDKPlacesKit: 8df353f8f7978763309bb925ca0151c2992e7534
@@ -169,6 +178,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 3f617b9a6e73605565086864c9bc26b2bf2dd5a3
 
-PODFILE CHECKSUM: 87ba20425444984c82465d89065571a7ef8b1722
+PODFILE CHECKSUM: 3f5f7c80d6ec8731b703159ca85c26f37d604f21
 
 COCOAPODS: 1.6.1

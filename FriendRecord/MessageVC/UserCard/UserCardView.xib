@@ -68,7 +68,7 @@
             <color key="tintColor" name="MyColor4"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-507" y="-253"/>
+            <point key="canvasLocation" x="-985" y="-257"/>
         </view>
     </objects>
     <resources>

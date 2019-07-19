@@ -1,4 +1,4 @@
-·# Uncomment the next line to define a global platform for your project
+# Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
 target 'FriendRecord' do
@@ -18,5 +18,8 @@ target 'FriendRecord' do
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKPlacesKit'
+  # Pods for PodTest
+  pod 'Fabric'
+  pod 'Crashlytics'
 
 end

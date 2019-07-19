@@ -23,19 +23,9 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.1061438445960-6s1f5ekko0jp39sb5ndohim6mncghenu</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>632157750585863</string>
+				<string>fb2227739867487385</string>
 			</array>
 		</dict>
 	</array>
@@ -46,7 +36,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>請同意開啟相機使用</string>
+	<string>知音有分享大頭照功能，請是否讓知音開啟相機功能</string>
+	<key>NSHumanReadableCopyright</key>
+	<string></string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>請同意開啟定位</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -54,11 +46,13 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>請同意開啟定位</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>使用錄音留言板需打開麥克風使用權</string>
+	<string>知音有分享語音功能，請是否讓知音打開麥克風使用權</string>
+	<key>CFBundleSignature</key>
+	<string></string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>請同意開啟相簿使用</string>
+	<string>知音有分享大頭照功能，請是否讓知音開啟相簿使用</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>請同意開啟相簿使用</string>
+	<string>知音有分享大頭照功能，請是否讓知音開啟相簿使用</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -84,23 +78,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-
-
-
-<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string>fb2227739867487385</string>
-    </array>
-  </dict>
-</array>
-<key>FacebookAppID</key>
-<string>2227739867487385</string>
-<key>FacebookDisplayName</key>
-<string>Friend_Record_EJLin</string>
-
-	
+	<key>FacebookAppID</key>
+	<string>2227739867487385</string>
+	<key>FacebookDisplayName</key>
+	<string>Friend_Record_EJLin</string>
 </dict>
 </plist>
