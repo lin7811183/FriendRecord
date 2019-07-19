@@ -9,6 +9,7 @@ protocol ManagerDelegate {
 protocol ManagerDelegateUser {
     func finishDownLoadUserRecordPen()
     func finishDownLoadUserPresent(preenst :String)
+    func finishDownLoadUserFriendList()
 }
 
 class Manager :UIViewController {
@@ -20,6 +21,7 @@ class Manager :UIViewController {
     static var indexPath :Int!
     static var userLocalRecordPen :[Record]  = []
     static var userCardData :[UserCatdData] = []
+    static var frindList :[Friend] = []
     
     static var delegate :ManagerDelegate!
     static var delegateUser :ManagerDelegateUser!
@@ -553,6 +555,38 @@ class Manager :UIViewController {
                 let decoder = JSONDecoder()
                 do {
                     Manager.userCardData = try decoder.decode([UserCatdData].self, from: data!)//[Note].self 取得Note陣列的型態
+                } catch {
+                    print("error while parsing json \(error)")
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    //MARK: func -  downLoad user list
+    func downLoadUserList(email :String) {
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Account_Load_Friend_List.php") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            
+            let param = "email=\(email)"
+            request.httpBody = param.data(using: .utf8)
+            
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let e = error {
+                    print("erroe \(e)")
+                }
+                guard let jsonData = data else {
+                    return
+                }
+                let reCode = String(data: data!, encoding: .utf8)
+                print(reCode!)
+                let decoder = JSONDecoder()
+                do {
+                    Manager.frindList = try decoder.decode([Friend].self, from: jsonData)//[Note].self 取得Note陣列的型態
+                    print("Manager.frindList.count :\(Manager.frindList.count)")
+                    Manager.delegateUser.finishDownLoadUserFriendList()
                 } catch {
                     print("error while parsing json \(error)")
                 }

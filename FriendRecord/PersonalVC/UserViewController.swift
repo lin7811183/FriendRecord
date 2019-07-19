@@ -1,6 +1,7 @@
 import UIKit
 import Photos
 import MobileCoreServices
+import MessageUI
 
 class UserViewController: UIViewController {
     
@@ -14,6 +15,7 @@ class UserViewController: UIViewController {
     @IBOutlet weak var userTableView: UITableView!
     @IBOutlet weak var userTabBar: UINavigationItem!
     @IBOutlet weak var userBT: UIButton!
+    @IBOutlet weak var friendSum: UILabel!
     
     var isUserFTType = false
     
@@ -49,7 +51,7 @@ class UserViewController: UIViewController {
             
             let userDataBf = userData.string(forKey: "bf")
             self.userBfLB.text = Manager.shared.userBFChange(bf: userDataBf!)
-
+            
             //self.navigationItem.title = uesrDataNickName
             self.userBT.setImage(UIImage(named: "down"), for: .normal)
             self.userBT.setTitle(uesrDataNickName, for: .normal)
@@ -104,13 +106,14 @@ class UserViewController: UIViewController {
                 return
             }
             Manager.shared.downLoadUserLocalRecordPen(email: email)
-            Manager.shared.downLoadUserPresent(email: email
-            )
+            Manager.shared.downLoadUserPresent(email: email)
+            Manager.shared.downLoadUserList(email: email)
         } else {
             //DownLoadUserRecordPen.
             Manager.delegateUser = self
             Manager.shared.downLoadUserLocalRecordPen(email: self.reocrdPenEmail!)
             Manager.shared.downLoadUserPresent(email: self.reocrdPenEmail!)
+            Manager.shared.downLoadUserList(email: self.reocrdPenEmail!)
         }
         
     }
@@ -118,8 +121,10 @@ class UserViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.tableArray.removeAll()
+        //Manager.frindList.removeAll()
         self.stopOldRecordMuice()
     }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.stopOldRecordMuice()
     }
@@ -150,10 +155,21 @@ class UserViewController: UIViewController {
             self.present(AppPresent, animated: true, completion: nil)
         }
         moreAlert.addAction(appPresentAction)
+        
         let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
             
         }
         moreAlert.addAction(cancelAction)
+        
+//        let emailAction = UIAlertAction(title: "知音App問題回報", style: .default) { (action) in
+//            let mailController = MFMailComposeViewController()
+//            mailController.mailComposeDelegate = self
+//            mailController.setSubject("知音App問題回報")
+//            mailController.setToRecipients(["lintest7811183@gmail.com"])
+//            self.present(mailController, animated: true, completion: nil)
+//        }
+//        moreAlert.addAction(emailAction)
+        
         self.present(moreAlert, animated: true, completion: nil)
     }
     //MARK: func - logout button
@@ -187,7 +203,7 @@ class UserViewController: UIViewController {
         } else {
             self.editUserTF_BT.setTitleColor(UIColor.black, for: .normal)
             self.editUserTF_BT.setImage(UIImage(named: ""), for: .normal)
-            self.userTF.backgroundColor = UIColor(named: "UserViewColor")
+            self.userTF.backgroundColor = UIColor.white//(named: "UserViewColor")
             self.editUserTF_BT.setTitle("編輯", for: .normal)
             self.userTF.isSelectable = false
             self.userTF.isEditable = false
@@ -391,7 +407,7 @@ extension UserViewController :AVAudioPlayerDelegate {
 extension UserViewController :ManagerDelegateUser {
     //MARK: Protocol - CodeManagerDelegateUser
     func finishDownLoadUserRecordPen() {
-        print("ManagerDelegate = finishDownLoadUserPhoto")
+        print("ManagerDelegate - finishDownLoadUserPhoto")
         
         DispatchQueue.main.async {
             for i in 0 ..< Manager.userLocalRecordPen.count {
@@ -412,7 +428,12 @@ extension UserViewController :ManagerDelegateUser {
             self.userTF.text = preenst
         }
     }
-    
+    func finishDownLoadUserFriendList() {
+        print("ManagerDelegate - finishDownLoadUserFriendList")
+        DispatchQueue.main.async {
+            self.friendSum.text = "\(Manager.frindList.count)"
+        }
+    }
 }
 
 extension UserViewController :UITextViewDelegate {
@@ -494,5 +515,11 @@ extension UserViewController :LeaveMessageViewControllerDelegate {
     func updateMessageSum() {
         print("LeaveMessageViewControllerDelegate - updateMessageSum")
         self.userTableView.reloadData()
+    }
+}
+
+extension UserViewController :MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
     }
 }
