@@ -93,7 +93,7 @@ class UserViewController: UIViewController {
             if exist != true {
                 self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
                 self.userPhotoBT.clipsToBounds = true
-                self.userPhotoBT.setImage(UIImage(named: "userPhotoDefault.png"), for: .normal)
+                self.userPhotoBT.setImage(UIImage(named: "userImage"), for: .normal)
             } else {
                 self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
                 self.userPhotoBT.clipsToBounds = true
@@ -157,7 +157,6 @@ class UserViewController: UIViewController {
         moreAlert.addAction(appPresentAction)
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
-            
         }
         moreAlert.addAction(cancelAction)
         

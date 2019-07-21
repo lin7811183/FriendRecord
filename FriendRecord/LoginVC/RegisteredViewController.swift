@@ -151,7 +151,7 @@ class RegisteredViewController: UIViewController {
     
     //MARK: func - check all textfiels are =  "".
     func checkTextfiel() {
-        guard self.emailTF.text != "", self.passwordTF.text! != "", self.userTF.text! != "", self.bfTF.text! != "", self.genderTF.text! != ""  else {
+        guard self.emailTF.text != "", self.passwordTF.text! != "", self.userTF.text! != ""/*, self.bfTF.text! != "", self.genderTF.text! != ""*/  else {
             Manager.shared.okAlter(vc: self, title: "請確認註冊資訊是否皆有填寫完成", message: "")
             self.isRegistered += 1
             return

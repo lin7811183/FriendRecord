@@ -64,22 +64,29 @@ class Manager :UIViewController {
     }
     
     //MARK: func - User gender change Image.
-    func userGenderChangeImage(gender :String) -> UIImage? {
+    func userGenderChangeImage(gender :String?) -> UIImage? {
         if gender == "男孩" {
             return UIImage(named: "boy")
         } else if gender == "女孩" {
             return UIImage(named: "girl")
         } else if gender == "不說" {
             return UIImage(named: "none")
-        } else {
+        } else if gender == "" {
+            return UIImage(named: "none")
+        }
+        else {
             return UIImage(named: "tomore")
         }
     }
     
     //MARK: func - User BF day Change.
-    func userBFChange(bf :String) -> String{
-        let bfArray = bf.split(separator: "/")
-        return "\(bfArray[1])\(bfArray[2])"
+    func userBFChange(bf :String?) -> String {
+        if bf != "" {
+            let bfArray = bf!.split(separator: "/")
+            return "\(bfArray[1])\(bfArray[2])"
+        } else {
+            return "生日未公開"
+        }
     }
     
     //MARK: func - check file in app.
