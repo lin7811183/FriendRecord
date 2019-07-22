@@ -21,7 +21,7 @@ class Manager :UIViewController {
     static var indexPath :Int!
     static var userLocalRecordPen :[Record]  = []
     static var userCardData :[UserCatdData] = []
-    static var frindList :[Friend] = []
+    static var userDataShow :[UserDataShow] = []
     
     static var delegate :ManagerDelegate!
     static var delegateUser :ManagerDelegateUser!
@@ -72,9 +72,8 @@ class Manager :UIViewController {
         } else if gender == "不說" {
             return UIImage(named: "none")
         } else if gender == "" {
-            return UIImage(named: "none")
-        }
-        else {
+            return UIImage(named: "")
+        } else {
             return UIImage(named: "tomore")
         }
     }
@@ -83,9 +82,9 @@ class Manager :UIViewController {
     func userBFChange(bf :String?) -> String {
         if bf != "" {
             let bfArray = bf!.split(separator: "/")
-            return "\(bfArray[1])\(bfArray[2])"
+            return "\(bfArray[1])/\(bfArray[2])"
         } else {
-            return "生日未公開"
+            return ""
         }
     }
     
@@ -572,7 +571,7 @@ class Manager :UIViewController {
     
     //MARK: func -  downLoad user list
     func downLoadUserList(email :String) {
-        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Account_Load_Friend_List.php") {
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Load_User_Data.php") {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             
@@ -591,8 +590,8 @@ class Manager :UIViewController {
                 print(reCode!)
                 let decoder = JSONDecoder()
                 do {
-                    Manager.frindList = try decoder.decode([Friend].self, from: jsonData)//[Note].self 取得Note陣列的型態
-                    print("Manager.frindList.count :\(Manager.frindList.count)")
+                    Manager.userDataShow = try decoder.decode([UserDataShow].self, from: jsonData)//[Note].self 取得Note陣列的型態
+                    print("Manager.frindList.count :\(Manager.userDataShow.count)")
                     Manager.delegateUser.finishDownLoadUserFriendList()
                 } catch {
                     print("error while parsing json \(error)")

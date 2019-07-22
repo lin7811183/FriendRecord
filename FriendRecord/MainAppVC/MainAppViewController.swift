@@ -302,7 +302,7 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             return [deleteAction]
         }
         let action = UITableViewRowAction(style: .default, title: "檢舉") { (action, indexPath) in
-            Manager.shared.okAlter(vc: self, title: "按下OK後，送出檢舉", message: "後續會進行查證")
+            Manager.shared.okAlter(vc: self, title: "按下確認後，送出檢舉", message: "後續客服會進行查證，謝謝")
         }
         action.backgroundColor = UIColor.gray
         return [action]

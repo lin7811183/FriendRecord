@@ -15,6 +15,8 @@ class UserViewController: UIViewController {
     @IBOutlet weak var userTableView: UITableView!
     @IBOutlet weak var userTabBar: UINavigationItem!
     @IBOutlet weak var userBT: UIButton!
+    @IBOutlet weak var recordPenSum: UILabel!
+    @IBOutlet weak var penGoodSum: UILabel!
     @IBOutlet weak var friendSum: UILabel!
     
     var isUserFTType = false
@@ -93,7 +95,7 @@ class UserViewController: UIViewController {
             if exist != true {
                 self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
                 self.userPhotoBT.clipsToBounds = true
-                self.userPhotoBT.setImage(UIImage(named: "userImage"), for: .normal)
+                self.userPhotoBT.setImage(UIImage(named: "userPhotoDefault.png"), for: .normal)
             } else {
                 self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
                 self.userPhotoBT.clipsToBounds = true
@@ -150,24 +152,23 @@ class UserViewController: UIViewController {
     //MARK: func - User More
     @IBAction func userMore(_ sender: Any) {
         let moreAlert = UIAlertController(title: "知音", message: "更多功能", preferredStyle: .actionSheet)
+        
+        let userEditAction = UIAlertAction(title: "個人資料", style: .default) { (action) in
+            let userEditVC = self.storyboard?.instantiateViewController(withIdentifier: "userEditVC") as! UserEditViewController
+            userEditVC.delegate = self
+            self.present(userEditVC, animated: true, completion: nil)
+        }
+        moreAlert.addAction(userEditAction)
+        
         let appPresentAction = UIAlertAction(title: "知音導覽", style: .default) { (action) in
             let AppPresent = self.storyboard?.instantiateViewController(withIdentifier: "AppPresnetVC") as! AppPresentViewController
             self.present(AppPresent, animated: true, completion: nil)
         }
         moreAlert.addAction(appPresentAction)
-        
+
         let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (action) in
         }
         moreAlert.addAction(cancelAction)
-        
-//        let emailAction = UIAlertAction(title: "知音App問題回報", style: .default) { (action) in
-//            let mailController = MFMailComposeViewController()
-//            mailController.mailComposeDelegate = self
-//            mailController.setSubject("知音App問題回報")
-//            mailController.setToRecipients(["lintest7811183@gmail.com"])
-//            self.present(mailController, animated: true, completion: nil)
-//        }
-//        moreAlert.addAction(emailAction)
         
         self.present(moreAlert, animated: true, completion: nil)
     }
@@ -430,7 +431,9 @@ extension UserViewController :ManagerDelegateUser {
     func finishDownLoadUserFriendList() {
         print("ManagerDelegate - finishDownLoadUserFriendList")
         DispatchQueue.main.async {
-            self.friendSum.text = "\(Manager.frindList.count)"
+            self.recordPenSum.text = "\(Manager.userDataShow.first?.recordPenSum ?? 0)"
+            self.penGoodSum.text  = "\(Manager.userDataShow.first?.penGoodSum ?? 0)"
+            self.friendSum.text = "\(Manager.userDataShow.first?.friendSum ?? 0)"
         }
     }
 }
@@ -520,5 +523,17 @@ extension UserViewController :LeaveMessageViewControllerDelegate {
 extension UserViewController :MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension UserViewController :UserEditViewControllerDelegate {
+    func updateFinishUserData() {
+        let userData = UserDefaults.standard
+        
+        let userDataGender = userData.string(forKey: "gender")
+        self.userGenderImage.image = Manager.shared.userGenderChangeImage(gender: userDataGender!)
+        
+        let userDataBf = userData.string(forKey: "bf")
+        self.userBfLB.text = Manager.shared.userBFChange(bf: userDataBf!)
     }
 }

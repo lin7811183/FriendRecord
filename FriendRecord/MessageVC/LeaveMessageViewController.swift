@@ -241,10 +241,6 @@ class LeaveMessageViewController: UIViewController {
         cancelBT.addTarget(self, action: #selector(dissMissUserCardView), for: .touchUpInside)
         UIView.transition(with: self.view, duration: 0.3, options: [.transitionCrossDissolve], animations: {self.view.addSubview(cancelBT)}, completion: nil)//加入此視窗
     }
-    //MARK: func - Look User Image.
-    @objc func lookUserImage() {
-        print("TTTT")
-    }
     // diss Miss UserCardView BT
     @objc func dissMissUserCardView() {
         let back = self.view.viewWithTag(997)
@@ -492,6 +488,13 @@ extension LeaveMessageViewController :UITableViewDataSource, UITableViewDelegate
         return cell
     }
     //MARK: Protocol -  tableViewe UITableViewDelegate.
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let action = UITableViewRowAction(style: .default, title: "檢舉") { (action, indexPath) in
+            Manager.shared.okAlter(vc: self, title: "按下確認後，送出檢舉", message: "後續客服會進行查證，謝謝")
+        }
+        action.backgroundColor = UIColor.red
+        return [action]
+    }
 }
 
 extension LeaveMessageViewController :AVAudioPlayerDelegate {
