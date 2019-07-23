@@ -36,9 +36,6 @@
 		CE10040F229B725300660E82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE10040D229B725300660E82 /* LaunchScreen.storyboard */; };
 		CE100418229B728D00660E82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE100417229B728D00660E82 /* LoginViewController.swift */; };
 		CE10041A229B764900660E82 /* RegisteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE100419229B764900660E82 /* RegisteredViewController.swift */; };
-		CE12B01822E49A4700253FEF /* Page-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE12B01722E49A4700253FEF /* Page-1.png */; };
-		CE12B01E22E4B5B700253FEF /* Page-3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE12B01D22E4B5B700253FEF /* Page-3.png */; };
-		CE12B02022E4B81600253FEF /* Page-4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE12B01F22E4B81600253FEF /* Page-4.png */; };
 		CE140C0A22B8E30300EF1F1C /* PenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE140C0922B8E30300EF1F1C /* PenViewController.swift */; };
 		CE16A9E422C0A64D00B16983 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = CE16A9E322C0A64D00B16983 /* Star.png */; };
 		CE16A9E622C0ADB000B16983 /* Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = CE16A9E522C0ADAF00B16983 /* Stop.png */; };
@@ -53,10 +50,14 @@
 		CE22B5FC22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE22B5FB22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift */; };
 		CE34DFC322E5632B00E0188F /* UserDataShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34DFC222E5632B00E0188F /* UserDataShow.swift */; };
 		CE34DFC522E5701100E0188F /* UserEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE34DFC422E5701100E0188F /* UserEditViewController.swift */; };
+		CE3BF7B622E699B30069718B /* Page-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3BF7B522E699B30069718B /* Page-2.png */; };
+		CE3BF7BB22E699BC0069718B /* Page-5.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3BF7B722E699BC0069718B /* Page-5.png */; };
+		CE3BF7BC22E699BC0069718B /* Page-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3BF7B822E699BC0069718B /* Page-1.png */; };
+		CE3BF7BD22E699BC0069718B /* Page-3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3BF7B922E699BC0069718B /* Page-3.png */; };
+		CE3BF7BE22E699BC0069718B /* Page-4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE3BF7BA22E699BC0069718B /* Page-4.png */; };
 		CE63540C22CB3ED500E05A02 /* waring.png in Resources */ = {isa = PBXBuildFile; fileRef = CE63540B22CB3ED500E05A02 /* waring.png */; };
 		CE63540E22CB3F0200E05A02 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = CE63540D22CB3F0200E05A02 /* edit.png */; };
 		CE64A18022E58EDB0092B576 /* GoAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE64A17F22E58EDB0092B576 /* GoAppViewController.swift */; };
-		CE64A18422E599180092B576 /* Page-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE64A18322E599180092B576 /* Page-2.png */; };
 		CE7F14C822DB513B003FF41D /* 未命名89.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14C722DB513B003FF41D /* 未命名89.png */; };
 		CE7F14CA22DB5178003FF41D /* add-friend.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14C922DB5178003FF41D /* add-friend.png */; };
 		CE7F14D522DC035C003FF41D /* UserCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7F14D422DC035C003FF41D /* UserCardView.xib */; };
@@ -113,9 +114,6 @@
 		CE100410229B725300660E82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE100417229B728D00660E82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CE100419229B764900660E82 /* RegisteredViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredViewController.swift; sourceTree = "<group>"; };
-		CE12B01722E49A4700253FEF /* Page-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-1.png"; sourceTree = "<group>"; };
-		CE12B01D22E4B5B700253FEF /* Page-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-3.png"; sourceTree = "<group>"; };
-		CE12B01F22E4B81600253FEF /* Page-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-4.png"; sourceTree = "<group>"; };
 		CE140C0922B8E30300EF1F1C /* PenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenViewController.swift; sourceTree = "<group>"; };
 		CE16A9E322C0A64D00B16983 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star.png; sourceTree = "<group>"; };
 		CE16A9E522C0ADAF00B16983 /* Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Stop.png; sourceTree = "<group>"; };
@@ -130,10 +128,14 @@
 		CE22B5FB22CF3D58008D8C57 /* MyUserRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserRecordTableViewCell.swift; sourceTree = "<group>"; };
 		CE34DFC222E5632B00E0188F /* UserDataShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataShow.swift; sourceTree = "<group>"; };
 		CE34DFC422E5701100E0188F /* UserEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEditViewController.swift; sourceTree = "<group>"; };
+		CE3BF7B522E699B30069718B /* Page-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-2.png"; sourceTree = "<group>"; };
+		CE3BF7B722E699BC0069718B /* Page-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-5.png"; sourceTree = "<group>"; };
+		CE3BF7B822E699BC0069718B /* Page-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-1.png"; sourceTree = "<group>"; };
+		CE3BF7B922E699BC0069718B /* Page-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-3.png"; sourceTree = "<group>"; };
+		CE3BF7BA22E699BC0069718B /* Page-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-4.png"; sourceTree = "<group>"; };
 		CE63540B22CB3ED500E05A02 /* waring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waring.png; sourceTree = "<group>"; };
 		CE63540D22CB3F0200E05A02 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		CE64A17F22E58EDB0092B576 /* GoAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoAppViewController.swift; sourceTree = "<group>"; };
-		CE64A18322E599180092B576 /* Page-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Page-2.png"; sourceTree = "<group>"; };
 		CE7F14C722DB513B003FF41D /* 未命名89.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "未命名89.png"; sourceTree = "<group>"; };
 		CE7F14C922DB5178003FF41D /* add-friend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-friend.png"; sourceTree = "<group>"; };
 		CE7F14D422DC035C003FF41D /* UserCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCardView.xib; sourceTree = "<group>"; };
@@ -421,10 +423,11 @@
 		CE7F14E622DC6556003FF41D /* AppPresent */ = {
 			isa = PBXGroup;
 			children = (
-				CE12B01722E49A4700253FEF /* Page-1.png */,
-				CE12B01D22E4B5B700253FEF /* Page-3.png */,
-				CE64A18322E599180092B576 /* Page-2.png */,
-				CE12B01F22E4B81600253FEF /* Page-4.png */,
+				CE3BF7B822E699BC0069718B /* Page-1.png */,
+				CE3BF7B522E699B30069718B /* Page-2.png */,
+				CE3BF7B922E699BC0069718B /* Page-3.png */,
+				CE3BF7B722E699BC0069718B /* Page-5.png */,
+				CE3BF7BA22E699BC0069718B /* Page-4.png */,
 			);
 			path = AppPresent;
 			sourceTree = "<group>";
@@ -528,19 +531,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE0D3D53229F5ECD008033D7 /* Login_Icon_ver_2_2.png in Resources */,
-				CE64A18422E599180092B576 /* Page-2.png in Resources */,
 				CE7F14D522DC035C003FF41D /* UserCardView.xib in Resources */,
 				CE0DE89C22B08F7E00F49C5B /* userPhotoDefault.png in Resources */,
 				CE10040F229B725300660E82 /* LaunchScreen.storyboard in Resources */,
 				CE0E6DD122C4BCD50028FF47 /* microphone.png in Resources */,
 				CEFFD38722CA5ED5000E46DF /* isLike.png in Resources */,
+				CE3BF7BB22E699BC0069718B /* Page-5.png in Resources */,
+				CE3BF7BE22E699BC0069718B /* Page-4.png in Resources */,
 				CE17072C22E1812300A3478C /* GoogleService-Info.plist in Resources */,
 				CE63540E22CB3F0200E05A02 /* edit.png in Resources */,
 				CE0DD11522CAE4720031D4BA /* line.png in Resources */,
 				CE0DDC3C22D06A0B00E89E0E /* Login.png in Resources */,
-				CE12B01822E49A4700253FEF /* Page-1.png in Resources */,
+				CE3BF7BD22E699BC0069718B /* Page-3.png in Resources */,
 				CE63540C22CB3ED500E05A02 /* waring.png in Resources */,
 				CE0E6DCB22C4BBCC0028FF47 /* user.png in Resources */,
+				CE3BF7BC22E699BC0069718B /* Page-1.png in Resources */,
 				CEFFD38522CA5EA8000E46DF /* message.png in Resources */,
 				CE7F14C822DB513B003FF41D /* 未命名89.png in Resources */,
 				CEFFD38922CA5F93000E46DF /* Like.png in Resources */,
@@ -549,12 +554,11 @@
 				CE0DD11722CAEEDC0031D4BA /* recordPen_Line.png in Resources */,
 				CE0E6DC922C4BAF40028FF47 /* cassette.png in Resources */,
 				CE16A9E622C0ADB000B16983 /* Stop.png in Resources */,
-				CE12B01E22E4B5B700253FEF /* Page-3.png in Resources */,
 				CE1D642A22D8F1EA00D9FCAE /* speaker.png in Resources */,
 				CEBAFDEC22CB0EB90055A4AE /* top_line.png in Resources */,
-				CE12B02022E4B81600253FEF /* Page-4.png in Resources */,
 				CE10040A229B725200660E82 /* Main.storyboard in Resources */,
 				CE7F14CA22DB5178003FF41D /* add-friend.png in Resources */,
+				CE3BF7B622E699B30069718B /* Page-2.png in Resources */,
 				CE0102C622A784B700EDB18A /* Login_Icon_ver_2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
