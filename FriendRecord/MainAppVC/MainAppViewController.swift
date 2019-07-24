@@ -48,10 +48,7 @@ class MainAppViewController: UIViewController {
     var pushIndex :IndexPath!
     
     let transiton = SlideInTransition()
-    
-    var count = 0.0
-    var timer = Timer()
-    
+
     var isSearch = false
     
     override func viewDidLoad() {
@@ -155,10 +152,9 @@ class MainAppViewController: UIViewController {
             if let indexPath = self.oldRecordIndexPath {
                 print("user is out MainAppVC.")
                 let oldcurrentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
-                oldcurrentCell.sendImage.layer.borderWidth = 0
+                //oldcurrentCell.sendImage.layer.borderWidth = 0
+                oldcurrentCell.sendImage.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
                 self.recordPlayer?.stop()
-                //self.timer.invalidate()
-                self.count = 0.0
                 self.isPiayer = false
             }
         }
@@ -328,23 +324,25 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
     @objc func player(sender :UITapGestureRecognizer) {
         // Check if player!?
         if self.isPiayer ==  true {
+            //stop old player task.
             let oldcurrentCell = self.tableView.cellForRow(at: self.oldRecordIndexPath) as! MyRecordTableViewCell
-            oldcurrentCell.sendImage.layer.borderWidth = 0
+            //oldcurrentCell.sendImage.layer.borderWidth = 0
+            oldcurrentCell.sendImage.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
             
             guard let imageView = sender.view as? UIImageView  else {
                 return
             }
+            //stop now player task.
             let row = imageView.tag
             let indexPath = IndexPath(row: row, section: 1)
             self.recordIndexPath = indexPath
             self.oldRecordIndexPath = indexPath
             let currentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
-            currentCell.sendImage.layer.borderWidth = 0
+            //currentCell.sendImage.layer.borderWidth = 0
+            currentCell.sendImage.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
             
             //Record stop Player.
             self.recordPlayer?.stop()
-//            self.timer.invalidate()
-            self.count = 0.0
             print("********** Stop player Record. **********")
             
             self.isPiayer = false
@@ -371,20 +369,47 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             
             //Record Player.
             self.recordPlayer?.play()
-            //Star timer.
-//            self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.playerTimer), userInfo: nil, repeats: true)
             print("********** Star player Record. **********")
             
-    
-            currentCell.sendImage.layer.borderWidth = 2
-            currentCell.sendImage.layer.borderColor = UIColor.green.cgColor
+            //currentCell.sendImage.layer.borderWidth = 2
+            //currentCell.sendImage.layer.borderColor = UIColor.green.cgColor
+            
+            //播放進度條:
+            let imageCirclePathLayer = CAShapeLayer()
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: currentCell.sendImage.frame.size.width / 2, y: currentCell.sendImage.frame.size.height / 2), radius: (currentCell.sendImage.frame.size.width - 1.5) / 2, startAngle: CGFloat(-0.5 * .pi), endAngle: CGFloat(1.5 * .pi), clockwise: true)
+            
+            imageCirclePathLayer.path = circlePath.cgPath
+            imageCirclePathLayer.fillColor = UIColor.clear.cgColor
+            imageCirclePathLayer.strokeColor = UIColor(named: "MyColor3")?.cgColor
+            imageCirclePathLayer.lineWidth = 3.0
+            imageCirclePathLayer.strokeEnd = 1.0
+            currentCell.sendImage.layer.addSublayer(imageCirclePathLayer)
+            
+            let time = self.tableViewData[1][indexPath.row].recordTime
+            let animationTime = self.playerTimeChange(time: time!)
+            self.setProgressWithAnimation(imageCircle: imageCirclePathLayer, duration: animationTime, value: 1.0)
             
             self.isPiayer = true
         }
     }
-    @objc func playerTimer() {
-        self.count = self.count + 0.1
-        print("\(self.count)")
+    //MARK: func - 播放進度條動畫
+    func setProgressWithAnimation(imageCircle :CAShapeLayer, duration: TimeInterval, value: Float) {
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.duration = duration
+        animation.fromValue = 0
+        animation.toValue = value
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        imageCircle.strokeEnd = CGFloat(value)
+        imageCircle.add(animation, forKey: "animateprogress")
+    }
+    //MARK: func - Record Muice timer change
+    func playerTimeChange(time :String) -> Double {
+        let timeData = time.split(separator: ":")
+        let minute = Double(timeData[0])! * 60.0
+        let second = Double(timeData[1])!
+        
+        let totalTime = minute + second - 0.25
+        return totalTime
     }
     //MARK: func - cell style.
     func cellStyle() -> String {
@@ -415,11 +440,10 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             
             print("Stop Record.")
             let currentCell = tableView.cellForRow(at: self.reloadIndexPath) as! MyRecordTableViewCell
-            currentCell.sendImage.layer.borderWidth = 0
+            //currentCell.sendImage.layer.borderWidth = 0
+            currentCell.sendImage.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
             self.tableView.isScrollEnabled = true
             self.recordPlayer?.stop()
-//            self.timer.invalidate()
-            self.count = 0.0
         } else {
             sender.setImage(UIImage(named: "isLike.png"), for: .normal)
             self.tableViewData[1][self.goodIndexPath].Good_user = nil
@@ -429,16 +453,13 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             self.tableView.reloadRows(at: [self.reloadIndexPath], with: .fade)
             
             self.recordPlayer?.stop()
-//            self.timer.invalidate()
-            self.count = 0.0
             print("Stop Record.")
             
             let currentCell = tableView.cellForRow(at: self.reloadIndexPath) as! MyRecordTableViewCell
-            currentCell.sendImage.layer.borderWidth = 0
+            //currentCell.sendImage.layer.borderWidth = 0
+            currentCell.sendImage.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
 //            self.tableView.isScrollEnabled = true
 //            self.recordPlayer?.stop()
-//            self.timer.invalidate()
-//            self.count = 0.0
         }
     }
 }
@@ -461,9 +482,8 @@ extension MainAppViewController :AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if flag == true {
             let currentCell = self.tableView.cellForRow(at: self.recordIndexPath)  as! MyRecordTableViewCell
+            currentCell.sendImage.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
             self.recordPlayer?.stop()
-//            self.timer.invalidate()
-            self.count = 0.0
             print("********** Stop player Record. **********")
             currentCell.sendImage.layer.borderWidth = 0
             self.isPiayer = false
