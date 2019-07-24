@@ -49,6 +49,9 @@ class MainAppViewController: UIViewController {
     
     let transiton = SlideInTransition()
     
+    var count = 0.0
+    var timer = Timer()
+    
     var isSearch = false
     
     override func viewDidLoad() {
@@ -154,6 +157,8 @@ class MainAppViewController: UIViewController {
                 let oldcurrentCell = self.tableView.cellForRow(at: indexPath) as! MyRecordTableViewCell
                 oldcurrentCell.sendImage.layer.borderWidth = 0
                 self.recordPlayer?.stop()
+                //self.timer.invalidate()
+                self.count = 0.0
                 self.isPiayer = false
             }
         }
@@ -338,6 +343,8 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             
             //Record stop Player.
             self.recordPlayer?.stop()
+//            self.timer.invalidate()
+            self.count = 0.0
             print("********** Stop player Record. **********")
             
             self.isPiayer = false
@@ -364,13 +371,20 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             
             //Record Player.
             self.recordPlayer?.play()
+            //Star timer.
+//            self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.playerTimer), userInfo: nil, repeats: true)
             print("********** Star player Record. **********")
             
+    
             currentCell.sendImage.layer.borderWidth = 2
             currentCell.sendImage.layer.borderColor = UIColor.green.cgColor
             
             self.isPiayer = true
         }
+    }
+    @objc func playerTimer() {
+        self.count = self.count + 0.1
+        print("\(self.count)")
     }
     //MARK: func - cell style.
     func cellStyle() -> String {
@@ -404,6 +418,8 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             currentCell.sendImage.layer.borderWidth = 0
             self.tableView.isScrollEnabled = true
             self.recordPlayer?.stop()
+//            self.timer.invalidate()
+            self.count = 0.0
         } else {
             sender.setImage(UIImage(named: "isLike.png"), for: .normal)
             self.tableViewData[1][self.goodIndexPath].Good_user = nil
@@ -413,12 +429,16 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             self.tableView.reloadRows(at: [self.reloadIndexPath], with: .fade)
             
             self.recordPlayer?.stop()
-            
+//            self.timer.invalidate()
+            self.count = 0.0
             print("Stop Record.")
+            
             let currentCell = tableView.cellForRow(at: self.reloadIndexPath) as! MyRecordTableViewCell
             currentCell.sendImage.layer.borderWidth = 0
-            self.tableView.isScrollEnabled = true
-            self.recordPlayer?.stop()
+//            self.tableView.isScrollEnabled = true
+//            self.recordPlayer?.stop()
+//            self.timer.invalidate()
+//            self.count = 0.0
         }
     }
 }
@@ -442,6 +462,8 @@ extension MainAppViewController :AVAudioPlayerDelegate {
         if flag == true {
             let currentCell = self.tableView.cellForRow(at: self.recordIndexPath)  as! MyRecordTableViewCell
             self.recordPlayer?.stop()
+//            self.timer.invalidate()
+            self.count = 0.0
             print("********** Stop player Record. **********")
             currentCell.sendImage.layer.borderWidth = 0
             self.isPiayer = false

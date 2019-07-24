@@ -56,25 +56,25 @@ class UserViewController: UIViewController {
             
             //self.navigationItem.title = uesrDataNickName
             self.userBT.setImage(UIImage(named: "down"), for: .normal)
-            self.userBT.setTitle(uesrDataNickName, for: .normal)
+            self.userBT.setTitle(" \(uesrDataNickName!)", for: .normal)
+            
+            self.userView.layer.cornerRadius = 10
+            self.userView.layer.masksToBounds = true
+            //self.userView.backgroundColor = UIColor.lightGray
+            //self.userView.backgroundColor = UIColor(displayP3Red: 192/220, green: 192/220, blue: 192/220, alpha: 0.5)
+            
+            self.userTF.isEditable = false
+            self.userTF.isSelectable = false
+            self.userTF.layer.borderColor = UIColor.black.cgColor
+            self.userTF.layer.borderWidth = 1.0
+            self.userTF.layer.cornerRadius = 5.0
+            self.userTF.delegate = self
+            
+            self.userTableView.dataSource = self
+            self.userTableView.delegate = self
         } else {
             
         }
-        
-        self.userView.layer.cornerRadius = 10
-        self.userView.layer.masksToBounds = true
-        //self.userView.backgroundColor = UIColor.lightGray
-        //self.userView.backgroundColor = UIColor(displayP3Red: 192/220, green: 192/220, blue: 192/220, alpha: 0.5)
-        
-        self.userTF.isEditable = false
-        self.userTF.isSelectable = false
-        //self.userTF.layer.borderColor = UIColor.black.cgColor
-        //self.userTF.layer.borderWidth = 1.0
-        self.userTF.layer.cornerRadius = 5.0
-        self.userTF.delegate = self
-        
-        self.userTableView.dataSource = self
-        self.userTableView.delegate = self
         
     }
     
@@ -95,7 +95,7 @@ class UserViewController: UIViewController {
             if exist != true {
                 self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
                 self.userPhotoBT.clipsToBounds = true
-                self.userPhotoBT.setImage(UIImage(named: "userPhotoDefault.png"), for: .normal)
+                self.userPhotoBT.setImage(UIImage(named: "userImage"), for: .normal)
             } else {
                 self.userPhotoBT.layer.cornerRadius = 0.5 * self.userPhotoBT.bounds.size.width
                 self.userPhotoBT.clipsToBounds = true
@@ -203,7 +203,7 @@ class UserViewController: UIViewController {
         } else {
             self.editUserTF_BT.setTitleColor(UIColor.black, for: .normal)
             self.editUserTF_BT.setImage(UIImage(named: ""), for: .normal)
-            self.userTF.backgroundColor = UIColor.white//(named: "UserViewColor")
+            self.userTF.backgroundColor = UIColor(named: "UserViewColor")
             self.editUserTF_BT.setTitle("編輯", for: .normal)
             self.userTF.isSelectable = false
             self.userTF.isEditable = false

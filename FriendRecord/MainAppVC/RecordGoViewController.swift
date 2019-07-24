@@ -129,7 +129,11 @@ class RecordGoViewController: UIViewController {
                 newRecord.recordSendUser = recordDataEmail
                 newRecord.recordFileName = "\(fileName).caf"
                 newRecord.userNickName = userNickName!
-                newRecord.recordText = self.textView.text
+                if self.textView.text == "請選擇心情~" {
+                    newRecord.recordText = "健忘摟"
+                } else {
+                   newRecord.recordText = self.textView.text
+                }
                 newRecord.messageSum = 0.0
                 
                 let dateFormat2 :DateFormatter = DateFormatter()

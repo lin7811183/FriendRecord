@@ -22,6 +22,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //self.t.setImage(UIImage(named: "t"), for: .normal)
+        
 //        self.loginFBBT.permissions = ["public_profile","email"]
 //        self.loginFBBT.delegate = self
         
