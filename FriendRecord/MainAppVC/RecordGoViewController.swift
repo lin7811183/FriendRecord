@@ -129,7 +129,7 @@ class RecordGoViewController: UIViewController {
                 newRecord.recordSendUser = recordDataEmail
                 newRecord.recordFileName = "\(fileName).caf"
                 newRecord.userNickName = userNickName!
-                if self.textView.text == "請選擇心情~" {
+                if self.textView.text == "請選擇心情~" || self.textView.text == "" {
                     newRecord.recordText = "健忘摟"
                 } else {
                    newRecord.recordText = self.textView.text
@@ -161,9 +161,7 @@ class RecordGoViewController: UIViewController {
             }
             
             Manager.recordData.remove(at: 0)
-            //self.starRecordBT.titleLabel?.text = "再次錄音"
-            self.starRecordBT.setTitle("再次錄音", for: .normal)
-            //self.textView.text = ""
+            print("********** User agin Record. **********")
             
             //Star timer.
             self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
@@ -174,6 +172,7 @@ class RecordGoViewController: UIViewController {
                 AVLinearPCMBitDepthKey: 16 ,//資料Bits數
                 AVLinearPCMIsFloatKey: false ,//其他PCM相關資料
                 AVLinearPCMIsBigEndianKey: false ]
+            
             let newRecord = Record()
             
             //record file path URL.
@@ -196,7 +195,11 @@ class RecordGoViewController: UIViewController {
             newRecord.recordSendUser = recordDataEmail
             newRecord.recordFileName = "\(fileName).caf"
             newRecord.userNickName = userNickName!
-            newRecord.recordText = self.textView.text
+            if self.textView.text == "請選擇心情~" && self.textView.text == "" {
+                newRecord.recordText = "健忘摟"
+            } else {
+                newRecord.recordText = self.textView.text
+            }
             newRecord.messageSum = 0.0
             
             let dateFormat2 :DateFormatter = DateFormatter()
@@ -319,7 +322,12 @@ class RecordGoViewController: UIViewController {
                         let filePath =  NSHomeDirectory()+"/Documents/"+Manager.recordData[0].recordFileName!
                         let recordData = try! Data(contentsOf: URL(fileURLWithPath: filePath))
                         
+                        // Upload running to background.
+//                        let config = URLSessionConfiguration.background(withIdentifier: "Upload.RecordPen.File")
+//                        lest session = URLSession(configuration: config, delegate: self, delegateQueue: nil)
+                        
                         let session = URLSession.shared
+                        
                         let uploadTask = session.uploadTask(with: request, from: recordData) {
                             (data:Data?, response:URLResponse?, error:Error?) -> Void in
                             if let e = error {
@@ -342,6 +350,13 @@ class RecordGoViewController: UIViewController {
 }
 
 /*------------------------------------------------------------ Protocl. ------------------------------------------------------------*/
+//extension RecordGoViewController :URLSessionDelegate {
+//    //MARK: func - background thread URLSession delegate.
+//    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+//        print("We're done here")
+//    }
+//}
+
 extension RecordGoViewController :UITextViewDelegate {
     //MARK: Protocol - textFiel Delegate.
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {

@@ -296,7 +296,8 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
                 self.tableViewData[1].remove(at: indexPath.row)
                 Manager.recordData.remove(at: indexPath.row)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
-                self.tableView.rectForRow(at: indexPath)
+                //self.tableView.rectForRow(at: indexPath)
+                self.tableView.reloadData()
                 Manager.shared.deleteRecordPen(recordID: Int(data.recordID!))
             }
             deleteAction.backgroundColor = UIColor.red

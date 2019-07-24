@@ -20,8 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var mydelegate :MyAppDelegate!
     
-    
     let gcmMessageIDKey = "gcm.message_id"
+    
+    var backgroundSessionCompletionHandler: (() -> Void)?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -65,12 +66,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        //print("Notification  ID = \(userInfo[""])")
 //        print("userInfo : \(userInfo)")
 //    }
+    
 //    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 //        print("Registration succeeded!")
 //    }
-//    
+
 //    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
 //        print("Registration failed!")
+//    }
+    
+//    func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
+//        if identifier == "Upload.RecordPen.File" {
+//            self.backgroundSessionCompletionHandler = completionHandler
+//        }
 //    }
     
     func applicationWillResignActive(_ application: UIApplication) {

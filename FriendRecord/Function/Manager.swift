@@ -395,7 +395,13 @@ class Manager :UIViewController {
             let filePath = NSHomeDirectory()+"/Documents/"+fileName
             //創建文件管理器
             let fileManager = FileManager.default
-            try! fileManager.moveItem(atPath: locationPath, toPath: filePath)
+            
+            do {
+                try fileManager.moveItem(atPath: locationPath, toPath: filePath)
+            } catch {
+                print("\(error)")
+            }
+            
         }
         downloadtask.resume()
         session.finishTasksAndInvalidate()//自訂session 須加這行，會若不加會造成memory link
