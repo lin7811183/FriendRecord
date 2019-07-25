@@ -55,6 +55,10 @@ class RecordGoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // check Internet Type.
+//        Manager.delefateInternet = self
+        Manager.shared.mobileInternetType()
+        
         let userEmail = UserDefaults.standard
         let emailHead = userEmail.string(forKey: "emailHead")
         self.userImage.image = Manager.shared.userPhotoRead(jpg: emailHead!)
@@ -265,6 +269,14 @@ class RecordGoViewController: UIViewController {
     }
     //MARK: func - Send Record Pen.
     @IBAction func SendRecordPen(_ sender: Any) {
+        if Manager.internetType == true {
+            self.uploadRecordPen()
+        } else if Manager.internetType == false {
+           Manager.shared.okAlter(vc: self, title: "偵測無網路服務", message: "需網路服務，才可分享語音文章，謝謝！")
+        }
+    }
+    //MARK: Protocol - upload record pen url session.
+    func uploadRecordPen() {
         
         //call Mysql get record id.
         if let url = URL(string: "http://34.80.138.241:81/FriendRecord/RecordPen/Get_Record_Pen_ID.php") {
@@ -280,8 +292,8 @@ class RecordGoViewController: UIViewController {
                 guard let jsData = data else {
                     return
                 }
-//                let recordID = String(data: data!, encoding: .utf8)
-//                print(recordID!)
+                //                let recordID = String(data: data!, encoding: .utf8)
+                //                print(recordID!)
                 let jsDocode = JSONDecoder()
                 self.recordIDArry = try? jsDocode.decode([String:Double].self, from: jsData)
                 //print("\(self.recordIDArry.first?.value)")
@@ -323,8 +335,8 @@ class RecordGoViewController: UIViewController {
                         let recordData = try! Data(contentsOf: URL(fileURLWithPath: filePath))
                         
                         // Upload running to background.
-//                        let config = URLSessionConfiguration.background(withIdentifier: "Upload.RecordPen.File")
-//                        lest session = URLSession(configuration: config, delegate: self, delegateQueue: nil)
+                        //                        let config = URLSessionConfiguration.background(withIdentifier: "Upload.RecordPen.File")
+                        //                        lest session = URLSession(configuration: config, delegate: self, delegateQueue: nil)
                         
                         let session = URLSession.shared
                         
@@ -346,7 +358,6 @@ class RecordGoViewController: UIViewController {
             task.resume()
         }
     }
-    
 }
 
 /*------------------------------------------------------------ Protocl. ------------------------------------------------------------*/
@@ -388,4 +399,12 @@ extension RecordGoViewController :UIPickerViewDelegate {
         self.view.endEditing(false)
     }
 }
+
+//extension RecordGoViewController :ManagerDelegateInternet {
+//    func checkInternetType(type: Bool) {
+//        //MARK: Protocol - ManagerDelegateInternet
+//        print("RecordGoViewController - ManagerDelegateInternet")
+//        Manager.internetType = type
+//    }
+//}
 

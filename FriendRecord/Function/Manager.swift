@@ -1,5 +1,7 @@
 import Foundation
 import UIKit
+import Reachability
+import Network
 
 protocol ManagerDelegate {
     func finishDownLoadUserPhoto()
@@ -9,8 +11,12 @@ protocol ManagerDelegate {
 protocol ManagerDelegateUser {
     func finishDownLoadUserRecordPen()
     func finishDownLoadUserPresent(preenst :String)
-    func finishDownLoadUserFriendList()
+    func finishDownLoadUserOtherData()
 }
+
+//protocol ManagerDelegateInternet {
+//    func checkInternetType(type :Bool)
+//}
 
 class Manager :UIViewController {
     
@@ -25,7 +31,12 @@ class Manager :UIViewController {
     
     static var delegate :ManagerDelegate!
     static var delegateUser :ManagerDelegateUser!
+//    static var delefateInternet :ManagerDelegateInternet!
     
+    
+    //static var internetReach = Reachability()
+    static var internetMonitor = NWPathMonitor()
+    static var internetType :Bool!
     
     //MARK: func - dismissKeyboard.
     func hideKeyboardWhenTappedAround() {
@@ -80,8 +91,11 @@ class Manager :UIViewController {
     
     //MARK: func - User BF day Change.
     func userBFChange(bf :String?) -> String {
-        if bf != "" {
-            let bfArray = bf!.split(separator: "/")
+        guard let userbf = bf else {
+            return ""
+        }
+        if userbf != "" {
+            let bfArray = userbf.split(separator: "/")
             return "\(bfArray[1])/\(bfArray[2])"
         } else {
             return ""
@@ -388,6 +402,7 @@ class Manager :UIViewController {
         let downloadtask = session.downloadTask(with: url) { (url, response, error) in
             if let e = error {
                 print("erroe \(e)")
+                return
             }
             //location位置轉換
             let locationPath = url!.path
@@ -475,7 +490,6 @@ class Manager :UIViewController {
                 do {
                     Manager.recordData = try decoder.decode([Record].self, from: jsonData)//[Note].self 取得Note陣列的型態
                     print("Manager.recordData.count:\(Manager.recordData.count)")
-                    
                     Manager.delegate.finishDownLoadRecordPen()
                 } catch {
                     print("error while parsing json \(error)")
@@ -597,8 +611,8 @@ class Manager :UIViewController {
                 let decoder = JSONDecoder()
                 do {
                     Manager.userDataShow = try decoder.decode([UserDataShow].self, from: jsonData)//[Note].self 取得Note陣列的型態
-                    print("Manager.frindList.count :\(Manager.userDataShow.count)")
-                    Manager.delegateUser.finishDownLoadUserFriendList()
+                    print("Manager.userDataShow.count :\(Manager.userDataShow.count)")
+                    Manager.delegateUser.finishDownLoadUserOtherData()
                 } catch {
                     print("error while parsing json \(error)")
                 }
@@ -697,6 +711,23 @@ class Manager :UIViewController {
         }
     }
     
+    //MARK: Protocol - Check Mobile Internet Type.
+    func mobileInternetType() {
+        print("---------- Mobile Internet Check.----------")
+        Manager.internetMonitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("---------- Mobile Internet is Seccuse. ----------")
+                Manager.internetType = true
+                //Manager.delefateInternet.checkInternetType(type: true)
+            } else {
+                print("---------- Mobile Internet Faile. ----------")
+                Manager.internetType = false
+                //Manager.delefateInternet.checkInternetType(type: false)
+            }
+        }
+        Manager.internetMonitor.start(queue :DispatchQueue.global())
+    }
+    
     func fireBasePostMessaging() {
         if let url = URL(string: "https://fcm.googleapis.com/fcm/send") {
             
@@ -716,4 +747,7 @@ class Manager :UIViewController {
             task.resume()
         }
     }
+    
+    
+    
 }

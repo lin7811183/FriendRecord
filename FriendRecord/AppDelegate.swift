@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundSessionCompletionHandler: (() -> Void)?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        // Internet check.
+        Manager.shared.mobileInternetType()
+        
         // Override point for customization after application launch.
         print("Home : \(NSHomeDirectory())")
         
@@ -113,14 +117,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("********** App Close User Offline. **********")
     }
     
-    
-    
     //Application UIBackgroundFetchResult.
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         print("Complete");
         completionHandler(UIBackgroundFetchResult.newData)
         Manager.shared.downLoadRecordPen()
+    }
+    
+    @objc func networkChange() {
+        print("網路轉換，請確認網路狀態！")
     }
 }
 

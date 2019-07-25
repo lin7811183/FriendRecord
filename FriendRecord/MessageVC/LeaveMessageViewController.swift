@@ -8,6 +8,7 @@ protocol LeaveMessageViewControllerDelegate {
 class LeaveMessageViewController: UIViewController {
     
     @IBOutlet var mainView: UIView!
+    @IBOutlet weak var secondView: UIView!
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var messageTF: UITextField!
     @IBOutlet weak var messageSendImage: UIImageView!
@@ -99,6 +100,8 @@ class LeaveMessageViewController: UIViewController {
             print("form MainAppVC.")
             self.dataArray = Manager.recordData
             Manager.shared.loadUserCardData(email: self.recordSendUser)
+            Manager.delegateUser = self
+            Manager.shared.downLoadUserList(email: self.recordSendUser)
 
         } else {
             print("form UserVC.")
@@ -125,7 +128,12 @@ class LeaveMessageViewController: UIViewController {
         self.dataArray.removeAll()
         self.messageTVData.removeAll()
         Manager.userCardData.removeAll()
+        Manager.userDataShow.removeAll()
         print("********** Clear Array. **********")
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -213,10 +221,10 @@ class LeaveMessageViewController: UIViewController {
         
         let userCardView = UserCardView()
        
-        
         userCardView.tag = 998
-        userCardView.frame = CGRect(x: 12.5 ,y: (self.navigationController?.navigationBar.frame.size.height)! + 100, width:self.userCardView.frame.size.width, height: self.userCardView.frame.size.height)
+        userCardView.frame = CGRect(x: 0 ,y: 0, width: userCardView.frame.size.width, height: userCardView.frame.size.height)
         userCardView.mainView.layer.cornerRadius = 5.0
+        //userCardView.contentView.layer.cornerRadius = 5.0
         
         let imageName = Manager.shared.emailChangeHead(email: self.recordSendUser)
         userCardView.userImage.image = Manager.shared.userPhotoRead(jpg: imageName)
@@ -224,22 +232,35 @@ class LeaveMessageViewController: UIViewController {
         
         userCardView.userName.text = Manager.userCardData.first?.nickname
 
-        userCardView.userBF.text = Manager.shared.userBFChange(bf: Manager.userCardData.first!.bf!)
+        userCardView.userBF.text = Manager.shared.userBFChange(bf: Manager.userCardData.first?.bf!)
         
         //userCardView.userGender.text = Manager.userCardData.first?.gender
-        userCardView.userGenderImage.image = Manager.shared.userGenderChangeImage(gender: Manager.userCardData.first!.gender!)
+        userCardView.userGenderImage.image = Manager.shared.userGenderChangeImage(gender: Manager.userCardData.first?.gender!)
         
         userCardView.userSend.text = Manager.userCardData.first?.presentation
         userCardView.userSend.layer.cornerRadius = 5.0
+        userCardView.userSend.layer.borderColor = UIColor.black.cgColor
+         userCardView.userSend.layer.borderWidth = 1.0
+        
+        userCardView.userPenSumLB.text = "\(Manager.userDataShow.first?.recordPenSum! ?? 0)"
+        userCardView.userGoodSumLB.text = "\(Manager.userDataShow.first?.penGoodSum! ?? 0)"
+        userCardView.userFriendSumLB.text = "\(Manager.userDataShow.first?.friendSum! ?? 0)"
         
         UIView.transition(with: self.view, duration: 0.3, options: [.transitionCrossDissolve], animations: {self.view.addSubview(userCardView)}, completion: nil)//加入此視窗
+        
+        userCardView.mainView.translatesAutoresizingMaskIntoConstraints = false
+        userCardView.mainView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor ,constant: 0).isActive = true
+        //userCardView.mainView.centerYAnchor.constraint(equalTo: self.secondView.centerYAnchor ,constant: 0).isActive = true
+        userCardView.mainView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 175).isActive = true
+        userCardView.mainView.widthAnchor.constraint(equalToConstant: 307).isActive = true
+        userCardView.mainView.heightAnchor.constraint(equalToConstant: 270).isActive = true
         
         let cancelBT = UIButton()
         cancelBT.tag = 999
         cancelBT.frame = CGRect(x: self.view.center.x - 25, y: (self.view.frame.height - (self.tabBarController?.tabBar.frame.size.height)!) - 100, width: 50, height: 50)
         cancelBT.setImage(UIImage(named: "cencel"), for: .normal)
         cancelBT.addTarget(self, action: #selector(dissMissUserCardView), for: .touchUpInside)
-        UIView.transition(with: self.view, duration: 0.3, options: [.transitionCrossDissolve], animations: {self.view.addSubview(cancelBT)}, completion: nil)//加入此視窗
+        UIView.transition(with: self.secondView, duration: 0.3, options: [.transitionCrossDissolve], animations: {self.view.addSubview(cancelBT)}, completion: nil)//加入此視窗
     }
     // diss Miss UserCardView BT
     @objc func dissMissUserCardView() {
@@ -505,5 +526,15 @@ extension LeaveMessageViewController :AVAudioPlayerDelegate {
             print("********** Stop player Record. **********")
             self.isPlayer = false
         }
+    }
+}
+
+extension LeaveMessageViewController :ManagerDelegateUser {
+    func finishDownLoadUserRecordPen() {
+    }
+    func finishDownLoadUserPresent(preenst: String) {
+    }
+    func finishDownLoadUserOtherData() {
+        print("********** User Card Data Other DownLoad Finish. **********")
     }
 }

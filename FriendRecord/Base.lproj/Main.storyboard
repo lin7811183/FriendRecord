@@ -265,15 +265,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R6J-PN-Rmj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R6J-PN-Rmj">
                                 <rect key="frame" x="0.0" y="564" width="414" height="249"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="249" id="Hbh-Rr-hcT"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="userCell" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userrecordCell" rowHeight="88" id="stI-2w-eva" customClass="MyUserRecordTableViewCell" customModule="FriendRecord" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="stI-2w-eva" id="0FJ-7r-eT7">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="87.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTC-f4-Mca">
@@ -347,7 +350,7 @@
                                         <rect key="frame" x="0.0" y="116" width="414" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pSd-jH-hCk" id="L2H-4h-6qb">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="48.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9re-an-sTW">
@@ -501,7 +504,6 @@
                                     <constraint firstItem="dN7-Pb-5z7" firstAttribute="top" secondItem="Z4s-qK-ZzW" secondAttribute="bottom" constant="14.5" id="kDl-B7-AM0"/>
                                     <constraint firstItem="Syk-cx-ezK" firstAttribute="top" secondItem="WM9-1y-96k" secondAttribute="bottom" constant="24" id="kk8-k3-xbq"/>
                                     <constraint firstItem="HM0-LI-n1W" firstAttribute="top" secondItem="Syk-cx-ezK" secondAttribute="bottom" constant="24" id="lxm-pX-ZXF"/>
-                                    <constraint firstAttribute="height" constant="432" id="mSZ-LX-Q0v"/>
                                     <constraint firstItem="WM9-1y-96k" firstAttribute="leading" secondItem="nm2-nv-phd" secondAttribute="trailing" constant="8" id="nkh-OE-uSG"/>
                                     <constraint firstAttribute="trailing" secondItem="Syk-cx-ezK" secondAttribute="trailing" constant="19" id="nl8-wG-bcI"/>
                                     <constraint firstItem="lcw-Ee-C0J" firstAttribute="top" secondItem="cDL-pf-49d" secondAttribute="bottom" constant="18" id="sOV-IC-blm"/>
@@ -509,9 +511,14 @@
                                     <constraint firstAttribute="trailing" secondItem="kaz-yb-xjr" secondAttribute="trailing" constant="19" id="zlD-mN-NjH"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Czd-Vb-wjT">
+                                <rect key="frame" x="197" y="613" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Czd-Vb-wjT" firstAttribute="centerY" secondItem="lWN-Hh-FvB" secondAttribute="centerY" constant="175" id="3YB-oG-UBu"/>
+                            <constraint firstItem="Czd-Vb-wjT" firstAttribute="centerX" secondItem="lWN-Hh-FvB" secondAttribute="centerX" id="Cy4-4J-Eft"/>
                             <constraint firstItem="R6J-PN-Rmj" firstAttribute="trailing" secondItem="vz4-9b-KRr" secondAttribute="trailing" id="Lyd-CL-6LM"/>
                             <constraint firstItem="R6J-PN-Rmj" firstAttribute="top" secondItem="G7m-dV-BWS" secondAttribute="bottom" constant="26" id="Uhr-3d-TXh"/>
                             <constraint firstItem="G7m-dV-BWS" firstAttribute="top" secondItem="vz4-9b-KRr" secondAttribute="top" constant="18" id="bYh-mJ-8pW"/>
@@ -550,6 +557,7 @@
                     <connections>
                         <outlet property="editUserTF_BT" destination="kaz-yb-xjr" id="PTL-sX-iZo"/>
                         <outlet property="friendSum" destination="HM0-LI-n1W" id="2Qw-ES-hgS"/>
+                        <outlet property="loading" destination="Czd-Vb-wjT" id="2rM-ck-Nfr"/>
                         <outlet property="penGoodSum" destination="Syk-cx-ezK" id="X9N-5f-wwl"/>
                         <outlet property="recordPenSum" destination="WM9-1y-96k" id="HVf-v8-0MD"/>
                         <outlet property="userBT" destination="9N8-Tt-EY0" id="zCE-e8-M8M"/>
@@ -1294,6 +1302,7 @@
                         <outlet property="messageTableView" destination="WkZ-g4-lLs" id="w5T-5f-iDT"/>
                         <outlet property="moreBT" destination="bLf-rF-yFX" id="EKN-Ld-MwH"/>
                         <outlet property="moreToViewBottomAL" destination="37X-zb-uVa" id="6zq-4k-pqc"/>
+                        <outlet property="secondView" destination="3cG-pD-aAs" id="yGt-Co-9Y9"/>
                         <outlet property="userLookToViewBottom" destination="OME-Ax-9Ku" id="hI0-q8-DxU"/>
                         <outlet property="userLookToViewBottom_B" destination="54n-fI-xgc" id="goy-w4-ZBU"/>
                         <outlet property="userMessageView" destination="NJ6-df-bt3" id="vAh-cp-zhK"/>

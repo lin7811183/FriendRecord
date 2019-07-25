@@ -51,6 +51,8 @@ class MainAppViewController: UIViewController {
 
     var isSearch = false
     
+    var recordPenMode = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -116,9 +118,16 @@ class MainAppViewController: UIViewController {
     /*------------------------------------------------------------ Functions. ------------------------------------------------------------*/
     //MARK: func - DownLoad Record Pen.
     @objc func downLoadRecordPen() {
-        print("downLoadRecordPen")
-        Manager.shared.downLoadRecordPen()
-        Manager.shared.downLoadUserPhoto()
+        if self.recordPenMode == 0 {
+            //全音模式
+            print("downLoadRecordPen - 全音模式")
+            Manager.shared.downLoadRecordPen()
+            Manager.shared.downLoadUserPhoto()
+        } else if self.recordPenMode == 1 {
+            //好友模式
+            print("downLoadRecordPen - 好友模式")
+            Manager.shared.downLoadRecordPenFriend()
+        }
     }
     //MARK: func - Go to TableView Top.
     @IBAction func goToTableViewTop(_ sender: Any) {
@@ -132,9 +141,11 @@ class MainAppViewController: UIViewController {
         if sender.selectedSegmentIndex == 0 {
             //全音模式
             Manager.shared.downLoadRecordPen()
+            self.recordPenMode = 0
         } else if sender.selectedSegmentIndex == 1 {
             //好友模式
             Manager.shared.downLoadRecordPenFriend()
+            self.recordPenMode = 1
         }
         print(sender.selectedSegmentIndex)
     }
@@ -280,34 +291,42 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let userData = UserDefaults.standard
-        let recordPenUser = userData.string(forKey: "email")
-        
-        let data = self.tableViewData[1][indexPath.row]
-        
-        guard let user = data.recordSendUser else {
-            let none = UITableViewRowAction(style: .default, title: "None") { (action, indexPath) in
+        if self.tableViewData[1].count != 0 {
+            let userData = UserDefaults.standard
+            let recordPenUser = userData.string(forKey: "email")
+            
+            let data = self.tableViewData[1][indexPath.row]
+            
+            guard let user = data.recordSendUser else {
+                let none = UITableViewRowAction(style: .default, title: "None") { (action, indexPath) in
+                }
+                return [none]
             }
-            return [none]
-        }
-        guard recordPenUser != user else {
-            let deleteAction = UITableViewRowAction(style: .default, title: "刪除") { (action, indexPath) in
-
-                self.tableViewData[1].remove(at: indexPath.row)
-                Manager.recordData.remove(at: indexPath.row)
-                self.tableView.deleteRows(at: [indexPath], with: .fade)
-                //self.tableView.rectForRow(at: indexPath)
-                self.tableView.reloadData()
-                Manager.shared.deleteRecordPen(recordID: Int(data.recordID!))
+            
+            if recordPenUser == user {
+                let deleteAction = UITableViewRowAction(style: .default, title: "刪除") { (action, indexPath) in
+                    
+                    self.tableViewData[1].remove(at: indexPath.row)
+                    Manager.recordData.remove(at: indexPath.row)
+                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                    //self.tableView.rectForRow(at: indexPath)
+                    self.tableView.reloadData()
+                    Manager.shared.deleteRecordPen(recordID: Int(data.recordID!))
+                }
+                deleteAction.backgroundColor = UIColor.red
+                return [deleteAction]
+            } else {
+                let action = UITableViewRowAction(style: .default, title: "檢舉") { (action, indexPath) in
+                    Manager.shared.okAlter(vc: self, title: "按下確認後，送出檢舉", message: "後續客服會進行查證，謝謝")
+                }
+                action.backgroundColor = UIColor.gray
+                return [action]
             }
-            deleteAction.backgroundColor = UIColor.red
-            return [deleteAction]
         }
-        let action = UITableViewRowAction(style: .default, title: "檢舉") { (action, indexPath) in
-            Manager.shared.okAlter(vc: self, title: "按下確認後，送出檢舉", message: "後續客服會進行查證，謝謝")
+        let defultaction = UITableViewRowAction(style: .default, title: "回報") { (action, indexPath) in
         }
-        action.backgroundColor = UIColor.gray
-        return [action]
+        defultaction.backgroundColor = UIColor.gray
+        return [defultaction]
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -382,7 +401,7 @@ extension MainAppViewController :UITableViewDataSource ,UITableViewDelegate{
             imageCirclePathLayer.path = circlePath.cgPath
             imageCirclePathLayer.fillColor = UIColor.clear.cgColor
             imageCirclePathLayer.strokeColor = UIColor(named: "MyColor3")?.cgColor
-            imageCirclePathLayer.lineWidth = 3.0
+            imageCirclePathLayer.lineWidth = 3.5
             imageCirclePathLayer.strokeEnd = 1.0
             currentCell.sendImage.layer.addSublayer(imageCirclePathLayer)
             

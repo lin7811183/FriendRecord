@@ -19,6 +19,8 @@ class UserViewController: UIViewController {
     @IBOutlet weak var penGoodSum: UILabel!
     @IBOutlet weak var friendSum: UILabel!
     
+    @IBOutlet weak var loading: UIActivityIndicatorView!
+    
     var isUserFTType = false
     
     //var userRecordData = [Record]()
@@ -107,6 +109,7 @@ class UserViewController: UIViewController {
             guard let email = userData.string(forKey: "email") else {
                 return
             }
+            self.loading.startAnimating()
             Manager.shared.downLoadUserLocalRecordPen(email: email)
             Manager.shared.downLoadUserPresent(email: email)
             Manager.shared.downLoadUserList(email: email)
@@ -123,7 +126,10 @@ class UserViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.tableArray.removeAll()
-        //Manager.frindList.removeAll()
+        Manager.userLocalRecordPen.removeAll()
+        self.userTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.userTableView.reloadData()
+        Manager.userDataShow.removeAll()
         self.stopOldRecordMuice()
     }
     
@@ -193,28 +199,33 @@ class UserViewController: UIViewController {
     
     //MARK: func - Edit UserFT
     @IBAction func editUserFT(_ sender: Any) {
-        if self.isUserFTType == false {
-            self.editUserTF_BT.setImage(UIImage(named: "pen.png"), for: .normal)
-            self.editUserTF_BT.setTitle("", for: .normal)
-            self.userTF.backgroundColor = UIColor(named: "MyColor4")
-            self.userTF.isSelectable = true
-            self.userTF.isEditable = true
-            self.isUserFTType = true
-        } else {
-            self.editUserTF_BT.setTitleColor(UIColor.black, for: .normal)
-            self.editUserTF_BT.setImage(UIImage(named: ""), for: .normal)
-            self.userTF.backgroundColor = UIColor(named: "UserViewColor")
-            self.editUserTF_BT.setTitle("編輯", for: .normal)
-            self.userTF.isSelectable = false
-            self.userTF.isEditable = false
-            self.isUserFTType = false
-            
-            let userData = UserDefaults.standard
-            let useremail = userData.string(forKey: "email")
-            self.uploadUserPresent(email: useremail!, present: self.userTF.text)
-            userData.string(forKey: "present")
-            userData.set("\(self.userTF.text!)" , forKey: "present")
+        if Manager.internetType == true {
+            if self.isUserFTType == false {
+                self.editUserTF_BT.setImage(UIImage(named: "pen.png"), for: .normal)
+                self.editUserTF_BT.setTitle("", for: .normal)
+                self.userTF.backgroundColor = UIColor(named: "MyColor4")
+                self.userTF.isSelectable = true
+                self.userTF.isEditable = true
+                self.isUserFTType = true
+            } else {
+                self.editUserTF_BT.setTitleColor(UIColor.black, for: .normal)
+                self.editUserTF_BT.setImage(UIImage(named: ""), for: .normal)
+                self.userTF.backgroundColor = UIColor(named: "UserViewColor")
+                self.editUserTF_BT.setTitle("編輯", for: .normal)
+                self.userTF.isSelectable = false
+                self.userTF.isEditable = false
+                self.isUserFTType = false
+                
+                let userData = UserDefaults.standard
+                let useremail = userData.string(forKey: "email")
+                self.uploadUserPresent(email: useremail!, present: self.userTF.text)
+                userData.string(forKey: "present")
+                userData.set("\(self.userTF.text!)" , forKey: "present")
+            }
+        } else if Manager.internetType == false {
+            Manager.shared.okAlter(vc: self, title: "偵測無網路服務", message: "需網路服務，才可更新個人簡介，謝謝！")
         }
+        
     }
     
     //MARK: func - user upload present.
@@ -239,20 +250,23 @@ class UserViewController: UIViewController {
     
     //MARK: func - user imaage photo.
     @IBAction func userImagePhoto(_ sender: Any) {
-        
-        //Prepare imagePicker.
-        let picker = UIImagePickerController()
-        picker.sourceType = .camera
-        
-        let photoBT = UIButton(frame: CGRect(x: 90, y: UIScreen.main.bounds.size.height - 160 , width: 64, height: 64))
-        photoBT.setTitle("相簿", for:.normal)
-        photoBT.titleLabel?.textColor = UIColor.white
-        photoBT.addTarget(self, action: #selector(photoLibrary), for: .touchUpInside)
-        picker.view.addSubview(photoBT)
-        
-        picker.delegate = self
-        
-        self.present(picker, animated: true)
+        if Manager.internetType == true {
+            //Prepare imagePicker.
+            let picker = UIImagePickerController()
+            picker.sourceType = .camera
+            
+            let photoBT = UIButton(frame: CGRect(x: 90, y: UIScreen.main.bounds.size.height - 160 , width: 64, height: 64))
+            photoBT.setTitle("相簿", for:.normal)
+            photoBT.titleLabel?.textColor = UIColor.white
+            photoBT.addTarget(self, action: #selector(photoLibrary), for: .touchUpInside)
+            picker.view.addSubview(photoBT)
+            
+            picker.delegate = self
+            
+            self.present(picker, animated: true)
+        } else if Manager.internetType == false {
+            Manager.shared.okAlter(vc: self, title: "偵測無網路服務", message: "需網路服務，才可更新個人頭像，謝謝！")
+        }
     }
     
     //MARK: func - get photo library.
@@ -420,6 +434,8 @@ extension UserViewController :ManagerDelegateUser {
             }
             print("tableArray: \(self.tableArray.count)")
             //self.userTableView.reloadData()
+            self.loading.stopAnimating()
+            self.userTableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
             UIView.transition(with: self.userTableView, duration: 0.5, options: .transitionCrossDissolve, animations: { self.userTableView.reloadData() })
         }
     }
@@ -428,7 +444,7 @@ extension UserViewController :ManagerDelegateUser {
             self.userTF.text = preenst
         }
     }
-    func finishDownLoadUserFriendList() {
+    func finishDownLoadUserOtherData() {
         print("ManagerDelegate - finishDownLoadUserFriendList")
         DispatchQueue.main.async {
             self.recordPenSum.text = "\(Manager.userDataShow.first?.recordPenSum ?? 0)"

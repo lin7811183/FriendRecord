@@ -11,6 +11,10 @@ class UserCardView: UIView {
     @IBOutlet weak var userGenderImage: UIImageView!
     @IBOutlet weak var userSend: UITextView!
     
+    @IBOutlet weak var userPenSumLB: UILabel!
+    @IBOutlet weak var userGoodSumLB: UILabel!
+    @IBOutlet weak var userFriendSumLB: UILabel!
+    
     @IBOutlet weak var Test: UIButton!
     
     override init(frame: CGRect) {

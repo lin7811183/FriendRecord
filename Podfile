@@ -21,5 +21,6 @@ target 'FriendRecord' do
   # Pods for PodTest
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'ReachabilitySwift'
 
 end
