@@ -73,6 +73,7 @@
 		CED64B0B22CC8A6F006DB0EE /* MyMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED64B0A22CC8A6F006DB0EE /* MyMessageTableViewCell.swift */; };
 		CED64B0D22CC9AD8006DB0EE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED64B0C22CC9AD8006DB0EE /* Message.swift */; };
 		CEF9016022B100CE004F5A4C /* RecordGoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */; };
+		CEFD946522E9BFC6004FA747 /* BackGroundTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD946422E9BFC6004FA747 /* BackGroundTest.swift */; };
 		CEFF4423229E961B006A7449 /* MainAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF4422229E961B006A7449 /* MainAppViewController.swift */; };
 		CEFFD38522CA5EA8000E46DF /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFFD38422CA5EA7000E46DF /* message.png */; };
 		CEFFD38722CA5ED5000E46DF /* isLike.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFFD38622CA5ED5000E46DF /* isLike.png */; };
@@ -152,6 +153,7 @@
 		CED64B0A22CC8A6F006DB0EE /* MyMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMessageTableViewCell.swift; sourceTree = "<group>"; };
 		CED64B0C22CC9AD8006DB0EE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		CEF9015F22B100CE004F5A4C /* RecordGoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordGoViewController.swift; sourceTree = "<group>"; };
+		CEFD946422E9BFC6004FA747 /* BackGroundTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackGroundTest.swift; sourceTree = "<group>"; };
 		CEFF4422229E961B006A7449 /* MainAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewController.swift; sourceTree = "<group>"; };
 		CEFFD38422CA5EA7000E46DF /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
 		CEFFD38622CA5ED5000E46DF /* isLike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = isLike.png; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				CE0A949822B238A300F7F031 /* Manager.swift */,
+				CEFD946422E9BFC6004FA747 /* BackGroundTest.swift */,
 			);
 			path = Function;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				CE100418229B728D00660E82 /* LoginViewController.swift in Sources */,
 				CE0B064022ADF756007ADB36 /* CameraViewController.swift in Sources */,
 				CED64B0922CC6F0B006DB0EE /* LeaveMessageViewController.swift in Sources */,
+				CEFD946522E9BFC6004FA747 /* BackGroundTest.swift in Sources */,
 				CE0A949922B238A300F7F031 /* Manager.swift in Sources */,
 				CE22B5F822CF3563008D8C57 /* SearchFriendViewController.swift in Sources */,
 				CE34DFC322E5632B00E0188F /* UserDataShow.swift in Sources */,

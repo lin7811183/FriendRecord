@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Internet check.
         Manager.shared.mobileInternetType()
         
+        // BackGround Task Running....
+        //Manager.shared.backgroundtask()
+        
         // Override point for customization after application launch.
         print("Home : \(NSHomeDirectory())")
         
@@ -47,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //FireBase.
         FirebaseApp.configure()
         
+        // Remote Notificatio.
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
@@ -62,6 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         Messaging.messaging().delegate = self
         application.registerForRemoteNotifications()
+        
+        // First open App download user photo.
+        Manager.delegateUser = self
         
         return true
     }
@@ -183,4 +190,16 @@ extension AppDelegate :MessagingDelegate {
         print("Messaging Data : \(remoteMessage.appData) ")
     }
     
+}
+
+extension AppDelegate :ManagerDelegateUser {
+    func finishDownLoadUserRecordPen() {
+    }
+    
+    func finishDownLoadUserPresent(preenst: String) {
+    }
+    
+    func finishDownLoadUserOtherData() {
+    }
+
 }

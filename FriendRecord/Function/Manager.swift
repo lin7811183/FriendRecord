@@ -38,6 +38,8 @@ class Manager :UIViewController {
     static var internetMonitor = NWPathMonitor()
     static var internetType :Bool!
     
+    static var backgroundtask = BackGroundTask()
+    
     //MARK: func - dismissKeyboard.
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
@@ -371,6 +373,34 @@ class Manager :UIViewController {
                             let filePath = self.fileDocumentsPath(fileName: "\(fileName).jpg")
                             try imageData.write(to: filePath, options: [.atomicWrite])
                             
+                            Manager.delegate.finishDownLoadUserPhoto()
+                        } catch {
+                            print("uer photo fiel save is eror : \(error)")
+                        }
+                    }
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    //MARK: func - DownLoad user photo.
+    func downLoadOneUserPhoto(fileName :String) {
+        //DownLoad user Photo.
+        if let url = URL(string: "http://34.80.138.241:81/FriendRecord/Account/Accoount_Upload_UserPhoto/Accoount_Upload_UserPhoto/\(fileName).jpg") {
+            let request = URLRequest(url: url)
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { (data, response, error) in
+                if let e = error {
+                    print("erroe \(e)")
+                }
+                if let data = data {
+                    let image = UIImage(data: data)
+                    //write file
+                    if let imageData = image?.jpegData(compressionQuality: 1) {//compressionQuality:0~1之間
+                        do{
+                            let filePath = self.fileDocumentsPath(fileName: "\(fileName).jpg")
+                            try imageData.write(to: filePath, options: [.atomicWrite])
                             Manager.delegate.finishDownLoadUserPhoto()
                         } catch {
                             print("uer photo fiel save is eror : \(error)")
@@ -726,6 +756,10 @@ class Manager :UIViewController {
             }
         }
         Manager.internetMonitor.start(queue :DispatchQueue.global())
+    }
+    
+    func backgroundtask() {
+        Manager.backgroundtask.starRun()
     }
     
     func fireBasePostMessaging() {

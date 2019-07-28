@@ -280,7 +280,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GTC-f4-Mca">
-                                                    <rect key="frame" x="310" y="59" width="30" height="14"/>
+                                                    <rect key="frame" x="310" y="59.5" width="30" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="ZfW-wW-cnw"/>
                                                         <constraint firstAttribute="height" constant="14" id="cgb-5Z-6AA"/>
@@ -290,7 +290,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIL-VJ-93w">
-                                                    <rect key="frame" x="364" y="61" width="30" height="14"/>
+                                                    <rect key="frame" x="364" y="61.5" width="30" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="AZu-3M-muo"/>
                                                         <constraint firstAttribute="height" constant="14" id="G7D-P2-pb1"/>
@@ -308,7 +308,7 @@
                                                     <state key="normal" image="Star"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xmx-zU-zdg">
-                                                    <rect key="frame" x="342" y="55" width="20" height="20"/>
+                                                    <rect key="frame" x="342" y="55.5" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="aCp-Fs-GXt"/>
                                                         <constraint firstAttribute="height" constant="20" id="yrT-qA-huc"/>
@@ -319,7 +319,7 @@
                                                     </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="isLike.png" translatesAutoresizingMaskIntoConstraints="NO" id="LZN-L0-eKY">
-                                                    <rect key="frame" x="288" y="55" width="20" height="20"/>
+                                                    <rect key="frame" x="288" y="55.5" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="nDW-al-JHl"/>
                                                         <constraint firstAttribute="height" constant="20" id="oXe-88-RWF"/>

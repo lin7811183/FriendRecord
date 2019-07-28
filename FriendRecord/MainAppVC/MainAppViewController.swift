@@ -582,7 +582,7 @@ extension MainAppViewController :ManagerDelegate {
             self.refreshControl.endRefreshing()
             
             //Analysis email to phtot.
-            for photoData in Manager.recordData{
+            for photoData in Manager.recordData {
                 let data = photoData.recordSendUser
                 let record = photoData.recordFileName
                 
